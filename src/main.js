@@ -17,6 +17,5 @@ new Vue({
 	router: new Router(router),
 	template: '<App/>',
 	components: { App },
-	created() {
-	}
+	created() {}
 });

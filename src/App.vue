@@ -1,12 +1,12 @@
 <template>
 	<div>
-		<HeaderView></HeaderView>
+		<header-view></header-view>
 		<router-view></router-view>
 	</div>
 </template>
 
 <script>
-import HeaderView from '@/components/layouts/Header.vue';
+import HeaderView from './components/layouts/Header.vue';
 export default {
 	components: {
 		HeaderView
