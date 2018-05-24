@@ -31,8 +31,7 @@
 
 <script>
 export default {
-	data() {
-	},
+	name: 'GlobalHeader',
 	methods: {
 		goLevel() {
 			console.log('Level of achievement');
