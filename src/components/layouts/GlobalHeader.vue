@@ -19,9 +19,9 @@
 						</router-link>
 					</li>
 					<li class="tab">
-						<a class="waves-effect waves-light" @click='goLevel'>
+						<router-link class="waves-effect waves-light" :to="{name:'login'}" href="#">
 							達成度
-						</a>
+						</router-link>
 					</li>
 				</ul>
 			</div>
