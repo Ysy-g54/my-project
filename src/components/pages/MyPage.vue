@@ -43,9 +43,9 @@ export default {
 			let self = this;
 			self.$nextTick(() => {
 				handsonTable(self.$el.querySelector('.todo-table'), {
-					startCols: 3,
-					colWidths: [300, 200, 200],
-					colHeaders: ['やること', '何分', '何時から'],
+					startCols: 2,
+					colWidths: [600, 100],
+					colHeaders: ['やること', '何分'],
 					columnSorting: true,
 					rowHeaders: true,
 					manualRowMove: true

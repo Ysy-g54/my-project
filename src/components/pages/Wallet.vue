@@ -1,6 +1,6 @@
 <template>
 	<div class="center">
-		<h5>借りたお金は返しましょう</h5>
+		<h5>メモ</h5>
 		<div class="memo-table"></div>
 	</div>
 </template>
