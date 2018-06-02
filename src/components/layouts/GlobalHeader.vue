@@ -10,7 +10,7 @@
 					</li>
 					<li class="tab">
 						<router-link class="waves-effect waves-light" :to="{name:'wallet'}" href="#">
-							お金管理
+							メモ
 						</router-link>
 					</li>
 					<li class="tab">

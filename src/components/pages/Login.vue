@@ -2,7 +2,7 @@
 	<div class="hello center">
 		<h4>ログイン</h4>
 		<ul>
-			<a class="btn white-text" @click="countStart">勉強スタート</a>
+			<a class="btn white-text" @click="countStart">ログイン</a>
 		</ul>
 	</div>
 </template>

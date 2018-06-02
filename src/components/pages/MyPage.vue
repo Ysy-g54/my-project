@@ -6,9 +6,9 @@
 		<ul>
 			<li v-if="minute != 0">{{ minute }}分</li><li>{{ second }}秒</li>
 		</ul>
-		<ul>
-			<a v-if="start" class="btn white-text" @click="countStart">勉強スタート</a>
-			<a v-else class="btn white-text" @click="countStop">一旦ストップ</a>
+		<ul　class="right">
+			<a v-if="start" class="btn white-text" @click="countStart">保存</a>
+			<a v-else class="btn white-text" @click="countStop">完了</a>
 		</ul>
 	</div>
 </template>
@@ -25,7 +25,7 @@ export default {
 			second: 0,
 			minute: 0,
 			timer: '',
-			todoData: ['']
+			tableValue: []
 		};
 	},
 	methods: {
@@ -38,17 +38,28 @@ export default {
 		countStop() {
 			this.start = true;
 			clearTimeout(this.timer);
+			this.tableValue.setDataAtCell(0, 2, this.minute);
 		},
 		displayTable() {
 			let self = this;
 			self.$nextTick(() => {
-				handsonTable(self.$el.querySelector('.todo-table'), {
-					startCols: 2,
-					colWidths: [600, 100],
-					colHeaders: ['やること', '何分'],
-					columnSorting: true,
+				this.tableValue = handsonTable(self.$el.querySelector('.todo-table'), {
+					startCols: 3,
+					startRows: 10,
+					colWidths: [600, 100, 100],
+					colHeaders: ['やること', '何分', '実績(何分)'],
 					rowHeaders: true,
-					manualRowMove: true
+					manualRowMove: true,
+					contextMenu: {
+						items: {
+							row_above: {
+								name: '上に行を挿入'
+							},
+							row_below: {
+								name: '下に行を挿入'
+							}
+						}
+					}
 				});
 			});
 		}
@@ -75,7 +86,7 @@ ul {
 }
 li {
 	display: inline-block;
-  margin: 0 10px;
+	margin: 0 10px;
 }
 a {
 	color: #42b983;
