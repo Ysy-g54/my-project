@@ -2,11 +2,20 @@
 	<div class="hello center">
 		<h4>{{ msg }}</h4>
 		<h5>今日やること</h5>
+		<a class='dropdown-trigger btn white-text' href='#' data-activates='dropdown1'>{{ toDo }}</a>
+		<ul id='dropdown1' class='dropdown-content'>
+			<li @click.stop.prevent="selectToDo('テスト')"><a href="#!">one</a></li>
+			<li><a href="#!">two</a></li>
+			<li class="divider" tabindex="-1"></li>
+			<li><a href="#!">three</a></li>
+			<li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+			<li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+		</ul>
 		<div class="todo-table"></div>
 		<ul>
 			<li v-if="minute != 0">{{ minute }}分</li><li>{{ second }}秒</li>
 		</ul>
-		<ul　class="right">
+		<ul>
 			<a v-if="start" class="btn white-text" @click="countStart">保存</a>
 			<a v-else class="btn white-text" @click="countStop">完了</a>
 		</ul>
@@ -15,6 +24,7 @@
 
 <script>
 import handsonTable from 'handsontable';
+import $ from '../../ui/jquery-ex';
 import '../../../node_modules/handsontable/dist/handsontable.full.css';
 import '../../../node_modules/handsontable/dist/handsontable.full.js';
 export default {
@@ -25,7 +35,8 @@ export default {
 			second: 0,
 			minute: 0,
 			timer: '',
-			tableValue: []
+			tableValue: [],
+			toDo: ''
 		};
 	},
 	methods: {
@@ -38,18 +49,20 @@ export default {
 		countStop() {
 			this.start = true;
 			clearTimeout(this.timer);
-			this.tableValue.setDataAtCell(0, 2, this.minute);
+		},
+		selectToDo(toDo) {
+			this.toDo = toDo;
 		},
 		displayTable() {
-			let self = this;
-			self.$nextTick(() => {
-				this.tableValue = handsonTable(self.$el.querySelector('.todo-table'), {
+			this.$nextTick(() => {
+				this.tableValue = handsonTable(this.$el.querySelector('.todo-table'), {
 					startCols: 3,
 					startRows: 10,
 					colWidths: [600, 100, 100],
 					colHeaders: ['やること', '何分', '実績(何分)'],
 					rowHeaders: true,
 					manualRowMove: true,
+					comments: true,
 					contextMenu: {
 						items: {
 							row_above: {
@@ -57,6 +70,12 @@ export default {
 							},
 							row_below: {
 								name: '下に行を挿入'
+							},
+							commentsAddEdit: {
+								name: 'セルにコメントを挿入する'
+							},
+							commentsRemove: {
+								name: 'セルにコメントを削除する'
 							}
 						}
 					}
@@ -74,6 +93,9 @@ export default {
 	},
 	created() {
 		this.displayTable();
+	},
+	mounted() {
+		$.dropdown.initialize(this, '.dropdown-trigger');
 	}
 };
 </script>
