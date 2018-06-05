@@ -2,14 +2,11 @@
 	<div class="hello center">
 		<h4>{{ msg }}</h4>
 		<h5>今日やること</h5>
-		<a class='dropdown-trigger btn white-text' href='#' data-activates='dropdown1'>{{ toDo }}</a>
+		<a class='dropdown-trigger btn white-text' href='#' data-activates='dropdown1' @click="clickDropDown">{{ toDo }}</a>
 		<ul id='dropdown1' class='dropdown-content'>
-			<li @click.stop.prevent="selectToDo('テスト')"><a href="#!">one</a></li>
-			<li><a href="#!">two</a></li>
-			<li class="divider" tabindex="-1"></li>
-			<li><a href="#!">three</a></li>
-			<li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-			<li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+			<ul v-for="toDo in toDoList">
+				<li @click.stop.prevent="selectToDo(toDo)"><a href="#">{{ toDo }}</a></li>
+			</ul>
 		</ul>
 		<div class="todo-table"></div>
 		<ul>
@@ -36,6 +33,7 @@ export default {
 			minute: 0,
 			timer: '',
 			tableValue: [],
+			toDoList: [],
 			toDo: ''
 		};
 	},
@@ -50,8 +48,12 @@ export default {
 			this.start = true;
 			clearTimeout(this.timer);
 		},
+		clickDropDown() {
+			this.toDoList = this.tableValue.getDataAtCol(0);
+		},
 		selectToDo(toDo) {
 			this.toDo = toDo;
+			$.dropdown.close(this, '.dropdown-trigger');
 		},
 		displayTable() {
 			this.$nextTick(() => {
