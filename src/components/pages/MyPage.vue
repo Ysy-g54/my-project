@@ -4,8 +4,8 @@
 		<h5>今日やること</h5>
 		<a class='dropdown-trigger btn white-text' href='#' data-activates='dropdown1' @click="clickDropDown">{{ toDo }}</a>
 		<ul id='dropdown1' class='dropdown-content'>
-			<ul v-for="toDo in toDoList">
-				<li @click.stop.prevent="selectToDo(toDo)"><a href="#">{{ toDo }}</a></li>
+			<ul v-for="(toDo, index) in toDoList" v-if="toDo !== null && toDo !== ''" :key="index">
+				<li @click.stop.prevent="selectToDo(toDo, index)"><a href="#">{{ toDo }}</a></li>
 			</ul>
 		</ul>
 		<div class="todo-table"></div>
@@ -34,7 +34,8 @@ export default {
 			timer: '',
 			tableValue: [],
 			toDoList: [],
-			toDo: ''
+			toDo: '',
+			toDoIndex: 0
 		};
 	},
 	methods: {
@@ -47,12 +48,14 @@ export default {
 		countStop() {
 			this.start = true;
 			clearTimeout(this.timer);
+			this.tableValue.setDataAtCell(this.toDoIndex,  2, this.minute);
 		},
 		clickDropDown() {
 			this.toDoList = this.tableValue.getDataAtCol(0);
 		},
-		selectToDo(toDo) {
+		selectToDo(toDo, index) {
 			this.toDo = toDo;
+			this.toDoIndex = index;
 			$.dropdown.close(this, '.dropdown-trigger');
 		},
 		displayTable() {
