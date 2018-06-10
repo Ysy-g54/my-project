@@ -5,17 +5,17 @@
 				<ul class="tabs tabs-transparent left js-global-header-tabs">
 					<li class="tab">
 						<router-link class="waves-effect waves-light" :to="{name:'mypage'}" exact href="#">
-							マイページ
+							<a class="mypage"></a>
 						</router-link>
 					</li>
 					<li class="tab">
 						<router-link class="waves-effect waves-light" :to="{name:'wallet'}" href="#">
-							メモ
+							<a class="memo"></a>
 						</router-link>
 					</li>
 					<li class="tab">
 						<router-link class="waves-effect waves-light" :to="{name:'goal'}" href="#">
-							目標
+							<a class="goal"></a>
 						</router-link>
 					</li>
 					<li class="tab">
@@ -42,4 +42,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.mypage{
+  background: url("../../img/mypage.png") no-repeat;
+  background-size: contain;
+}
+.memo{
+  background: url("../../img/memo.png") no-repeat;
+  background-size: contain;
+}
+.goal{
+  background: url("../../img/goal.png") no-repeat;
+  background-size: contain;
+}
 </style>

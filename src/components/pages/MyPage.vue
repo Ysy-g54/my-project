@@ -7,15 +7,12 @@
 			<ul v-for="(toDo, index) in toDoList" v-if="toDo !== null && toDo !== ''" :key="index">
 				<li @click.stop.prevent="selectToDo(toDo, index)"><a href="#">{{ toDo }}</a></li>
 			</ul>
-		</ul>
-		<div class="todo-table"></div>
+		</ul>	
+			<a class="btn keep grey lighten-3" @click="keep"></a>
 		<ul>
 			<li v-if="minute != 0">{{ minute }}分</li><li>{{ second }}秒</li>
 		</ul>
-		<ul>
-			<a v-if="start" class="btn white-text" @click="countStart">保存</a>
-			<a v-else class="btn white-text" @click="countStop">完了</a>
-		</ul>
+		<div class="todo-table"></div>
 	</div>
 </template>
 
@@ -34,16 +31,23 @@ export default {
 			timer: '',
 			tableValue: [],
 			toDoList: [],
-			toDo: '',
+			toDo: '---',
 			toDoIndex: 0
 		};
 	},
 	methods: {
+		keep() {
+			this.countStart();
+		},
 		countStart() {
-			this.start = false;
-			this.timer = setInterval(() => {
-				this.second++;
-			}, 1000);
+			if (this.start) {
+				this.start = false;
+				this.timer = setInterval(() => {
+					this.second++;
+				}, 1000);
+			} else {
+				this.countStop();
+			}
 		},
 		countStop() {
 			this.start = true;
@@ -57,6 +61,7 @@ export default {
 			this.toDo = toDo;
 			this.toDoIndex = index;
 			$.dropdown.close(this, '.dropdown-trigger');
+			this.countStart();
 		},
 		displayTable() {
 			this.$nextTick(() => {
@@ -107,6 +112,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+a.keep{
+  background: url("../../img/keep.png") no-repeat;
+  background-size: contain;
+}
 ul {
 	list-style-type: none;
   padding: 0;
