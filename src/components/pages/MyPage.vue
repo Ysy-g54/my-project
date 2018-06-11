@@ -7,8 +7,9 @@
 			<ul v-for="(toDo, index) in toDoList" v-if="toDo !== null && toDo !== ''" :key="index">
 				<li @click.stop.prevent="selectToDo(toDo, index)"><a href="#">{{ toDo }}</a></li>
 			</ul>
-		</ul>	
-			<a class="btn keep grey lighten-3" @click="keep"></a>
+		</ul>
+			<a class="waves-effect waves-light btn save grey lighten-3" @click="save">
+			</a>
 		<ul>
 			<li v-if="minute != 0">{{ minute }}分</li><li>{{ second }}秒</li>
 		</ul>
@@ -36,7 +37,7 @@ export default {
 		};
 	},
 	methods: {
-		keep() {
+		save() {
 			this.countStart();
 		},
 		countStart() {
@@ -97,6 +98,15 @@ export default {
 		second() {
 			if (this.second === 60) {
 				this.minute++;
+				if(this.tableValue.getDataAtCell(this.toDoIndex,  1) <= this.minute) {
+					this.tableValue.setDataAtCell(this.toDoIndex++,  2, this.minute);
+					this.minute = 0;
+					// lodashをインストールしてisempty使って分岐する
+					// if(this.tableValue.getDataAtRow(this.toDoIndex).length === 0) {
+					// 	alert('やることを全て達成しました!!');
+					// 	this.countStop();
+					// }
+				}
 				this.second = 0;
 			}
 		}
@@ -112,7 +122,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-a.keep{
+a.save{
   background: url("../../img/keep.png") no-repeat;
   background-size: contain;
 }
