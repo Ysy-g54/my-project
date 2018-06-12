@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import handsonTable from 'handsontable';
 import $ from '../../ui/jquery-ex';
 import '../../../node_modules/handsontable/dist/handsontable.full.css';
@@ -101,11 +102,11 @@ export default {
 				if(this.tableValue.getDataAtCell(this.toDoIndex,  1) <= this.minute) {
 					this.tableValue.setDataAtCell(this.toDoIndex++,  2, this.minute);
 					this.minute = 0;
-					// lodashをインストールしてisempty使って分岐する
-					// if(this.tableValue.getDataAtRow(this.toDoIndex).length === 0) {
-					// 	alert('やることを全て達成しました!!');
-					// 	this.countStop();
-					// }
+					// [null]のチェック未完
+					if(_.isNull(_.uniq(this.tableValue.getDataAtRow(this.toDoIndex)))) {
+						alert('やることを全て達成しました!!');
+						this.countStop();
+					}
 				}
 				this.second = 0;
 			}
