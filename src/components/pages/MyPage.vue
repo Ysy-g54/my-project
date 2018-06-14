@@ -99,15 +99,6 @@ export default {
 		second() {
 			if (this.second === 60) {
 				this.minute++;
-				if(this.tableValue.getDataAtCell(this.toDoIndex,  1) <= this.minute) {
-					this.tableValue.setDataAtCell(this.toDoIndex++,  2, this.minute);
-					this.minute = 0;
-					// [null]のチェック未完
-					if(_.isNull(_.uniq(this.tableValue.getDataAtRow(this.toDoIndex)))) {
-						alert('やることを全て達成しました!!');
-						this.countStop();
-					}
-				}
 				this.second = 0;
 			}
 		}

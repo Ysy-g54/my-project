@@ -1,8 +1,8 @@
 <template>
 	<div class="header global-header">
 		<nav>
-			<div class="nav-wrapper">
-				<ul class="tabs tabs-transparent left js-global-header-tabs">
+			<div class="nav-wrapper left">
+				<ul class="tabs tabs-transparent js-global-header-tabs">
 					<li class="tab">
 						<router-link class="waves-effect waves-light" :to="{name:'mypage'}" exact href="#">
 							<a class="mypage"></a>
