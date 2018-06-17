@@ -30,6 +30,7 @@ export default {
 			start: true,
 			second: 0,
 			minute: 0,
+			saveTaskTime: 0,
 			timer: '',
 			tableValue: [],
 			toDoList: [],
@@ -39,9 +40,9 @@ export default {
 	},
 	methods: {
 		save() {
-			this.countStart();
+			this.timerStart();
 		},
-		countStart() {
+		timerStart() {
 			if (this.start) {
 				this.start = false;
 				this.timer = setInterval(() => {
@@ -54,16 +55,19 @@ export default {
 		countStop() {
 			this.start = true;
 			clearTimeout(this.timer);
-			this.tableValue.setDataAtCell(this.toDoIndex,  2, this.minute);
+			this.tableValue.setDataAtCell(this.toDoIndex,  2, this.saveTaskTime);
 		},
 		clickDropDown() {
 			this.toDoList = this.tableValue.getDataAtCol(0);
 		},
 		selectToDo(toDo, index) {
+			this.tableValue.setDataAtCell(this.toDoIndex,  2, this.saveTaskTime);
 			this.toDo = toDo;
 			this.toDoIndex = index;
 			$.dropdown.close(this, '.dropdown-trigger');
-			this.countStart();
+			if (this.start) {
+				this.timerStart();
+			}
 		},
 		displayTable() {
 			this.$nextTick(() => {
@@ -98,8 +102,16 @@ export default {
 	watch: {
 		second() {
 			if (this.second === 60) {
+				this.saveTaskTime++;
 				this.minute++;
 				this.second = 0;
+			}
+		},
+		toDo() {
+			if (this.tableValue.getDataAtCell(this.toDoIndex, 2) !== null) {
+				this.saveTaskTime = this.tableValue.getDataAtCell(this.toDoIndex, 2);
+			} else {
+				this.saveTaskTime = 0;
 			}
 		}
 	},
