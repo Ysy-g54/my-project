@@ -8,7 +8,8 @@
 				<li @click.stop.prevent="selectToDo(toDo, index)"><a href="#">{{ toDo }}</a></li>
 			</ul>
 		</ul>
-			<a class="waves-effect waves-light btn save grey lighten-3" @click="save">
+			<a class="waves-effect waves-light btn" @click="save">
+				<i class="save"></i>
 			</a>
 		<ul>
 			<li v-if="minute != 0">{{ minute }}分</li><li>{{ second }}秒</li>
@@ -126,8 +127,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-a.save{
-  background: url("../../img/keep.png") no-repeat;
+.save{
+  background: url("../../img/keep.png");
   background-size: contain;
 }
 ul {
