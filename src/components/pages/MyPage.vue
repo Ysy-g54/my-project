@@ -8,8 +8,11 @@
 				<li @click.stop.prevent="selectToDo(toDo, index)"><a href="#">{{ toDo }}</a></li>
 			</ul>
 		</ul>
-			<a class="waves-effect waves-light btn" @click="save">
-				<i class="save"></i>
+			<a class="waves-effect waves-light btn white-text" @click="timerStart">
+				{{ timerBtn }}
+			</a>
+			<a class="waves-effect waves-light btn white-text" @click="save">
+				<i></i>
 			</a>
 		<ul>
 			<li v-if="minute != 0">{{ minute }}分</li><li>{{ second }}秒</li>
@@ -36,12 +39,13 @@ export default {
 			tableValue: [],
 			toDoList: [],
 			toDo: '---',
+			timerBtn: 'タイマーstart',
 			toDoIndex: 0
 		};
 	},
 	methods: {
 		save() {
-			this.timerStart();
+			console.error('保存');
 		},
 		timerStart() {
 			if (this.start) {
@@ -49,6 +53,7 @@ export default {
 				this.timer = setInterval(() => {
 					this.second++;
 				}, 1000);
+				this.timerBtn = 'タイマーstop';
 			} else {
 				this.countStop();
 			}
@@ -56,13 +61,18 @@ export default {
 		countStop() {
 			this.start = true;
 			clearTimeout(this.timer);
-			this.tableValue.setDataAtCell(this.toDoIndex,  2, this.saveTaskTime);
+			this.timerBtn = 'タイマーstart';
+			if (this.selectedTodo()) {
+				this.tableValue.setDataAtCell(this.toDoIndex,  2, this.saveTaskTime);
+			}
 		},
 		clickDropDown() {
 			this.toDoList = this.tableValue.getDataAtCol(0);
 		},
 		selectToDo(toDo, index) {
-			this.tableValue.setDataAtCell(this.toDoIndex,  2, this.saveTaskTime);
+			if (this.selectedTodo()) {
+				this.tableValue.setDataAtCell(this.toDoIndex,  2, this.saveTaskTime);
+			}
 			this.toDo = toDo;
 			this.toDoIndex = index;
 			$.dropdown.close(this, '.dropdown-trigger');
@@ -70,13 +80,16 @@ export default {
 				this.timerStart();
 			}
 		},
+		selectedTodo() {
+			return this.toDo !== '---';
+		},
 		displayTable() {
 			this.$nextTick(() => {
 				this.tableValue = handsonTable(this.$el.querySelector('.todo-table'), {
 					startCols: 3,
 					startRows: 10,
 					colWidths: [600, 100, 100],
-					colHeaders: ['やること', '何分', '実績(何分)'],
+					colHeaders: ['やること', '何分', '実績(分)'],
 					rowHeaders: true,
 					manualRowMove: true,
 					comments: true,
