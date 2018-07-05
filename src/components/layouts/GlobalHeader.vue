@@ -17,13 +17,16 @@
 						<router-link class="waves-effect waves-light" :to="{name:'goal'}" href="#">
 							<a class="goal"></a>
 						</router-link>
-					</li>
+					</li>	
 					<li class="tab">
 						<router-link class="waves-effect waves-light" :to="{name:'login'}" href="#">
 							達成度
 						</router-link>
 					</li>
 				</ul>
+			</div>
+			<div :class="{ progress: preloaderFlg }">
+				<div class="indeterminate"></div>
 			</div>
 		</nav>
 	</div>
@@ -32,6 +35,14 @@
 <script>
 export default {
 	name: 'GlobalHeader',
+	watch: {
+		preloaderFlg() {
+			console.error('!');
+		}
+	},
+	props: {
+		preloaderFlg: { type: Boolean }
+	},
 	methods: {
 		goLevel() {
 			console.log('Level of achievement');

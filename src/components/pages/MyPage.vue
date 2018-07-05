@@ -54,6 +54,7 @@ export default {
 					this.second++;
 				}, 1000);
 				this.timerBtn = 'タイマーstop';
+				this.$emit('startTimer', true);
 			} else {
 				this.countStop();
 			}
@@ -62,6 +63,7 @@ export default {
 			this.start = true;
 			clearTimeout(this.timer);
 			this.timerBtn = 'タイマーstart';
+			this.$emit('startTimer', false);
 			if (this.selectedTodo()) {
 				this.tableValue.setDataAtCell(this.toDoIndex,  2, this.saveTaskTime);
 			}

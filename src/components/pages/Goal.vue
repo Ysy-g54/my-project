@@ -25,7 +25,7 @@ export default {
 				handsonTable(self.$el.querySelector('.goal-table'), {
 					startCols: 3,
 					colWidths: [300, 400, 200],
-					colHeaders: ['目標', 'いつまでに達成するか', '達成率'],
+					colHeaders: ['目標', 'いつまでに', '達成率'],
 					columnSorting: true,
 					rowHeaders: true,
 					manualRowMove: true

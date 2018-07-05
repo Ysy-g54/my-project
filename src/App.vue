@@ -1,13 +1,23 @@
 <template>
 	<div>
-		<header-view></header-view>
-		<router-view></router-view>
+		<header-view :preloaderFlg="flg"></header-view>
+		<router-view @startTimer="startPreloader"></router-view>
 	</div>
 </template>
 
 <script>
 import HeaderView from './components/layouts/Header.vue';
 export default {
+	data() {
+		return {
+			flg : false
+		}
+	},
+	methods: {
+		startPreloader(flg) {
+			this.flg = flg;
+		}
+	},
 	components: {
 		HeaderView
 	}
