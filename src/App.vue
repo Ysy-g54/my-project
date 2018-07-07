@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<header-view :preloaderFlg="flg"></header-view>
-		<router-view @startTimer="startPreloader"></router-view>
+		<router-view @startTimer="switchPreloader"></router-view>
 	</div>
 </template>
 
@@ -14,7 +14,7 @@ export default {
 		}
 	},
 	methods: {
-		startPreloader(flg) {
+		switchPreloader(flg) {
 			this.flg = flg;
 		}
 	},

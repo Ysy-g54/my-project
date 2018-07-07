@@ -35,13 +35,10 @@
 <script>
 export default {
 	name: 'GlobalHeader',
-	watch: {
-		preloaderFlg() {
-			console.error('!');
-		}
-	},
 	props: {
 		preloaderFlg: { type: Boolean }
+	},
+	watch: {
 	},
 	methods: {
 		goLevel() {
