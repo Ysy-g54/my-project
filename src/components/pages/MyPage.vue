@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import _ from 'lodash';
 import handsonTable from 'handsontable';
 import $ from '../../ui/jquery-ex';
 import '../../../node_modules/handsontable/dist/handsontable.full.css';
@@ -65,7 +64,7 @@ export default {
 			this.timerBtn = 'タイマーstart';
 			this.$emit('startTimer', false);
 			if (this.selectedTodo()) {
-				this.tableValue.setDataAtCell(this.toDoIndex,  2, this.saveTaskTime);
+				this.tableValue.setDataAtCell(this.toDoIndex, 2, this.saveTaskTime);
 			}
 		},
 		clickDropDown() {
@@ -73,7 +72,7 @@ export default {
 		},
 		selectToDo(toDo, index) {
 			if (this.selectedTodo()) {
-				this.tableValue.setDataAtCell(this.toDoIndex,  2, this.saveTaskTime);
+				this.tableValue.setDataAtCell(this.toDoIndex, 2, this.saveTaskTime);
 			}
 			this.toDo = toDo;
 			this.toDoIndex = index;

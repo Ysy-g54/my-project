@@ -1,17 +1,19 @@
 <template>
 	<div>
-		<header-view :preloaderFlg="flg"></header-view>
+		<globalHeader :preloaderFlg="flg"></globalHeader>
+		<header-view></header-view>
 		<router-view @startTimer="switchPreloader"></router-view>
 	</div>
 </template>
 
 <script>
 import HeaderView from './components/layouts/Header.vue';
+import GlobalHeader from './components/layouts/GlobalHeader.vue';
 export default {
 	data() {
 		return {
-			flg : false
-		}
+			flg: false
+		};
 	},
 	methods: {
 		switchPreloader(flg) {
@@ -19,6 +21,7 @@ export default {
 		}
 	},
 	components: {
+		GlobalHeader,
 		HeaderView
 	}
 };

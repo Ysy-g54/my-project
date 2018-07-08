@@ -1,4 +1,4 @@
-const globalHeader = () => import('@/components/layouts/GlobalHeader.vue');
+const naviHeader = () => import('@/components/layouts/NaviHeader.vue');
 const myPage = () => import('@/components/pages/MyPage.vue');
 const goal = () => import('@/components/pages/Goal.vue');
 const wallet = () => import('@/components/pages/Wallet.vue');
@@ -14,7 +14,7 @@ export default {
 			meta: {
 				title: 'マイページ',
 				// titleKey: 'myPage',
-				currentHeader: globalHeader
+				currentHeader: naviHeader
 			},
 			props: true
 		},
@@ -25,7 +25,7 @@ export default {
 			meta: {
 				title: 'お金管理',
 				// titleKey: 'wallet',
-				currentHeader: globalHeader
+				currentHeader: naviHeader
 			},
 			props: true
 		},
@@ -36,7 +36,7 @@ export default {
 			meta: {
 				title: '目標',
 				// titleKey: 'goal',
-				currentHeader: globalHeader
+				currentHeader: naviHeader
 			},
 			props: true
 		},

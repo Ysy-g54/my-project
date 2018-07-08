@@ -1,54 +1,20 @@
 <template>
 	<div class="header global-header">
-		<nav>
-			<div class="nav-wrapper left">
-				<ul class="tabs tabs-transparent js-global-header-tabs">
-					<li class="tab">
-						<router-link class="waves-effect waves-light" :to="{name:'mypage'}" exact href="#">
-							<a class="mypage"></a>
-						</router-link>
-					</li>
-					<li class="tab">
-						<router-link class="waves-effect waves-light" :to="{name:'wallet'}" href="#">
-							<a class="memo"></a>
-						</router-link>
-					</li>
-					<li class="tab">
-						<router-link class="waves-effect waves-light" :to="{name:'goal'}" href="#">
-							<a class="goal"></a>
-						</router-link>
-					</li>	
-					<li class="tab">
-						<router-link class="waves-effect waves-light" :to="{name:'login'}" href="#">
-							達成度
-						</router-link>
-					</li>
-				</ul>
-			</div>
-			<div :class="{ progress: preloaderFlg }">
-				<div class="indeterminate"></div>
+		<nav  class="progress-bottom">
+			<div class="row">
+				<div class="input-field col s4">
+					<input placeholder="検索" id="first_name" type="text" class="validate">
+				</div>
+				<div :class="{ progress: preloaderFlg }">
+					<div class="indeterminate"></div>
+				</div>
 			</div>
 		</nav>
-		<div class="row">
-    <div class="col s12">
-      <ul class="tabs">
-        <li class="tab col s3"><a href="#test1">Test 1</a></li>
-        <li class="tab col s3"><a class="active" href="#test2">Test 2</a></li>
-        <li class="tab col s3 disabled"><a href="#test3">Disabled Tab</a></li>
-        <li class="tab col s3"><a href="#test4">Test 4</a></li>
-      </ul>
-    </div>
-    <div id="test1" class="col s12">Test 1</div>
-    <div id="test2" class="col s12">Test 2</div>
-    <div id="test3" class="col s12">Test 3</div>
-    <div id="test4" class="col s12">Test 4</div>
-  </div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'GlobalHeader',
 	props: {
 		preloaderFlg: { type: Boolean }
 	},
@@ -64,6 +30,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.progress-bottom {
+	margin-bottom: 1.5em;
+}
 .mypage{
   background: url("../../img/mypage.png") no-repeat;
   background-size: contain;

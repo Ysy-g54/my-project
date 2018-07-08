@@ -1,48 +1,36 @@
 <template>
-	<div class="header global-header">
-		<nav>
-			<div class="nav-wrapper left">
-				<ul class="tabs tabs-transparent js-global-header-tabs">
-					<li class="tab">
-						<router-link class="waves-effect waves-light" :to="{name:'mypage'}" exact href="#">
-							<a class="mypage"></a>
-						</router-link>
-					</li>
-					<li class="tab">
-						<router-link class="waves-effect waves-light" :to="{name:'wallet'}" href="#">
-							<a class="memo"></a>
-						</router-link>
-					</li>
-					<li class="tab">
-						<router-link class="waves-effect waves-light" :to="{name:'goal'}" href="#">
-							<a class="goal"></a>
-						</router-link>
-					</li>	
-					<li class="tab">
-						<router-link class="waves-effect waves-light" :to="{name:'login'}" href="#">
-							達成度
-						</router-link>
-					</li>
-				</ul>
-			</div>
-			<div :class="{ progress: preloaderFlg }">
-				<div class="indeterminate"></div>
-			</div>
-			<div class="col s12">
-      <ul class="tabs">
-        <li class="tab col s3"><a href="#/mypage">Test 1</a></li>
-        <li class="tab col s3"><a href="#/wallet">Test 2</a></li>
-        <li class="tab col s3"><a href="#/goal">Disabled Tab</a></li>
-        <li class="tab col s3"><a href="#test4">Test 4</a></li>
-      </ul>
+	<div class="row">
+		<div class="col s12">
+			<ul class="tabs">
+				<li class="tab">
+					<router-link class="waves-effect waves-light" :to="{name:'mypage'}" exact href="#">
+						<a class="mypage tooltipped" data-position="bottom" data-tooltip="マイページ"></a>
+					</router-link>
+				</li>
+				<li class="tab">
+					<router-link class="waves-effect waves-light" :to="{name:'wallet'}" href="#">
+						<a class="memo tooltipped"  data-position="bottom" data-tooltip="メモ"></a>
+					</router-link>
+				</li>
+				<li class="tab">
+					<router-link class="waves-effect waves-light" :to="{name:'goal'}" href="#">
+						<a class="goal tooltipped"  data-position="bottom" data-tooltip="目標"></a>
+					</router-link>
+				</li>	
+				<li class="tab">
+					<router-link class="waves-effect waves-light" :to="{name:'mypage'}" href="#">
+						達成度
+					</router-link>
+				</li>
+			</ul>
+		</div>
     </div>
-		</nav>
-	</div>
 </template>
 
 <script>
+import $ from '../../ui/jquery-ex';
 export default {
-	name: 'GlobalHeader',
+	name: 'NaviHeader',
 	props: {
 		preloaderFlg: { type: Boolean }
 	},
@@ -52,6 +40,9 @@ export default {
 		goLevel() {
 			console.log('Level of achievement');
 		}
+	},
+	mounted() {
+		$.tooltip.initialize(this, '.tooltipped');
 	}
 };
 </script>
