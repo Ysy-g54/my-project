@@ -71,11 +71,6 @@ ul.navi{
     color: navy;
 }
 
-#wallet{
-    background-image: url("./../img/wallet.png");
-    /* width:120px;
-    height: 130px; */
-}
 
 #goal{
     background-image: url("./../img/goal.png");
