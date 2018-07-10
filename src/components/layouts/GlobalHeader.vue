@@ -1,19 +1,15 @@
 <template>
-	<div class="header global-header">
 		<nav  class="progress-bottom light-green lighten-4">
-			<div class="row">
+			<div class="nav-wrapper">
 				<div class="left input-field col s4">
 					<input placeholder="検索" type="text" class="validate">
 				</div>
-				<div class="center">
-					<a href="#" class="gear"></a>
-				</div>
+				<i class="gear"></i>
 				<div :class="{ progress: preloaderFlg }">
 					<div class="indeterminate"></div>
 				</div>
 			</div>
 		</nav>
-	</div>
 </template>
 
 <script>
