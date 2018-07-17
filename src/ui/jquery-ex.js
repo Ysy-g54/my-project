@@ -89,4 +89,78 @@ let tooltip = {
     }
 };
 
-export default { dropdown, tooltip };
+/**
+ * @namespace
+ * @see http://materializecss.com/modals.html
+ */
+let modal = {
+    /**
+     * initializeを行います。
+     *
+     * @param {Object} vm Vueインスタンス
+     * @param {string} selector 処理対象のセレクタ
+     * @param {Object} options 初期化オプション
+     */
+    initialize(vm, selector, options) {
+        let element = $(vm.$el).find(selector);
+        if (!element[0]) {
+            return;
+        }
+        let _options = Object.assign({
+        }, options);
+        element.modal(_options);
+    },
+
+    /**
+     * destroyを行います。
+     *
+     * @param {Object} vm Vueインスタンス
+     * @param {string} selector 処理対象のセレクタ
+     */
+    destroy(vm, selector) {
+        let element = $(vm.$el).find(selector);
+        if (!element[0]) {
+            return;
+        }
+        element.modal('remove');
+    }
+};
+
+/**
+ * @namespace
+ * @see https://materializecss.com/toasts.html
+ */
+let toast = {
+    /**
+     * initializeを行います。
+     *
+     * @param {Object} vm Vueインスタンス
+     * @param {string} selector 処理対象のセレクタ
+     * @param {Object} options 初期化オプション
+     */
+    initialize(vm, selector, options) {
+        let element = $(vm.$el).find(selector);
+        if (!element[0]) {
+            return;
+        }
+        let _options = Object.assign({
+        }, options);
+        element.toast(_options);
+    },
+
+    /**
+     * destroyを行います。
+     *
+     * @param {Object} vm Vueインスタンス
+     * @param {string} selector 処理対象のセレクタ
+     */
+    destroy(vm, selector) {
+        let element = $(vm.$el).find(selector);
+        if (!element[0]) {
+            return;
+        }
+        element.modal('remove');
+    }
+};
+
+export default { dropdown, tooltip, modal, toast };

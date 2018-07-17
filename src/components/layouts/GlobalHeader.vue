@@ -1,18 +1,26 @@
 <template>
 		<nav  class="progress-bottom light-green lighten-4">
 			<div class="nav-wrapper">
-				<div class="left input-field col s4">
-					<input placeholder="検索" type="text" class="validate">
-				</div>
-				<i class="gear"></i>
+				<a data-target="modal1" class="modal-trigger"><i class="gear"></i></a>
 				<div :class="{ progress: preloaderFlg }">
 					<div class="indeterminate"></div>
+				</div>
+			</div>
+			<!-- Modal Structure -->
+			<div id="modal1" class="modal">
+				<div class="modal-content black-text">
+					<h4>Modal Header</h4>
+					<p>A bunch of text</p>
+				</div>
+				<div class="modal-footer">
+					<a class="modal-close waves-effect waves-green btn-flat">閉じる</a>
 				</div>
 			</div>
 		</nav>
 </template>
 
 <script>
+import $ from '../../ui/jquery-ex';
 export default {
 	props: {
 		preloaderFlg: { type: Boolean }
@@ -23,6 +31,9 @@ export default {
 		goLevel() {
 			console.log('Level of achievement');
 		}
+	},
+	mounted() {
+		$.modal.initialize(this, '.modal');
 	}
 };
 </script>

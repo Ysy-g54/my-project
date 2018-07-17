@@ -53,6 +53,7 @@ export default {
 					this.second++;
 				}, 1000);
 				this.timerBtn = 'タイマーstop';
+				$.dropdown.initialize(this, '.dropdown-trigger');
 				this.$emit('startTimer', true);
 			} else {
 				this.countStop();
