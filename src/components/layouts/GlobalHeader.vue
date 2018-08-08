@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import $ from '../../ui/jquery-ex';
 export default {
 	props: {
 		preloaderFlg: { type: Boolean }
@@ -33,7 +32,6 @@ export default {
 		}
 	},
 	mounted() {
-		$.modal.initialize(this, '.modal');
 	}
 };
 </script>

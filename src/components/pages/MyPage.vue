@@ -23,7 +23,6 @@
 
 <script>
 import handsonTable from 'handsontable';
-import $ from '../../ui/jquery-ex';
 import '../../../node_modules/handsontable/dist/handsontable.full.css';
 import '../../../node_modules/handsontable/dist/handsontable.full.js';
 export default {
@@ -135,7 +134,6 @@ export default {
 		this.displayTable();
 	},
 	mounted() {
-		$.dropdown.initialize(this, '.dropdown-trigger');
 	}
 };
 </script>

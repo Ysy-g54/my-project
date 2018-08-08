@@ -9,7 +9,7 @@
 				</li>
 				<li class="tab">
 					<router-link class="waves-effect waves-light" :to="{name:'wallet'}" href="#">
-						<a class="memo tooltipped"  data-position="bottom" data-tooltip="メモ"></a>
+						<a class="memo"><p class="navi-text">メモ</p></a>
 					</router-link>
 				</li>
 				<li class="tab">
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import $ from '../../ui/jquery-ex';
 export default {
 	name: 'NaviHeader',
 	props: {
@@ -60,5 +59,9 @@ export default {
 .goal{
   background: url("../../img/goal.png") no-repeat;
   background-size: contain;
+}
+.navi-text{
+	height:auto;
+	text-align:center;
 }
 </style>

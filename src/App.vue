@@ -29,7 +29,7 @@ export default {
 
 <style>
 @import './assets/stylesheet.css';
-@import '../node_modules/materialize-css';
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
