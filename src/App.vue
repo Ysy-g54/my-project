@@ -1,41 +1,54 @@
 <template>
-	<div>
-		<globalHeader :preloaderFlg="flg"></globalHeader>
-		<header-view></header-view>
-		<router-view @startTimer="switchPreloader"></router-view>
-	</div>
+  <div id="app">
+    <header>
+      <span>Vue.js PWA</span>
+    </header>
+    <main>
+      <img src="./assets/logo.png" alt="Vue.js PWA">
+      <router-view></router-view>
+    </main>
+  </div>
 </template>
 
 <script>
-import HeaderView from './components/layouts/Header.vue';
-import GlobalHeader from './components/layouts/GlobalHeader.vue';
 export default {
-	data() {
-		return {
-			flg: false
-		};
-	},
-	methods: {
-		switchPreloader(flg) {
-			this.flg = flg;
-		}
-	},
-	components: {
-		GlobalHeader,
-		HeaderView
-	}
-};
+  name: 'app'
+}
 </script>
 
 <style>
-@import './assets/stylesheet.css';
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+body {
+  margin: 0;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 20px;
+}
+
+main {
+  text-align: center;
+  margin-top: 40px;
+}
+
+header {
+  margin: 0;
+  height: 56px;
+  padding: 0 16px 0 24px;
+  background-color: #35495E;
+  color: #ffffff;
+}
+
+header span {
+  display: block;
+  position: relative;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: .02em;
+  font-weight: 400;
+  box-sizing: border-box;
+  padding-top: 16px;
 }
 </style>
