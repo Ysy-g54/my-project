@@ -10,12 +10,7 @@
 <script>
 export default {
   name: "app",
-  date() {
-    return {
-      menuVisible: false
-    };
-  },
-  methods() {}
+  date() {}
 };
 </script>
 
