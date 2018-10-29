@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     showNavigation() {
-      return true;
+      this.menuVisible = true;
     }
   }
 };
