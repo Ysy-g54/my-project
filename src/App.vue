@@ -2,6 +2,7 @@
 	<div id="app">
 		<main>
 			<img src="./assets/logo.png" alt="Vue.js PWA">
+      <component :is="$route.meta.currentHeader"></component>
 			<router-view></router-view>
 		</main>
 	</div>

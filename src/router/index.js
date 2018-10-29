@@ -10,6 +10,9 @@ export default new Router({
 	routes: [{
 		path: '/',
 		name: 'Hello',
-		component: Hello
+		component: Hello,
+		meta: {
+			currentHeader: GlobalHeader
+		},
 	}]
 });
