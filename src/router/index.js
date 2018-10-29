@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import GlobalHeader from '@/components/layouts/GlobalHeader';
 import Hello from '@/components/pages/Hello';
 import VueMaterial from 'vue-material';
 
@@ -13,6 +14,6 @@ export default new Router({
 		component: Hello,
 		meta: {
 			currentHeader: GlobalHeader
-		},
+		}
 	}]
 });
