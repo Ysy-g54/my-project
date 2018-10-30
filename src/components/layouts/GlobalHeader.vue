@@ -6,14 +6,14 @@
 			<div class="md-toolbar-row">
 				<div class="md-toolbar-section-start">
 					<md-button class="md-icon-button" @click="showNavigation">
-						<md-icon>menu</md-icon>
+						<md-icon class="menu"></md-icon>
 					</md-button>
 					<span class="md-title">memo-list</span>
 		  		</div>
 
 				<div class="md-toolbar-section-end">
 					<md-button class="md-icon-button">
-						<md-icon>more_vert</md-icon>
+						<md-icon class="setting-detail"></md-icon>
 					</md-button>
 				</div>
 			</div>
@@ -52,9 +52,20 @@
 			<span class="md-list-item-text">Spam</span>
 		  </md-list-item>
 		</md-list>
-	  </md-app-drawer>
-	</md-app>
-  </div>
+	  	</md-app-drawer>
+	        <md-app-content>
+	        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+    	    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+	        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+    	    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+	        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+    	    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+        	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error quibusdam, non molestias et! Earum magnam, similique, quo recusandae placeat dicta asperiores modi sint ea repudiandae maxime? Quae non explicabo, neque.</p>
+      		</md-app-content>
+		</md-app>
+		</div>
 	</div>
 </template>
 
@@ -91,7 +102,14 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-
+.menu {
+  background: url("../../../static/img/icons/menu.png");
+  background-size: cover;
+}
+.setting-detail {
+  background: url("../../../static/img/icons/setting-detail.png");
+  background-size: cover;
+}
 a {
   color: #35495e;
 }
