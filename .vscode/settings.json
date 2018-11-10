@@ -1,0 +1,12 @@
+{
+	"editor.insertSpaces": false,
+	"git.ignoreMissingGitWarning": true,
+	"editor.detectIndentation": false,
+	"window.zoomLevel": 0,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnType": true,
+	"javascript.format.insertSpaceAfterCommaDelimiter": false,
+	"html.format.enable": false,
+	"html.format.indentInnerHtml": true
+}
