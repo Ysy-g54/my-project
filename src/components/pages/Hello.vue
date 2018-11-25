@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div id="hello">
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "hello",
+  name: "Hello",
   data() {
     return {
       msg: "Welcome to Your Vue.js PWA"
@@ -31,10 +31,14 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 h1,
 h2 {
   font-weight: normal;
+}
+
+#hello {
+  text-align: center;
 }
 
 ul {
