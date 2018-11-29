@@ -1,75 +1,75 @@
 <template>
-	<div id="globalHeader">
-		<div class="page-container">
-			<md-app md-waterfall md-mode="fixed-last">
-				<md-app-toolbar class="md-large md-dense md-primary">
-					<div class="md-toolbar-row">
-						<div class="md-toolbar-section-start">
-							<md-button class="md-icon-button" @click="showNavigation">
-								<md-icon>
-									<md-avatar>
-										<img src="https://vuematerial.io/assets/examples/avatar.jpg" alt="Avatar">
-									</md-avatar>
-								</md-icon>
-							</md-button>
-						</div>
+  <div id="globalHeader">
+    <div class="page-container">
+      <md-app md-waterfall md-mode="fixed-last">
+        <md-app-toolbar class="md-large md-dense md-primary">
+          <div class="md-toolbar-row">
+            <div class="md-toolbar-section-start">
+              <md-button class="md-icon-button" @click="showNavigation">
+                <md-icon>
+                  <md-avatar>
+                    <img src="https://vuematerial.io/assets/examples/avatar.jpg" alt="Avatar">
+                  </md-avatar>
+                </md-icon>
+              </md-button>
+            </div>
 
-						<div>
-							<md-field>
-								<md-icon class="search"></md-icon>
-								<label>検索条件</label>
-								<md-input v-model="initial"></md-input>
-							</md-field>
-						</div>
+            <div>
+              <md-field>
+                <md-icon class="search"></md-icon>
+                <label>検索条件</label>
+                <md-input v-model="initial"></md-input>
+              </md-field>
+            </div>
 
-						<md-menu class="md-toolbar-section-end" md-direction="bottom-start">
-							<md-button class="md-icon-button" md-menu-trigger>
-								<md-icon class="setting-detail"></md-icon>
-							</md-button>
-							<md-menu-content class="right">
-			    				<md-menu-item>My Item 1</md-menu-item>
-				    	    	<md-menu-item>My Item 2</md-menu-item>
-    							<md-menu-item>My Item 3</md-menu-item>
-							</md-menu-content>
-						</md-menu>
-					</div>
+            <md-menu class="md-toolbar-section-end" md-direction="bottom-start">
+              <md-button class="md-icon-button" md-menu-trigger>
+                <md-icon class="setting-detail"></md-icon>
+              </md-button>
+              <md-menu-content class="right">
+                <md-menu-item>My Item 1</md-menu-item>
+                <md-menu-item>My Item 2</md-menu-item>
+                <md-menu-item>My Item 3</md-menu-item>
+              </md-menu-content>
+            </md-menu>
+          </div>
 
-					<div class="md-toolbar-row">
-						<md-tabs md-sync-route>
-							<md-tab id="tab-home" md-label="Home"></md-tab>
-							<md-tab id="tab-pages" md-label="Pages"></md-tab>
-							<md-tab id="tab-posts" md-label="Posts"></md-tab>
-							<md-tab id="tab-favorites" md-label="Favorites"></md-tab>
-						</md-tabs>
-					</div>
-				</md-app-toolbar>
+          <div class="md-toolbar-row">
+            <md-tabs md-sync-route>
+              <md-tab id="tab-home" md-label="Home"></md-tab>
+              <md-tab id="tab-pages" md-label="Pages"></md-tab>
+              <md-tab id="tab-posts" md-label="Posts"></md-tab>
+              <md-tab id="tab-favorites" md-label="Favorites"></md-tab>
+            </md-tabs>
+          </div>
+        </md-app-toolbar>
 
-				<md-app-drawer :md-active.sync="menuVisible">
-					<md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
-					<md-list>
-						<md-list-item>
-							<md-icon>move_to_inbox</md-icon>
-							<span class="md-list-item-text">Inbox</span>
-						</md-list-item>
-						<md-list-item>
-							<md-icon>send</md-icon>
-							<span class="md-list-item-text">Sent Mail</span>
-						</md-list-item>
+        <md-app-drawer :md-active.sync="menuVisible">
+          <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
+          <md-list>
+            <md-list-item>
+              <md-icon>move_to_inbox</md-icon>
+              <span class="md-list-item-text">Inbox</span>
+            </md-list-item>
+            <md-list-item>
+              <md-icon>send</md-icon>
+              <span class="md-list-item-text">Sent Mail</span>
+            </md-list-item>
 
-						<md-list-item>
-							<md-icon>delete</md-icon>
-							<span class="md-list-item-text">Trash</span>
-						</md-list-item>
+            <md-list-item>
+              <md-icon>delete</md-icon>
+              <span class="md-list-item-text">Trash</span>
+            </md-list-item>
 
-						<md-list-item>
-							<md-icon>error</md-icon>
-							<span class="md-list-item-text">Spam</span>
-						</md-list-item>
-					</md-list>
-				</md-app-drawer>
-			</md-app>
-		</div>
-	</div>
+            <md-list-item>
+              <md-icon>error</md-icon>
+              <span class="md-list-item-text">Spam</span>
+            </md-list-item>
+          </md-list>
+        </md-app-drawer>
+      </md-app>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -95,9 +95,14 @@ body {
   margin: 0;
 }
 
-main {
-  text-align: center;
-  margin-top: 40px;
+.md-app {
+  max-height: 400px;
+  border: 1px solid rgba(#000, 0.12);
+}
+
+.md-drawer {
+  width: 230px;
+  max-width: calc(100vw - 125px);
 }
 
 header {
