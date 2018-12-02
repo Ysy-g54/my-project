@@ -1,8 +1,8 @@
 <template>
-  <md-field :class="messageClass">
-    <label>Required Field</label>
+  <md-field :class="messageClass" md-inline>
+    <label>{{ inline }}</label>
     <md-input v-model="required" required></md-input>
-    <span class="md-error">There is an error</span>
+    <md-icon v-if="icon !== null" class="search"></md-icon>
   </md-field>
 </template>
 
@@ -21,10 +21,19 @@ export default {
         "md-invalid": this.hasMessages
       };
     }
-  }
+  },
+  props: {
+    inline: { type: String, default: null },
+    icon: { type: String, default: null }
+  },
+  created() {}
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.search {
+  background: url("../../../static/img/icons/search.png");
+  background-size: cover;
+}
 </style>

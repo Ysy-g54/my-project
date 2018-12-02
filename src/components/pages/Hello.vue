@@ -38,7 +38,7 @@
         <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a>
       </li>
     </ul>
-    <text-field></text-field>
+    <textField inline="必須"></textField>
   </div>
 </template>
 
