@@ -1,5 +1,6 @@
 <template>
-  <div id="hello">
+  <div name="hello" slot-scope="slotProps">
+    <slot></slot>
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -43,6 +44,7 @@
 </template>
 
 <script>
+import Header from "@/components/organisms/GlobalHeader";
 import TextField from "@/components/atoms/TextField";
 export default {
   name: "Hello",
@@ -54,6 +56,7 @@ export default {
   methods: {},
   created() {},
   components: {
+    Header,
     TextField
   }
 };
