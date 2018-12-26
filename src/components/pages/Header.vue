@@ -1,13 +1,12 @@
 <template>
   <div name="header">
-    <global-header></global-header>
+    <GlobalHeader></GlobalHeader>
   </div>
 </template>
 
 <script>
 import GlobalHeader from "@/components/organisms/GlobalHeader";
 export default {
-  name: "Header",
   data() {
     return {};
   },

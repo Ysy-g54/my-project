@@ -11,7 +11,6 @@
 
 <script>
 export default {
-  name: "GlobalHeader",
   data() {
     return {};
   },
