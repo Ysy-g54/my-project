@@ -1,8 +1,5 @@
 <template>
   <Header>
-    <div slot="header">
-      <GlobalHeader/>
-    </div>
     <div slot="main">
       <h1>{{ msg }}</h1>
       <h2>Essential Links</h2>
@@ -51,7 +48,6 @@
 </template>
 
 <script>
-import GlobalHeader from "@/components/organisms/GlobalHeader";
 import Header from "@/components/pages/Header";
 import TextField from "@/components/atoms/TextField";
 export default {
@@ -69,7 +65,6 @@ export default {
   },
   created() {},
   components: {
-    GlobalHeader,
     Header,
     TextField
   }

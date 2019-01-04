@@ -1,7 +1,9 @@
 <template>
   <div>
     <header>
-      <slot name="header"></slot>
+      <slot name="header">
+        <GlobalHeader/>
+      </slot>
     </header>
     <main>
       <slot name="main"></slot>
@@ -10,13 +12,16 @@
 </template>
 
 <script>
+import GlobalHeader from "@/components/organisms/GlobalHeader";
 export default {
   data() {
     return {};
   },
   methods: {},
   created() {},
-  components: {}
+  components: {
+    GlobalHeader
+  }
 };
 </script>
 
