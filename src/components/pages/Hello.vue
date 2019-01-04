@@ -1,7 +1,9 @@
 <template>
-  <div name="header">
-    <slot></slot>
-    <div name="hello">
+  <Header>
+    <div slot="header">
+      <GlobalHeader/>
+    </div>
+    <div slot="main">
       <h1>{{ msg }}</h1>
       <h2>Essential Links</h2>
       <ul>
@@ -40,15 +42,17 @@
           <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a>
         </li>
         <li>
-          <a @click="test">hello2</a>
+          <a @click="test" target="_blank">hello2</a>
         </li>
       </ul>
       <textField inline="必須"></textField>
     </div>
-  </div>
+  </Header>
 </template>
 
 <script>
+import GlobalHeader from "@/components/organisms/GlobalHeader";
+import Header from "@/components/pages/Header";
 import TextField from "@/components/atoms/TextField";
 export default {
   data() {
@@ -65,6 +69,8 @@ export default {
   },
   created() {},
   components: {
+    GlobalHeader,
+    Header,
     TextField
   }
 };

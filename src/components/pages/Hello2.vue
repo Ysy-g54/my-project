@@ -39,6 +39,9 @@
         <li>
           <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a>
         </li>
+        <li>
+          <a @click="test" target="_blank">hello</a>
+        </li>
       </ul>
       <textField inline="必須"></textField>
     </div>
@@ -53,7 +56,13 @@ export default {
       msg: "Welcome to Your Vue.js PWA"
     };
   },
-  methods: {},
+  methods: {
+    test() {
+      this.$router.push({
+        path: "/"
+      });
+    }
+  },
   created() {},
   components: {
     TextField

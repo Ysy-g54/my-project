@@ -1,20 +1,22 @@
 <template>
-  <div name="header">
-    <GlobalHeader></GlobalHeader>
+  <div>
+    <header>
+      <slot name="header"></slot>
+    </header>
+    <main>
+      <slot name="main"></slot>
+    </main>
   </div>
 </template>
 
 <script>
-import GlobalHeader from "@/components/organisms/GlobalHeader";
 export default {
   data() {
     return {};
   },
   methods: {},
   created() {},
-  components: {
-    GlobalHeader
-  }
+  components: {}
 };
 </script>
 
