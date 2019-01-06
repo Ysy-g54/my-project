@@ -53,7 +53,7 @@ import TextField from "@/components/atoms/TextField";
 export default {
   data() {
     return {
-      msg: "Welcome to Your Vue.js PWA"
+      msg: "画面遷移"
     };
   },
   methods: {

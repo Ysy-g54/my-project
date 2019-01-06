@@ -17,12 +17,12 @@ export default {
   methods: {
     onHomeTab() {
       this.$router.push({
-        path: "/test"
+        path: "/"
       });
     },
     onPagesTab() {
       this.$router.push({
-        path: "/"
+        path: "/test"
       });
     }
   },

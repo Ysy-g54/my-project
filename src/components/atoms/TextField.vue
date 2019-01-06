@@ -8,7 +8,6 @@
 
 <script>
 export default {
-  name: "TextField",
   data: () => ({
     noError: null,
     required: null,
