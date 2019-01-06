@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Header from "@/components/pages/Header";
 import Goal from "@/components/organisms/Goal";
+import Header from "@/components/pages/Header";
 export default {
   data() {
     return {};
@@ -16,8 +16,8 @@ export default {
   methods: {},
   created() {},
   components: {
-    Header,
-    Goal
+    Goal,
+    Header
   }
 };
 </script>

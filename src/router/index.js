@@ -5,6 +5,7 @@ import Goal from '@/components/pages/Goal';
 import Hello2 from '@/components/pages/Hello2';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
+import '@/assets/vue-material.icons.css';
 
 Vue.use(Router);
 Vue.use(Vuex);

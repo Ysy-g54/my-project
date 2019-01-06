@@ -46,8 +46,4 @@ header span {
   box-sizing: border-box;
   padding-top: 16px;
 }
-.setting-detail {
-  background: url("../static/img/icons/setting-detail.png");
-  background-size: cover;
-}
 </style>

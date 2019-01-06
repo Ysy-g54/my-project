@@ -2,7 +2,6 @@
   <md-field :class="messageClass" md-inline>
     <label>{{ inline }}</label>
     <md-input v-model="required" required></md-input>
-    <md-icon v-if="icon !== null" class="search"></md-icon>
   </md-field>
 </template>
 
@@ -31,8 +30,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.search {
-  background: url("../../../static/img/icons/search.png");
-  background-size: cover;
-}
 </style>
