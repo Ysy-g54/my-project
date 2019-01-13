@@ -1,18 +1,18 @@
 <template>
   <md-speed-dial md-event="click" class="md-bottom-right" md-direction="top">
     <md-speed-dial-target class="md-primary">
-      <md-icon>my_location</md-icon>
+      <md-icon>add</md-icon>
     </md-speed-dial-target>
 
-    <md-speed-dial-content>
+    <!-- FIXME prop受け取る処理を書くまでコメントアウト -->
+    <!-- <md-speed-dial-content>
       <md-button class="md-icon-button">
-        <md-icon>directions</md-icon>
+        <md-icon>add</md-icon>
       </md-button>
-
       <md-button class="md-icon-button">
-        <md-icon>streetview</md-icon>
+        <md-icon>edit</md-icon>
       </md-button>
-    </md-speed-dial-content>
+    </md-speed-dial-content>-->
   </md-speed-dial>
 </template>
 
@@ -32,8 +32,8 @@ export default {
     }
   },
   props: {
-    // inline: { type: String, default: null },
-    // icon: { type: String, default: null }
+    event: { type: String, default: null },
+    icon: { type: String, default: null }
   },
   created() {}
 };

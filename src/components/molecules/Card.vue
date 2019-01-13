@@ -1,0 +1,58 @@
+<template>
+  <md-card>
+    <md-card-media>
+      <img src="https://vuematerial.io/assets/examples/card-image-1.jpg" alt="People">
+    </md-card-media>
+
+    <md-card-header>
+      <div class="md-title">Title goes here</div>
+      <div class="md-subhead">Subtitle here</div>
+    </md-card-header>
+
+    <md-card-expand>
+      <md-card-actions md-alignment="space-between">
+        <div>
+          <md-button>Action</md-button>
+          <md-button>Action</md-button>
+        </div>
+
+        <md-card-expand-trigger>
+          <md-button class="md-icon-button">
+            <md-icon>keyboard_arrow_down</md-icon>
+          </md-button>
+        </md-card-expand-trigger>
+      </md-card-actions>
+
+      <md-card-expand-content>
+        <md-card-content>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.</md-card-content>
+      </md-card-expand-content>
+    </md-card-expand>
+  </md-card>
+</template>
+
+<script>
+export default {
+  data: () => ({
+    // noError: null,
+    // required: null,
+    // textarea: null,
+    // hasMessages: true
+  }),
+  computed: {
+    messageClass() {
+      return {
+        // "md-invalid": this.hasMessages
+      };
+    }
+  },
+  props: {
+    event: { type: String, default: null },
+    icon: { type: String, default: null }
+  },
+  created() {}
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+</style>
