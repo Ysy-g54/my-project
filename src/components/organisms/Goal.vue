@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>目標</h1>
-    <Card/>
+    <Card :goals="goals"/>
     <SpeedDial/>
   </div>
 </template>
@@ -11,7 +11,9 @@ import Card from "@/components/molecules/Card";
 import SpeedDial from "@/components/molecules/SpeedDial";
 export default {
   data() {
-    return {};
+    return {
+      goals: [{ title: "test" }, { title: "test2" }]
+    };
   },
   methods: {},
   created() {},

@@ -24,16 +24,16 @@ export default {
     // textarea: null,
     // hasMessages: true
   }),
+  props: {
+    // event: { type: String, default: null },
+    // icon: { type: String, default: null }
+  },
   computed: {
     messageClass() {
       return {
         // "md-invalid": this.hasMessages
       };
     }
-  },
-  props: {
-    event: { type: String, default: null },
-    icon: { type: String, default: null }
   },
   created() {}
 };
