@@ -6,8 +6,8 @@
       </md-card-media>
 
       <md-card-header>
-        <div class="md-title">Title goes here</div>
-        <div class="md-subhead">Subtitle here</div>
+        <div class="md-title">{{goal.title}}</div>
+        <div class="md-subhead">{{goal.insertDateTime }}</div>
       </md-card-header>
 
       <md-card-expand>

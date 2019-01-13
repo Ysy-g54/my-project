@@ -12,7 +12,10 @@ import SpeedDial from "@/components/molecules/SpeedDial";
 export default {
   data() {
     return {
-      goals: [{ title: "test" }, { title: "test2" }]
+      goals: [
+        { title: "test", insertDateTime: "2018/01/13" },
+        { title: "test2", insertDateTime: "2018/01/14" }
+      ]
     };
   },
   methods: {},
