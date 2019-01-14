@@ -34,12 +34,7 @@
 
 <script>
 export default {
-  data: () => ({
-    // noError: null,
-    // required: null,
-    // textarea: null,
-    // hasMessages: true
-  }),
+  data: () => ({}),
   props: {
     goals: { type: Array, default: [] }
   },
@@ -50,4 +45,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.md-card {
+  width: 320px;
+  margin: 4px;
+  display: inline-block;
+  vertical-align: top;
+}
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div name="global-header">
     <md-tabs>
-      <md-tab @click="onHomeTab" md-label="Home"></md-tab>
-      <md-tab @click="onPagesTab" md-label="Pages"></md-tab>
+      <md-tab @click="goHome" md-label="Home"></md-tab>
+      <md-tab @click="goPages" md-label="Pages"></md-tab>
       <md-tab id="tab-posts" md-label="Posts"></md-tab>
       <md-tab id="tab-favorites" md-label="Favorites"></md-tab>
     </md-tabs>
@@ -15,14 +15,14 @@ export default {
     return {};
   },
   methods: {
-    onHomeTab() {
+    goHome() {
       this.$router.push({
-        path: "/"
+        path: "/goal"
       });
     },
-    onPagesTab() {
+    goPages() {
       this.$router.push({
-        path: "/test"
+        path: "/goal/modification"
       });
     }
   },

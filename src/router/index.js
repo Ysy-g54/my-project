@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Vuex from 'vuex';
 import Goal from '@/components/pages/Goal';
-import Hello2 from '@/components/pages/Hello2';
+import GoalModification from '@/components/pages/GoalModification';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.min.css';
 import '@/assets/vue-material.icons.css';
@@ -13,13 +13,13 @@ Vue.use(VueMaterial);
 
 export default new Router({
 	routes: [{
-		path: '/',
+		path: '/goal',
 		name: 'Goal',
 		component: Goal
 	},
 	{
-		path: '/test',
-		name: 'Hello2',
-		component: Hello2
+		path: '/goal/modification',
+		name: 'GoalModification',
+		component: GoalModification
 	}]
 });

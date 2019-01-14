@@ -1,6 +1,6 @@
 <template>
   <md-speed-dial md-event="click" class="md-bottom-right" md-direction="top">
-    <md-speed-dial-target class="md-primary">
+    <md-speed-dial-target class="md-primary" @click="goGoalModification">
       <md-icon>add</md-icon>
     </md-speed-dial-target>
 
@@ -18,21 +18,14 @@
 
 <script>
 export default {
-  data: () => ({
-    // noError: null,
-    // required: null,
-    // textarea: null,
-    // hasMessages: true
-  }),
-  props: {
-    // event: { type: String, default: null },
-    // icon: { type: String, default: null }
-  },
-  computed: {
-    messageClass() {
-      return {
-        // "md-invalid": this.hasMessages
-      };
+  data: () => ({}),
+  props: {},
+  computed: {},
+  methods: {
+    goGoalModification() {
+      this.$router.push({
+        path: "/goal/modification"
+      });
     }
   },
   created() {}
