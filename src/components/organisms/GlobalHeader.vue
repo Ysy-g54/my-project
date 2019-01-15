@@ -1,9 +1,7 @@
 <template>
   <div name="global-header">
-    <md-tabs>
+    <md-tabs md-alignment="left">
       <md-tab @click="goHome" md-label="Home"></md-tab>
-      <md-tab @click="goPages" md-label="Pages"></md-tab>
-      <md-tab id="tab-posts" md-label="Posts"></md-tab>
       <md-tab id="tab-favorites" md-label="Favorites"></md-tab>
     </md-tabs>
   </div>
@@ -18,11 +16,6 @@ export default {
     goHome() {
       this.$router.push({
         path: "/goal"
-      });
-    },
-    goPages() {
-      this.$router.push({
-        path: "/goal/modification"
       });
     }
   },
