@@ -21,5 +21,10 @@ export default new Router({
 		path: '/goal/modification',
 		name: 'GoalModification',
 		component: GoalModification
+	},
+	// catch all redirect
+	{
+		path: '*',
+		redirect: '/goal'
 	}]
 });

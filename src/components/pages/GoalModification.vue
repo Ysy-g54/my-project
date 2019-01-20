@@ -5,7 +5,7 @@
         <md-icon>arrow_back</md-icon>
       </md-button>
       <md-button class="md-icon-button" @click="save">
-        <md-icon>save</md-icon>
+        <md-icon>send</md-icon>
       </md-button>
     </div>
     <div slot="main">
