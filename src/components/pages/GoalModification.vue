@@ -1,12 +1,19 @@
 <template>
   <Header>
     <div slot="header">
-      <md-button class="md-icon-button" @click="back">
-        <md-icon>arrow_back</md-icon>
-      </md-button>
-      <md-button class="md-icon-button" @click="save">
-        <md-icon>send</md-icon>
-      </md-button>
+      <div class="md-toolbar-row">
+        <div class="md-toolbar-section-start">
+          <md-button class="md-icon-button" @click="back">
+            <md-icon>arrow_back</md-icon>
+          </md-button>
+          <span class="md-headline">新規作成</span>
+        </div>
+        <div class="md-toolbar-section-end">
+          <md-button class="md-icon-button" @click="save">
+            <md-icon>send</md-icon>
+          </md-button>
+        </div>
+      </div>
     </div>
     <div slot="main">
       <GoalModification></GoalModification>

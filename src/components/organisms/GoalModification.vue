@@ -12,6 +12,7 @@ export default {
     return {
       goals: [
         { title: "test", insertDateTime: "2018/01/13" },
+        { title: "test2", insertDateTime: "2018/01/14" },
         { title: "test2", insertDateTime: "2018/01/14" }
       ]
     };
