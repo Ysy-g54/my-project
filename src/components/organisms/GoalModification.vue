@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>新規作成</h1>
     <Card :goals="goals"/>
   </div>
 </template>
