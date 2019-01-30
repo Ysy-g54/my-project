@@ -1,5 +1,10 @@
 <template>
-  <md-snackbar :md-position="position" :md-active.sync="showSnackbar" md-persistent>
+  <md-snackbar
+    :md-position="position"
+    :md-active.sync="isShowSnackbar"
+    :md-duration="4000"
+    md-persistent
+  >
     <span>Connection timeout. Showing limited messages!</span>
   </md-snackbar>
 </template>
@@ -10,6 +15,7 @@ export default {
     position: "center"
   }),
   computed: {},
+  props: {},
   created() {}
 };
 </script>
