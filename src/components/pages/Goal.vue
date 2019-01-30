@@ -2,20 +2,33 @@
   <Header>
     <div slot="main">
       <Goal></Goal>
+      <Snackbar v-model="isShowSnackbar"></Snackbar>
     </div>
   </Header>
 </template>
 
 <script>
+import Snackbar from "@/components/atoms/Snackbar";
 import Goal from "@/components/organisms/Goal";
 import Header from "@/components/pages/Header";
 export default {
   data() {
-    return {};
+    return {
+      isShowSnackbar: false
+    };
   },
   methods: {},
+  watch: {
+    "$route.params": {
+      handler() {
+        this.isShowSnackbar = this.$route.params.saveSuccessFlg !== undefined;
+      },
+      immediate: true
+    }
+  },
   created() {},
   components: {
+    Snackbar,
     Goal,
     Header
   }
