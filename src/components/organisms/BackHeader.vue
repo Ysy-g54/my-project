@@ -25,7 +25,9 @@ export default {
     back() {
       this.$router.back();
     },
-    save() {}
+    save() {
+      this.$emit("save-success");
+    }
   },
   created() {},
   components: {}

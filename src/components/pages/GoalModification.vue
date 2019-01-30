@@ -1,7 +1,7 @@
 <template>
   <Header>
     <div slot="header">
-      <BackHeader></BackHeader>
+      <BackHeader @save-success="saveSuccess"></BackHeader>
     </div>
     <div slot="main">
       <GoalModification></GoalModification>
@@ -17,7 +17,14 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    saveSuccess() {
+      this.$router.push({
+        name: "Goal",
+        params: { saveSuccessFlg: true }
+      });
+    }
+  },
   created() {},
   components: {
     BackHeader,
