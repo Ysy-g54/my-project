@@ -2,7 +2,7 @@
   <Header>
     <div slot="main">
       <Goal></Goal>
-      <Snackbar v-model="isShowSnackbar"></Snackbar>
+      <Snackbar v-if="isShowSnackbar"></Snackbar>
     </div>
   </Header>
 </template>
