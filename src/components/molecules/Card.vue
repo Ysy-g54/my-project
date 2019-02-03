@@ -1,10 +1,6 @@
 <template>
   <div>
     <md-card v-for="(goal, index) in goals" :key="index">
-      <md-card-media>
-        <img src="https://vuematerial.io/assets/examples/card-image-1.jpg" alt="People">
-      </md-card-media>
-
       <md-card-header>
         <div class="md-title">{{goal.title}}</div>
         <div class="md-subhead">{{goal.insertDateTime }}</div>
@@ -36,7 +32,7 @@
 export default {
   data: () => ({}),
   props: {
-    goals: { type: Array, default: [] }
+    goals: { type: Array, required: false }
   },
   computed: {},
   created() {}

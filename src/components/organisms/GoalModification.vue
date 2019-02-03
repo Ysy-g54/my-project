@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Card :goals="goals"/>
+    <Card/>
   </div>
 </template>
 
@@ -8,13 +8,7 @@
 import Card from "@/components/molecules/Card";
 export default {
   data() {
-    return {
-      goals: [
-        { title: "test", insertDateTime: "2018/01/13" },
-        { title: "test2", insertDateTime: "2018/01/14" },
-        { title: "test2", insertDateTime: "2018/01/14" }
-      ]
-    };
+    return {};
   },
   methods: {},
   created() {},

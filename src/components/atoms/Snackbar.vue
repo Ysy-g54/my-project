@@ -5,7 +5,7 @@
     :md-duration="4000"
     md-persistent
   >
-    <span>Connection timeout. Showing limited messages!</span>
+    <span>save!</span>
   </md-snackbar>
 </template>
 
