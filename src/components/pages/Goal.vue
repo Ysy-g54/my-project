@@ -2,7 +2,7 @@
   <Header>
     <div slot="main">
       <Goal></Goal>
-      <Snackbar v-if="isShowSnackbar"></Snackbar>
+      <Snackbar :isShowSnackbar="isSnackbar"></Snackbar>
     </div>
   </Header>
 </template>
@@ -13,17 +13,13 @@ import Goal from "@/components/organisms/Goal";
 import Header from "@/components/pages/Header";
 export default {
   data() {
-    return {
-      isShowSnackbar: false
-    };
+    return {};
   },
   methods: {},
-  watch: {
-    "$route.params": {
-      handler() {
-        this.isShowSnackbar = this.$route.params.saveSuccessFlg !== undefined;
-      },
-      immediate: true
+  watch: {},
+  computed: {
+    isSnackbar() {
+      return this.$route.params.saveSuccessFlg !== undefined;
     }
   },
   created() {},
