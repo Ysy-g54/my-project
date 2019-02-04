@@ -2,13 +2,9 @@
   <div>
     <md-field>
       <label>目標</label>
-      <md-input
-        v-model="initial"
-        v-validate="'required'"
-        data-vv-name="goalText"
-        :error-messages="errors.collect('goalText')"
-      ></md-input>
+      <md-input v-model="initial" v-validate="'required|max:255'" name="goalText"></md-input>
     </md-field>
+    <span>{{ errors.first('goalText') }}</span>
     <div class="md-layout-item">
       <md-field>
         <label for="movie">カテゴリ</label>

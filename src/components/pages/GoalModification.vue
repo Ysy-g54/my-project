@@ -19,13 +19,15 @@ export default {
   },
   methods: {
     saveSuccess() {
-      const isValid = this.$validator.validateAll();
-      if (isValid) {
-        return;
-      }
-      this.$router.push({
-        name: "Goal",
-        params: { saveSuccessFlg: true }
+      this.$validator.validateAll().then(result => {
+        if (result) {
+          return;
+        }
+        this.$validator.reset();
+        this.$router.push({
+          name: "Goal",
+          params: { saveSuccessFlg: true }
+        });
       });
     }
   },
@@ -34,6 +36,9 @@ export default {
     BackHeader,
     GoalModification,
     Header
+  },
+  inject: {
+    $validator: "$validator"
   }
 };
 </script>
