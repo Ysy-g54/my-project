@@ -1,10 +1,10 @@
 <template>
   <div>
-    <md-field>
+    <md-field :class="messageClass">
       <label>目標</label>
-      <md-input v-model="initial" v-validate="'required|max:255'" name="goalText"></md-input>
+      <md-input v-model="initial" v-validate="'required|max:255'" data-vv-as="goal" name="goalText"></md-input>
+      <span class="md-error">{{ errors.first('goalText') }}</span>
     </md-field>
-    <span>{{ errors.first('goalText') }}</span>
     <div class="md-layout-item">
       <md-field>
         <label for="movie">カテゴリ</label>
@@ -37,6 +37,13 @@ export default {
     };
   },
   methods: {},
+  computed: {
+    messageClass() {
+      return {
+        "md-invalid": true
+      };
+    }
+  },
   created() {},
   components: {
     Card
