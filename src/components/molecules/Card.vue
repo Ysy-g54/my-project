@@ -3,13 +3,12 @@
     <md-card>
       <md-card-header>
         <div class="md-title">{{goal.title}}</div>
-        <div class="md-subhead">{{goal.insertDateTime }}</div>
+        <div class="md-subhead">登録日：{{goal.insertDateTime }}</div>
       </md-card-header>
 
       <md-card-expand>
         <md-card-actions md-alignment="space-between">
           <div>
-            <md-button>Action</md-button>
             <md-button>Action</md-button>
           </div>
 
