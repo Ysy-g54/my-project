@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-card v-for="(goal, index) in goals" :key="index">
+    <md-card>
       <md-card-header>
         <div class="md-title">{{goal.title}}</div>
         <div class="md-subhead">{{goal.insertDateTime }}</div>
@@ -32,7 +32,7 @@
 export default {
   data: () => ({}),
   props: {
-    goals: { type: Array, required: false }
+    goal: { type: Object, required: false }
   },
   computed: {},
   created() {}

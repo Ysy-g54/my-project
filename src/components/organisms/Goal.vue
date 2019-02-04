@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>目標</h1>
-    <Card :goals="goals"/>
+    <div v-for="goal in goals">
+      <Card :goal="goal"/>
+    </div>
     <SpeedDial/>
   </div>
 </template>
