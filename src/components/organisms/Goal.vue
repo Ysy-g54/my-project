@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>目標</h1>
-    <div v-for="goal in goals">
-      <Card :goal="goal"/>
+    <div v-for="(goal, index) in goals" :key="index">
+      <Card :goal="goals[index]"/>
     </div>
     <SpeedDial/>
   </div>
