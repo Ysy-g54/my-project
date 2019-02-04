@@ -6,7 +6,7 @@
     </md-field>
     <div class="md-layout-item">
       <md-field>
-        <label for="movie">Movie</label>
+        <label for="movie">カテゴリ</label>
         <md-select v-model="movie" name="movie" id="movie">
           <md-option value="fight-club">Fight Club</md-option>
           <md-option value="godfather">Godfather</md-option>
@@ -18,6 +18,10 @@
         </md-select>
       </md-field>
     </div>
+    <md-field>
+      <label>達成のためのアクション</label>
+      <md-textarea v-model="textarea"></md-textarea>
+    </md-field>
   </div>
 </template>
 
@@ -27,7 +31,8 @@ export default {
   data() {
     return {
       initial: "",
-      movie: "test"
+      movie: "test",
+      textarea: null
     };
   },
   methods: {},
