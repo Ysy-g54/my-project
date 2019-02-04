@@ -19,6 +19,10 @@ export default {
   },
   methods: {
     saveSuccess() {
+      const isValid = this.$validator.validateAll();
+      if (isValid) {
+        return;
+      }
       this.$router.push({
         name: "Goal",
         params: { saveSuccessFlg: true }

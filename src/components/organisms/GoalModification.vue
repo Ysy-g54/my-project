@@ -2,7 +2,12 @@
   <div>
     <md-field>
       <label>目標</label>
-      <md-input v-model="initial"></md-input>
+      <md-input
+        v-model="initial"
+        v-validate="'required'"
+        data-vv-name="goalText"
+        :error-messages="errors.collect('goalText')"
+      ></md-input>
     </md-field>
     <div class="md-layout-item">
       <md-field>

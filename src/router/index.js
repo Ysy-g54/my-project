@@ -8,9 +8,13 @@ import GoalModification from "@/components/pages/GoalModification";
 import "vue-material/dist/vue-material.min.css";
 import "@/assets/vue-material.icons.css";
 
+const config = {
+  inject: true
+};
+
 Vue.use(Router);
 Vue.use(Vuex);
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, config);
 Vue.use(VueMaterial);
 
 export default new Router({
