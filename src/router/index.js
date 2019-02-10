@@ -6,6 +6,7 @@ import VueMaterial from "vue-material";
 import Goal from "@/components/pages/Goal";
 import GoalModification from "@/components/pages/GoalModification";
 import "vue-material/dist/vue-material.min.css";
+import "vue-material/dist/theme/default.css";
 import "@/assets/vue-material.icons.css";
 
 Vue.use(Router);
@@ -14,21 +15,21 @@ Vue.use(VeeValidate);
 Vue.use(VueMaterial);
 
 export default new Router({
-  routes: [
-    {
-      path: "/goal",
-      name: "Goal",
-      component: Goal
-    },
-    {
-      path: "/goal/modification",
-      name: "GoalModification",
-      component: GoalModification
-    },
-    // catch all redirect
-    {
-      path: "*",
-      redirect: "/goal"
-    }
-  ]
+	routes: [
+		{
+			path: "/goal",
+			name: "Goal",
+			component: Goal
+		},
+		{
+			path: "/goal/modification",
+			name: "GoalModification",
+			component: GoalModification
+		},
+		// catch all redirect
+		{
+			path: "*",
+			redirect: "/goal"
+		}
+	]
 });
