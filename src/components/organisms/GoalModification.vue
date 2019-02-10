@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-field :class="messageClass">
+    <md-field :class="messageClass" md-clearable>
       <label>目標</label>
       <md-input v-model="initial" v-validate="'required|max:255'" data-vv-as="goal" name="goalText"></md-input>
       <span class="md-error">{{ errors.first('goalText') }}</span>
@@ -13,9 +13,6 @@
           <md-option value="godfather">Godfather</md-option>
           <md-option value="godfather-ii">Godfather II</md-option>
           <md-option value="godfather-iii">Godfather III</md-option>
-          <md-option value="godfellas">Godfellas</md-option>
-          <md-option value="pulp-fiction">Pulp Fiction</md-option>
-          <md-option value="scarface">Scarface</md-option>
         </md-select>
       </md-field>
     </div>
@@ -47,7 +44,8 @@ export default {
   created() {},
   components: {
     Card
-  }
+  },
+  inject: ["$validator"]
 };
 </script>
 

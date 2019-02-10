@@ -36,9 +36,6 @@ export default {
     BackHeader,
     GoalModification,
     Header
-  },
-  inject: {
-    $validator: "$validator"
   }
 };
 </script>
