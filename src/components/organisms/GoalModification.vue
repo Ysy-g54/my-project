@@ -1,23 +1,22 @@
 <template>
   <div>
-    <md-field :class="messageClass" md-clearable>
-      <label>目標</label>
-      <md-input v-model="initial" v-validate="'required|max:255'" data-vv-as="goal" name="goalText"></md-input>
-      <span class="md-error">{{ errors.first('goalText') }}</span>
+    <md-field :class="isErrorField" md-clearable>
+      <label>タイトル</label>
+      <md-input v-model="initial" v-validate="'max:255'" data-vv-as="title" name="titleField"></md-input>
+      <span class="md-error">{{ errors.first('titleField') }}</span>
     </md-field>
     <div class="md-layout-item">
       <md-field>
         <label for="movie">カテゴリ</label>
         <md-select v-model="movie" name="movie" id="movie">
-          <md-option value="fight-club">Fight Club</md-option>
-          <md-option value="godfather">Godfather</md-option>
-          <md-option value="godfather-ii">Godfather II</md-option>
-          <md-option value="godfather-iii">Godfather III</md-option>
+          <md-option value="fight-club">目標</md-option>
+          <md-option value="godfather">メモ</md-option>
+          <md-option value="godfather">その他</md-option>
         </md-select>
       </md-field>
     </div>
     <md-field>
-      <label>達成のためのアクション</label>
+      <label>アクション・メモ</label>
       <md-textarea v-model="textarea"></md-textarea>
     </md-field>
   </div>
@@ -34,10 +33,11 @@ export default {
     };
   },
   methods: {},
+  watch: {},
   computed: {
-    messageClass() {
+    isErrorField() {
       return {
-        "md-invalid": true
+        "md-invalid": this.errors.has("titleField")
       };
     }
   },

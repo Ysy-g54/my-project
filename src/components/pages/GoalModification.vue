@@ -20,7 +20,7 @@ export default {
   methods: {
     saveSuccess() {
       this.$validator.validateAll().then(result => {
-        if (result) {
+        if (!result) {
           return;
         }
         this.$validator.reset();
