@@ -14,6 +14,7 @@
 	},
 	"dependencies": {
 		"chai": "^4.2.0",
+		"firebase": "^5.8.2",
 		"ts-loader": "^5.3.1",
 		"typescript": "^3.2.2",
 		"vee-validate": "^2.1.7",
