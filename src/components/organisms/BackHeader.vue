@@ -5,7 +5,7 @@
         <md-button class="md-icon-button" @click="back">
           <md-icon>arrow_back</md-icon>
         </md-button>
-        <span class="md-headline">新規作成</span>
+        <span class="md-subheading">書き留める</span>
       </div>
       <div class="md-toolbar-section-end">
         <md-button class="md-icon-button" @click="save">

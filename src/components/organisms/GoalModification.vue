@@ -9,9 +9,9 @@
       <md-field>
         <label for="movie">カテゴリ</label>
         <md-select v-model="movie" name="movie" id="movie">
-          <md-option value="fight-club">目標</md-option>
-          <md-option value="godfather">メモ</md-option>
-          <md-option value="godfather">その他</md-option>
+          <md-option value="goal">目標</md-option>
+          <md-option value="memo">メモ</md-option>
+          <md-option value="other">その他</md-option>
         </md-select>
       </md-field>
     </div>
