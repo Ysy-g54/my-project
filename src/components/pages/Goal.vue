@@ -2,7 +2,7 @@
   <Header>
     <div slot="main">
       <Goal></Goal>
-      <Snackbar :isShowSnackbar="isSnackbar"></Snackbar>
+      <Snackbar :isOpenSnackbar="isOpenSnackbar"></Snackbar>
     </div>
   </Header>
 </template>
@@ -18,7 +18,7 @@ export default {
   methods: {},
   watch: {},
   computed: {
-    isSnackbar() {
+    isOpenSnackbar() {
       return this.$route.params.saveSuccessFlg !== undefined;
     }
   },

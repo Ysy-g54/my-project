@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>リスト</h1>
+    <h2>書き留め一覧</h2>
     <div v-for="(goal, index) in goals" :key="index">
       <Card :goal="goals[index]"/>
     </div>
