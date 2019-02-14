@@ -1,7 +1,10 @@
 <template>
   <div name="global-header">
+    <md-button class="md-icon-button md-raised" @click="onAvatarClick">
+      <md-icon>menu</md-icon>
+    </md-button>
     <md-tabs md-alignment="left">
-      <md-tab @click="goHome" md-label="Home"></md-tab>
+      <md-tab md-label="Home" @click="goHome"></md-tab>
       <md-tab id="tab-favorites" md-label="Favorites"></md-tab>
     </md-tabs>
   </div>
@@ -13,6 +16,9 @@ export default {
     return {};
   },
   methods: {
+    onAvatarClick() {
+      console.error("test");
+    },
     goHome() {
       this.$router.push({
         path: "/goal"
