@@ -1,12 +1,16 @@
 <template>
   <div name="global-header">
-    <md-button class="md-icon-button" @click="onAvatarClick">
-      <md-icon>account_circle</md-icon>
-    </md-button>
-    <md-tabs md-alignment="left">
-      <md-tab md-label="Home" @click="goHome"></md-tab>
-      <md-tab id="tab-favorites" md-label="Favorites"></md-tab>
-    </md-tabs>
+    <div>
+      <md-button class="md-icon-button" @click="onAvatarClick">
+        <md-icon>account_circle</md-icon>
+      </md-button>
+    </div>
+    <div>
+      <md-tabs md-alignment="left">
+        <md-tab md-label="Home" @click="goHome"></md-tab>
+        <md-tab id="tab-favorites" md-label="Favorites"></md-tab>
+      </md-tabs>
+    </div>
     <md-app-drawer :md-active.sync="menuVisible">
       <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
 
