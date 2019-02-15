@@ -4,10 +4,12 @@
       <label>メールアドレス</label>
       <md-input v-model="mailAddress"></md-input>
     </md-field>
-    <md-field :md-toggle-password="false">
+    <md-field>
       <label>パスワード</label>
       <md-input v-model="password" type="password"></md-input>
     </md-field>
+    <md-button class="md-dense md-raised md-primary" @click="onLoginClick">ログイン</md-button>
+    <md-button class="md-dense md-raised">googleアカウントでログイン</md-button>
   </div>
 </template>
 
@@ -19,7 +21,14 @@ export default {
       password: ""
     };
   },
-  methods: {},
+  methods: {
+    onLoginClick() {
+      // FIXME 認証処理追記
+      this.$router.push({
+        path: "/goal"
+      });
+    }
+  },
   watch: {},
   computed: {},
   created() {},

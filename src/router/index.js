@@ -16,26 +16,26 @@ Vue.use(VeeValidate);
 Vue.use(VueMaterial);
 
 export default new Router({
-	routes: [
-		{
-			path: "/login",
-			name: "Login",
-			component: Login
-		},
-		{
-			path: "/goal",
-			name: "Goal",
-			component: Goal
-		},
-		{
-			path: "/goal/modification",
-			name: "GoalModification",
-			component: GoalModification
-		},
-		// catch all redirect
-		{
-			path: "*",
-			redirect: "/goal"
-		}
-	]
+  routes: [
+    {
+      path: "/login",
+      name: "Login",
+      component: Login
+    },
+    {
+      path: "/goal",
+      name: "Goal",
+      component: Goal
+    },
+    {
+      path: "/goal/modification",
+      name: "GoalModification",
+      component: GoalModification
+    },
+    // catch all redirect
+    {
+      path: "*",
+      redirect: "/login"
+    }
+  ]
 });

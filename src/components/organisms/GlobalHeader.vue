@@ -29,10 +29,8 @@
           <md-icon>delete</md-icon>
           <span class="md-list-item-text">Trash</span>
         </md-list-item>
-
         <md-list-item>
-          <md-icon>error</md-icon>
-          <span class="md-list-item-text">Spam</span>
+          <span class="md-list-item-text">ログアウト</span>
         </md-list-item>
       </md-list>
     </md-app-drawer>
