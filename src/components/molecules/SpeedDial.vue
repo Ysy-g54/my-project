@@ -1,6 +1,6 @@
 <template>
   <md-speed-dial md-event="click" class="md-bottom-right" md-direction="top">
-    <md-speed-dial-target class="md-primary" @click="goGoalModification">
+    <md-speed-dial-target class="md-primary" @click="goMemoModification">
       <md-icon>add</md-icon>
     </md-speed-dial-target>
 
@@ -22,9 +22,9 @@ export default {
   props: {},
   computed: {},
   methods: {
-    goGoalModification() {
+    goMemoModification() {
       this.$router.push({
-        path: "/goal/modification"
+        path: "/memo/modification"
       });
     }
   },

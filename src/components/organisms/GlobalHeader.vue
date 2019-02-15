@@ -29,9 +29,7 @@
           <md-icon>delete</md-icon>
           <span class="md-list-item-text">Trash</span>
         </md-list-item>
-        <md-list-item>
-          <span class="md-list-item-text">ログアウト</span>
-        </md-list-item>
+        <md-list-item @click="onLogoutClick">ログアウト</md-list-item>
       </md-list>
     </md-app-drawer>
   </div>
@@ -48,9 +46,15 @@ export default {
     onAvatarClick() {
       this.menuVisible = true;
     },
+    onLogoutClick() {
+      // FIXME ログアウト処理追加
+      this.$router.push({
+        path: "/login"
+      });
+    },
     goHome() {
       this.$router.push({
-        path: "/goal"
+        path: "/memo"
       });
     }
   },

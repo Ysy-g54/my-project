@@ -1,14 +1,11 @@
 <template>
   <div>
-    <md-card>
+    <md-card v-for="(memo, index) in memos" :key="index">
       <md-card-header>
         <div>
-          <span class="md-title">{{goal.title}}</span>
-          <md-button class="md-icon-button">
-            <md-icon>more_vert</md-icon>
-          </md-button>
+          <span class="md-title">{{memo.title}}</span>
         </div>
-        <div class="md-subhead">登録日：{{goal.insertDateTime }}</div>
+        <div class="md-subhead">登録日：{{memo.insertDateTime }}</div>
       </md-card-header>
 
       <md-card-expand>
@@ -18,6 +15,22 @@
               <md-icon>keyboard_arrow_down</md-icon>
             </md-button>
           </md-card-expand-trigger>
+          <md-menu md-size="big" md-direction="bottom-end">
+            <md-button class="md-icon-button" md-fab-top-right md-menu-trigger>
+              <md-icon>more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item>
+                <span>Call</span>
+                <md-icon>phone</md-icon>
+              </md-menu-item>
+
+              <md-menu-item>
+                <span>Send a message</span>
+                <md-icon>message</md-icon>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
         </md-card-actions>
 
         <md-card-expand-content>
@@ -30,10 +43,15 @@
 
 <script>
 export default {
-  data: () => ({}),
-  props: {
-    goal: { type: Object, required: false }
-  },
+  data: () => ({
+    memos: [
+      { title: "test", insertDateTime: "2018/01/13" },
+      { title: "test2", insertDateTime: "2018/01/14" },
+      { title: "test3", insertDateTime: "2018/01/15" },
+      { title: "test3", insertDateTime: "2018/01/15" }
+    ]
+  }),
+  props: {},
   computed: {},
   created() {}
 };

@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import Card from "@/components/molecules/Card";
 export default {
   data() {
     return {
@@ -41,10 +40,11 @@ export default {
       };
     }
   },
-  created() {},
-  components: {
-    Card
+  props: {
+    memo: { type: Array, required: false }
   },
+  created() {},
+  components: {},
   inject: ["$validator"]
 };
 </script>

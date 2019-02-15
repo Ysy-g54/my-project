@@ -4,14 +4,14 @@
       <BackHeader @save-success="saveSuccess"></BackHeader>
     </div>
     <div slot="main">
-      <GoalModification></GoalModification>
+      <MemoModification></MemoModification>
     </div>
   </Header>
 </template>
 
 <script>
 import BackHeader from "@/components/organisms/BackHeader";
-import GoalModification from "@/components/organisms/GoalModification";
+import MemoModification from "@/components/organisms/MemoModification";
 import Header from "@/components/pages/Header";
 export default {
   data() {
@@ -25,7 +25,7 @@ export default {
         }
         this.$validator.reset();
         this.$router.push({
-          name: "Goal",
+          name: "Memo",
           params: { saveSuccessFlg: true }
         });
       });
@@ -34,7 +34,7 @@ export default {
   created() {},
   components: {
     BackHeader,
-    GoalModification,
+    MemoModification,
     Header
   }
 };

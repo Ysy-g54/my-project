@@ -1,7 +1,7 @@
 <template>
   <Header>
     <div slot="main">
-      <Goal></Goal>
+      <Memo></Memo>
       <Snackbar :isOpenSnackbar="isOpenSnackbar"></Snackbar>
     </div>
   </Header>
@@ -9,7 +9,7 @@
 
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
-import Goal from "@/components/organisms/Goal";
+import Memo from "@/components/organisms/Memo";
 import Header from "@/components/pages/Header";
 export default {
   data() {
@@ -25,7 +25,7 @@ export default {
   created() {},
   components: {
     Snackbar,
-    Goal,
+    Memo,
     Header
   }
 };

@@ -8,8 +8,12 @@
       <label>パスワード</label>
       <md-input v-model="password" type="password"></md-input>
     </md-field>
-    <md-button class="md-dense md-raised md-primary" @click="onLoginClick">ログイン</md-button>
-    <md-button class="md-dense md-raised">googleアカウントでログイン</md-button>
+    <div>
+      <md-button class="md-dense md-raised md-primary" @click="onLoginClick">ログイン</md-button>
+    </div>
+    <div>
+      <md-button class="md-dense md-raised">googleアカウントでログイン</md-button>
+    </div>
   </div>
 </template>
 
@@ -25,7 +29,7 @@ export default {
     onLoginClick() {
       // FIXME 認証処理追記
       this.$router.push({
-        path: "/goal"
+        path: "/memo"
       });
     }
   },

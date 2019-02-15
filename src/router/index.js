@@ -3,9 +3,9 @@ import Router from "vue-router";
 import Vuex from "vuex";
 import VeeValidate from "vee-validate";
 import VueMaterial from "vue-material";
-import Goal from "@/components/pages/Goal";
+import Memo from "@/components/pages/Memo";
 import Login from "@/components/pages/Login";
-import GoalModification from "@/components/pages/GoalModification";
+import MemoModification from "@/components/pages/MemoModification";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 import "@/assets/vue-material.icons.css";
@@ -23,14 +23,14 @@ export default new Router({
       component: Login
     },
     {
-      path: "/goal",
-      name: "Goal",
-      component: Goal
+      path: "/memo",
+      name: "Memo",
+      component: Memo
     },
     {
-      path: "/goal/modification",
-      name: "GoalModification",
-      component: GoalModification
+      path: "/memo/modification",
+      name: "MemoModification",
+      component: MemoModification
     },
     // catch all redirect
     {
