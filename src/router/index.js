@@ -4,6 +4,7 @@ import Vuex from "vuex";
 import VeeValidate from "vee-validate";
 import VueMaterial from "vue-material";
 import Goal from "@/components/pages/Goal";
+import Login from "@/components/pages/Login";
 import GoalModification from "@/components/pages/GoalModification";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
@@ -16,6 +17,11 @@ Vue.use(VueMaterial);
 
 export default new Router({
 	routes: [
+		{
+			path: "/login",
+			name: "Login",
+			component: Login
+		},
 		{
 			path: "/goal",
 			name: "Goal",
