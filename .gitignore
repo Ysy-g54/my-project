@@ -1,3 +1,7 @@
+#app configuration
+/src/main.js
+!.gitkeep
+
 .DS_Store
 node_modules/
 /dist/
