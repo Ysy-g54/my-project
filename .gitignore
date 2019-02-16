@@ -2,7 +2,6 @@
 /src/*
 !.gitkeep
 
-# dotenv environment variables file
 .env
 
 
