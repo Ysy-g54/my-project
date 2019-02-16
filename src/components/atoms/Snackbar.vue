@@ -1,7 +1,7 @@
 <template>
   <md-snackbar :md-position="position" :md-active.sync="isOpen" :md-duration="4000" md-persistent>
     <span>{{message}}</span>
-    <md-button class="md-primary" @click="isOpen = false">元に戻す</md-button>
+    <md-button v-if="isButton" class="md-primary" @click="isOpen = false">{{button}}</md-button>
   </md-snackbar>
 </template>
 
@@ -17,10 +17,15 @@ export default {
       this.isOpen = this.isOpenSnackbar;
     }
   },
-  computed: {},
+  computed: {
+    isButton() {
+      return this.button !== "";
+    }
+  },
   props: {
     isOpenSnackbar: { type: Boolean, default: false },
-    message: { type: String, default: "save" }
+    message: { type: String, default: "save" },
+    button: { type: String, required: false }
   },
   mounted() {
     this.openSnackbar();
