@@ -21,13 +21,13 @@
             </md-button>
             <md-menu-content>
               <md-menu-item>
-                <span>Call</span>
-                <md-icon>phone</md-icon>
+                <md-icon>edit</md-icon>
+                <span>編集</span>
               </md-menu-item>
 
               <md-menu-item>
-                <span>Send a message</span>
-                <md-icon>message</md-icon>
+                <md-icon>delete</md-icon>
+                <span>削除</span>
               </md-menu-item>
             </md-menu-content>
           </md-menu>
