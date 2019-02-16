@@ -1,5 +1,10 @@
 <template>
-  <md-snackbar :md-position="position" :md-active.sync="isOpen" :md-duration="4000" md-persistent>
+  <md-snackbar
+    :md-position="position"
+    :md-active.sync="isOpen"
+    :md-duration="duration"
+    md-persistent
+  >
     <span>{{message}}</span>
     <md-button v-if="isButton" class="md-primary" @click="isOpen = false">{{button}}</md-button>
   </md-snackbar>
@@ -26,7 +31,8 @@ export default {
   props: {
     isOpenSnackbar: { type: Boolean, default: false },
     message: { type: String, default: "RETRY" },
-    button: { type: String, required: false }
+    button: { type: String, required: false },
+    duration: { type: Number, default: 4000, required: false }
   },
   mounted() {
     if (this.isOpenSnackbar) {

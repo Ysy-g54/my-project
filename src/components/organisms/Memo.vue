@@ -4,7 +4,13 @@
     <div>
       <MemoCard @delete-memo="deleteMemo"/>
     </div>
-    <Snackbar ref="snackbar" :isOpenSnackbar="isOpenSnackbar" :message="message" :button="button"></Snackbar>
+    <Snackbar
+      ref="snackbar"
+      :isOpenSnackbar="isOpenSnackbar"
+      :message="message"
+      :button="button"
+      :duration="duration"
+    ></Snackbar>
     <SpeedDial/>
   </div>
 </template>
@@ -18,18 +24,21 @@ export default {
     return {
       isOpenSnackbar: false,
       message: "",
-      button: ""
+      button: "",
+      duration: 0
     };
   },
   methods: {
     addMemo() {
       this.isOpenSnackbar = this.$route.params.saveSuccessFlg !== undefined;
       this.message = "書き留めました";
+      this.duration = 4000;
     },
     deleteMemo() {
       this.isOpenSnackbar = true;
       this.message = "メモをゴミ箱に移動しました";
       this.button = "元に戻す";
+      this.duration = 10000;
       this.$refs.snackbar.openSnackbar();
     }
   },
