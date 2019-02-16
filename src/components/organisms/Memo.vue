@@ -4,7 +4,7 @@
     <div>
       <MemoCard @delete-memo="deleteMemo"/>
     </div>
-    <Snackbar :isOpenSnackbar="isOpenSnackbar" :message="message" :button="button"></Snackbar>
+    <Snackbar ref="snackbar" :isOpenSnackbar="isOpenSnackbar" :message="message" :button="button"></Snackbar>
     <SpeedDial/>
   </div>
 </template>
@@ -30,6 +30,7 @@ export default {
       this.isOpenSnackbar = true;
       this.message = "メモをゴミ箱に移動しました";
       this.button = "元に戻す";
+      this.$refs.snackbar.openSnackbar();
     }
   },
   computed: {},

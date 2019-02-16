@@ -14,9 +14,11 @@ export default {
   methods: {
     // FIXME v-model使う
     openSnackbar() {
-      this.isOpen = this.isOpenSnackbar;
+      this.isOpen = true;
+      console.error(this.isOpen);
     }
   },
+  watch: {},
   computed: {
     isButton() {
       return this.button !== "";
@@ -24,11 +26,13 @@ export default {
   },
   props: {
     isOpenSnackbar: { type: Boolean, default: false },
-    message: { type: String, default: "save" },
+    message: { type: String, default: "RETRY" },
     button: { type: String, required: false }
   },
   mounted() {
-    this.openSnackbar();
+    if (this.isOpenSnackbar) {
+      this.openSnackbar();
+    }
   },
   created() {}
 };
