@@ -2,22 +2,41 @@
   <div>
     <h2>書き留め一覧</h2>
     <div>
-      <MemoCard/>
+      <MemoCard @delete-memo="deleteMemo"/>
     </div>
+    <Snackbar :isOpenSnackbar="isOpenSnackbar" :message="message"></Snackbar>
     <SpeedDial/>
   </div>
 </template>
 
 <script>
+import Snackbar from "@/components/atoms/Snackbar";
 import MemoCard from "@/components/molecules/MemoCard";
 import SpeedDial from "@/components/molecules/SpeedDial";
 export default {
   data() {
-    return {};
+    return {
+      isOpenSnackbar: false,
+      message: ""
+    };
   },
-  methods: {},
-  created() {},
+  methods: {
+    addMemo() {
+      this.isOpenSnackbar = this.$route.params.saveSuccessFlg !== undefined;
+      this.message = "書き留めました";
+    },
+    deleteMemo() {
+      this.isOpenSnackbar = true;
+      this.message = "メモをゴミ箱に移動しました";
+    }
+  },
+  computed: {},
+  mounted() {},
+  created() {
+    this.addMemo();
+  },
   components: {
+    Snackbar,
     MemoCard,
     SpeedDial
   }

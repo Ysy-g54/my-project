@@ -2,13 +2,11 @@
   <Header>
     <div slot="main">
       <Memo></Memo>
-      <Snackbar :isOpenSnackbar="isOpenSnackbar"></Snackbar>
     </div>
   </Header>
 </template>
 
 <script>
-import Snackbar from "@/components/atoms/Snackbar";
 import Memo from "@/components/organisms/Memo";
 import Header from "@/components/pages/Header";
 export default {
@@ -17,14 +15,9 @@ export default {
   },
   methods: {},
   watch: {},
-  computed: {
-    isOpenSnackbar() {
-      return this.$route.params.saveSuccessFlg !== undefined;
-    }
-  },
+  computed: {},
   created() {},
   components: {
-    Snackbar,
     Memo,
     Header
   }

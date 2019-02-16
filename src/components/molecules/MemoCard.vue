@@ -20,13 +20,10 @@
               <md-icon>more_vert</md-icon>
             </md-button>
             <md-menu-content>
-              <md-menu-item>
-                <md-icon>edit</md-icon>
+              <md-menu-item @click="onEditClick(memo[index])">
                 <span>編集</span>
               </md-menu-item>
-
-              <md-menu-item>
-                <md-icon>delete</md-icon>
+              <md-menu-item @click="onDeleteClick(memo[index])">
                 <span>削除</span>
               </md-menu-item>
             </md-menu-content>
@@ -51,9 +48,20 @@ export default {
       { title: "test3", insertDateTime: "2018/01/15" }
     ]
   }),
+  methods: {
+    onEditClick(memo) {
+      this.$router.push({
+        path: "/memo/modification"
+      });
+    },
+    onDeleteClick(memo) {
+      this.$emit("delete-memo");
+    }
+  },
   props: {},
   computed: {},
-  created() {}
+  created() {},
+  components: {}
 };
 </script>
 

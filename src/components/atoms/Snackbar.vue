@@ -1,6 +1,7 @@
 <template>
   <md-snackbar :md-position="position" :md-active.sync="isOpen" :md-duration="4000" md-persistent>
-    <span>save</span>
+    <span>{{message}}</span>
+    <md-button class="md-primary" @click="isOpen = false">元に戻す</md-button>
   </md-snackbar>
 </template>
 
@@ -14,12 +15,12 @@ export default {
     // FIXME v-model使う
     openSnackbar() {
       this.isOpen = this.isOpenSnackbar;
-    },
-    close
+    }
   },
   computed: {},
   props: {
-    isOpenSnackbar: { type: Boolean, default: false }
+    isOpenSnackbar: { type: Boolean, default: false },
+    message: { type: String, default: "save" }
   },
   mounted() {
     this.openSnackbar();
