@@ -15,7 +15,6 @@ export default {
     // FIXME v-model使う
     openSnackbar() {
       this.isOpen = true;
-      console.error(this.isOpen);
     }
   },
   watch: {},
