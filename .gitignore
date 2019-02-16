@@ -1,6 +1,10 @@
 #app configuration
-/src/main.js
+/src/*
 !.gitkeep
+
+# dotenv environment variables file
+.env
+
 
 .DS_Store
 node_modules/
