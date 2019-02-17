@@ -1,5 +1,4 @@
 #app configuration
-/src/*
 !.gitkeep
 
 .env
