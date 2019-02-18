@@ -5,7 +5,7 @@
         <div>
           <span class="md-title">{{memo.title}}</span>
         </div>
-        <div class="md-subhead">登録日：{{memo.insertDateTime }}</div>
+        <!-- <div class="md-subhead">登録日：{{memo.insertDateTime }}</div> -->
       </md-card-header>
 
       <md-card-expand>
@@ -31,7 +31,7 @@
         </md-card-actions>
 
         <md-card-expand-content>
-          <md-card-content>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.</md-card-content>
+          <md-card-content>{{ memo.memo }}</md-card-content>
         </md-card-expand-content>
       </md-card-expand>
     </md-card>
@@ -39,14 +39,13 @@
 </template>
 
 <script>
+import _ from "lodash";
+import firebase from "firebase";
+import "firebase/firestore";
 export default {
   data: () => ({
-    memos: [
-      { title: "test", insertDateTime: "2018/01/13" },
-      { title: "test2", insertDateTime: "2018/01/14" },
-      { title: "test3", insertDateTime: "2018/01/15" },
-      { title: "test3", insertDateTime: "2018/01/15" }
-    ]
+    memos: [],
+    database: firebase.firestore()
   }),
   methods: {
     onEditClick(memo) {
@@ -55,12 +54,32 @@ export default {
       });
     },
     onDeleteClick(memo) {
-      this.$emit("delete-memo");
+      this.database
+        .collection("memo")
+        .doc("76drSJ1moQjbmkGWDUvw")
+        .delete()
+        .then(() => {
+          this.$emit("delete-memo");
+        })
+        .catch(error => {
+          console.error("Error adding document: ", error);
+        });
     }
   },
   props: {},
   computed: {},
-  created() {},
+  created() {
+    this.database
+      .collection("memo")
+      .where("deleteFlg", "==", false)
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(document => {
+          let memoSnapshot = _.set(document.data(), "memoId", document.id);
+          this.memos.push(memoSnapshot);
+        });
+      });
+  },
   components: {}
 };
 </script>

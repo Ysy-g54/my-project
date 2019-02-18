@@ -17,7 +17,9 @@ import MemoModification from "@/components/organisms/MemoModification";
 import Header from "@/components/pages/Header";
 export default {
   data() {
-    return {};
+    return {
+      database: firebase.firestore()
+    };
   },
   methods: {
     saveSuccess() {
@@ -26,25 +28,24 @@ export default {
           return;
         }
         this.$validator.reset();
-        // Get a database reference to our blog
-        let db = firebase.firestore();
-        db.collection("memo")
+        this.database
+          .collection("memo")
           .add({
-            memoId: "1",
             categoryId: "1",
             title: "testTitle",
-            memo: "testMessage"
+            memo: "testMessage",
+            userId: "user1",
+            deleteFlg: false
           })
-          .then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
+          .then(docRef => {
+            this.$router.push({
+              name: "Memo",
+              params: { saveSuccessFlg: true }
+            });
           })
-          .catch(function(error) {
+          .catch(error => {
             console.error("Error adding document: ", error);
           });
-        this.$router.push({
-          name: "Memo",
-          params: { saveSuccessFlg: true }
-        });
       });
     }
   },
