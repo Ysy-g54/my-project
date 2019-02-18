@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import firebase from "firebase";
+import "firebase/firestore";
 import BackHeader from "@/components/organisms/BackHeader";
 import MemoModification from "@/components/organisms/MemoModification";
 import Header from "@/components/pages/Header";
@@ -24,6 +26,21 @@ export default {
           return;
         }
         this.$validator.reset();
+        // Get a database reference to our blog
+        let db = firebase.firestore();
+        db.collection("memo")
+          .add({
+            memoId: "1",
+            categoryId: "1",
+            title: "testTitle",
+            memo: "testMessage"
+          })
+          .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+          })
+          .catch(function(error) {
+            console.error("Error adding document: ", error);
+          });
         this.$router.push({
           name: "Memo",
           params: { saveSuccessFlg: true }
