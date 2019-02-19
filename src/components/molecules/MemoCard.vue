@@ -54,6 +54,7 @@ export default {
         .where("deleteFlg", "==", false)
         .get()
         .then(querySnapshot => {
+          this.memos = [];
           querySnapshot.forEach(document => {
             let memoSnapshot = _.set(document.data(), "memoId", document.id);
             this.memos.push(memoSnapshot);
@@ -71,9 +72,8 @@ export default {
         .doc(memoId)
         .delete()
         .then(() => {
-          this.searchMemo().then(() => {
-            this.$emit("delete-memo");
-          });
+          this.searchMemo();
+          this.$emit("delete-memo");
         })
         .catch(error => {
           console.error("Error adding document: ", error);
