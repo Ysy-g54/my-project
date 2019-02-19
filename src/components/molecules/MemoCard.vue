@@ -23,7 +23,7 @@
               <md-menu-item @click="onEditClick(memo[index])">
                 <span>編集</span>
               </md-menu-item>
-              <md-menu-item @click="onDeleteClick(memo[index])">
+              <md-menu-item @click="onDeleteClick(memo.memoId)">
                 <span>削除</span>
               </md-menu-item>
             </md-menu-content>
@@ -48,18 +48,32 @@ export default {
     database: firebase.firestore()
   }),
   methods: {
+    searchMemo() {
+      this.database
+        .collection("memo")
+        .where("deleteFlg", "==", false)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(document => {
+            let memoSnapshot = _.set(document.data(), "memoId", document.id);
+            this.memos.push(memoSnapshot);
+          });
+        });
+    },
     onEditClick(memo) {
       this.$router.push({
         path: "/memo/modification"
       });
     },
-    onDeleteClick(memo) {
+    onDeleteClick(memoId) {
       this.database
         .collection("memo")
-        .doc("76drSJ1moQjbmkGWDUvw")
+        .doc(memoId)
         .delete()
         .then(() => {
-          this.$emit("delete-memo");
+          this.searchMemo().then(() => {
+            this.$emit("delete-memo");
+          });
         })
         .catch(error => {
           console.error("Error adding document: ", error);
@@ -69,16 +83,7 @@ export default {
   props: {},
   computed: {},
   created() {
-    this.database
-      .collection("memo")
-      .where("deleteFlg", "==", false)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(document => {
-          let memoSnapshot = _.set(document.data(), "memoId", document.id);
-          this.memos.push(memoSnapshot);
-        });
-      });
+    this.searchMemo();
   },
   components: {}
 };
