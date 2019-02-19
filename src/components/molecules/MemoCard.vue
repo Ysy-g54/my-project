@@ -5,7 +5,6 @@
         <div>
           <span class="md-title">{{memo.title}}</span>
         </div>
-        <!-- <div class="md-subhead">登録日：{{memo.insertDateTime }}</div> -->
       </md-card-header>
 
       <md-card-expand>
@@ -20,7 +19,7 @@
               <md-icon>more_vert</md-icon>
             </md-button>
             <md-menu-content>
-              <md-menu-item @click="onEditClick(memo[index])">
+              <md-menu-item @click="onEditClick(memo.memoId)">
                 <span>編集</span>
               </md-menu-item>
               <md-menu-item @click="onDeleteClick(memo.memoId)">
@@ -61,9 +60,10 @@ export default {
           });
         });
     },
-    onEditClick(memo) {
+    onEditClick(memoId) {
       this.$router.push({
-        path: "/memo/modification"
+        name: "MemoModification",
+        params: { memoId }
       });
     },
     onDeleteClick(memoId) {

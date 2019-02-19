@@ -28,7 +28,7 @@ export default new Router({
       component: Memo
     },
     {
-      path: "/memo/modification",
+      path: "/memo/modification/:memoId?",
       name: "MemoModification",
       component: MemoModification
     },

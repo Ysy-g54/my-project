@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       title: "",
-      categoryId: "test",
+      categoryId: "",
       memo: "",
       database: firebase.firestore()
     };
@@ -69,8 +69,21 @@ export default {
     }
   },
   props: {
-    isSavable: { type: Boolean, default: false },
-    memoId: { type: String, required: false }
+    isSavable: { type: Boolean, default: false }
+  },
+  mounted() {
+    if (this.$route.params.memoId !== undefined) {
+      this.database
+        .collection("memo")
+        .doc(this.$route.params.memoId)
+        .get()
+        .then(querySnapshot => {
+          let data = querySnapshot.data();
+          this.title = data.title;
+          this.categoryId = data.categoryId;
+          this.memo = data.memo;
+        });
+    }
   },
   created() {},
   components: {},
