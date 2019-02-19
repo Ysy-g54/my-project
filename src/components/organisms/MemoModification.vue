@@ -32,29 +32,52 @@ export default {
       categoryId: "",
       memo: "",
       database: firebase.firestore(),
-      isUpdateMemo: false
+      isUpdateMemo: false,
+      memoId: ""
     };
   },
   methods: {
     saveMemo() {
-      this.database
-        .collection("memo")
-        .add({
-          title: this.title,
-          categoryId: this.categoryId,
-          memo: this.memo,
-          userId: "user1",
-          deleteFlg: false
-        })
-        .then(docRef => {
-          this.$router.push({
-            name: "Memo",
-            params: { saveSuccessFlg: true }
+      if (!this.isUpdateMemo) {
+        this.database
+          .collection("memo")
+          .add({
+            title: this.title,
+            categoryId: this.categoryId,
+            memo: this.memo,
+            userId: "user1",
+            deleteFlg: false
+          })
+          .then(docRef => {
+            this.$router.push({
+              name: "Memo",
+              params: { saveSuccessFlg: true }
+            });
+          })
+          .catch(error => {
+            console.error("Error adding document: ", error);
           });
-        })
-        .catch(error => {
-          console.error("Error adding document: ", error);
-        });
+      } else {
+        this.database
+          .collection("memo")
+          .doc(this.memoId)
+          .set({
+            title: this.title,
+            categoryId: this.categoryId,
+            memo: this.memo,
+            userId: "user1",
+            deleteFlg: false
+          })
+          .then(docRef => {
+            this.$router.push({
+              name: "Memo",
+              params: { saveSuccessFlg: true }
+            });
+          })
+          .catch(error => {
+            console.error("Error adding document: ", error);
+          });
+      }
     }
   },
   watch: {
@@ -80,11 +103,14 @@ export default {
         .doc(this.$route.params.memoId)
         .get()
         .then(querySnapshot => {
-          let data = querySnapshot.data();
-          this.title = data.title;
-          this.categoryId = data.categoryId;
-          this.memo = data.memo;
-          this.isUpdateMemo = true;
+          if (querySnapshot.exists) {
+            let data = querySnapshot.data();
+            this.title = data.title;
+            this.categoryId = data.categoryId;
+            this.memo = data.memo;
+            this.memoId = querySnapshot.id;
+            this.isUpdateMemo = true;
+          }
         });
     }
   },
