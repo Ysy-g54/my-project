@@ -11,6 +11,7 @@
     <div>
       <md-button class="md-dense md-raised md-primary" @click="onLoginClick">ログイン</md-button>
     </div>
+    <div>OR</div>
     <div>
       <md-button class="md-dense md-raised">googleアカウントでログイン</md-button>
     </div>
