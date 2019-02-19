@@ -38,46 +38,34 @@ export default {
   },
   methods: {
     saveMemo() {
-      if (!this.isUpdateMemo) {
-        this.database
-          .collection("memo")
-          .add({
+      (!this.isUpdateMemo
+        ? this.database.collection("memo").add({
             title: this.title,
             categoryId: this.categoryId,
             memo: this.memo,
             userId: "user1",
             deleteFlg: false
           })
-          .then(docRef => {
-            this.$router.push({
-              name: "Memo",
-              params: { saveSuccessFlg: true }
-            });
-          })
-          .catch(error => {
-            console.error("Error adding document: ", error);
+        : this.database
+            .collection("memo")
+            .doc(this.memoId)
+            .set({
+              title: this.title,
+              categoryId: this.categoryId,
+              memo: this.memo,
+              userId: "user1",
+              deleteFlg: false
+            })
+      )
+        .then(docRef => {
+          this.$router.push({
+            name: "Memo",
+            params: { saveSuccessFlg: true }
           });
-      } else {
-        this.database
-          .collection("memo")
-          .doc(this.memoId)
-          .set({
-            title: this.title,
-            categoryId: this.categoryId,
-            memo: this.memo,
-            userId: "user1",
-            deleteFlg: false
-          })
-          .then(docRef => {
-            this.$router.push({
-              name: "Memo",
-              params: { saveSuccessFlg: true }
-            });
-          })
-          .catch(error => {
-            console.error("Error adding document: ", error);
-          });
-      }
+        })
+        .catch(error => {
+          console.error("Error adding document: ", error);
+        });
     }
   },
   watch: {
