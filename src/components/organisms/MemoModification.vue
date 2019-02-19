@@ -31,7 +31,8 @@ export default {
       title: "",
       categoryId: "",
       memo: "",
-      database: firebase.firestore()
+      database: firebase.firestore(),
+      isUpdateMemo: false
     };
   },
   methods: {
@@ -71,7 +72,8 @@ export default {
   props: {
     isSavable: { type: Boolean, default: false }
   },
-  mounted() {
+  mounted() {},
+  created() {
     if (this.$route.params.memoId !== undefined) {
       this.database
         .collection("memo")
@@ -82,12 +84,13 @@ export default {
           this.title = data.title;
           this.categoryId = data.categoryId;
           this.memo = data.memo;
+          this.isUpdateMemo = true;
         });
     }
   },
-  created() {},
-  components: {},
-  inject: ["$validator"]
+  components: {
+    inject: ["$validator"]
+  }
 };
 </script>
 
