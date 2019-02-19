@@ -4,21 +4,19 @@
       <BackHeader @save-success="saveSuccess"></BackHeader>
     </div>
     <div slot="main">
-      <MemoModification></MemoModification>
+      <MemoModification :isSavable="isSavable"></MemoModification>
     </div>
   </Header>
 </template>
 
 <script>
-import firebase from "firebase";
-import "firebase/firestore";
 import BackHeader from "@/components/organisms/BackHeader";
 import MemoModification from "@/components/organisms/MemoModification";
 import Header from "@/components/pages/Header";
 export default {
   data() {
     return {
-      database: firebase.firestore()
+      isSavable: false
     };
   },
   methods: {
@@ -28,24 +26,7 @@ export default {
           return;
         }
         this.$validator.reset();
-        this.database
-          .collection("memo")
-          .add({
-            categoryId: "1",
-            title: "testTitle",
-            memo: "testMessage",
-            userId: "user1",
-            deleteFlg: false
-          })
-          .then(docRef => {
-            this.$router.push({
-              name: "Memo",
-              params: { saveSuccessFlg: true }
-            });
-          })
-          .catch(error => {
-            console.error("Error adding document: ", error);
-          });
+        this.isSavable = true;
       });
     }
   },

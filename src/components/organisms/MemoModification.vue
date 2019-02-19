@@ -2,37 +2,65 @@
   <div>
     <md-field :class="isErrorField" md-clearable>
       <label>タイトル</label>
-      <md-input v-model="initial" v-validate="'max:255'" data-vv-as="title" name="titleField"></md-input>
+      <md-input v-model="title" v-validate="'max:255'" data-vv-as="title" name="titleField"></md-input>
       <span class="md-error">{{ errors.first('titleField') }}</span>
     </md-field>
     <div class="md-layout-item">
       <md-field>
-        <label for="movie">カテゴリ</label>
-        <md-select v-model="movie" name="movie" id="movie">
-          <md-option value="goal">目標</md-option>
-          <md-option value="memo">メモ</md-option>
-          <md-option value="other">その他</md-option>
+        <label for="categoryId">カテゴリ</label>
+        <md-select v-model="categoryId" name="categoryId">
+          <md-option value="1">目標</md-option>
+          <md-option value="2">メモ</md-option>
+          <md-option value="3">その他</md-option>
         </md-select>
       </md-field>
     </div>
     <md-field>
       <label>アクション・メモ</label>
-      <md-textarea v-model="textarea"></md-textarea>
+      <md-textarea v-model="memo"></md-textarea>
     </md-field>
   </div>
 </template>
 
 <script>
+import firebase from "firebase";
+import "firebase/firestore";
 export default {
   data() {
     return {
-      initial: "",
-      movie: "test",
-      textarea: null
+      title: "",
+      categoryId: "test",
+      memo: "",
+      database: firebase.firestore()
     };
   },
-  methods: {},
-  watch: {},
+  methods: {
+    saveMemo() {
+      this.database
+        .collection("memo")
+        .add({
+          title: this.title,
+          categoryId: this.categoryId,
+          memo: this.memo,
+          userId: "user1",
+          deleteFlg: false
+        })
+        .then(docRef => {
+          this.$router.push({
+            name: "Memo",
+            params: { saveSuccessFlg: true }
+          });
+        })
+        .catch(error => {
+          console.error("Error adding document: ", error);
+        });
+    }
+  },
+  watch: {
+    isSavable() {
+      this.saveMemo();
+    }
+  },
   computed: {
     isErrorField() {
       return {
@@ -41,7 +69,8 @@ export default {
     }
   },
   props: {
-    memo: { type: Array, required: false }
+    isSavable: { type: Boolean, default: false },
+    memoId: { type: String, required: false }
   },
   created() {},
   components: {},
