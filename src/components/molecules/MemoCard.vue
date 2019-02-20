@@ -5,6 +5,7 @@
         <div>
           <span class="md-title">{{memo.title}}</span>
         </div>
+        <div>登録日：{{memo.insertDateTime}}</div>
       </md-card-header>
 
       <md-card-expand>
@@ -39,6 +40,7 @@
 
 <script>
 import _ from "lodash";
+import moment from "moment";
 import firebase from "firebase";
 import "firebase/firestore";
 export default {
@@ -56,9 +58,20 @@ export default {
           this.memos = [];
           querySnapshot.forEach(document => {
             let memoSnapshot = _.set(document.data(), "memoId", document.id);
+            memoSnapshot.insertDateTime = this.formatDate(
+              memoSnapshot.insertDateTime
+            );
             this.memos.push(memoSnapshot);
           });
         });
+    },
+    // FIXME 共通化する
+    formatDate(date) {
+      if (!_.isDate(date) && _.isEmpty(date)) {
+        return "";
+      }
+      let m = moment(date.toDate());
+      return m.format("YYYY/MM/DD");
     },
     onEditClick(memoId) {
       this.$router.push({

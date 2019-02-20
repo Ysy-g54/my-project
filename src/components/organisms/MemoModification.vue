@@ -33,7 +33,8 @@ export default {
       memo: "",
       database: firebase.firestore(),
       isUpdateMemo: false,
-      memoId: ""
+      memoId: "",
+      insertDateTime: new Date()
     };
   },
   methods: {
@@ -43,6 +44,7 @@ export default {
             title: this.title,
             categoryId: this.categoryId,
             memo: this.memo,
+            insertDateTime: this.insertDateTime,
             userId: "user1",
             deleteFlg: false
           })
@@ -53,6 +55,7 @@ export default {
               title: this.title,
               categoryId: this.categoryId,
               memo: this.memo,
+              insertDateTime: this.insertDateTime,
               userId: "user1",
               deleteFlg: false
             })
@@ -97,6 +100,7 @@ export default {
             this.categoryId = data.categoryId;
             this.memo = data.memo;
             this.memoId = querySnapshot.id;
+            this.insertDateTime = data.insertDateTime;
             this.isUpdateMemo = true;
           }
         });

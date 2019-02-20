@@ -18,6 +18,7 @@
           <md-icon>delete</md-icon>
           <span class="md-list-item-text">ゴミ箱</span>
         </md-list-item>
+        <md-divider></md-divider>
         <md-list-item @click="onLogoutClick">ログアウト</md-list-item>
       </md-list>
     </md-app-drawer>
