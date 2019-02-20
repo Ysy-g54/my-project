@@ -7,33 +7,24 @@
         </div>
         <div>登録日：{{memo.insertDateTime}}</div>
       </md-card-header>
-
-      <md-card-expand>
-        <md-card-actions md-alignment="space-between">
-          <md-card-expand-trigger>
-            <md-button class="md-icon-button">
-              <md-icon>keyboard_arrow_down</md-icon>
-            </md-button>
-          </md-card-expand-trigger>
-          <md-menu md-size="big" md-direction="bottom-end">
-            <md-button class="md-icon-button" md-fab-top-right md-menu-trigger>
-              <md-icon>more_vert</md-icon>
-            </md-button>
-            <md-menu-content>
-              <md-menu-item @click="onEditClick(memo.memoId)">
-                <span>編集</span>
-              </md-menu-item>
-              <md-menu-item @click="onDeleteClick(memo.memoId)">
-                <span>削除</span>
-              </md-menu-item>
-            </md-menu-content>
-          </md-menu>
-        </md-card-actions>
-
-        <md-card-expand-content>
-          <md-card-content>{{ memo.memo }}</md-card-content>
-        </md-card-expand-content>
-      </md-card-expand>
+      <md-card-content>
+        <md-card-content>{{ memo.memo }}</md-card-content>
+      </md-card-content>
+      <md-card-actions>
+        <md-menu md-size="big" md-direction="bottom-end">
+          <md-button class="md-icon-button" md-menu-trigger>
+            <md-icon>more_vert</md-icon>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item @click="onEditClick(memo.memoId)">
+              <span>編集</span>
+            </md-menu-item>
+            <md-menu-item @click="onDeleteClick(memo.memoId)">
+              <span>削除</span>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-card-actions>
     </md-card>
   </div>
 </template>

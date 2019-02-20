@@ -36,7 +36,7 @@ export default {
     },
     deleteMemo() {
       this.isOpenSnackbar = true;
-      this.message = "メモをゴミ箱に移動しました";
+      this.message = "削除しました";
       this.duration = 10000;
       this.$refs.snackbar.openSnackbar();
     }
