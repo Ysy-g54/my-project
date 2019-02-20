@@ -9,7 +9,7 @@
       </div>
       <div class="md-toolbar-section-end">
         <md-button class="md-icon-button" @click="save">
-          <md-icon>send</md-icon>
+          <md-icon>check</md-icon>
         </md-button>
       </div>
     </div>
