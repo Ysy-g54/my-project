@@ -7,9 +7,7 @@
         </div>
         <div>登録日：{{memo.insertDateTime}}</div>
       </md-card-header>
-      <md-card-content>
-        <md-card-content>{{ memo.memo }}</md-card-content>
-      </md-card-content>
+      <md-card-content>{{ memo.memo }}</md-card-content>
       <md-card-actions>
         <md-menu md-size="big" md-direction="bottom-end">
           <md-button class="md-icon-button" md-menu-trigger>
