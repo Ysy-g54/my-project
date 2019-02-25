@@ -30,7 +30,7 @@ export default {
     onLoginClick() {
       // FIXME 認証処理追記
       this.$router.push({
-        path: "/memo"
+        name: "Memo"
       });
     }
   },

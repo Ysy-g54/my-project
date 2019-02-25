@@ -1,14 +1,11 @@
 <template>
-  <Header>
-    <div slot="main">
-      <Memo></Memo>
-    </div>
-  </Header>
+  <div>
+    <Memo></Memo>
+  </div>
 </template>
 
 <script>
 import Memo from "@/components/organisms/Memo";
-import Header from "@/components/pages/Header";
 export default {
   data() {
     return {};
@@ -18,8 +15,7 @@ export default {
   computed: {},
   created() {},
   components: {
-    Memo,
-    Header
+    Memo
   }
 };
 </script>

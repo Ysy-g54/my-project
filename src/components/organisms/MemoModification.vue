@@ -1,10 +1,5 @@
 <template>
   <div>
-    <md-field :class="isErrorField" md-clearable>
-      <label>タイトル</label>
-      <md-input v-model="title" v-validate="'max:255'" data-vv-as="title" name="titleField"></md-input>
-      <span class="md-error">{{ errors.first('titleField') }}</span>
-    </md-field>
     <div class="md-layout-item">
       <md-field>
         <label for="categoryId">カテゴリ</label>
@@ -28,7 +23,6 @@ import "firebase/firestore";
 export default {
   data() {
     return {
-      title: "",
       categoryId: "",
       memo: "",
       database: firebase.firestore(),
@@ -41,7 +35,6 @@ export default {
     saveMemo() {
       (!this.isUpdateMemo
         ? this.database.collection("memo").add({
-            title: this.title,
             categoryId: this.categoryId,
             memo: this.memo,
             insertDateTime: this.insertDateTime,
@@ -52,7 +45,6 @@ export default {
             .collection("memo")
             .doc(this.memoId)
             .set({
-              title: this.title,
               categoryId: this.categoryId,
               memo: this.memo,
               insertDateTime: this.insertDateTime,
@@ -76,13 +68,7 @@ export default {
       this.saveMemo();
     }
   },
-  computed: {
-    isErrorField() {
-      return {
-        "md-invalid": this.errors.has("titleField")
-      };
-    }
-  },
+  computed: {},
   props: {
     isSavable: { type: Boolean, default: false }
   },
@@ -96,7 +82,6 @@ export default {
         .then(querySnapshot => {
           if (querySnapshot.exists) {
             let data = querySnapshot.data();
-            this.title = data.title;
             this.categoryId = data.categoryId;
             this.memo = data.memo;
             this.memoId = querySnapshot.id;

@@ -6,6 +6,7 @@ import VueMaterial from "vue-material";
 import Login from "@/components/pages/Login";
 import Memo from "@/components/pages/Memo";
 import MemoModification from "@/components/pages/MemoModification";
+import GlobalHeader from "@/components/organisms/GlobalHeader";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 import "@/assets/vue-material.icons.css";
@@ -23,9 +24,17 @@ export default new Router({
       component: Login
     },
     {
-      path: "/memo",
-      name: "Memo",
-      component: Memo
+      path: "/browse",
+      component: GlobalHeader,
+      props: true,
+      children: [
+        {
+          path: "memo",
+          name: "Memo",
+          component: Memo,
+          props: true
+        }
+      ]
     },
     {
       path: "/memo/modification/:memoId?",

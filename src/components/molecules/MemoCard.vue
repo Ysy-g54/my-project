@@ -2,9 +2,6 @@
   <div>
     <md-card v-for="(memo, index) in memos" :key="index">
       <md-card-header>
-        <div>
-          <span class="md-title">{{memo.title}}</span>
-        </div>
         <div>登録日：{{memo.insertDateTime}}</div>
       </md-card-header>
       <md-card-content>{{ memo.memo }}</md-card-content>
