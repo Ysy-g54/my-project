@@ -1,7 +1,7 @@
 <template>
-  <md-app md-waterfall md-mode="fixed-last">
-    <md-app-toolbar class="md-large md-dense md-primary">
-      <div class="md-toolbar-row">
+  <md-app md-waterfall md-mode="fixed">
+    <md-app-toolbar class="md-primary">
+      <div>
         <md-button class="md-icon-button" @click="onAvatarClick">
           <md-icon>account_circle</md-icon>
         </md-button>
@@ -62,7 +62,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-app {
-  max-height: 400px;
+  max-height: 740px;
   border: 1px solid rgba(#000, 0.12);
 }
 
