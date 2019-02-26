@@ -3,6 +3,7 @@
     <md-card v-for="(memo, index) in memos" :key="index">
       <md-card-header>
         <div>登録日：{{memo.insertDateTime}}</div>
+        <div>カテゴリ：{{formatCategory(memo.categoryId)}}</div>
       </md-card-header>
       <md-card-content>{{ memo.memo }}</md-card-content>
       <md-card-actions>
@@ -50,6 +51,20 @@ export default {
             this.memos.push(memoSnapshot);
           });
         });
+    },
+    formatCategory(categoryId) {
+      // 定数としてまとめる
+      let categoryNm = "";
+      if (categoryId === "1") {
+        categoryNm = "目標";
+      } else if (categoryId === "2") {
+        categoryNm = "メモ";
+      } else if (categoryId === "3") {
+        categoryNm = "ToDo";
+      } else if (categoryId === "4") {
+        categoryNm = "その他";
+      }
+      return categoryNm;
     },
     // FIXME 共通化する
     formatDate(date) {

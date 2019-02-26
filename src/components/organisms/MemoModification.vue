@@ -6,7 +6,8 @@
         <md-select v-model="categoryId" name="categoryId">
           <md-option value="1">目標</md-option>
           <md-option value="2">メモ</md-option>
-          <md-option value="3">その他</md-option>
+          <md-option value="3">ToDo</md-option>
+          <md-option value="4">その他</md-option>
         </md-select>
       </md-field>
     </div>
