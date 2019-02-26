@@ -55,7 +55,7 @@ export default {
       )
         .then(docRef => {
           this.$router.push({
-            name: "Memo",
+            name: "memo",
             params: { saveSuccessFlg: true }
           });
         })

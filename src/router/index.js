@@ -4,6 +4,7 @@ import Vuex from "vuex";
 import VeeValidate from "vee-validate";
 import VueMaterial from "vue-material";
 import Login from "@/components/pages/Login";
+import Goal from "@/components/pages/Goal";
 import Memo from "@/components/pages/Memo";
 import MemoModification from "@/components/pages/MemoModification";
 import GlobalHeader from "@/components/organisms/GlobalHeader";
@@ -20,7 +21,7 @@ export default new Router({
   routes: [
     {
       path: "/login",
-      name: "Login",
+      name: "login",
       component: Login
     },
     {
@@ -30,7 +31,7 @@ export default new Router({
       children: [
         {
           path: "memo",
-          name: "Memo",
+          name: "memo",
           component: Memo,
           props: true
         }
@@ -38,8 +39,21 @@ export default new Router({
     },
     {
       path: "/memo/modification/:memoId?",
-      name: "MemoModification",
+      name: "memoModification",
       component: MemoModification
+    },
+    {
+      path: "/browse",
+      component: GlobalHeader,
+      props: true,
+      children: [
+        {
+          path: "goal",
+          name: "goal",
+          component: Goal,
+          props: true
+        }
+      ]
     },
     // catch all redirect
     {

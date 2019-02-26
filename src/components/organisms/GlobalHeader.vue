@@ -7,9 +7,9 @@
         </md-button>
       </div>
       <div class="md-toolbar-row">
-        <md-tabs class="md-primary">
-          <md-tab md-label="メモ" @click="goMemo"></md-tab>
-          <!-- <md-tab id="tab-favorites" md-label="Favorites"></md-tab> -->
+        <md-tabs class="md-primary" :md-active-tab="'tab-'+$route.name">
+          <md-tab id="tab-memo" md-label="書留め" :to="{name: 'memo'}"></md-tab>
+          <md-tab id="tab-goal" md-label="目標進捗" :to="{name: 'goal'}"></md-tab>
         </md-tabs>
       </div>
     </md-app-toolbar>
@@ -47,14 +47,11 @@ export default {
       this.$router.push({
         path: "/login"
       });
-    },
-    goMemo() {
-      this.$router.push({
-        name: "Memo"
-      });
     }
   },
-  created() {},
+  created() {
+    console.error(this.$route.name);
+  },
   components: {}
 };
 </script>

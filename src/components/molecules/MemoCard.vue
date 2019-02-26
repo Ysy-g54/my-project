@@ -76,7 +76,7 @@ export default {
     },
     onEditClick(memoId) {
       this.$router.push({
-        name: "MemoModification",
+        name: "memoModification",
         params: { memoId }
       });
     },
