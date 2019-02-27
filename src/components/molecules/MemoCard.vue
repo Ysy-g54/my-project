@@ -2,11 +2,10 @@
   <div>
     <md-card v-for="(memo, index) in memos" :key="index">
       <md-card-header>
-        <div>登録日：{{memo.insertDateTime}}</div>
-        <div>カテゴリ：{{formatCategory(memo.categoryId)}}</div>
-      </md-card-header>
-      <md-card-content>{{ memo.memo }}</md-card-content>
-      <md-card-actions>
+        <md-card-header-text>
+          <div>登録日：{{formatDate(memo.insertDateTime)}}</div>
+          <div>カテゴリ：{{formatCategory(memo.categoryId)}}</div>
+        </md-card-header-text>
         <md-menu md-size="big" md-direction="bottom-end">
           <md-button class="md-icon-button" md-menu-trigger>
             <md-icon>more_vert</md-icon>
@@ -20,7 +19,8 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-      </md-card-actions>
+      </md-card-header>
+      <md-card-content>{{ memo.memo }}</md-card-content>
     </md-card>
   </div>
 </template>
@@ -46,9 +46,6 @@ export default {
           this.memos = [];
           querySnapshot.forEach(document => {
             let memoSnapshot = _.set(document.data(), "memoId", document.id);
-            memoSnapshot.insertDateTime = this.formatDate(
-              memoSnapshot.insertDateTime
-            );
             this.memos.push(memoSnapshot);
           });
         });
@@ -102,7 +99,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-card {
-  width: 320px;
+  width: 285px;
   margin: 4px;
   display: inline-block;
   vertical-align: top;
