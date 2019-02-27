@@ -11,11 +11,11 @@
             <md-icon>more_vert</md-icon>
           </md-button>
           <md-menu-content>
-            <md-menu-item @click="onEditClick(memo.memoId)">
-              <span>編集</span>
+            <md-menu-item v-if="!isDiscard" @click="onEditClick(memo.memoId)">
+              <span>編集する</span>
             </md-menu-item>
             <md-menu-item @click="onDeleteClick(memo.memoId)">
-              <span>削除</span>
+              <span>{{ deleteMessage }}</span>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
@@ -33,6 +33,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 export default {
   data: () => ({
+    deleteMessage: "",
     memos: [],
     database: firebase.firestore()
   }),
@@ -40,7 +41,7 @@ export default {
     searchMemo() {
       this.database
         .collection("memo")
-        .where("deleteFlg", "==", false)
+        .where("deleteFlg", "==", this.isDiscard)
         .get()
         .then(querySnapshot => {
           this.memos = [];
@@ -74,10 +75,18 @@ export default {
       });
     },
     onDeleteClick(memoId) {
-      this.database
-        .collection("memo")
-        .doc(memoId)
-        .delete()
+      (this.isDiscard
+        ? this.database
+            .collection("memo")
+            .doc(memoId)
+            .delete()
+        : this.database
+            .collection("memo")
+            .doc(memoId)
+            .update({
+              deleteFlg: true
+            })
+      )
         .then(() => {
           this.searchMemo();
           this.$emit("delete-memo");
@@ -87,9 +96,12 @@ export default {
         });
     }
   },
-  props: {},
+  props: {
+    isDiscard: { type: Boolean, default: false }
+  },
   computed: {},
   created() {
+    this.deleteMessage = this.isDiscard ? "完全に削除する" : "ゴミ箱に移動する";
     this.searchMemo();
   },
   components: {}

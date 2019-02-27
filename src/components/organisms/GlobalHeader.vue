@@ -43,6 +43,7 @@ export default {
       this.menuVisible = true;
     },
     onTrashClick() {
+      this.menuVisible = false;
       this.$router.push({
         name: "memoTrash"
       });

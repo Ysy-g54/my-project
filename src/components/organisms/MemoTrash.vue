@@ -2,7 +2,7 @@
   <div>
     <h2>ゴミ箱</h2>
     <div>
-      <MemoCard @delete-memo="deleteMemo"/>
+      <MemoCard :isDiscard="true" @delete-memo="deleteMemo"/>
     </div>
     <Snackbar
       ref="snackbar"
@@ -11,14 +11,12 @@
       :button="button"
       :duration="duration"
     ></Snackbar>
-    <SpeedDial/>
   </div>
 </template>
 
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
 import MemoCard from "@/components/molecules/MemoCard";
-import SpeedDial from "@/components/molecules/SpeedDial";
 export default {
   data() {
     return {
@@ -29,27 +27,19 @@ export default {
     };
   },
   methods: {
-    addMemo() {
-      this.isOpenSnackbar = this.$route.params.saveSuccessFlg !== undefined;
-      this.message = "書き留めました";
-      this.duration = 4000;
-    },
     deleteMemo() {
       this.isOpenSnackbar = true;
-      this.message = "削除しました";
+      this.message = "完全に削除しました";
       this.duration = 10000;
       this.$refs.snackbar.openSnackbar();
     }
   },
   computed: {},
   mounted() {},
-  created() {
-    this.addMemo();
-  },
+  created() {},
   components: {
     Snackbar,
-    MemoCard,
-    SpeedDial
+    MemoCard
   }
 };
 </script>
