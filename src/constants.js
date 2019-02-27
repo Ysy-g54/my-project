@@ -1,4 +1,4 @@
-// メモカテゴリ
+// カテゴリ
 export const categories = [
   { categoryId: "1", categoryNm: "目標" },
   { categoryId: "2", categoryNm: "メモ" },
