@@ -49,9 +49,7 @@ export default {
       });
     }
   },
-  created() {
-    console.error(this.$route.name);
-  },
+  created() {},
   components: {}
 };
 </script>
