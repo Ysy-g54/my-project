@@ -6,6 +6,7 @@ import VueMaterial from "vue-material";
 import Login from "@/components/pages/Login";
 import Goal from "@/components/pages/Goal";
 import Memo from "@/components/pages/Memo";
+import MemoTrash from "@/components/pages/MemoTrash";
 import MemoModification from "@/components/pages/MemoModification";
 import GlobalHeader from "@/components/organisms/GlobalHeader";
 import "vue-material/dist/vue-material.min.css";
@@ -33,6 +34,12 @@ export default new Router({
           path: "memo",
           name: "memo",
           component: Memo,
+          props: true
+        },
+        {
+          path: "memoTrash",
+          name: "memoTrash",
+          component: MemoTrash,
           props: true
         }
       ]

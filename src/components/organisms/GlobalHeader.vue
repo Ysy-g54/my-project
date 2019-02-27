@@ -17,7 +17,7 @@
     <md-app-drawer :md-active.sync="menuVisible">
       <md-toolbar class="md-transparent" md-elevation="0">Navigation</md-toolbar>
       <md-list>
-        <md-list-item>
+        <md-list-item @click="onTrashClick">
           <md-icon>delete</md-icon>
           <span class="md-list-item-text">ゴミ箱</span>
         </md-list-item>
@@ -42,10 +42,15 @@ export default {
     onAvatarClick() {
       this.menuVisible = true;
     },
+    onTrashClick() {
+      this.$router.push({
+        name: "memoTrash"
+      });
+    },
     onLogoutClick() {
       // FIXME ログアウト処理追加
       this.$router.push({
-        path: "/login"
+        name: "login"
       });
     }
   },

@@ -24,7 +24,7 @@ export default {
   methods: {
     goMemoModification() {
       this.$router.push({
-        path: "/memo/modification"
+        name: "memoModification"
       });
     }
   },

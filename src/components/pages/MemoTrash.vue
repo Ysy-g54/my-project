@@ -1,11 +1,11 @@
 <template>
   <div>
-    <MemoHistory></MemoHistory>
+    <MemoTrash></MemoTrash>
   </div>
 </template>
 
 <script>
-import MemoHistory from "@/components/organisms/MemoHistory";
+import MemoTrash from "@/components/organisms/MemoTrash";
 export default {
   data() {
     return {};
@@ -15,7 +15,7 @@ export default {
   computed: {},
   created() {},
   components: {
-    MemoHistory
+    MemoTrash
   }
 };
 </script>
