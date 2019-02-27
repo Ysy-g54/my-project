@@ -13,7 +13,7 @@
     </div>
     <md-field>
       <label>アクション・メモ</label>
-      <md-textarea v-model="memo"></md-textarea>
+      <md-textarea v-model="memo" :md-autogrow="true"></md-textarea>
     </md-field>
   </div>
 </template>
