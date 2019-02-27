@@ -27,6 +27,7 @@
 
 <script>
 import _ from "lodash";
+import { categories } from "../../constants";
 import moment from "moment";
 import firebase from "firebase";
 import "firebase/firestore";
@@ -53,17 +54,12 @@ export default {
         });
     },
     formatCategory(categoryId) {
-      // 定数としてまとめる
       let categoryNm = "";
-      if (categoryId === "1") {
-        categoryNm = "目標";
-      } else if (categoryId === "2") {
-        categoryNm = "メモ";
-      } else if (categoryId === "3") {
-        categoryNm = "ToDo";
-      } else if (categoryId === "4") {
-        categoryNm = "その他";
-      }
+      categories.forEach(category => {
+        if (categoryId === category.categoryId) {
+          categoryNm = category.categoryNm;
+        }
+      });
       return categoryNm;
     },
     // FIXME 共通化する

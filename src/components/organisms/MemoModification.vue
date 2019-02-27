@@ -4,22 +4,24 @@
       <md-field>
         <label for="categoryId">カテゴリ</label>
         <md-select v-model="categoryId" name="categoryId">
-          <md-option value="1">目標</md-option>
-          <md-option value="2">メモ</md-option>
-          <md-option value="3">ToDo</md-option>
-          <md-option value="4">その他</md-option>
+          <md-option
+            v-for="(category, index) in categories"
+            :key="index"
+            :value="category.categoryId"
+          >{{ category.categoryNm }}</md-option>
         </md-select>
       </md-field>
     </div>
     <md-field>
       <label>アクション・メモ</label>
-      <md-textarea v-model="memo" :md-autogrow="true"></md-textarea>
+      <md-textarea v-model="memo"></md-textarea>
     </md-field>
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
+import { categories } from "../../constants";
 import "firebase/firestore";
 export default {
   data() {
@@ -29,7 +31,8 @@ export default {
       database: firebase.firestore(),
       isUpdateMemo: false,
       memoId: "",
-      insertDateTime: new Date()
+      insertDateTime: new Date(),
+      categories: categories
     };
   },
   methods: {
