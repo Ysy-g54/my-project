@@ -1,23 +1,17 @@
 <template>
   <div>
-    <Dialog :isActive="isDialogActive" @confirm-dialog="confirmDialog"></Dialog>
+    <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
     <h2>ゴミ箱</h2>
     <div>
       <MemoCard
-        ref="mamoCard"
+        ref="memoCard"
         :isDiscard="true"
         @delete-memo="deleteMemo"
         @restore-memo="restoreMemo"
         @delete-confirm="deleteConfirm"
       />
     </div>
-    <Snackbar
-      ref="snackbar"
-      :isOpenSnackbar="isOpenSnackbar"
-      :message="message"
-      :button="button"
-      :duration="duration"
-    ></Snackbar>
+    <Snackbar ref="snackbar" :message="message" :button="button" :duration="duration"></Snackbar>
   </div>
 </template>
 
@@ -28,11 +22,11 @@ import MemoCard from "@/components/molecules/MemoCard";
 export default {
   data() {
     return {
-      isOpenSnackbar: false,
       message: "",
       button: "",
       duration: 0,
-      isDialogActive: false
+      isDialogActive: false,
+      dialogContent: "完全に削除してもいいですか？"
     };
   },
   methods: {
@@ -40,16 +34,14 @@ export default {
       this.$refs.memoCard.deleteMemo();
     },
     deleteConfirm() {
-      this.isDialogActive = true;
+      this.$refs.dialog.openDialog();
     },
     deleteMemo() {
-      this.isOpenSnackbar = true;
       this.message = "完全に削除しました";
       this.duration = 10000;
       this.$refs.snackbar.openSnackbar();
     },
     restoreMemo() {
-      this.isOpenSnackbar = true;
       this.message = "復元しました";
       this.duration = 4000;
       this.$refs.snackbar.openSnackbar();

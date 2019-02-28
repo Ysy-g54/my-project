@@ -29,16 +29,11 @@ export default {
     }
   },
   props: {
-    isOpenSnackbar: { type: Boolean, default: false },
     message: { type: String, default: "RETRY" },
     button: { type: String, required: false },
     duration: { type: Number, default: 4000, required: false }
   },
-  mounted() {
-    if (this.isOpenSnackbar) {
-      this.openSnackbar();
-    }
-  },
+  mounted() {},
   created() {}
 };
 </script>

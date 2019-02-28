@@ -4,13 +4,7 @@
     <div>
       <MemoCard @delete-memo="deleteMemo"/>
     </div>
-    <Snackbar
-      ref="snackbar"
-      :isOpenSnackbar="isOpenSnackbar"
-      :message="message"
-      :button="button"
-      :duration="duration"
-    ></Snackbar>
+    <Snackbar ref="snackbar" :message="message" :button="button" :duration="duration"></Snackbar>
     <SpeedDial/>
   </div>
 </template>
@@ -22,7 +16,6 @@ import SpeedDial from "@/components/molecules/SpeedDial";
 export default {
   data() {
     return {
-      isOpenSnackbar: false,
       message: "",
       button: "",
       duration: 0
@@ -30,22 +23,23 @@ export default {
   },
   methods: {
     addMemo() {
-      this.isOpenSnackbar = this.$route.params.saveSuccessFlg !== undefined;
       this.message = "書き留めました";
       this.duration = 4000;
+      if (this.$route.params.saveSuccessFlg !== undefined) {
+        this.$refs.snackbar.openSnackbar();
+      }
     },
     deleteMemo() {
-      this.isOpenSnackbar = true;
       this.message = "ゴミ箱に移動しました";
       this.duration = 10000;
       this.$refs.snackbar.openSnackbar();
     }
   },
   computed: {},
-  mounted() {},
-  created() {
+  mounted() {
     this.addMemo();
   },
+  created() {},
   components: {
     Snackbar,
     MemoCard,

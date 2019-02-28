@@ -5,7 +5,6 @@
       :md-content="content"
       md-confirm-text="OK"
       md-cancel-text="キャンセル"
-      @md-cancel="onCancelClick"
       @md-confirm="onConfirmClick"
     />
   </div>
@@ -14,15 +13,14 @@
 <script>
 export default {
   data: () => ({
-    active: false,
-    content: "defaultMessage"
+    active: false
   }),
   props: {
-    isActive: { type: Boolean, default: false }
+    content: { type: String, default: "" }
   },
   watch: {
-    isActive() {
-      this.active = this.isActive;
+    message() {
+      this.content = this.message;
     }
   },
   computed: {},
@@ -30,15 +28,11 @@ export default {
     onConfirmClick() {
       this.$emit("confirm-dialog");
     },
-    onCancelClick() {
-      this.active = false;
-    }
-  },
-  mounted() {
-    if (this.isActive) {
+    openDialog() {
       this.active = true;
     }
   },
+  mounted() {},
   created() {}
 };
 </script>
