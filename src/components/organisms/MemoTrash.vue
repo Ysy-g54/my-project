@@ -1,8 +1,15 @@
 <template>
   <div>
+    <Dialog :isActive="isDialogActive" @confirm-dialog="confirmDialog"></Dialog>
     <h2>ゴミ箱</h2>
     <div>
-      <MemoCard :isDiscard="true" @delete-memo="deleteMemo"/>
+      <MemoCard
+        ref="mamoCard"
+        :isDiscard="true"
+        @delete-memo="deleteMemo"
+        @restore-memo="restoreMemo"
+        @delete-confirm="deleteConfirm"
+      />
     </div>
     <Snackbar
       ref="snackbar"
@@ -16,6 +23,7 @@
 
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
+import Dialog from "@/components/molecules/Dialog";
 import MemoCard from "@/components/molecules/MemoCard";
 export default {
   data() {
@@ -23,14 +31,27 @@ export default {
       isOpenSnackbar: false,
       message: "",
       button: "",
-      duration: 0
+      duration: 0,
+      isDialogActive: false
     };
   },
   methods: {
+    confirmDialog() {
+      this.$refs.memoCard.deleteMemo();
+    },
+    deleteConfirm() {
+      this.isDialogActive = true;
+    },
     deleteMemo() {
       this.isOpenSnackbar = true;
       this.message = "完全に削除しました";
       this.duration = 10000;
+      this.$refs.snackbar.openSnackbar();
+    },
+    restoreMemo() {
+      this.isOpenSnackbar = true;
+      this.message = "復元しました";
+      this.duration = 4000;
       this.$refs.snackbar.openSnackbar();
     }
   },
@@ -39,6 +60,7 @@ export default {
   created() {},
   components: {
     Snackbar,
+    Dialog,
     MemoCard
   }
 };
