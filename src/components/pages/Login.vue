@@ -15,16 +15,20 @@
     <div>
       <md-button class="md-dense md-raised" @click="onGoogleLoginClick">googleアカウントでログイン</md-button>
     </div>
+    <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
   </div>
 </template>
 
 <script>
+import Snackbar from "@/components/atoms/Snackbar";
 import firebase from "firebase";
 export default {
   data() {
     return {
       mailAddress: "",
-      password: ""
+      password: "",
+      message: "",
+      duration: 10000
     };
   },
   methods: {
@@ -37,8 +41,9 @@ export default {
             name: "memo"
           });
         })
-        .catch(error => {
-          console.error(error);
+        .catch(() => {
+          this.message = "ログインできません。正しい情報を入力してください。";
+          this.$refs.snackbar.openSnackbar();
         });
     },
     onGoogleLoginClick() {
@@ -50,7 +55,9 @@ export default {
   watch: {},
   computed: {},
   created() {},
-  components: {}
+  components: {
+    Snackbar
+  }
 };
 </script>
 
