@@ -13,12 +13,13 @@
     </div>
     <div>OR</div>
     <div>
-      <md-button class="md-dense md-raised">googleアカウントでログイン</md-button>
+      <md-button class="md-dense md-raised" @click="onGoogleLoginClick">googleアカウントでログイン</md-button>
     </div>
   </div>
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   data() {
     return {
@@ -28,10 +29,22 @@ export default {
   },
   methods: {
     onLoginClick() {
-      // FIXME 認証処理追記
-      this.$router.push({
-        name: "memo"
-      });
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.mailAddress, this.password)
+        .then(() => {
+          this.$router.push({
+            name: "memo"
+          });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    onGoogleLoginClick() {
+      firebase
+        .auth()
+        .signInWithRedirect(new firebase.auth.GoogleAuthProvider());
     }
   },
   watch: {},

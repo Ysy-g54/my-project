@@ -19,6 +19,8 @@ const config = {
 };
 firebase.initializeApp(config);
 
+export default firebase;
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

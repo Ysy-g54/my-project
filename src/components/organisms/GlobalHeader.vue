@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   data() {
     return {
@@ -49,10 +50,19 @@ export default {
       });
     },
     onLogoutClick() {
-      // FIXME ログアウト処理追加
-      this.$router.push({
-        name: "login"
-      });
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          // Sign-out successful.
+          this.$router.push({
+            name: "login"
+          });
+        })
+        .catch(error => {
+          // An error happened.
+          console.error(error);
+        });
     }
   },
   created() {},
