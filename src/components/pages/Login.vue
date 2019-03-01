@@ -8,12 +8,15 @@
       <label>パスワード</label>
       <md-input v-model="password" type="password"></md-input>
     </md-field>
-    <div>
-      <md-button class="md-dense md-raised md-primary" @click="onLoginClick">ログイン</md-button>
+    <div class="md-layout md-alignment-center">
+      <md-button class="md-layout-item md-dense md-raised md-primary" @click="onLoginClick">ログイン</md-button>
     </div>
-    <div>OR</div>
-    <div>
-      <md-button class="md-dense md-raised" @click="onGoogleLoginClick">googleアカウントでログイン</md-button>
+    <div class="md-layout md-alignment-center">OR</div>
+    <div class="md-layout md-alignment-center">
+      <md-button
+        class="md-layout-item md-dense md-raised"
+        @click="onGoogleLoginClick"
+      >googleアカウントでログイン</md-button>
     </div>
     <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
   </div>
@@ -33,6 +36,10 @@ export default {
   },
   methods: {
     onLoginClick() {
+      if (this.mailAddress === "" || this.password === "") {
+        this.showFailureMessage();
+        return;
+      }
       firebase
         .auth()
         .signInWithEmailAndPassword(this.mailAddress, this.password)
@@ -42,14 +49,25 @@ export default {
           });
         })
         .catch(() => {
-          this.message = "ログインできません。正しい情報を入力してください。";
-          this.$refs.snackbar.openSnackbar();
+          this.showFailureMessage();
         });
     },
     onGoogleLoginClick() {
       firebase
         .auth()
-        .signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+        .signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+        .then(() => {
+          this.$router.push({
+            name: "memo"
+          });
+        })
+        .catch(() => {
+          this.showFailureMessage();
+        });
+    },
+    showFailureMessage() {
+      this.message = "ログインに失敗しました。正しい情報を入力してください。";
+      this.$refs.snackbar.openSnackbar();
     }
   },
   watch: {},
