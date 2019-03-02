@@ -1,8 +1,6 @@
 #app configuration
+/src/configs/*
 !.gitkeep
-
-.env
-
 
 .DS_Store
 node_modules/

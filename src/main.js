@@ -4,25 +4,17 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 import firebase from "firebase";
-import process from "../.env";
+import firebaseConfig from "./configs/firebase.js";
 
 Vue.config.productionTip = false;
 
 // Initialize Firebase
-const config = {
-  apiKey: process.apiKey,
-  authDomain: process.authDomain,
-  databaseURL: process.databaseURL,
-  projectId: "memo-d707b",
-  storageBucket: process.storageBucket,
-  messagingSenderId: process.messagingSenderId
-};
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 
 /* eslint-disable no-new */
 new Vue({
-  el: "#app",
-  router,
-  template: "<App/>",
-  components: { App }
+	el: "#app",
+	router,
+	template: "<App/>",
+	components: { App }
 });
