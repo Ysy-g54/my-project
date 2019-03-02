@@ -73,7 +73,6 @@ export default {
   watch: {},
   computed: {},
   created() {
-    console.error(firebase.apps);
   },
   components: {
     Snackbar
