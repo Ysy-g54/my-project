@@ -53,9 +53,10 @@ export default {
         });
     },
     onGoogleLoginClick() {
+      let provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
-        .signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+        .signInWithRedirect(provider)
         .then(() => {
           this.$router.push({
             name: "memo"
@@ -72,8 +73,7 @@ export default {
   },
   watch: {},
   computed: {},
-  created() {
-  },
+  created() {},
   components: {
     Snackbar
   }

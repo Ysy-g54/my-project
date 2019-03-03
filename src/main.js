@@ -3,6 +3,7 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
+import store from './store';
 import firebase from "firebase";
 import firebaseConfig from "./configs/firebase.js";
 
@@ -16,5 +17,6 @@ new Vue({
 	el: "#app",
 	router,
 	template: "<App/>",
-	components: { App }
+	components: { App },
+	store
 });
