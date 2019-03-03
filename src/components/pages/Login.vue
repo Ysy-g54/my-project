@@ -25,6 +25,7 @@
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
 import firebase from "firebase";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -35,6 +36,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions("Login", {
+      updateLoginUser: "updateLoginUser"
+    }),
     onLoginClick() {
       if (this.mailAddress === "" || this.password === "") {
         this.showFailureMessage();
@@ -44,6 +48,7 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.mailAddress, this.password)
         .then(() => {
+          this.updateLoginUser();
           this.$router.push({
             name: "memo"
           });
