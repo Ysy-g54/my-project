@@ -19,53 +19,53 @@ Vue.use(VeeValidate);
 Vue.use(VueMaterial);
 
 export default new Router({
-  routes: [
-    {
-      path: "/login",
-      name: "login",
-      component: Login
-    },
-    {
-      path: "/browse",
-      component: GlobalHeader,
-      props: true,
-      children: [
-        {
-          path: "memo",
-          name: "memo",
-          component: Memo,
-          props: true
-        },
-        {
-          path: "memoTrash",
-          name: "memoTrash",
-          component: MemoTrash,
-          props: true
-        }
-      ]
-    },
-    {
-      path: "/memo/modification/:memoId?",
-      name: "memoModification",
-      component: MemoModification
-    },
-    {
-      path: "/browse",
-      component: GlobalHeader,
-      props: true,
-      children: [
-        {
-          path: "goal",
-          name: "goal",
-          component: Goal,
-          props: true
-        }
-      ]
-    },
-    // catch all redirect
-    {
-      path: "*",
-      redirect: "/login"
-    }
-  ]
+	routes: [
+		{
+			path: "/login",
+			name: "login",
+			component: Login
+		},
+		{
+			path: "/browse",
+			component: GlobalHeader,
+			props: true,
+			children: [
+				{
+					path: "memo",
+					name: "memo",
+					component: Memo,
+					props: true
+				},
+				{
+					path: "memotrash",
+					name: "memoTrash",
+					component: MemoTrash,
+					props: true
+				}
+			]
+		},
+		{
+			path: "/memo/modification/:memoId?",
+			name: "memoModification",
+			component: MemoModification
+		},
+		{
+			path: "/browse",
+			component: GlobalHeader,
+			props: true,
+			children: [
+				{
+					path: "goal",
+					name: "goal",
+					component: Goal,
+					props: true
+				}
+			]
+		},
+		// catch all redirect
+		{
+			path: "*",
+			redirect: "/login"
+		}
+	]
 });
