@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import _ from "lodash";
 import Snackbar from "@/components/atoms/Snackbar";
 import firebase from "firebase";
 import { mapActions } from "vuex";
@@ -37,18 +38,18 @@ export default {
   },
   methods: {
     ...mapActions("Login", {
-      updateLoginUser: "updateLoginUser"
+      login: "updateLoginUser"
     }),
     onLoginClick() {
       if (this.mailAddress === "" || this.password === "") {
         this.showFailureMessage();
         return;
       }
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.mailAddress, this.password)
+      let data = {};
+      _.set(data, "mailAddress", this.mailAddress);
+      _.set(data, "password", this.password);
+      this.login(data)
         .then(() => {
-          this.updateLoginUser();
           this.$router.push({
             name: "memo"
           });

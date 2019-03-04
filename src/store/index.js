@@ -1,3 +1,4 @@
+import firebase from "firebase";
 import Vuex from "vuex";
 
 const Login = {
@@ -13,8 +14,14 @@ const Login = {
     }
   },
   actions: {
-    updateLoginUser(context, loginUser) {
-      context.commit("updateLoginUser", loginUser);
+    updateLoginUser(context, params) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(params.mailAddress, params.password)
+        .then(data => {
+          context.commit("updateLoginUser", data);
+          return data;
+        });
     }
   },
   getters: {
