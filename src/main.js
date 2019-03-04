@@ -3,7 +3,6 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
-import { mapActions } from "vuex";
 import store from "./store";
 import firebase from "firebase";
 import firebaseConfig from "./configs/firebase.js";
@@ -15,17 +14,11 @@ firebase.initializeApp(firebaseConfig);
 
 /* eslint-disable no-new */
 new Vue({
-  el: "#app",
-  router,
-  template: "<App/>",
-  components: { App },
-  store,
-  methods: {
-    ...mapActions("Login", {
-      findLoginUser: "findLoginUser"
-    })
-  },
-  created() {
-    this.findLoginUser();
-  }
+	el: "#app",
+	router,
+	template: "<App/>",
+	components: { App },
+	store,
+	methods: {
+	}
 });
