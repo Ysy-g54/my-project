@@ -9,7 +9,8 @@ const Login = {
     }
   },
   mutations: {
-    setLoginUser(state, loginUser) {
+    setLoginUser(state) {
+      let loginUser = firebase.auth().currentUser;
       state.loginUser.mailAddress = loginUser.email;
     }
   },
@@ -19,9 +20,13 @@ const Login = {
         .auth()
         .signInWithEmailAndPassword(params.mailAddress, params.password)
         .then(() => {
-          context.commit("setLoginUser", firebase.auth().currentUser);
+          context.commit("setLoginUser");
           return firebase.auth().currentUser;
         });
+    },
+    findLoginUser(context) {
+      context.commit("setLoginUser");
+      return firebase.auth().currentUser;
     }
   },
   getters: {
