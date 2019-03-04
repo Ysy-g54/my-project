@@ -25,7 +25,7 @@
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
 import firebase from "firebase";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
