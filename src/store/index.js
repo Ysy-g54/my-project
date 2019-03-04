@@ -9,8 +9,8 @@ const Login = {
     }
   },
   mutations: {
-    updateLoginUser(state, loginUser) {
-      state.loginUser = loginUser;
+    setLoginUser(state, loginUser) {
+      state.loginUser.mailAddress = loginUser.email;
     }
   },
   actions: {
@@ -18,9 +18,9 @@ const Login = {
       firebase
         .auth()
         .signInWithEmailAndPassword(params.mailAddress, params.password)
-        .then(data => {
-          context.commit("updateLoginUser", data);
-          return data;
+        .then(() => {
+          context.commit("setLoginUser", firebase.auth().currentUser);
+          return firebase.auth().currentUser;
         });
     }
   },
