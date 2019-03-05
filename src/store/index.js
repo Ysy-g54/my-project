@@ -1,5 +1,6 @@
 import firebase from "firebase";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 const Login = {
   namespaced: true,
@@ -43,7 +44,8 @@ const Login = {
     getLoginUser(state) {
       return state.loginUser;
     }
-  }
+  },
+  plugins: [createPersistedState({ indexedDb: this.state })]
 };
 
 export default new Vuex.Store({
