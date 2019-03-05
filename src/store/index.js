@@ -3,53 +3,67 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 const Login = {
-  namespaced: true,
-  state: {
-    loginUser: {
-      name: "",
-      mailAddress: "",
-      photoUrl: "",
-      uid: "",
-      emailVerified: ""
-    }
-  },
-  mutations: {
-    setLoginUser(state) {
-      let loginUser = firebase.auth().currentUser;
-      if (loginUser != null) {
-        state.loginUser.name = loginUser.displayName;
-        state.loginUser.mailAddress = loginUser.email;
-        state.loginUser.photoUrl = loginUser.photoUrl;
-        state.loginUser.uid = loginUser.uid;
-        state.loginUser.emailVerified = loginUser.emailVerified;
-      }
-    }
-  },
-  actions: {
-    updateLoginUser(context, params) {
-      return firebase
-        .auth()
-        .signInWithEmailAndPassword(params.mailAddress, params.password)
-        .then(() => {
-          context.commit("setLoginUser");
-          return firebase.auth().currentUser;
-        });
-    },
-    findLoginUser(context) {
-      context.commit("setLoginUser");
-      return firebase.auth().currentUser;
-    }
-  },
-  getters: {
-    getLoginUser(state) {
-      return state.loginUser;
-    }
-  },
-  plugins: [createPersistedState({ indexedDb: this.state })]
+	namespaced: true,
+	state: {
+		loginUser: {
+			name: "",
+			mailAddress: "",
+			photoUrl: "",
+			uid: "",
+			emailVerified: ""
+		}
+	},
+	mutations: {
+		setLoginUser(state) {
+			// let reqDb = indexedDB.open("firebaseLocalStorageDb");
+			// let storeName = "";
+			// let key = "";
+			// reqDb.onsuccess = function(event) {
+			// var db = event.target.result;
+			// console.error(db.transaction("indexedDb", 'readonly'));
+			// var trans = db.transaction(storeName, 'readonly');
+			// var store = trans.objectStore(storeName);
+			// var getRequest = store.get(key);
+
+			// getRequest.onsuccess = function(event) {
+			// 	return event.target.result;
+			// };
+			// };
+			let loginUser = firebase.auth().currentUser;
+			if (loginUser != null) {
+				state.loginUser.name = loginUser.displayName;
+				state.loginUser.mailAddress = loginUser.email;
+				state.loginUser.photoUrl = loginUser.photoUrl;
+				state.loginUser.uid = loginUser.uid;
+				state.loginUser.emailVerified = loginUser.emailVerified;
+			}
+		}
+	},
+	actions: {
+		updateLoginUser(context, params) {
+			return firebase
+				.auth()
+				.signInWithEmailAndPassword(params.mailAddress, params.password)
+				.then(() => {
+					context.commit("setLoginUser");
+					return firebase.auth().currentUser;
+				});
+		},
+		findLoginUser(context) {
+			context.commit("setLoginUser");
+			return firebase.auth().currentUser;
+		}
+	},
+	getters: {
+		getLoginUser(state) {
+			return state.loginUser;
+		}
+	},
+	plugins: [createPersistedState({ indexedDb: this.state })]
 };
 
 export default new Vuex.Store({
-  modules: {
-    Login
-  }
+	modules: {
+		Login
+	}
 });
