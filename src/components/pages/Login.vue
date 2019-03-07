@@ -60,13 +60,26 @@ export default {
     },
     onGoogleLoginClick() {
       let provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope("https://www.googleapis.com/auth/plus.login");
+      console.error();
       firebase
         .auth()
         .signInWithRedirect(provider)
         .then(() => {
-          this.$router.push({
-            name: "memo"
-          });
+          firebase
+            .auth()
+            .getRedirectResult()
+            .then(result => {
+              if (result.credential) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                let token = result.credential.accessToken;
+                console.error(token);
+              }
+              this.$router.push({
+                name: "memo"
+              });
+              console.error(result);
+            });
         })
         .catch(() => {
           this.showFailureMessage();
