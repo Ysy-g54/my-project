@@ -60,8 +60,6 @@ export default {
     },
     onGoogleLoginClick() {
       let provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope("https://www.googleapis.com/auth/plus.login");
-      console.error();
       firebase
         .auth()
         .signInWithRedirect(provider)
@@ -78,7 +76,6 @@ export default {
               this.$router.push({
                 name: "memo"
               });
-              console.error(result);
             });
         })
         .catch(() => {

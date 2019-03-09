@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -40,6 +40,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions("Login", {
+      logout: "logout"
+    }),
     onAvatarClick() {
       this.menuVisible = true;
     },
@@ -50,9 +53,7 @@ export default {
       });
     },
     onLogoutClick() {
-      firebase
-        .auth()
-        .signOut()
+      this.logout()
         .then(() => {
           // Sign-out successful.
           this.$router.push({

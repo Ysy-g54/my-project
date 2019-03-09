@@ -15,20 +15,6 @@ const Login = {
 	},
 	mutations: {
 		setLoginUser(state) {
-			// let reqDb = indexedDB.open("firebaseLocalStorageDb");
-			// let storeName = "";
-			// let key = "";
-			// reqDb.onsuccess = function(event) {
-			// var db = event.target.result;
-			// console.error(db.transaction("indexedDb", 'readonly'));
-			// var trans = db.transaction(storeName, 'readonly');
-			// var store = trans.objectStore(storeName);
-			// var getRequest = store.get(key);
-
-			// getRequest.onsuccess = function(event) {
-			// 	return event.target.result;
-			// };
-			// };
 			let loginUser = firebase.auth().currentUser;
 			if (loginUser != null) {
 				state.loginUser.name = loginUser.displayName;
@@ -37,6 +23,13 @@ const Login = {
 				state.loginUser.uid = loginUser.uid;
 				state.loginUser.emailVerified = loginUser.emailVerified;
 			}
+		},
+		logout(state) {
+			state.loginUser.name = "";
+			state.loginUser.mailAddress = "";
+			state.loginUser.photoUrl = "";
+			state.loginUser.uid = "";
+			state.loginUser.emailVerified = "";
 		}
 	},
 	actions: {
@@ -46,12 +39,18 @@ const Login = {
 				.signInWithEmailAndPassword(params.mailAddress, params.password)
 				.then(() => {
 					context.commit("setLoginUser");
-					return firebase.auth().currentUser;
 				});
 		},
 		findLoginUser(context) {
 			context.commit("setLoginUser");
-			return firebase.auth().currentUser;
+		},
+		logout(context) {
+			return firebase
+				.auth()
+				.signOut()
+				.then(() => {
+					context.commit("logout");
+				});
 		}
 	},
 	getters: {
