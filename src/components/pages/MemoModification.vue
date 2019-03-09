@@ -1,7 +1,7 @@
 <template>
   <Header>
     <div slot="header">
-      <BackHeader @save-success="saveSuccess"></BackHeader>
+      <BackHeader :title="'書き留める'" @save-success="saveSuccess"></BackHeader>
     </div>
     <div slot="main">
       <MemoModification :isSavable="isSavable"></MemoModification>

@@ -6,7 +6,7 @@
           <md-button class="md-icon-button" @click="back">
             <md-icon>arrow_back</md-icon>
           </md-button>
-          <span class="md-subheading">書き留める</span>
+          <span class="md-subheading">{{ title }}</span>
         </div>
         <div class="md-toolbar-section-end">
           <md-button class="md-icon-button" @click="save">
@@ -30,6 +30,9 @@ export default {
     save() {
       this.$emit("save-success");
     }
+  },
+  props: {
+    title: { type: String, default: "" }
   },
   created() {},
   components: {}

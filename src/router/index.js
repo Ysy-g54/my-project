@@ -4,6 +4,7 @@ import Vuex from "vuex";
 import VeeValidate from "vee-validate";
 import VueMaterial from "vue-material";
 import Login from "@/components/pages/Login";
+import Signup from "@/components/pages/Signup";
 import Goal from "@/components/pages/Goal";
 import Memo from "@/components/pages/Memo";
 import MemoTrash from "@/components/pages/MemoTrash";
@@ -24,6 +25,11 @@ export default new Router({
 			path: "/login",
 			name: "login",
 			component: Login
+		},
+		{
+			path: "/signup",
+			name: "signup",
+			component: Signup
 		},
 		{
 			path: "/browse",

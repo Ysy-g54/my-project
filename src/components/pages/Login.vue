@@ -1,24 +1,36 @@
 <template>
   <div>
-    <md-field md-clearable>
-      <label>メールアドレス</label>
-      <md-input v-model="mailAddress"></md-input>
-    </md-field>
-    <md-field>
-      <label>パスワード</label>
-      <md-input v-model="password" type="password"></md-input>
-    </md-field>
-    <div class="md-layout md-alignment-center">
-      <md-button class="md-layout-item md-dense md-raised md-primary" @click="onLoginClick">ログイン</md-button>
-    </div>
-    <div class="md-layout md-alignment-center">OR</div>
-    <div class="md-layout md-alignment-center">
-      <md-button
-        class="md-layout-item md-dense md-raised"
-        @click="onGoogleLoginClick"
-      >googleアカウントでログイン</md-button>
-    </div>
-    <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
+    <md-app>
+      <md-app-toolbar class="md-primary">
+        <div class="md-toolbar-section-start">
+          <span class="md-title">memo-list</span>
+        </div>
+        <div class="md-toolbar-section-end" @click="onSignupClick">
+          <md-button>アカウント作成</md-button>
+        </div>
+      </md-app-toolbar>
+      <md-app-content>
+        <md-field md-clearable>
+          <label>メールアドレス</label>
+          <md-input v-model="mailAddress" placeholder="メールアドレス"></md-input>
+        </md-field>
+        <md-field>
+          <label>パスワード</label>
+          <md-input v-model="password" placeholder="パスワード" type="password"></md-input>
+        </md-field>
+        <div class="md-layout md-alignment-center">
+          <md-button class="md-layout-item md-dense md-raised md-primary" @click="onLoginClick">ログイン</md-button>
+        </div>
+        <div class="md-layout md-alignment-center">OR</div>
+        <div class="md-layout md-alignment-center">
+          <md-button
+            class="md-layout-item md-dense md-raised"
+            @click="onGoogleLoginClick"
+          >googleアカウントでログイン</md-button>
+        </div>
+        <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
+      </md-app-content>
+    </md-app>
   </div>
 </template>
 
@@ -40,6 +52,11 @@ export default {
     ...mapActions("Login", {
       login: "updateLoginUser"
     }),
+    onSignupClick() {
+      this.$router.push({
+        name: "signup"
+      });
+    },
     onLoginClick() {
       if (this.mailAddress === "" || this.password === "") {
         this.showFailureMessage();
