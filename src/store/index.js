@@ -58,7 +58,7 @@ const Login = {
 			return state.loginUser;
 		}
 	},
-	plugins: [createPersistedState({ indexedDb: this.state })]
+	plugins: [createPersistedState()]
 };
 
 export default new Vuex.Store({
