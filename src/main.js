@@ -20,7 +20,5 @@ new Vue({
 	components: { App },
 	store,
 	methods: {
-	},
-	created: {
 	}
 });

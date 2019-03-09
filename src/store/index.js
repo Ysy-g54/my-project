@@ -25,6 +25,11 @@ const Login = {
 			}
 		},
 		logout(state) {
+			let deleteReq = indexedDB.deleteDatabase("firebaseLocalStorage");
+
+			deleteReq.onsuccess = () => {
+				console.log('db delete success');
+			};
 			state.loginUser.name = "";
 			state.loginUser.mailAddress = "";
 			state.loginUser.photoUrl = "";
