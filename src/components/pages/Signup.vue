@@ -3,26 +3,39 @@
     <div slot="header">
       <BackHeader :title="'アカウントを作成'" @save-success="saveSuccess"></BackHeader>
     </div>
-    <div slot="main"></div>
+    <div slot="main">
+      <md-field md-clearable>
+        <label>メールアドレス</label>
+        <md-input v-model="mailAddress" placeholder="メールアドレス"></md-input>
+      </md-field>
+      <md-field>
+        <label>パスワード</label>
+        <md-input v-model="password" placeholder="パスワード" type="password"></md-input>
+      </md-field>
+    </div>
   </Header>
 </template>
 
 <script>
 import BackHeader from "@/components/organisms/BackHeader";
+import firebase from "firebase";
 export default {
   data() {
     return {
       mailAddress: "",
-      password: "",
-      message: "",
-      duration: 10000
+      password: ""
     };
   },
   methods: {
     saveSuccess() {
-      this.$router.push({
-        name: "login"
-      });
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.mailAddress, this.password)
+        .then(() => {
+          this.$router.push({
+            name: "memo"
+          });
+        });
     }
   },
   watch: {},
