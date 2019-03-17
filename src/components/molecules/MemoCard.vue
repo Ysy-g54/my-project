@@ -1,26 +1,26 @@
 <template>
   <div v-if="isNotEmptyMemo">
     <md-card v-for="memo in memos" :key="memo.memoId">
-      <md-card-header>
-        <md-card-header-text>
-          <div>登録日：{{formatDate(memo.insertDateTime)}}</div>
-          <div>カテゴリ：{{formatCategory(memo.categoryId)}}</div>
-        </md-card-header-text>
-        <md-menu md-size="big" md-direction="bottom-end">
-          <md-button class="md-icon-button" md-menu-trigger>
-            <md-icon>more_vert</md-icon>
-          </md-button>
-          <md-menu-content>
-            <md-menu-item @click="onEditClick(memo.memoId)">
-              <span>{{ editMessage }}</span>
-            </md-menu-item>
-            <md-menu-item @click="onDeleteClick(memo.memoId)">
-              <span>{{ deleteMessage }}</span>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
-      </md-card-header>
-      <md-card-content>{{ memo.memo }}</md-card-content>
+      <md-card-content>
+        <div class="text-pre-wrap">{{ memo.memo }}</div>
+        <div>カテゴリ：{{formatCategory(memo.categoryId)}}</div>
+        <div>
+          <span class="md-subhead">登録日：{{formatDate(memo.insertDateTime)}}</span>
+          <md-menu md-size="small">
+            <md-button class="md-icon-button" md-menu-trigger>
+              <md-icon>more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item @click="onEditClick(memo.memoId)">
+                <span>{{ editMessage }}</span>
+              </md-menu-item>
+              <md-menu-item @click="onDeleteClick(memo.memoId)">
+                <span>{{ deleteMessage }}</span>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+      </md-card-content>
     </md-card>
   </div>
   <div v-else>空っぽです</div>
@@ -147,5 +147,8 @@ export default {
   margin: 4px;
   display: inline-block;
   vertical-align: top;
+}
+.text-pre-wrap {
+  white-space: pre-wrap;
 }
 </style>
