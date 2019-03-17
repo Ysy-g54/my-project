@@ -1,6 +1,5 @@
 import firebase from "firebase";
 import Vuex from "vuex";
-import createPersistedState from "vuex-persistedstate";
 
 const Login = {
 	namespaced: true,
@@ -15,21 +14,22 @@ const Login = {
 	},
 	mutations: {
 		setLoginUser(state) {
-			let loginUser = firebase.auth().currentUser;
-			if (loginUser != null) {
-				state.loginUser.name = loginUser.displayName;
-				state.loginUser.mailAddress = loginUser.email;
-				state.loginUser.photoUrl = loginUser.photoUrl;
-				state.loginUser.uid = loginUser.uid;
-				state.loginUser.emailVerified = loginUser.emailVerified;
-			}
+			firebase.auth().onAuthStateChanged(loginUser => {
+				if (loginUser !== null) {
+					state.loginUser.name = loginUser.displayName;
+					state.loginUser.mailAddress = loginUser.email;
+					state.loginUser.photoUrl = loginUser.photoUrl;
+					state.loginUser.uid = loginUser.uid;
+					state.loginUser.emailVerified = loginUser.emailVerified;
+				}
+			});
 		},
 		logout(state) {
-			let deleteReq = indexedDB.deleteDatabase("firebaseLocalStorage");
+			// let deleteReq = indexedDB.deleteDatabase("firebaseLocalStorage");
 
-			deleteReq.onsuccess = () => {
-				console.log('db delete success');
-			};
+			// deleteReq.onsuccess = () => {
+			// 	console.log('db delete success');
+			// };
 			state.loginUser.name = "";
 			state.loginUser.mailAddress = "";
 			state.loginUser.photoUrl = "";
@@ -62,8 +62,7 @@ const Login = {
 		getLoginUser(state) {
 			return state.loginUser;
 		}
-	},
-	plugins: [createPersistedState()]
+	}
 };
 
 export default new Vuex.Store({

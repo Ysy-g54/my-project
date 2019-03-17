@@ -11,11 +11,9 @@
       </md-app-toolbar>
       <md-app-content>
         <md-field md-clearable>
-          <label>メールアドレス</label>
           <md-input v-model="mailAddress" placeholder="メールアドレス"></md-input>
         </md-field>
         <md-field>
-          <label>パスワード</label>
           <md-input v-model="password" placeholder="パスワード" type="password"></md-input>
         </md-field>
         <div class="md-layout md-alignment-center">

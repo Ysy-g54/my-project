@@ -21,13 +21,7 @@ export default {
   },
   methods: {
     saveSuccess() {
-      this.$validator.validateAll().then(result => {
-        if (!result) {
-          return;
-        }
-        this.$validator.reset();
-        this.isSavable = true;
-      });
+      this.isSavable = true;
     }
   },
   created() {},

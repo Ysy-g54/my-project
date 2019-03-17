@@ -6,6 +6,7 @@ import router from "./router";
 import store from "./store";
 import firebase from "firebase";
 import firebaseConfig from "./configs/firebase.js";
+import { mapActions } from "vuex";
 
 Vue.config.productionTip = false;
 
@@ -20,5 +21,11 @@ new Vue({
 	components: { App },
 	store,
 	methods: {
+		...mapActions("Login", {
+			findLoginUser: "findLoginUser"
+		})
+	},
+	created() {
+		this.findLoginUser();
 	}
 });
