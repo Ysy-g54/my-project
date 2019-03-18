@@ -9,9 +9,6 @@ import Memo from "@/components/pages/Memo";
 import MemoTrash from "@/components/pages/MemoTrash";
 import MemoModification from "@/components/pages/MemoModification";
 import GlobalHeader from "@/components/organisms/GlobalHeader";
-import "vue-material/dist/vue-material.min.css";
-import "vue-material/dist/theme/default.css";
-import "@/assets/vue-material.icons.css";
 
 Vue.use(Router);
 Vue.use(Vuex);
