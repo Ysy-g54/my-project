@@ -1,13 +1,15 @@
 <template>
-  <md-snackbar
-    :md-position="position"
-    :md-active.sync="isOpen"
-    :md-duration="duration"
-    md-persistent
-  >
-    <span>{{message}}</span>
-    <md-button v-if="isButton" class="md-primary" @click="isOpen = false">{{button}}</md-button>
-  </md-snackbar>
+  <div>
+    <md-snackbar
+      :md-position="position"
+      :md-active.sync="isOpen"
+      :md-duration="duration"
+      md-persistent
+    >
+      <span>{{message}}</span>
+      <md-button v-if="isButton" class="md-primary" @click="isOpen = false">{{button}}</md-button>
+    </md-snackbar>
+  </div>
 </template>
 
 <script>

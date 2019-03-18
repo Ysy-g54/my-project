@@ -11,17 +11,21 @@
         <md-input v-model="password" placeholder="パスワード" type="password"></md-input>
       </md-field>
     </div>
+    <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
   </Header>
 </template>
 
 <script>
+import Snackbar from "@/components/atoms/Snackbar";
 import BackHeader from "@/components/organisms/BackHeader";
 import firebase from "firebase";
 export default {
   data() {
     return {
       mailAddress: "",
-      password: ""
+      password: "",
+      message: "",
+      duration: 10000
     };
   },
   methods: {
@@ -33,13 +37,22 @@ export default {
           this.$router.push({
             name: "memo"
           });
+        })
+        .catch(() => {
+          this.showFailureMessage();
         });
+    },
+    showFailureMessage() {
+      this.message =
+        "アカウント作成に失敗しました。正しい情報を入力してください。";
+      this.$refs.snackbar.openSnackbar();
     }
   },
   watch: {},
   computed: {},
   created() {},
   components: {
+    Snackbar,
     BackHeader
   }
 };

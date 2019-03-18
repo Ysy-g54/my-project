@@ -1,19 +1,11 @@
 <template>
-  <md-speed-dial md-event="click" class="md-bottom-right" md-direction="top">
-    <md-speed-dial-target class="md-primary" @click="goMemoModification">
-      <md-icon>add</md-icon>
-    </md-speed-dial-target>
-
-    <!-- FIXME prop受け取る処理を書くまでコメントアウト -->
-    <!-- <md-speed-dial-content>
-      <md-button class="md-icon-button">
+  <div>
+    <md-speed-dial md-event="click" class="md-bottom-right" md-direction="top">
+      <md-speed-dial-target class="md-primary" @click="goMemoModification">
         <md-icon>add</md-icon>
-      </md-button>
-      <md-button class="md-icon-button">
-        <md-icon>edit</md-icon>
-      </md-button>
-    </md-speed-dial-content>-->
-  </md-speed-dial>
+      </md-speed-dial-target>
+    </md-speed-dial>
+  </div>
 </template>
 
 <script>
@@ -22,6 +14,7 @@ export default {
   props: {},
   computed: {},
   methods: {
+    // FIXME 共通化
     goMemoModification() {
       this.$router.push({
         name: "memoModification"
@@ -34,4 +27,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.md-speed-dial {
+  margin-bottom: 50px;
+}
 </style>

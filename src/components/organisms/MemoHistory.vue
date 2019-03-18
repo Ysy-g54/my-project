@@ -4,8 +4,8 @@
     <div>
       <MemoCard @delete-memo="deleteMemo"/>
     </div>
-    <Snackbar ref="snackbar" :message="message" :button="button" :duration="duration"></Snackbar>
     <SpeedDial/>
+    <Snackbar ref="snackbar" :message="message" :button="button" :duration="duration"></Snackbar>
   </div>
 </template>
 
