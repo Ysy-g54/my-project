@@ -59,7 +59,7 @@ const Login = {
 		}
 	},
 	getters: {
-		getLoginUser(state) {
+		getLoginUser: (state) => {
 			return state.loginUser;
 		}
 	}

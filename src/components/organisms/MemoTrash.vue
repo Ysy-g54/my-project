@@ -18,7 +18,7 @@
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
 import Dialog from "@/components/molecules/Dialog";
-import MemoCard from "@/components/molecules/MemoCard";
+import MemoCard from "@/components/organisms/MemoCard";
 export default {
   data() {
     return {

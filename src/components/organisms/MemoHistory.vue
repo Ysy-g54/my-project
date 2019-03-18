@@ -11,7 +11,7 @@
 
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
-import MemoCard from "@/components/molecules/MemoCard";
+import MemoCard from "@/components/organisms/MemoCard";
 import SpeedDial from "@/components/molecules/SpeedDial";
 export default {
   data() {

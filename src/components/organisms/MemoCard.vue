@@ -44,6 +44,7 @@ export default {
     searchMemo() {
       this.database
         .collection("memo")
+        .where("userId", "==", this.$store.getters["Login/getLoginUser"].uid)
         .where("deleteFlg", "==", this.isDiscard)
         .get()
         .then(querySnapshot => {
