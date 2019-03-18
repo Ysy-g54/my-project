@@ -10,8 +10,6 @@ import { mapActions } from "vuex";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 import "@/assets/vue-material.icons.css";
-import "@fortawesome/fontawesome-free/css/all.css";
-import "@fortawesome/fontawesome-free/js/all.js";
 
 Vue.config.productionTip = false;
 
