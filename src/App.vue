@@ -1,8 +1,7 @@
 <template>
-  <div id="app">
-    <router-view name="header"></router-view>
+  <transition>
     <router-view></router-view>
-  </div>
+  </transition>
 </template>
 <script>
 import GlobalHeader from "@/components/organisms/GlobalHeader";
