@@ -32,3 +32,12 @@ new Vue({
 		this.findLoginUser();
 	}
 });
+
+// router.beforeEach((to, from, next) => {
+// 	store.dispatch('setIsLoading', true);
+// 	next();
+// });
+
+// router.afterEach(() => {
+// 	store.dispatch('setIsLoading', false);
+// });

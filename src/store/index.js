@@ -10,7 +10,8 @@ const Login = {
 			photoUrl: "",
 			uid: "",
 			emailVerified: ""
-		}
+		},
+		is_loading: false
 	},
 	mutations: {
 		setLoginUser(state) {
@@ -35,6 +36,9 @@ const Login = {
 			state.loginUser.photoUrl = "";
 			state.loginUser.uid = "";
 			state.loginUser.emailVerified = "";
+		},
+		setIsLoading(state, flg) {
+			state.is_loading = flg;
 		}
 	},
 	actions: {
@@ -48,6 +52,9 @@ const Login = {
 		},
 		findLoginUser(context) {
 			context.commit("setLoginUser");
+		},
+		setIsLoading(context, flg) {
+			context.commit("setIsLoading", flg);
 		},
 		logout(context) {
 			return firebase

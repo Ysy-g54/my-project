@@ -14,7 +14,7 @@ Vue.use(Router);
 Vue.use(Vuex);
 Vue.use(VueMaterial);
 
-export default new Router({
+const router = new Router({
 	routes: [
 		{
 			path: "/login",
@@ -70,3 +70,5 @@ export default new Router({
 		}
 	]
 });
+
+export default router;

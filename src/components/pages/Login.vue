@@ -82,8 +82,8 @@ export default {
         .then(result => {
           if (result.credential) {
             // This gives you a Google Access Token. You can use it to access the Google API.
-            let token = result.credential.accessToken;
-            console.error(token);
+            // let token = result.credential.accessToken;
+            // console.error(token);
           }
           this.$router.push({
             name: "memo"

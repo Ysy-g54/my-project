@@ -1,13 +1,18 @@
 <template>
-  <transition>
-    <router-view></router-view>
-  </transition>
+  <div id="app">
+    <span v-show="is_loading">loading...</span>
+    <span>loading...</span>
+    <router-view v-show="!is_loading"></router-view>
+  </div>
 </template>
 <script>
-import GlobalHeader from "@/components/organisms/GlobalHeader";
 export default {
   methods: {},
-  components: { GlobalHeader }
+  computed: {
+    is_loading() {
+      return this.$store.state.is_loading;
+    }
+  }
 };
 </script>
 
