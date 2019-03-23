@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <span v-show="is_loading">loading...</span>
-    <span>loading...</span>
     <router-view v-show="!is_loading"></router-view>
   </div>
 </template>
