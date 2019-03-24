@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -42,9 +42,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions("Login", {
-      logout: "logout"
-    }),
+    // ...mapActions("Login", {
+    //   logout: "logout"
+    // }),
     onAvatarClick() {
       this.menuVisible = true;
     },
@@ -55,7 +55,8 @@ export default {
       });
     },
     onLogoutClick() {
-      this.logout()
+      this.$store
+        .dispatch("logout")
         .then(() => {
           // Sign-out successful.
           this.$router.push({

@@ -6,7 +6,7 @@ import router from "./router";
 import store from "./store";
 import firebase from "firebase";
 import firebaseConfig from "./configs/firebase.js";
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 import "vue-material/dist/vue-material.min.css";
 import "vue-material/dist/theme/default.css";
 import "@/assets/vue-material.icons.css";
@@ -24,20 +24,17 @@ new Vue({
 	components: { App },
 	store,
 	methods: {
-		...mapActions("Login", {
-			findLoginUser: "findLoginUser"
-		})
 	},
 	created() {
-		this.findLoginUser();
+		store.dispatch('findLoginUser');
 	}
 });
 
-// router.beforeEach((to, from, next) => {
-// 	store.dispatch('setIsLoading', true);
-// 	next();
-// });
+router.beforeEach((to, from, next) => {
+	store.commit('setIsLoading', true);
+	next();
+});
 
-// router.afterEach(() => {
-// 	store.dispatch('setIsLoading', false);
-// });
+router.afterEach(() => {
+	store.commit('setIsLoading', false);
+});

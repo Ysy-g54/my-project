@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <span v-show="is_loading">loading...</span>
-    <router-view v-show="!is_loading"></router-view>
+    <md-progress-spinner v-show="$store.state.loading" md-mode="indeterminate"></md-progress-spinner>
+    <router-view></router-view>
   </div>
 </template>
 <script>
 export default {
+  data() {
+    return {};
+  },
   methods: {},
-  computed: {
-    is_loading() {
-      return this.$store.state.is_loading;
-    }
-  }
+  computed: {}
 };
 </script>
 

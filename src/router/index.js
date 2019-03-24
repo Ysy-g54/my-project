@@ -19,12 +19,14 @@ const router = new Router({
 		{
 			path: "/login",
 			name: "login",
-			component: Login
+			component: Login,
+			meta: { isPublic: true }
 		},
 		{
 			path: "/signup",
 			name: "signup",
-			component: Signup
+			component: Signup,
+			meta: { isPublic: true }
 		},
 		{
 			path: "/browse",

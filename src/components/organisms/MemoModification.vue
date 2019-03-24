@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     saveMemo() {
-      let userId = this.$store.getters["Login/getLoginUser"].uid;
+      let userId = this.$store.getters["getLoginUser"].uid;
       (!this.isUpdateMemo
         ? this.database.collection("memo").add({
             categoryId: this.categoryId,

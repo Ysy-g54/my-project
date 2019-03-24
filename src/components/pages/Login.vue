@@ -36,7 +36,7 @@
 import _ from "lodash";
 import Snackbar from "@/components/atoms/Snackbar";
 import firebase from "firebase";
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -47,9 +47,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions("Login", {
-      login: "updateLoginUser"
-    }),
+    // ...mapActions("Login", {
+    //   login: "updateLoginUser"
+    // }),
     onSignupClick() {
       this.$router.push({
         name: "signup"
@@ -63,7 +63,8 @@ export default {
       let data = {};
       _.set(data, "mailAddress", this.mailAddress);
       _.set(data, "password", this.password);
-      this.login(data)
+      this.$store
+        .dispatch("updateLoginUser", data)
         .then(() => {
           this.$router.push({
             name: "memo"

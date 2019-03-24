@@ -1,7 +1,7 @@
 import firebase from "firebase";
 import Vuex from "vuex";
 
-const Login = {
+const store = new Vuex.Store({
 	namespaced: true,
 	state: {
 		loginUser: {
@@ -11,7 +11,7 @@ const Login = {
 			uid: "",
 			emailVerified: ""
 		},
-		is_loading: false
+		loading: false
 	},
 	mutations: {
 		setLoginUser(state) {
@@ -38,7 +38,7 @@ const Login = {
 			state.loginUser.emailVerified = "";
 		},
 		setIsLoading(state, flg) {
-			state.is_loading = flg;
+			state.loading = flg;
 		}
 	},
 	actions: {
@@ -52,9 +52,6 @@ const Login = {
 		},
 		findLoginUser(context) {
 			context.commit("setLoginUser");
-		},
-		setIsLoading(context, flg) {
-			context.commit("setIsLoading", flg);
 		},
 		logout(context) {
 			return firebase
@@ -70,10 +67,6 @@ const Login = {
 			return state.loginUser;
 		}
 	}
-};
-
-export default new Vuex.Store({
-	modules: {
-		Login
-	}
 });
+
+export default store;
