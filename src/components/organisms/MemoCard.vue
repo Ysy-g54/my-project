@@ -1,5 +1,8 @@
 <template>
   <div v-if="isNotEmptyMemo">
+    <div>
+      <span class="md-title">{{ memos.length }}</span>個
+    </div>
     <md-card v-for="memo in memos" :key="memo.memoId">
       <md-card-content>
         <div class="text-pre-wrap">{{ memo.memo }}</div>
@@ -132,6 +135,13 @@ export default {
       return !_.isEmpty(this.memos);
     }
   },
+  //   firestore: {
+  //     memos: firebase
+  //       .firestore()
+  //       .collection("memo")
+  //       .where("userId", "==", this.$store.getters["getLoginUser"].uid)
+  //       .where("deleteFlg", "==", this.isDiscard)
+  //   },
   created() {
     this.editMessage = this.isDiscard ? "復元する" : "編集する";
     this.deleteMessage = this.isDiscard ? "完全に削除する" : "ゴミ箱に移動する";
