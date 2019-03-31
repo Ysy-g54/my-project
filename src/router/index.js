@@ -1,5 +1,5 @@
 import Vue from "vue";
-// import { firestorePlugin, vuefire } from "vuefire";
+import { firestorePlugin } from "vuefire";
 import Router from "vue-router";
 import Vuex from "vuex";
 import VueMaterial from "vue-material";
@@ -12,8 +12,7 @@ import MemoModification from "@/components/pages/MemoModification";
 import GlobalHeader from "@/components/organisms/GlobalHeader";
 import 'firebase/firestore';
 
-// Vue.use(firestorePlugin);
-// Vue.use(vuefire);
+Vue.use(firestorePlugin);
 Vue.use(Router);
 Vue.use(Vuex);
 Vue.use(VueMaterial);

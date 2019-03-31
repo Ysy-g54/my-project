@@ -1,7 +1,8 @@
 <template>
   <div v-if="isNotEmptyMemo">
     <div>
-      <span class="md-title">{{ memos.length }}</span>個
+      <span class="md-title">{{ memos.length }}</span>
+      <span class="md-subheading">個</span>
     </div>
     <md-card v-for="memo in memos" :key="memo.memoId">
       <md-card-content>
@@ -41,6 +42,7 @@ export default {
     editMessage: "",
     deleteMessage: "",
     memos: [],
+    test: [],
     database: firebase.firestore()
   }),
   methods: {
@@ -136,11 +138,7 @@ export default {
     }
   },
   //   firestore: {
-  //     memos: firebase
-  //       .firestore()
-  //       .collection("memo")
-  //       .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-  //       .where("deleteFlg", "==", this.isDiscard)
+  //     test: firebase.firestore().collection("memo")
   //   },
   created() {
     this.editMessage = this.isDiscard ? "復元する" : "編集する";
