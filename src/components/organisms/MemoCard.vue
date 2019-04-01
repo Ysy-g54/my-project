@@ -10,21 +10,26 @@
         <div>カテゴリ：{{formatCategory(memo.categoryId)}}</div>
         <div>
           <span class="md-subhead">登録日：{{formatDate(memo.insertDateTime)}}</span>
-          <md-menu md-size="small">
-            <md-button class="md-icon-button" md-menu-trigger>
-              <md-icon>more_vert</md-icon>
-            </md-button>
-            <md-menu-content>
-              <md-menu-item @click="onEditClick(memo.memoId)">
-                <span>{{ editMessage }}</span>
-              </md-menu-item>
-              <md-menu-item @click="onDeleteClick(memo.memoId)">
-                <span>{{ deleteMessage }}</span>
-              </md-menu-item>
-            </md-menu-content>
-          </md-menu>
         </div>
       </md-card-content>
+      <md-card-actions>
+        <md-button v-if="!isDiscard" class="md-icon-button">
+          <md-icon>star_border</md-icon>
+        </md-button>
+        <md-menu md-size="small">
+          <md-button class="md-icon-button" md-menu-trigger>
+            <md-icon>more_vert</md-icon>
+          </md-button>
+          <md-menu-content>
+            <md-menu-item @click="onEditClick(memo.memoId)">
+              <span>{{ editMessage }}</span>
+            </md-menu-item>
+            <md-menu-item @click="onDeleteClick(memo.memoId)">
+              <span>{{ deleteMessage }}</span>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-card-actions>
     </md-card>
   </div>
   <div v-else>空っぽです</div>

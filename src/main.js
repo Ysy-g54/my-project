@@ -29,11 +29,11 @@ new Vue({
 	}
 });
 
-router.beforeEach((to, from, next) => {
-	store.commit('setIsLoading', true);
-	next();
-});
+// router.beforeEach((to, from, next) => {
+// 	store.commit('setIsLoading', true);
+// 	next();
+// });
 
-router.afterEach(() => {
-	store.commit('setIsLoading', false);
-});
+// router.afterEach(() => {
+// 	store.commit('setIsLoading', false);
+// });

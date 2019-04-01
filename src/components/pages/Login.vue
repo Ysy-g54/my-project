@@ -56,10 +56,6 @@ export default {
       });
     },
     onLoginClick() {
-      if (this.mailAddress === "" || this.password === "") {
-        this.showFailureMessage();
-        return;
-      }
       let data = {};
       _.set(data, "mailAddress", this.mailAddress);
       _.set(data, "password", this.password);

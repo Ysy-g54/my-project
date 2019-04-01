@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <md-progress-spinner v-show="$store.state.loading" md-mode="indeterminate"></md-progress-spinner>
+    <!-- <md-progress-spinner v-show="$store.state.loading" md-mode="indeterminate"></md-progress-spinner> -->
     <router-view></router-view>
   </div>
 </template>
