@@ -2,7 +2,7 @@
   <div>
     <h2>書き留め一覧</h2>
     <div>
-      <MemoCard @delete-memo="deleteMemo"/>
+      <Memo @delete-memo="deleteMemo"/>
     </div>
     <SpeedDial/>
     <Snackbar ref="snackbar" :message="message" :button="button" :duration="duration"></Snackbar>
@@ -11,7 +11,7 @@
 
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
-import MemoCard from "@/components/organisms/MemoCard";
+import Memo from "@/components/organisms/Memo";
 import SpeedDial from "@/components/molecules/SpeedDial";
 export default {
   data() {
@@ -42,7 +42,7 @@ export default {
   created() {},
   components: {
     Snackbar,
-    MemoCard,
+    Memo,
     SpeedDial
   }
 };

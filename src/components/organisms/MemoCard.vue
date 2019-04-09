@@ -1,10 +1,6 @@
 <template>
-  <div v-if="isNotEmptyMemo">
-    <div>
-      <span class="md-title">{{ memos.length }}</span>
-      <span class="md-subheading">個</span>
-    </div>
-    <md-card v-for="memo in memos" :key="memo.memoId">
+  <div>
+    <md-card>
       <md-card-content>
         <div class="text-pre-wrap">{{ memo.memo }}</div>
         <div>カテゴリ：{{formatCategory(memo.categoryId)}}</div>
@@ -21,7 +17,7 @@
             <md-icon>more_vert</md-icon>
           </md-button>
           <md-menu-content>
-            <md-menu-item @click="onEditClick(memo.memoId)">
+            <md-menu-item @click="onEditClick">
               <span>{{ editMessage }}</span>
             </md-menu-item>
             <md-menu-item @click="onDeleteClick(memo.memoId)">
@@ -32,7 +28,6 @@
       </md-card-actions>
     </md-card>
   </div>
-  <div v-else>空っぽです</div>
 </template>
 
 <script>
@@ -51,20 +46,6 @@ export default {
     database: firebase.firestore()
   }),
   methods: {
-    searchMemo() {
-      this.database
-        .collection("memo")
-        .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-        .where("deleteFlg", "==", this.isDiscard)
-        .get()
-        .then(querySnapshot => {
-          this.memos = [];
-          querySnapshot.forEach(document => {
-            let memoSnapshot = _.set(document.data(), "memoId", document.id);
-            this.memos.push(memoSnapshot);
-          });
-        });
-    },
     formatCategory(categoryId) {
       let categoryNm = "";
       categories.forEach(category => {
@@ -82,27 +63,8 @@ export default {
       let m = moment(date.toDate());
       return m.format("YYYY/MM/DD");
     },
-    onEditClick(memoId) {
-      if (this.isDiscard) {
-        this.database
-          .collection("memo")
-          .doc(memoId)
-          .update({
-            deleteFlg: false
-          })
-          .then(() => {
-            this.searchMemo();
-            this.$emit("restore-memo");
-          })
-          .catch(error => {
-            console.error("Error adding document: ", error);
-          });
-      } else {
-        this.$router.push({
-          name: "memoModification",
-          params: { memoId }
-        });
-      }
+    onEditClick() {
+      this.$emit("on-edit-click", this.memo.memoId);
     },
     onDeleteClick(memoId) {
       this.memoId = memoId;
@@ -135,20 +97,12 @@ export default {
     }
   },
   props: {
-    isDiscard: { type: Boolean, default: false }
+    isDiscard: { type: Boolean, default: false },
+    memo: { type: Object, default: {} }
   },
-  computed: {
-    isNotEmptyMemo() {
-      return !_.isEmpty(this.memos);
-    }
-  },
-  //   firestore: {
-  //     test: firebase.firestore().collection("memo")
-  //   },
   created() {
     this.editMessage = this.isDiscard ? "復元する" : "編集する";
     this.deleteMessage = this.isDiscard ? "完全に削除する" : "ゴミ箱に移動する";
-    this.searchMemo();
   },
   components: {}
 };

@@ -10,7 +10,7 @@
         <div class="md-toolbar-row">
           <md-tabs class="md-primary" :md-active-tab="'tab-'+$route.name">
             <md-tab id="tab-memo" md-label="書留め" :to="{name: 'memo'}"></md-tab>
-            <!-- <md-tab id="tab-goal" md-label="目標集計" :to="{name: 'goal'}"></md-tab> -->
+            <md-tab id="tab-goal" md-label="統計" :to="{name: 'goal'}"></md-tab>
           </md-tabs>
         </div>
       </md-app-toolbar>

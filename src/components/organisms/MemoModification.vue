@@ -42,7 +42,7 @@ export default {
         ? this.database.collection("memo").add({
             categoryId: this.categoryId,
             memo: this.memo,
-            insertDateTime: this.insertDateTime,
+            insertDateTime: firebase.firestore.FieldValue.serverTimestamp(),
             userId: userId,
             deleteFlg: false
           })

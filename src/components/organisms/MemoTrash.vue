@@ -3,8 +3,8 @@
     <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
     <h2>ゴミ箱</h2>
     <div>
-      <MemoCard
-        ref="memoCard"
+      <Memo
+        ref="memo"
         :isDiscard="true"
         @delete-memo="deleteMemo"
         @restore-memo="restoreMemo"
@@ -18,7 +18,7 @@
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
 import Dialog from "@/components/molecules/Dialog";
-import MemoCard from "@/components/organisms/MemoCard";
+import Memo from "@/components/organisms/Memo";
 export default {
   data() {
     return {
@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     confirmDialog() {
-      this.$refs.memoCard.deleteMemo();
+      this.$refs.memo.deleteMemo();
     },
     deleteConfirm() {
       this.$refs.dialog.openDialog();
@@ -53,7 +53,7 @@ export default {
   components: {
     Snackbar,
     Dialog,
-    MemoCard
+    Memo
   }
 };
 </script>
