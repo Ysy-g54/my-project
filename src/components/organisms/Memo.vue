@@ -4,7 +4,14 @@
       <span class="md-title">{{ memos.length }}</span>
       <span class="md-subheading">個</span>
     </div>
-    <MemoCard v-for="memo in memos" :key="memo.memoId" :memo="memo" @on-edit-click="onEditClick"></MemoCard>
+    <MemoCard
+      v-for="memo in memos"
+      :key="memo.memoId"
+      :isDiscard="isDiscard"
+      :memo="memo"
+      @on-edit-click="onEditClick"
+      @on-delete-click="onDeleteClick"
+    ></MemoCard>
   </div>
   <div v-else>空っぽです</div>
 </template>
@@ -16,11 +23,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 export default {
   data: () => ({
-    memoId: "",
-    editMessage: "",
-    deleteMessage: "",
     memos: [],
-    test: [],
     database: firebase.firestore()
   }),
   methods: {
@@ -99,8 +102,6 @@ export default {
     }
   },
   created() {
-    this.editMessage = this.isDiscard ? "復元する" : "編集する";
-    this.deleteMessage = this.isDiscard ? "完全に削除する" : "ゴミ箱に移動する";
     this.searchMemo();
   },
   components: {
