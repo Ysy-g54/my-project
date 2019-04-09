@@ -5,7 +5,7 @@ import Vuex from "vuex";
 import VueMaterial from "vue-material";
 import Login from "@/components/pages/Login";
 import Signup from "@/components/pages/Signup";
-import Goal from "@/components/pages/Goal";
+import Statistics from "@/components/pages/Statistics";
 import Memo from "@/components/pages/Memo";
 import MemoTrash from "@/components/pages/MemoTrash";
 import MemoModification from "@/components/pages/MemoModification";
@@ -61,9 +61,9 @@ const router = new Router({
 			props: true,
 			children: [
 				{
-					path: "goal",
-					name: "goal",
-					component: Goal,
+					path: "statistics",
+					name: "statistics",
+					component: Statistics,
 					props: true
 				}
 			]

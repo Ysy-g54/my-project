@@ -10,7 +10,7 @@
         <div class="md-toolbar-row">
           <md-tabs class="md-primary" :md-active-tab="'tab-'+$route.name">
             <md-tab id="tab-memo" md-label="書留め" :to="{name: 'memo'}"></md-tab>
-            <md-tab id="tab-goal" md-label="統計" :to="{name: 'goal'}"></md-tab>
+            <md-tab id="tab-statistics" md-label="統計" :to="{name: 'statistics'}"></md-tab>
           </md-tabs>
         </div>
       </md-app-toolbar>
@@ -77,7 +77,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-app {
-  max-height: 650px;
+  max-height: 615px;
   border: 1px solid rgba(#000, 0.12);
 }
 

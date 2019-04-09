@@ -1,13 +1,16 @@
 <template>
   <div>
-    <h1>test</h1>
+    <md-datepicker v-model="selectedDate"/>
+    <span class="md-title">時点の統計</span>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      selectedDate: new Date()
+    };
   },
   methods: {},
   watch: {},

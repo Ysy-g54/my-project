@@ -1,7 +1,7 @@
 <template>
   <div>
     <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
-    <h2>ゴミ箱</h2>
+    <span class="md-title">ゴミ箱</span>
     <div>
       <Memo
         ref="memo"
@@ -60,26 +60,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-
-#hello {
-  text-align: center;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #35495e;
-}
 </style>

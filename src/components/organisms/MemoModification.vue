@@ -14,7 +14,7 @@
     </div>
     <md-field>
       <label>アクション・メモ</label>
-      <md-textarea v-model="memo"></md-textarea>
+      <md-textarea v-model="memo" md-autogrow></md-textarea>
     </md-field>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
       database: firebase.firestore(),
       isUpdateMemo: false,
       memoId: "",
-      insertDateTime: new Date(),
+      insertDateTime: null,
       categories: categories
     };
   },
@@ -104,26 +104,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-
-#hello {
-  text-align: center;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #35495e;
-}
 </style>
