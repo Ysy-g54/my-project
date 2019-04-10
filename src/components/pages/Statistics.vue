@@ -30,26 +30,39 @@ export default {
       .then(querySnapshot => {
         querySnapshot.forEach(document => {
           categories.find(category => {
+            _.set(
+              this.memoCategories,
+              "datasets[0].backgroundColor",
+              "#f87979"
+            );
             if (document.data().categoryId === category.categoryId) {
               _.set(
                 this.memoCategories,
-                `${category.categoryId}.count`,
-                _.get(this.memoCategories, `${category.categoryId}.count`, 0) +
-                  1
+                `labels[${category.categoryId}]`,
+                category.categoryId
+              );
+              _.set(
+                this.memoCategories,
+                `datasets[0].data[${category.categoryId}]`,
+                _.get(
+                  this.memoCategories,
+                  `datasets[0].data[${category.categoryId}]`,
+                  0
+                ) + 1
               );
               return true;
             }
             if (document.data().categoryId === "") {
+              _.set(this.memoCategories, "labels[0]", "0");
               _.set(
                 this.memoCategories,
-                "0.count",
-                _.get(this.memoCategories, "0.count", 0) + 1
+                "datasets[0].data[0]",
+                _.get(this.memoCategories, "datasets[0].data[0]", 0) + 1
               );
               return true;
             }
           });
         });
-        console.error(this.memoCategories);
       });
   },
   components: {

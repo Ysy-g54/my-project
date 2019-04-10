@@ -1,7 +1,6 @@
 <script>
 // import Chart from "chart.js";
 import { mixins, Pie } from "vue-chartjs";
-const { reactiveProp } = mixins;
 
 const DEFAULT_OPTIONS = {
   //   events: ["click"],
@@ -40,17 +39,15 @@ export default {
   methods: {
     createChart() {
       this.renderChart(this.chartData, DEFAULT_OPTIONS);
-    },
-    getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
     }
+    // getRandomInt() {
+    //   return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
+    // }
   },
-  props: {
-    chartData: { type: Array, default: [] }
-  },
+  props: { chartData: { type: Object, default: null } },
   computed: {},
   extends: Pie,
-  mixins: [reactiveProp],
+  mixins: [mixins.reactiveProp],
   mounted() {
     this.createChart();
   }
