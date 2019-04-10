@@ -1,9 +1,7 @@
 <script>
-// import Chart from "chart.js";
 import { mixins, Pie } from "vue-chartjs";
 
 const DEFAULT_OPTIONS = {
-  //   events: ["click"],
   //   layout: {
   //     padding: {
   //       left: 50,
@@ -19,7 +17,8 @@ const DEFAULT_OPTIONS = {
   //       fontSize: 12
   //     }
   //   },
-  responsive: true
+  responsive: true,
+  maintainAspectRatio: false
 };
 export default {
   data() {
@@ -38,7 +37,9 @@ export default {
   },
   methods: {
     createChart() {
-      this.renderChart(this.chartData, DEFAULT_OPTIONS);
+      setTimeout(() => {
+        this.renderChart(this.chartData, DEFAULT_OPTIONS);
+      }, 500);
     }
     // getRandomInt() {
     //   return Math.floor(Math.random() * (50 - 5 + 1)) + 5;

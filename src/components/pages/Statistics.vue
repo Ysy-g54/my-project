@@ -14,11 +14,21 @@ import "firebase/firestore";
 export default {
   data() {
     return {
-      memoCategories: [],
+      memoCategories: {},
       database: firebase.firestore()
     };
   },
-  methods: {},
+  methods: {
+    formatCategory(categoryId) {
+      let categoryNm = "";
+      categories.forEach(category => {
+        if (categoryId === category.categoryId) {
+          categoryNm = category.categoryNm;
+        }
+      });
+      return categoryNm;
+    }
+  },
   watch: {},
   computed: {},
   created() {
@@ -39,7 +49,7 @@ export default {
               _.set(
                 this.memoCategories,
                 `labels[${category.categoryId}]`,
-                category.categoryId
+                this.formatCategory(category.categoryId)
               );
               _.set(
                 this.memoCategories,
@@ -53,7 +63,7 @@ export default {
               return true;
             }
             if (document.data().categoryId === "") {
-              _.set(this.memoCategories, "labels[0]", "0");
+              _.set(this.memoCategories, "labels[0]", this.formatCategory("0"));
               _.set(
                 this.memoCategories,
                 "datasets[0].data[0]",
