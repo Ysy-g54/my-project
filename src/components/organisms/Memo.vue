@@ -34,7 +34,6 @@ export default {
         .where("deleteFlg", "==", this.isDiscard)
         .get()
         .then(querySnapshot => {
-          this.memos = [];
           querySnapshot.forEach(document => {
             let memoSnapshot = _.set(document.data(), "memoId", document.id);
             this.memos.push(memoSnapshot);
