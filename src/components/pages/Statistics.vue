@@ -2,10 +2,12 @@
   <div>
     <md-datepicker v-model="selectedDate"/>
     <span class="md-title">時点の統計</span>
+    <Chart></Chart>
   </div>
 </template>
 
 <script>
+import Chart from "@/components/organisms/Chart";
 export default {
   data() {
     return {
@@ -16,7 +18,9 @@ export default {
   watch: {},
   computed: {},
   created() {},
-  components: {}
+  components: {
+    Chart
+  }
 };
 </script>
 
