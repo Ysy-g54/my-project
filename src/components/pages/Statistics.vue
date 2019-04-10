@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="md-title">現時点の統計</span>
-    <Chart></Chart>
+    <Chart :chartData="memoCategories"></Chart>
   </div>
 </template>
 
@@ -29,15 +29,7 @@ export default {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(document => {
-          //   if (
-          //     categories.find(
-          //       category => category.categoryId === document.data().categoryId
-          //     )
-          //   ) {
-          //   } else if (document.data().categoryId === "") {
-          //   }
-
-          categories.forEach(category => {
+          categories.find(category => {
             if (document.data().categoryId === category.categoryId) {
               _.set(
                 this.memoCategories,
@@ -45,12 +37,15 @@ export default {
                 _.get(this.memoCategories, `${category.categoryId}.count`, 0) +
                   1
               );
-            } else if (document.data().categoryId === "") {
+              return true;
+            }
+            if (document.data().categoryId === "") {
               _.set(
                 this.memoCategories,
                 "0.count",
                 _.get(this.memoCategories, "0.count", 0) + 1
               );
+              return true;
             }
           });
         });

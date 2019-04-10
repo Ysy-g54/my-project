@@ -1,11 +1,10 @@
 <script>
 // import Chart from "chart.js";
-import { Pie } from "vue-chartjs";
-
-// const { reactiveProp } = mixins;
+import { mixins, Pie } from "vue-chartjs";
+const { reactiveProp } = mixins;
 
 const DEFAULT_OPTIONS = {
-  events: ["click"],
+  //   events: ["click"],
   //   layout: {
   //     padding: {
   //       left: 50,
@@ -26,16 +25,16 @@ const DEFAULT_OPTIONS = {
 export default {
   data() {
     return {
-      chartData: {
-        labels: [this.getRandomInt(), this.getRandomInt()],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [this.getRandomInt(), this.getRandomInt()]
-          }
-        ]
-      }
+      //   chartData: {
+      //     labels: [this.getRandomInt(), this.getRandomInt()],
+      //     datasets: [
+      //       {
+      //         label: "Data One",
+      //         backgroundColor: "#f87979",
+      //         data: [this.getRandomInt(), this.getRandomInt()]
+      //       }
+      //     ]
+      //   }
     };
   },
   methods: {
@@ -46,9 +45,12 @@ export default {
       return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
     }
   },
+  props: {
+    chartData: { type: Array, default: [] }
+  },
   computed: {},
   extends: Pie,
-  //   mixins: [reactiveProp],
+  mixins: [reactiveProp],
   mounted() {
     this.createChart();
   }
