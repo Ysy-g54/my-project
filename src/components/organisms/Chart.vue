@@ -33,11 +33,6 @@ export default {
             label: "Data One",
             backgroundColor: "#f87979",
             data: [this.getRandomInt(), this.getRandomInt()]
-          },
-          {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [this.getRandomInt(), this.getRandomInt()]
           }
         ]
       },
