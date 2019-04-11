@@ -16,7 +16,6 @@ const store = new Vuex.Store({
   mutations: {
     setLoginUser(state) {
       firebase.auth().onAuthStateChanged(loginUser => {
-        console.error("test", loginUser);
         if (loginUser !== null) {
           state.loginUser.name = loginUser.displayName;
           state.loginUser.mailAddress = loginUser.email;
@@ -27,11 +26,6 @@ const store = new Vuex.Store({
       });
     },
     logout(state) {
-      // let deleteReq = indexedDB.deleteDatabase("firebaseLocalStorage");
-
-      // deleteReq.onsuccess = () => {
-      // 	console.log('db delete success');
-      // };
       state.loginUser.name = "";
       state.loginUser.mailAddress = "";
       state.loginUser.photoUrl = "";
