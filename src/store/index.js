@@ -16,13 +16,11 @@ const store = new Vuex.Store({
   mutations: {
     setLoginUser(state) {
       firebase.auth().onAuthStateChanged(loginUser => {
-        if (loginUser !== null) {
-          state.loginUser.name = loginUser.displayName;
-          state.loginUser.mailAddress = loginUser.email;
-          state.loginUser.photoUrl = loginUser.photoUrl;
-          state.loginUser.uid = loginUser.uid;
-          state.loginUser.emailVerified = loginUser.emailVerified;
-        }
+        state.loginUser.name = loginUser.displayName || "";
+        state.loginUser.mailAddress = loginUser.email || "";
+        state.loginUser.photoUrl = loginUser.photoUrl || "";
+        state.loginUser.uid = loginUser.uid || "";
+        state.loginUser.emailVerified = loginUser.emailVerified || "";
       });
     },
     logout(state) {
