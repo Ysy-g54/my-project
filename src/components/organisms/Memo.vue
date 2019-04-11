@@ -28,6 +28,7 @@ export default {
   }),
   methods: {
     searchMemo() {
+      this.memos = [];
       this.database
         .collection("memo")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)

@@ -17,16 +17,17 @@ firebase.initializeApp(firebaseConfig);
 
 /* eslint-disable no-new */
 new Vue({
-	el: "#app",
-	router,
-	template: "<App/>",
-	components: { App },
-	store,
-	methods: {
-	},
-	created() {
-		store.dispatch('findLoginUser');
-	}
+  el: "#app",
+  router,
+  template: "<App/>",
+  components: { App },
+  store,
+  methods: {},
+  created() {
+    Promise.resolve().then(() => {
+      store.dispatch("findLoginUser");
+    });
+  }
 });
 
 // router.beforeEach((to, from, next) => {

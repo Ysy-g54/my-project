@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="md-title">現時点の統計</span>
+    <span class="md-title">現時点のデータでの統計</span>
     <Chart :chartData="memoCategories"></Chart>
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
             _.set(
               this.memoCategories,
               "datasets[0].backgroundColor",
-              "#f87979"
+              "#A5D6A7"
             );
             if (document.data().categoryId === category.categoryId) {
               _.set(
@@ -63,7 +63,7 @@ export default {
               return true;
             }
             if (document.data().categoryId === "") {
-              _.set(this.memoCategories, "labels[0]", this.formatCategory("0"));
+              _.set(this.memoCategories, "labels[0]", "");
               _.set(
                 this.memoCategories,
                 "datasets[0].data[0]",
