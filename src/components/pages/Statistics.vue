@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="md-title">現時点のデータでの統計</span>
+    <span class="md-title">現時点の統計</span>
     <Chart :chartData="memoCategories"></Chart>
   </div>
 </template>

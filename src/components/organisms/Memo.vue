@@ -1,9 +1,19 @@
 <template>
   <div v-if="isNotEmptyMemo">
     <div>
-      <span class="md-title">{{ memos.length }}</span>
+      <span class="md-title">{{ memoCount }}</span>
       <span class="md-subheading">個</span>
     </div>
+    <MemoCard
+      v-for="memo in favoriteMemos"
+      :key="memo.memoId"
+      :isDiscard="isDiscard"
+      :memo="memo"
+      @on-edit-click="onEditClick"
+      @on-delete-click="onDeleteClick"
+      @on-favorite="onFavorite"
+    ></MemoCard>
+    <md-divider/>
     <MemoCard
       v-for="memo in memos"
       :key="memo.memoId"
@@ -11,6 +21,7 @@
       :memo="memo"
       @on-edit-click="onEditClick"
       @on-delete-click="onDeleteClick"
+      @on-favorite="onFavorite"
     ></MemoCard>
   </div>
   <div v-else>空っぽです</div>
@@ -23,22 +34,35 @@ import firebase from "firebase";
 import "firebase/firestore";
 export default {
   data: () => ({
+    favoriteMemos: [],
     memos: [],
     database: firebase.firestore()
   }),
   methods: {
     searchMemo() {
-      this.memos = [];
       this.database
         .collection("memo")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
         .where("deleteFlg", "==", this.isDiscard)
         .get()
         .then(querySnapshot => {
+          let memosSnapshot = [];
+          let favoriteMemosSnapshot = [];
           querySnapshot.forEach(document => {
-            let memoSnapshot = _.set(document.data(), "memoId", document.id);
-            this.memos.push(memoSnapshot);
+            if (document.data().favoriteFlg) {
+              let favoriteMemoSnapshot = _.set(
+                document.data(),
+                "memoId",
+                document.id
+              );
+              favoriteMemosSnapshot.push(favoriteMemoSnapshot);
+            } else {
+              let memoSnapshot = _.set(document.data(), "memoId", document.id);
+              memosSnapshot.push(memoSnapshot);
+            }
           });
+          this.favoriteMemos = favoriteMemosSnapshot;
+          this.memos = memosSnapshot;
         });
     },
     onEditClick(memoId) {
@@ -71,6 +95,20 @@ export default {
         this.deleteMemo();
       }
     },
+    onFavorite(memo) {
+      this.database
+        .collection("memo")
+        .doc(memo.memoId)
+        .update({
+          favoriteFlg: !memo.favoriteFlg
+        })
+        .then(() => {
+          this.searchMemo();
+        })
+        .catch(error => {
+          console.error("Error adding document: ", error);
+        });
+    },
     deleteMemo() {
       (this.isDiscard
         ? this.database
@@ -99,6 +137,9 @@ export default {
   computed: {
     isNotEmptyMemo() {
       return !_.isEmpty(this.memos);
+    },
+    memoCount() {
+      return this.memos.length + this.favoriteMemos.length;
     }
   },
   created() {

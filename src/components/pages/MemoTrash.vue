@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MemoTrash></MemoTrash>
+    <MemoTrash/>
   </div>
 </template>
 

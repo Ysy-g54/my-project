@@ -8,8 +8,9 @@
       </div>
     </md-card-content>
     <md-card-actions>
-      <md-button v-if="!isDiscard" class="md-icon-button">
-        <md-icon>star_border</md-icon>
+      <md-button v-if="!isDiscard" class="md-icon-button" @click="onFavoriteClick">
+        <md-icon v-if="memo.favoriteFlg">star</md-icon>
+        <md-icon v-else>star_border</md-icon>
       </md-button>
       <md-menu md-size="small">
         <md-button class="md-icon-button" md-menu-trigger>
@@ -61,6 +62,9 @@ export default {
     },
     onDeleteClick() {
       this.$emit("on-delete-click", this.memo.memoId);
+    },
+    onFavoriteClick() {
+      this.$emit("on-favorite", this.memo);
     }
   },
   props: {

@@ -44,6 +44,7 @@ export default {
             memo: this.memo,
             insertDateTime: firebase.firestore.FieldValue.serverTimestamp(),
             userId: userId,
+            favoriteFlg: true,
             deleteFlg: false
           })
         : this.database
@@ -54,6 +55,7 @@ export default {
               memo: this.memo,
               insertDateTime: this.insertDateTime,
               userId: userId,
+              favoriteFlg: false,
               deleteFlg: false
             })
       )

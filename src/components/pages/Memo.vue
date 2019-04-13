@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MemoHistory></MemoHistory>
+    <MemoHistory/>
   </div>
 </template>
 
