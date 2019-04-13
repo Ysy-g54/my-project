@@ -1,5 +1,9 @@
 <template>
   <div>
+    <md-field>
+      <label>アクション・メモ</label>
+      <md-textarea v-model="memo" md-autogrow></md-textarea>
+    </md-field>
     <div class="md-layout-item">
       <md-field>
         <label for="categoryId">カテゴリ</label>
@@ -12,10 +16,15 @@
         </md-select>
       </md-field>
     </div>
-    <md-field>
-      <label>アクション・メモ</label>
-      <md-textarea v-model="memo" md-autogrow></md-textarea>
-    </md-field>
+    <span class="body-2">お気に入り</span>
+    <md-button
+      class="md-icon-button"
+      :class="{ 'md-primary': favoriteFlg }"
+      @click="onFavoriteChange"
+    >
+      <md-icon v-if="favoriteFlg">star</md-icon>
+      <md-icon v-else>star_border</md-icon>
+    </md-button>
   </div>
 </template>
 
@@ -32,10 +41,14 @@ export default {
       isUpdateMemo: false,
       memoId: "",
       insertDateTime: null,
-      categories: categories
+      categories: categories,
+      favoriteFlg: false
     };
   },
   methods: {
+    onFavoriteChange() {
+      this.favoriteFlg = !this.favoriteFlg;
+    },
     saveMemo() {
       let userId = this.$store.getters["getLoginUser"].uid;
       (!this.isUpdateMemo
@@ -44,7 +57,7 @@ export default {
             memo: this.memo,
             insertDateTime: firebase.firestore.FieldValue.serverTimestamp(),
             userId: userId,
-            favoriteFlg: true,
+            favoriteFlg: this.favoriteFlg,
             deleteFlg: false
           })
         : this.database
@@ -55,7 +68,7 @@ export default {
               memo: this.memo,
               insertDateTime: this.insertDateTime,
               userId: userId,
-              favoriteFlg: false,
+              favoriteFlg: this.favoriteFlg,
               deleteFlg: false
             })
       )
@@ -93,6 +106,7 @@ export default {
             this.memo = data.memo;
             this.memoId = querySnapshot.id;
             this.insertDateTime = data.insertDateTime;
+            this.favoriteFlg = data.favoriteFlg;
             this.isUpdateMemo = true;
           }
         });
