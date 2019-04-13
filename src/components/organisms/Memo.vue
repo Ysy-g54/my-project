@@ -4,6 +4,7 @@
       <span class="md-title">{{ memoCount }}</span>
       <span class="md-subheading">個</span>
     </div>
+    <div class="body-2" v-if="!isDiscard && favoriteMemos.length !== 0">お気に入り書き留め</div>
     <MemoCard
       v-for="memo in favoriteMemos"
       :key="memo.memoId"
@@ -13,7 +14,7 @@
       @on-delete-click="onDeleteClick"
       @on-favorite="onFavorite"
     ></MemoCard>
-    <md-divider/>
+    <md-divider v-if="!isDiscard && favoriteMemos.length !== 0"></md-divider>
     <MemoCard
       v-for="memo in memos"
       :key="memo.memoId"
