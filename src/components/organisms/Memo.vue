@@ -4,7 +4,7 @@
       <span class="md-title">{{ memoCount }}</span>
       <span class="md-subheading">個</span>
     </div>
-    <div class="body-2" v-if="!isDiscard && favoriteMemos.length !== 0">お気に入り書き留め</div>
+    <div class="body-2" v-if="!isDiscard && favoriteMemos.length !== 0">お気に入り</div>
     <MemoCard
       v-for="memo in favoriteMemos"
       :key="memo.memoId"
@@ -14,7 +14,7 @@
       @on-delete-click="onDeleteClick"
       @on-favorite="onFavorite"
     ></MemoCard>
-    <md-divider v-if="!isDiscard && favoriteMemos.length !== 0"></md-divider>
+    <md-divider v-if="!isDiscard && favoriteMemos.length !== 0"/>
     <MemoCard
       v-for="memo in memos"
       :key="memo.memoId"
@@ -25,7 +25,9 @@
       @on-favorite="onFavorite"
     ></MemoCard>
   </div>
-  <div v-else>空っぽです</div>
+  <div v-else>
+    <md-empty-state md-icon="create" md-label="空っぽです。" md-description="追加したらここに表示されます。"></md-empty-state>
+  </div>
 </template>
 
 <script>

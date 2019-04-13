@@ -22,6 +22,10 @@
             <md-icon>delete</md-icon>
             <span class="md-list-item-text">ゴミ箱</span>
           </md-list-item>
+          <md-list-item>
+            <md-icon>feedback</md-icon>
+            <span class="md-list-item-text">フィードバック</span>
+          </md-list-item>
           <md-divider/>
           <md-list-item @click="onLogoutClick">ログアウト</md-list-item>
         </md-list>

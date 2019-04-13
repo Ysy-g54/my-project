@@ -4,11 +4,16 @@
       <div class="text-pre-wrap">{{ memo.memo }}</div>
       <div>カテゴリ：{{ formatCategory(memo.categoryId) }}</div>
       <div>
-        <span class="md-subhead">登録日：{{ formatDate(memo.insertDateTime) }}</span>
+        <span class="md-subhead">作成日：{{ formatDate(memo.insertDateTime) }}</span>
       </div>
     </md-card-content>
     <md-card-actions>
-      <md-button v-if="!isDiscard" class="md-icon-button" @click="onFavoriteClick">
+      <md-button
+        v-if="!isDiscard"
+        class="md-icon-button"
+        :class="{ 'md-primary': memo.favoriteFlg }"
+        @click="onFavoriteClick"
+      >
         <md-icon v-if="memo.favoriteFlg">star</md-icon>
         <md-icon v-else>star_border</md-icon>
       </md-button>
