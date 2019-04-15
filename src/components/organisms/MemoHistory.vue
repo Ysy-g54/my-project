@@ -1,6 +1,5 @@
 <template>
   <div>
-    <span class="md-title">書き留め一覧</span>
     <div>
       <Memo @delete-memo="deleteMemo"/>
     </div>

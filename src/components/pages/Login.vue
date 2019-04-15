@@ -63,7 +63,7 @@ export default {
         .dispatch("updateLoginUser", data)
         .then(() => {
           this.$router.push({
-            name: "memo"
+            name: "memoHistory"
           });
         })
         .catch(() => {
