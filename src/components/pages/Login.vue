@@ -83,7 +83,7 @@ export default {
             // console.error(token);
           }
           this.$router.push({
-            name: "memo"
+            name: "memoHistory"
           });
         })
         .catch(() => {

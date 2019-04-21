@@ -27,7 +27,10 @@
             <span class="md-list-item-text">フィードバック</span>
           </md-list-item>
           <md-divider/>
-          <md-list-item @click="onLogoutClick">ログアウト</md-list-item>
+          <md-list-item @click="onLogoutClick">
+            <md-icon>exit_to_app</md-icon>
+            <span class="md-list-item-text">ログアウト</span>
+          </md-list-item>
         </md-list>
       </md-app-drawer>
       <md-app-content>

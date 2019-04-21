@@ -13,6 +13,7 @@
       @on-edit-click="onEditClick"
       @on-delete-click="onDeleteClick"
       @on-favorite="onFavorite"
+      @on-done="onDone"
     ></MemoCard>
     <md-divider v-if="!isDiscard && favoriteMemos.length !== 0"/>
     <MemoCard
@@ -23,6 +24,7 @@
       @on-edit-click="onEditClick"
       @on-delete-click="onDeleteClick"
       @on-favorite="onFavorite"
+      @on-done="onDone"
     ></MemoCard>
   </div>
   <div v-else>
@@ -104,6 +106,20 @@ export default {
         .doc(memo.memoId)
         .update({
           favoriteFlg: !memo.favoriteFlg
+        })
+        .then(() => {
+          this.searchMemo();
+        })
+        .catch(error => {
+          console.error("Error adding document: ", error);
+        });
+    },
+    onDone(memo) {
+      this.database
+        .collection("memo")
+        .doc(memo.memoId)
+        .update({
+          doneFlg: !memo.doneFlg
         })
         .then(() => {
           this.searchMemo();

@@ -1,14 +1,16 @@
 <template>
   <div>
     <span class="md-title">カテゴリ比率</span>
-    <Chart :chartData="memoCategories"></Chart>
+    <PieChart :chartData="memoCategories"></PieChart>
+    <BarChart :chartData="memoCategories"></BarChart>
   </div>
 </template>
 
 <script>
 import _ from "lodash";
 import { categories } from "../../constants";
-import Chart from "@/components/organisms/Chart";
+import BarChart from "@/components/organisms/BarChart";
+import PieChart from "@/components/organisms/PieChart";
 import firebase from "firebase";
 import "firebase/firestore";
 export default {
@@ -76,7 +78,8 @@ export default {
       });
   },
   components: {
-    Chart
+    BarChart,
+    PieChart
   }
 };
 </script>

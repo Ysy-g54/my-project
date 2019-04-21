@@ -9,6 +9,14 @@
     </md-card-content>
     <md-card-actions>
       <md-button
+        v-if="!isDiscard && memo.categoryId === '1'"
+        class="md-icon-button"
+        :class="{ 'md-primary': memo.doneFlg }"
+        @click="onDoneClick"
+      >
+        <md-icon>thumb_up</md-icon>
+      </md-button>
+      <md-button
         v-if="!isDiscard"
         class="md-icon-button"
         :class="{ 'md-primary': memo.favoriteFlg }"
@@ -68,6 +76,9 @@ export default {
     onDeleteClick() {
       this.$emit("on-delete-click", this.memo.memoId);
     },
+    onDoneClick() {
+      this.$emit("on-done", this.memo);
+    },
     onFavoriteClick() {
       this.$emit("on-favorite", this.memo);
     }
@@ -87,7 +98,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-card {
-  width: 285px;
+  width: 250px;
   margin: 4px;
   display: inline-block;
   vertical-align: top;

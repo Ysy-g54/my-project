@@ -42,7 +42,8 @@ export default {
       memoId: "",
       insertDateTime: null,
       categories: categories,
-      favoriteFlg: false
+      favoriteFlg: false,
+      doneFlg: false
     };
   },
   methods: {
@@ -58,7 +59,8 @@ export default {
             insertDateTime: firebase.firestore.FieldValue.serverTimestamp(),
             userId: userId,
             favoriteFlg: this.favoriteFlg,
-            deleteFlg: false
+            deleteFlg: false,
+            doneFlg: false
           })
         : this.database
             .collection("memo")
@@ -69,12 +71,13 @@ export default {
               insertDateTime: this.insertDateTime,
               userId: userId,
               favoriteFlg: this.favoriteFlg,
-              deleteFlg: false
+              deleteFlg: false,
+              doneFlg: false
             })
       )
         .then(docRef => {
           this.$router.push({
-            name: "memo",
+            name: "memoHistory",
             params: { saveSuccessFlg: true }
           });
         })
@@ -107,6 +110,7 @@ export default {
             this.memoId = querySnapshot.id;
             this.insertDateTime = data.insertDateTime;
             this.favoriteFlg = data.favoriteFlg;
+            this.doneFlg = data.doneFlg;
             this.isUpdateMemo = true;
           }
         });

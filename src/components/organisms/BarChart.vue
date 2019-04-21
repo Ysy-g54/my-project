@@ -1,5 +1,5 @@
 <script>
-import { mixins, Pie } from "vue-chartjs";
+import { mixins, Bar } from "vue-chartjs";
 
 const DEFAULT_OPTIONS = {
   responsive: true,
@@ -18,11 +18,12 @@ export default {
   },
   props: { chartData: { type: Object, default: null } },
   computed: {},
-  extends: Pie,
+  extends: Bar,
   mixins: [mixins.reactiveProp],
   mounted() {
     this.createChart();
-  }
+  },
+  destroyed() {}
 };
 </script>
 

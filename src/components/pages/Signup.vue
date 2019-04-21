@@ -35,7 +35,7 @@ export default {
         .createUserWithEmailAndPassword(this.mailAddress, this.password)
         .then(() => {
           this.$router.push({
-            name: "memo"
+            name: "memoHistory"
           });
         })
         .catch(() => {
