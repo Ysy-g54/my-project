@@ -3,12 +3,14 @@ import { firestorePlugin } from "vuefire";
 import Router from "vue-router";
 import Vuex from "vuex";
 import VueMaterial from "vue-material";
+import Feedback from "@/components/pages/Feedback";
 import Login from "@/components/pages/Login";
 import Signup from "@/components/pages/Signup";
 import Statistics from "@/components/pages/Statistics";
 import MemoHistory from "@/components/pages/MemoHistory";
 import MemoTrash from "@/components/pages/MemoTrash";
 import MemoModification from "@/components/pages/MemoModification";
+import Setting from "@/components/pages/Setting";
 import GlobalHeader from "@/components/organisms/GlobalHeader";
 import "firebase/firestore";
 
@@ -37,6 +39,12 @@ const router = new Router({
       props: true,
       children: [
         {
+          path: "Feedback",
+          name: "Feedback",
+          component: Feedback,
+          props: true
+        },
+        {
           path: "memo-history",
           name: "memoHistory",
           component: MemoHistory,
@@ -47,19 +55,13 @@ const router = new Router({
           name: "memoTrash",
           component: MemoTrash,
           props: true
-        }
-      ]
-    },
-    {
-      path: "/memo/modification/:memoId?",
-      name: "memoModification",
-      component: MemoModification
-    },
-    {
-      path: "/browse",
-      component: GlobalHeader,
-      props: true,
-      children: [
+        },
+        {
+          path: "setting",
+          name: "setting",
+          component: Setting,
+          props: true
+        },
         {
           path: "statistics",
           name: "statistics",
@@ -67,6 +69,11 @@ const router = new Router({
           props: true
         }
       ]
+    },
+    {
+      path: "/memo/modification/:memoId?",
+      name: "memoModification",
+      component: MemoModification
     },
     // catch all redirect
     {

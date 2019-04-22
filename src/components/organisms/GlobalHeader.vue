@@ -9,7 +9,7 @@
         </div>
         <div class="md-toolbar-row">
           <md-tabs class="md-primary" :md-active-tab="'tab-'+$route.name">
-            <md-tab id="tab-memo" md-label="書留め" :to="{name: 'memoHistory'}"></md-tab>
+            <md-tab id="tab-memoHistory" md-label="書留め" :to="{name: 'memoHistory'}"></md-tab>
             <md-tab id="tab-statistics" md-label="統計" :to="{name: 'statistics'}"></md-tab>
           </md-tabs>
         </div>
@@ -22,7 +22,7 @@
             <md-icon>delete</md-icon>
             <span class="md-list-item-text">ゴミ箱</span>
           </md-list-item>
-          <md-list-item>
+          <md-list-item @click="onSettingClick">
             <md-icon>settings</md-icon>
             <span class="md-list-item-text">設定</span>
           </md-list-item>
@@ -59,12 +59,6 @@ export default {
     onAvatarClick() {
       this.menuVisible = true;
     },
-    onTrashClick() {
-      this.menuVisible = false;
-      this.$router.push({
-        name: "memoTrash"
-      });
-    },
     onLogoutClick() {
       this.$store
         .dispatch("logout")
@@ -78,6 +72,18 @@ export default {
           // An error happened.
           console.error(error);
         });
+    },
+    onSettingClick() {
+      this.menuVisible = false;
+      this.$router.push({
+        name: "setting"
+      });
+    },
+    onTrashClick() {
+      this.menuVisible = false;
+      this.$router.push({
+        name: "memoTrash"
+      });
     }
   },
   created() {},
