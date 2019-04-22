@@ -26,7 +26,7 @@
             <md-icon>settings</md-icon>
             <span class="md-list-item-text">設定</span>
           </md-list-item>
-          <md-list-item>
+          <md-list-item @click="onSettingClick">
             <md-icon>textsms</md-icon>
             <span class="md-list-item-text">フィードバック</span>
           </md-list-item>
