@@ -3,13 +3,14 @@
     <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-primary">
         <div>
+          <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
           <md-button class="md-icon-button" @click="onAvatarClick">
             <md-icon>account_circle</md-icon>
           </md-button>
         </div>
         <div class="md-toolbar-row">
           <md-tabs class="md-primary" :md-active-tab="'tab-'+$route.name">
-            <md-tab id="tab-memoHistory" md-label="書留め" :to="{name: 'memoHistory'}"></md-tab>
+            <md-tab id="tab-memoHistory" md-label="メモ" :to="{name: 'memoHistory'}"></md-tab>
             <md-tab id="tab-statistics" md-label="統計" :to="{name: 'statistics'}"></md-tab>
           </md-tabs>
         </div>
@@ -30,7 +31,7 @@
             <md-icon>textsms</md-icon>
             <span class="md-list-item-text">フィードバック</span>
           </md-list-item>
-          <md-divider/>
+          <md-divider />
           <md-list-item @click="onLogoutClick">
             <md-icon>exit_to_app</md-icon>
             <span class="md-list-item-text">ログアウト</span>
@@ -45,10 +46,12 @@
 </template>
 
 <script>
+import Dialog from "@/components/molecules/Dialog";
 // import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      dialogContent: "ログアウトしますか？",
       menuVisible: false
     };
   },
@@ -60,6 +63,9 @@ export default {
       this.menuVisible = true;
     },
     onLogoutClick() {
+      this.$refs.dialog.openDialog();
+    },
+    confirmDialog() {
       this.$store
         .dispatch("logout")
         .then(() => {
@@ -87,7 +93,9 @@ export default {
     }
   },
   created() {},
-  components: {}
+  components: {
+    Dialog
+  }
 };
 </script>
 

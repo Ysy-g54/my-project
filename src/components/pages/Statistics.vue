@@ -2,7 +2,7 @@
   <div>
     <span class="md-title">カテゴリ比率</span>
     <PieChart :chartData="memoCategories"></PieChart>
-    <BarChart :chartData="memoCategories"></BarChart>
+    <!-- <BarChart :chartData="memoCategories"></BarChart> -->
   </div>
 </template>
 

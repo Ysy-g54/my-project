@@ -14,7 +14,7 @@
         :class="{ 'md-primary': memo.doneFlg }"
         @click="onDoneClick"
       >
-        <md-icon>thumb_up</md-icon>
+        <md-icon>done</md-icon>
       </md-button>
       <md-button
         v-if="!isDiscard"
