@@ -5,7 +5,8 @@
         <div>
           <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
           <md-button class="md-icon-button" @click="onAvatarClick">
-            <md-icon>account_circle</md-icon>
+            <img :src="loginUserPhoto" alt="People" />
+            <!-- <md-icon v-else>account_circle</md-icon> -->
           </md-button>
         </div>
         <div class="md-toolbar-row">
@@ -46,13 +47,15 @@
 </template>
 
 <script>
+import _ from "lodash";
 import Dialog from "@/components/molecules/Dialog";
 // import { mapActions } from "vuex";
 export default {
   data() {
     return {
       dialogContent: "ログアウトしますか？",
-      menuVisible: false
+      menuVisible: false,
+      loginUserPhoto: null
     };
   },
   methods: {
@@ -92,7 +95,14 @@ export default {
       });
     }
   },
-  created() {},
+  computed: {
+    isNotEmptyLoginUserPhoto() {
+      return !_.isEmpty(this.loginUserPhoto);
+    }
+  },
+  created() {
+    this.loginUserPhoto = this.$store.getters["getLoginUser"].photoUrl;
+  },
   components: {
     Dialog
   }
@@ -102,7 +112,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-app {
-  max-height: 615px;
+  max-height: 630px;
   border: 1px solid rgba(#000, 0.12);
 }
 
