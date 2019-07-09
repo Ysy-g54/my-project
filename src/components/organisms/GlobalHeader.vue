@@ -5,8 +5,8 @@
         <div>
           <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
           <md-button class="md-icon-button" @click="onAvatarClick">
-            <img :src="loginUserPhoto" alt="People" />
-            <!-- <md-icon v-else>account_circle</md-icon> -->
+            <img v-if="isNotEmptyLoginUserPhoto" :src="loginUserPhoto" alt="People" />
+            <md-icon v-else>account_circle</md-icon>
           </md-button>
         </div>
         <div class="md-toolbar-row">
@@ -54,8 +54,7 @@ export default {
   data() {
     return {
       dialogContent: "ログアウトしますか？",
-      menuVisible: false,
-      loginUserPhoto: null
+      menuVisible: false
     };
   },
   methods: {
@@ -98,11 +97,12 @@ export default {
   computed: {
     isNotEmptyLoginUserPhoto() {
       return !_.isEmpty(this.loginUserPhoto);
+    },
+    loginUserPhoto() {
+      return this.$store.getters["getLoginUser"].photoUrl;
     }
   },
-  created() {
-    this.loginUserPhoto = this.$store.getters["getLoginUser"].photoUrl;
-  },
+  created() {},
   components: {
     Dialog
   }

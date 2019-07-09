@@ -34,7 +34,6 @@ export default {
   watch: {},
   computed: {},
   created() {
-    console.error(this.$store.getters["getLoginUser"].photoUrl);
     this.database
       .collection("memo")
       .where("userId", "==", this.$store.getters["getLoginUser"].uid)
