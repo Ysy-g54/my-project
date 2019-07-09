@@ -15,7 +15,7 @@
       @on-favorite="onFavorite"
       @on-done="onDone"
     ></MemoCard>
-    <md-divider v-if="!isDiscard && favoriteMemos.length !== 0"/>
+    <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" />
     <MemoCard
       v-for="memo in memos"
       :key="memo.memoId"
@@ -28,7 +28,7 @@
     ></MemoCard>
   </div>
   <div v-else>
-    <md-empty-state md-icon="create" md-label="空っぽです。" md-description="追加したらここに表示されます。"></md-empty-state>
+    <md-empty-state md-icon="create" md-label="空っぽです。" md-description="メモを追加すると、ここに表示されます。"></md-empty-state>
   </div>
 </template>
 

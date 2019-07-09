@@ -5,12 +5,14 @@
         <div>
           <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
           <md-button class="md-icon-button" @click="onAvatarClick">
-            <img v-if="isNotEmptyLoginUserPhoto" :src="loginUserPhoto" alt="People" />
-            <md-icon v-else>account_circle</md-icon>
+            <md-avatar>
+              <img v-if="isNotEmptyLoginUserPhoto" :src="loginUserPhoto" alt="Avatar" />
+              <md-icon v-else>account_circle</md-icon>
+            </md-avatar>
           </md-button>
         </div>
         <div class="md-toolbar-row">
-          <md-tabs class="md-primary" :md-active-tab="'tab-'+$route.name">
+          <md-tabs class="md-primary" :md-active-tab="'tab-' + $route.name">
             <md-tab id="tab-memoHistory" md-label="メモ" :to="{name: 'memoHistory'}"></md-tab>
             <md-tab id="tab-statistics" md-label="統計" :to="{name: 'statistics'}"></md-tab>
           </md-tabs>
