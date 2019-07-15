@@ -2,7 +2,7 @@
   <div class="page-container">
     <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-primary">
-        <div>
+        <div class="md-toolbar-row">
           <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
           <md-button class="md-icon-button" @click="onAvatarClick">
             <md-avatar>
@@ -10,10 +10,10 @@
               <md-icon v-else>account_circle</md-icon>
             </md-avatar>
           </md-button>
-          <!-- <md-field md-clearable>
+          <md-field md-clearable>
             <md-icon>search</md-icon>
-            <md-input v-model="q" placeholder="検索"></md-input>
-          </md-field>-->
+            <md-input v-model="q" placeholder="search(comming Soon...)" readonly></md-input>
+          </md-field>
         </div>
         <div class="md-toolbar-row">
           <md-tabs class="md-primary" :md-active-tab="'tab-' + $route.name">
@@ -46,7 +46,7 @@
         </md-list>
       </md-app-drawer>
       <md-app-content>
-        <router-view></router-view>
+        <router-view :keyWord="q"></router-view>
       </md-app-content>
     </md-app>
   </div>
@@ -65,9 +65,6 @@ export default {
     };
   },
   methods: {
-    // ...mapActions("Login", {
-    //   logout: "logout"
-    // }),
     onAvatarClick() {
       this.menuVisible = true;
     },
@@ -108,6 +105,9 @@ export default {
     loginUserPhoto() {
       return this.$store.getters["getLoginUser"].photoUrl;
     }
+  },
+  watch: {
+    q() {}
   },
   created() {},
   components: {

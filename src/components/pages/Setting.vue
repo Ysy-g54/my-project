@@ -10,6 +10,7 @@ export default {
     return {};
   },
   methods: {},
+  props: {},
   created() {},
   components: {}
 };

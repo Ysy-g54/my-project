@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MemoHistory/>
+    <MemoHistory />
   </div>
 </template>
 
@@ -12,6 +12,9 @@ export default {
   },
   methods: {},
   watch: {},
+  props: {
+    keyWord: { type: String, default: null }
+  },
   computed: {},
   created() {},
   components: {
