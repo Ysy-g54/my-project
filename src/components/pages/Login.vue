@@ -21,10 +21,11 @@
         </div>
         <div class="md-layout md-alignment-center">OR</div>
         <div class="md-layout md-alignment-center">
-          <md-button
-            class="md-layout-item md-dense md-raised"
-            @click="onGoogleLoginClick"
-          >googleアカウントでログイン</md-button>
+          <md-button class="md-layout-item md-dense md-raised" @click="onGoogleLoginClick">
+            <md-icon>
+              <img :src="require('@/assets/google.png')" />
+            </md-icon>googleアカウントでログイン
+          </md-button>
         </div>
         <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
       </md-app-content>

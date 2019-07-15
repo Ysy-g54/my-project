@@ -10,6 +10,10 @@
               <md-icon v-else>account_circle</md-icon>
             </md-avatar>
           </md-button>
+          <!-- <md-field md-clearable>
+            <md-icon>search</md-icon>
+            <md-input v-model="q" placeholder="検索"></md-input>
+          </md-field>-->
         </div>
         <div class="md-toolbar-row">
           <md-tabs class="md-primary" :md-active-tab="'tab-' + $route.name">
@@ -56,7 +60,8 @@ export default {
   data() {
     return {
       dialogContent: "ログアウトしますか？",
-      menuVisible: false
+      menuVisible: false,
+      q: null
     };
   },
   methods: {
