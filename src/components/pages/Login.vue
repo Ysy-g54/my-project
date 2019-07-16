@@ -5,8 +5,8 @@
         <div class="md-toolbar-section-start">
           <span class="md-title">memo-list</span>
         </div>
-        <div class="md-toolbar-section-end" @click="onSignupClick">
-          <md-button>アカウント作成</md-button>
+        <div class="md-toolbar-section-end">
+          <md-button @click="onSignupClick">アカウント作成</md-button>
         </div>
       </md-app-toolbar>
       <md-app-content>
@@ -48,9 +48,6 @@ export default {
     };
   },
   methods: {
-    // ...mapActions("Login", {
-    //   login: "updateLoginUser"
-    // }),
     onSignupClick() {
       this.$router.push({
         name: "signup"
