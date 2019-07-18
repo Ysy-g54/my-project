@@ -12,7 +12,7 @@
           </md-button>
           <md-field md-clearable>
             <md-icon>search</md-icon>
-            <md-input v-model="q" placeholder="search(comming Soon...)" readonly></md-input>
+            <md-input v-model="q" placeholder="検索(機能は未完成)"></md-input>
           </md-field>
         </div>
         <div class="md-toolbar-row">
@@ -25,6 +25,14 @@
 
       <md-app-drawer :md-active.sync="menuVisible">
         <md-toolbar class="md-transparent" md-elevation="0">memo-list</md-toolbar>
+        <div>
+          <md-avatar>
+            <img v-if="isNotEmptyLoginUserPhoto" :src="loginUserPhoto" alt="Avatar" />
+            <md-icon v-else>account_circle</md-icon>
+          </md-avatar>
+          <div class="md-body-1">{{ $store.getters["getLoginUser"].name }}</div>
+          <div class="md-body-1">{{ $store.getters["getLoginUser"].mailAddress }}</div>
+        </div>
         <md-list>
           <md-list-item @click="onTrashClick">
             <md-icon>delete</md-icon>
@@ -126,5 +134,9 @@ export default {
 .md-drawer {
   width: 230px;
   max-width: calc(100vw - 125px);
+}
+
+.md-field.md-theme-default > .md-icon:after {
+  background-color: #000;
 }
 </style>
