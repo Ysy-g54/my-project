@@ -8,6 +8,7 @@ import Login from '@/components/pages/Login';
 import Signup from '@/components/pages/Signup';
 import Statistics from '@/components/pages/Statistics';
 import MemoHistory from '@/components/pages/MemoHistory';
+import MemoSearchResult from '@/components/pages/MemoSearchResult';
 import MemoTrash from '@/components/pages/MemoTrash';
 import MemoModification from '@/components/pages/MemoModification';
 import Setting from '@/components/pages/Setting';
@@ -66,6 +67,12 @@ const router = new Router({
 					path: 'statistics',
 					name: 'statistics',
 					component: Statistics,
+					props: true
+				},
+				{
+					path: 'memo/search/:q?',
+					name: 'memoSearch',
+					component: MemoSearchResult,
 					props: true
 				}
 			]

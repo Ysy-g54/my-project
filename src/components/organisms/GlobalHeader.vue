@@ -12,7 +12,7 @@
           </md-button>
           <md-field md-clearable>
             <md-icon>search</md-icon>
-            <md-input v-model="q" placeholder="検索(機能は未完成)"></md-input>
+            <md-input v-model="q" placeholder="検索(機能は未完成)" readonly></md-input>
           </md-field>
         </div>
         <div class="md-toolbar-row">
@@ -54,7 +54,7 @@
         </md-list>
       </md-app-drawer>
       <md-app-content>
-        <router-view :keyWord="q"></router-view>
+        <router-view></router-view>
       </md-app-content>
     </md-app>
   </div>
@@ -115,7 +115,13 @@ export default {
     }
   },
   watch: {
-    q() {}
+    q() {
+      let keyWord = this.q;
+      this.$router.push({
+        name: "memoSearch",
+        params: { q: keyWord }
+      });
+    }
   },
   created() {},
   components: {
