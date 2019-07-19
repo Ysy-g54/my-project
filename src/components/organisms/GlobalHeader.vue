@@ -12,7 +12,7 @@
           </md-button>
           <md-field md-clearable>
             <md-icon>search</md-icon>
-            <md-input v-model="q" placeholder="検索(機能は未完成)" readonly></md-input>
+            <md-input v-model="q" placeholder="検索(完全一致のみ可能)"></md-input>
           </md-field>
         </div>
         <div class="md-toolbar-row">
@@ -23,7 +23,7 @@
         </div>
       </md-app-toolbar>
 
-      <md-app-drawer :md-active.sync="menuVisible">
+      <md-app-drawer :md-active.sync="menuVisible" class="md-scrollbar">
         <md-toolbar class="md-transparent" md-elevation="0">memo-list</md-toolbar>
         <div>
           <md-avatar>

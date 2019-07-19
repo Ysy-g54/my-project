@@ -1,11 +1,11 @@
 <template>
   <div>
-    <MemoHistory />
+    <MemoSearchResult />
   </div>
 </template>
 
 <script>
-import MemoHistory from "@/components/organisms/MemoHistory";
+import MemoSearchResult from "@/components/organisms/MemoSearchResult";
 export default {
   data() {
     return {};
@@ -16,7 +16,7 @@ export default {
   computed: {},
   created() {},
   components: {
-    MemoHistory
+    MemoSearchResult
   }
 };
 </script>
