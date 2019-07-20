@@ -40,7 +40,7 @@
           </md-list-item>
           <md-list-item @click="onSettingClick">
             <md-icon>settings</md-icon>
-            <span class="md-list-item-text">設定</span>
+            <span class="md-list-item-text">アカウント設定</span>
           </md-list-item>
           <md-list-item @click="onSettingClick">
             <md-icon>textsms</md-icon>

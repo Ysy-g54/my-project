@@ -4,12 +4,19 @@
       <BackHeader :title="'アカウントを作成'" @save-success="saveSuccess"></BackHeader>
     </div>
     <div slot="main">
-      <md-field md-clearable>
-        <md-input v-model="mailAddress" placeholder="メールアドレス"></md-input>
-      </md-field>
-      <md-field>
-        <md-input v-model="password" placeholder="パスワード" type="password"></md-input>
-      </md-field>
+      <md-app>
+        <md-app-content>
+          <md-field md-clearable>
+            <md-input v-model="userName" placeholder="アカウント名"></md-input>
+          </md-field>
+          <md-field md-clearable>
+            <md-input v-model="mailAddress" placeholder="メールアドレス"></md-input>
+          </md-field>
+          <md-field>
+            <md-input v-model="password" placeholder="パスワード" type="password"></md-input>
+          </md-field>
+        </md-app-content>
+      </md-app>
     </div>
     <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
   </Header>
@@ -22,6 +29,7 @@ import firebase from "firebase";
 export default {
   data() {
     return {
+      userName: "",
       mailAddress: "",
       password: "",
       message: "",
@@ -34,9 +42,16 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.mailAddress, this.password)
         .then(() => {
-          this.$router.push({
-            name: "memoHistory"
-          });
+          let signupUser = firebase.auth().currentUser;
+          signupUser
+            .updateProfile({
+              displayName: this.userName
+            })
+            .then(() => {
+              this.$router.push({
+                name: "memoHistory"
+              });
+            });
         })
         .catch(() => {
           this.showFailureMessage();
