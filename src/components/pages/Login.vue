@@ -79,12 +79,16 @@ export default {
             // This gives you a Google Access Token. You can use it to access the Google API.
             // let token = result.credential.accessToken;
           }
-          this.$router.push({
-            name: "memoHistory"
-          });
-        })
-        .catch(() => {
-          this.showFailureMessage();
+          this.$store
+            .dispatch("findLoginUser")
+            .then(() => {
+              this.$router.push({
+                name: "memoHistory"
+              });
+            })
+            .catch(() => {
+              this.showFailureMessage();
+            });
         });
     },
     showFailureMessage() {

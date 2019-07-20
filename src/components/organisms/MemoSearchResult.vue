@@ -31,9 +31,6 @@ export default {
         .collection("memo")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
         .where("memo", "==", q)
-        // .orderBy("memo")
-        // .startAt(`\uf8ff${q}`)
-        // .endAt(`${q}\uf8ff`)
         .get()
         .then(querySnapshot => {
           let memosSnapshot = [];

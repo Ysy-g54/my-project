@@ -12,7 +12,7 @@
           </md-button>
           <md-field md-clearable>
             <md-icon>search</md-icon>
-            <md-input v-model="q" placeholder="検索(完全一致のみ可能)"></md-input>
+            <md-input v-model="q" placeholder="完全一致検索"></md-input>
           </md-field>
         </div>
         <div class="md-toolbar-row">
@@ -157,6 +157,6 @@ export default {
 }
 
 .md-field.md-theme-default > .md-icon:after {
-  background-color: rgba(0, 0, 0, 0.42);
+  display: none;
 }
 </style>
