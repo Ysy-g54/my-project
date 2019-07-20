@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showFlg">
+  <div v-if="isNotEmptyResult">
     <MemoCard
       v-for="memo in resultMemos"
       :key="memo.memoId"
@@ -10,10 +10,14 @@
       @on-done="onDone"
     ></MemoCard>
   </div>
+  <div v-else>
+    <md-empty-state md-icon="search" md-label="検索結果0件です。" md-description="検索条件を変えて再度検索して下さい。"></md-empty-state>
+  </div>
 </template>
 
 <script>
 import _ from "lodash";
+import { categories } from "../../constants";
 import firebase from "firebase";
 import "firebase/firestore";
 import MemoCard from "@/components/organisms/MemoCard";
@@ -22,7 +26,7 @@ export default {
     return {
       database: firebase.firestore(),
       resultMemos: [],
-      showFlg: false
+      isNotEmptyResult: false
     };
   },
   methods: {
@@ -30,7 +34,6 @@ export default {
       this.database
         .collection("memo")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-        .where("memo", "==", q)
         .get()
         .then(querySnapshot => {
           let memosSnapshot = [];
@@ -38,7 +41,13 @@ export default {
             let memoSnapshot = _.set(document.data(), "memoId", document.id);
             memosSnapshot.push(memoSnapshot);
           });
-          this.resultMemos = memosSnapshot;
+          // TODO 入力文字からカテゴリ名を検索し、それに紐づくカテゴリIDで検索する。
+          //   let filterCategories = categories
+          //     .filter(category => category.categoryNm.includes(q))
+          //     .map(filterCategory => filterCategory["categoryNm"]);
+          this.resultMemos = memosSnapshot.filter(resultMemo =>
+            resultMemo.memo.includes(q)
+          );
         });
     },
     onEditClick(memoId) {
@@ -136,7 +145,7 @@ export default {
     },
     resultMemos() {
       if (!_.isEmpty(this.resultMemos)) {
-        this.showFlg = true;
+        this.isNotEmptyResult = true;
       }
     }
   },

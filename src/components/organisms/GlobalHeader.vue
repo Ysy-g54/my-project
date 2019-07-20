@@ -12,7 +12,7 @@
           </md-button>
           <md-field md-clearable>
             <md-icon>search</md-icon>
-            <md-input v-model="q" placeholder="完全一致検索"></md-input>
+            <md-input v-model="q" placeholder="メモ内容で検索"></md-input>
           </md-field>
         </div>
         <div class="md-toolbar-row">

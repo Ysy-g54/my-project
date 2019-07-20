@@ -1,7 +1,7 @@
 <template>
   <div>
     <md-field>
-      <label>アクション・メモ</label>
+      <label>メモ内容</label>
       <md-textarea v-model="memo"></md-textarea>
     </md-field>
     <div class="md-layout-item">
