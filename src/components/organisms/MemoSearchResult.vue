@@ -129,6 +129,10 @@ export default {
       async handler(q) {
         if (this.$route.params.q !== "") {
           await this.searchMemo(this.$route.params.q);
+        } else {
+          this.$router.push({
+            name: "memoHistory"
+          });
         }
       },
       immediate: true

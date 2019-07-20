@@ -121,6 +121,20 @@ export default {
         name: "memoSearch",
         params: { q: keyWord }
       });
+    },
+    "$route.name"() {
+      let displayControl = "";
+      if (
+        this.$route.name === "memoHistory" ||
+        this.$route.name === "statistics"
+      ) {
+        displayControl = "visible";
+      } else {
+        displayControl = "hidden";
+      }
+      document.querySelector(
+        ".md-tabs.md-theme-default.md-primary .md-tabs-indicator"
+      ).style.visibility = displayControl;
     }
   },
   created() {},
@@ -133,7 +147,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-app {
-  max-height: 630px;
+  height: 620px;
   border: 1px solid rgba(#000, 0.12);
 }
 
@@ -143,6 +157,6 @@ export default {
 }
 
 .md-field.md-theme-default > .md-icon:after {
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.42);
 }
 </style>
