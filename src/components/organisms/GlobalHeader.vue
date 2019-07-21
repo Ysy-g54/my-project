@@ -24,7 +24,7 @@
       </md-app-toolbar>
 
       <md-app-drawer :md-active.sync="menuVisible" class="md-scrollbar">
-        <md-toolbar class="md-transparent" md-elevation="0">memo-list</md-toolbar>
+        <md-toolbar class="md-transparent" md-elevation="0">memoList</md-toolbar>
         <div>
           <md-avatar>
             <img v-if="isNotEmptyLoginUserPhoto" :src="loginUserPhoto" alt="Avatar" />

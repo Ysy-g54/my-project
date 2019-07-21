@@ -14,8 +14,10 @@ import MemoModification from '@/components/pages/MemoModification';
 import Setting from '@/components/pages/Setting';
 import GlobalHeader from '@/components/organisms/GlobalHeader';
 import firebase from 'firebase';
+import Mixin from '../util/mixin';
 
 Vue.use(firestorePlugin);
+Vue.mixin(Mixin);
 Vue.use(Router);
 Vue.use(Vuex);
 Vue.use(VueMaterial);
@@ -26,13 +28,13 @@ const router = new Router({
 			path: '/login',
 			name: 'login',
 			component: Login,
-			meta: { isPublic: true }
+			meta: { isPublic: true, title: 'ログイン' }
 		},
 		{
 			path: '/signup',
 			name: 'signup',
 			component: Signup,
-			meta: { isPublic: true }
+			meta: { isPublic: true, title: 'サインアップ' }
 		},
 		{
 			path: '/browse',
@@ -43,17 +45,20 @@ const router = new Router({
 					path: 'Feedback',
 					name: 'Feedback',
 					component: Feedback,
+					meta: { title: 'サインアップ' },
 					props: true
 				},
 				{
 					path: 'memo-history',
 					name: 'memoHistory',
 					component: MemoHistory,
+					meta: { title: 'メモ一覧' },
 					props: true
 				},
 				{
 					path: 'memo-trash',
 					name: 'memoTrash',
+					meta: { title: 'ゴミ箱' },
 					component: MemoTrash,
 					props: true
 				},
@@ -61,24 +66,28 @@ const router = new Router({
 					path: 'setting',
 					name: 'setting',
 					component: Setting,
+					meta: { title: '設定' },
 					props: true
 				},
 				{
 					path: 'feedback',
 					name: 'feedback',
 					component: Feedback,
+					meta: { title: 'フィードバック' },
 					props: true
 				},
 				{
 					path: 'statistics',
 					name: 'statistics',
 					component: Statistics,
+					meta: { title: '統計' },
 					props: true
 				},
 				{
 					path: 'memo/search/:q?',
 					name: 'memoSearch',
 					component: MemoSearchResult,
+					meta: { title: 'メモ検索結果' },
 					props: true
 				}
 			]
@@ -86,7 +95,8 @@ const router = new Router({
 		{
 			path: '/memo/modification/:memoId?',
 			name: 'memoModification',
-			component: MemoModification
+			component: MemoModification,
+			meta: { title: 'メモを更新' }
 		},
 		// catch all redirect
 		{

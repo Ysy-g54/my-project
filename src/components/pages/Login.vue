@@ -3,7 +3,7 @@
     <md-app>
       <md-app-toolbar class="md-primary">
         <div class="md-toolbar-section-start">
-          <span class="md-title">memo-list</span>
+          <span class="md-title">memoList</span>
         </div>
         <div class="md-toolbar-section-end">
           <md-button @click="onSignupClick">アカウント作成</md-button>
