@@ -64,6 +64,12 @@ const router = new Router({
 					props: true
 				},
 				{
+					path: 'feedback',
+					name: 'feedback',
+					component: Feedback,
+					props: true
+				},
+				{
 					path: 'statistics',
 					name: 'statistics',
 					component: Statistics,

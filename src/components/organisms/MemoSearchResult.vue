@@ -25,6 +25,7 @@ export default {
   data() {
     return {
       database: firebase.firestore(),
+      memos: [],
       resultMemos: [],
       isNotEmptyResult: false
     };
@@ -36,19 +37,22 @@ export default {
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
         .get()
         .then(querySnapshot => {
-          let memosSnapshot = [];
           querySnapshot.forEach(document => {
             let memoSnapshot = _.set(document.data(), "memoId", document.id);
-            memosSnapshot.push(memoSnapshot);
+            this.memos.push(memoSnapshot);
           });
-          // TODO 入力文字からカテゴリ名を検索し、それに紐づくカテゴリIDで検索する。
-          //   let filterCategories = categories
-          //     .filter(category => category.categoryNm.includes(q))
-          //     .map(filterCategory => filterCategory["categoryNm"]);
-          this.resultMemos = memosSnapshot.filter(resultMemo =>
-            resultMemo.memo.includes(q)
-          );
         });
+    },
+    filterMemo(q) {
+      let filterCategoryIds = categories
+        .filter(category => category.categoryNm.includes(q))
+        .map(filterCategory => filterCategory["categoryId"]);
+      this.resultMemos = [];
+      this.resultMemos = this.memos.filter(
+        memo =>
+          memo.memo.includes(q) ||
+          filterCategoryIds.find(categoryId => categoryId === memo.categoryId)
+      );
     },
     onEditClick(memoId) {
       if (this.isDiscard) {
@@ -134,7 +138,7 @@ export default {
     "$route.params.q": {
       async handler(q) {
         if (this.$route.params.q !== "") {
-          await this.searchMemo(this.$route.params.q);
+          await this.filterMemo(this.$route.params.q);
         } else {
           this.$router.push({
             name: "memoHistory"
@@ -144,14 +148,18 @@ export default {
       immediate: true
     },
     resultMemos() {
-      if (!_.isEmpty(this.resultMemos)) {
+      if (_.isEmpty(this.resultMemos)) {
+        this.isNotEmptyResult = false;
+      } else {
         this.isNotEmptyResult = true;
       }
     }
   },
   props: {},
   computed: {},
-  created() {},
+  created() {
+    this.searchMemo();
+  },
   components: {
     MemoCard
   }

@@ -48,8 +48,10 @@ export default {
               displayName: this.userName
             })
             .then(() => {
-              this.$router.push({
-                name: "memoHistory"
+              this.$store.dispatch("findLoginUser").then(() => {
+                this.$router.push({
+                  name: "memoHistory"
+                });
               });
             });
         })

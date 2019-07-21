@@ -37,7 +37,6 @@
 import _ from "lodash";
 import Snackbar from "@/components/atoms/Snackbar";
 import firebase from "firebase";
-// import { mapActions } from "vuex";
 export default {
   data() {
     return {

@@ -12,7 +12,7 @@
           </md-button>
           <md-field md-clearable>
             <md-icon>search</md-icon>
-            <md-input v-model="q" placeholder="メモ内容で検索"></md-input>
+            <md-input v-model="q" placeholder="メモを検索"></md-input>
           </md-field>
         </div>
         <div class="md-toolbar-row">
@@ -40,9 +40,9 @@
           </md-list-item>
           <md-list-item @click="onSettingClick">
             <md-icon>settings</md-icon>
-            <span class="md-list-item-text">アカウント設定</span>
+            <span class="md-list-item-text">設定</span>
           </md-list-item>
-          <md-list-item @click="onSettingClick">
+          <md-list-item @click="onFeedbackClick">
             <md-icon>textsms</md-icon>
             <span class="md-list-item-text">フィードバック</span>
           </md-list-item>
@@ -63,7 +63,6 @@
 <script>
 import _ from "lodash";
 import Dialog from "@/components/molecules/Dialog";
-// import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -93,16 +92,22 @@ export default {
           console.error(error);
         });
     },
+    onTrashClick() {
+      this.menuVisible = false;
+      this.$router.push({
+        name: "memoTrash"
+      });
+    },
     onSettingClick() {
       this.menuVisible = false;
       this.$router.push({
         name: "setting"
       });
     },
-    onTrashClick() {
+    onFeedbackClick() {
       this.menuVisible = false;
       this.$router.push({
-        name: "memoTrash"
+        name: "feedback"
       });
     }
   },
