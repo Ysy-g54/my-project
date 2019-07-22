@@ -12,6 +12,7 @@
         </md-avatar>
         <md-icon>chevron_right</md-icon>
       </md-list-item>
+      <md-divider></md-divider>
       <md-list-item>
         <div class="md-list-item-text">
           <span>{{ $store.getters["getLoginUser"].name }}</span>
