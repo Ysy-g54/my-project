@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <md-empty-state md-icon="hourglass_empty" md-label="Coming Soon..."></md-empty-state>
-  </div>
+  <Profile></Profile>
 </template>
 
 <script>
+import Profile from "@/components/organisms/Profile";
 export default {
   data() {
     return {};
@@ -12,7 +11,9 @@ export default {
   methods: {},
   props: {},
   created() {},
-  components: {}
+  components: {
+    Profile
+  }
 };
 </script>
 
