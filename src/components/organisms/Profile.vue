@@ -13,7 +13,7 @@
         <md-icon>chevron_right</md-icon>
       </md-list-item>
       <md-divider></md-divider>
-      <md-list-item>
+      <md-list-item @click="onItemClick('name')">
         <div class="md-list-item-text">
           <span>{{ $store.getters["getLoginUser"].name }}</span>
           <span>名前</span>
@@ -21,7 +21,7 @@
         <md-icon>chevron_right</md-icon>
       </md-list-item>
       <md-divider></md-divider>
-      <md-list-item>
+      <md-list-item @click="onItemClick('mailAddress')">
         <div class="md-list-item-text">
           <span>{{ $store.getters["getLoginUser"].mailAddress }}</span>
           <span>メールアドレス</span>
@@ -39,7 +39,14 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    onItemClick(name) {
+      this.$router.push({
+        name: "profileModification",
+        params: { name }
+      });
+    }
+  },
   computed: {
     isNotEmptyLoginUserPhoto() {
       return !_.isEmpty(this.loginUserPhoto);

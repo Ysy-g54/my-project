@@ -1,13 +1,18 @@
 <template>
   <md-card>
     <md-card-content>
-      <div class="text-pre-wrap">{{ memo.memo }}</div>
+      <div v-if="isTextHeightFive" class="text-pre-wrap">{{ memo.memo }}</div>
       <div>カテゴリ：{{ formatCategory(memo.categoryId) }}</div>
       <div>
         <span class="md-subhead">作成日：{{ formatDate(memo.insertDateTime) }}</span>
       </div>
     </md-card-content>
     <md-card-actions>
+      <md-card-expand-trigger v-if="!isTextHeightFive">
+        <md-button class="md-icon-button">
+          <md-icon>keyboard_arrow_down</md-icon>
+        </md-button>
+      </md-card-expand-trigger>
       <md-button
         v-if="!isDiscard && memo.categoryId === '1'"
         class="md-icon-button"
@@ -39,6 +44,9 @@
         </md-menu-content>
       </md-menu>
     </md-card-actions>
+    <md-card-expand-content>
+      <md-card-content>{{ memo.memo }}</md-card-content>
+    </md-card-expand-content>
   </md-card>
 </template>
 
@@ -81,6 +89,11 @@ export default {
     },
     onFavoriteClick() {
       this.$emit("on-favorite", this.memo);
+    }
+  },
+  computed: {
+    isTextHeightFive() {
+      return this.memo.memo.split("\n").length <= 5;
     }
   },
   props: {

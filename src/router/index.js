@@ -11,6 +11,7 @@ import MemoHistory from '@/components/pages/MemoHistory';
 import MemoSearchResult from '@/components/pages/MemoSearchResult';
 import MemoTrash from '@/components/pages/MemoTrash';
 import MemoModification from '@/components/pages/MemoModification';
+import ProfileModification from '@/components/pages/ProfileModification';
 import Setting from '@/components/pages/Setting';
 import GlobalHeader from '@/components/organisms/GlobalHeader';
 import firebase from 'firebase';
@@ -67,6 +68,13 @@ const router = new Router({
 					name: 'setting',
 					component: Setting,
 					meta: { title: '設定' },
+					props: true
+				},
+				{
+					path: 'profile/modification/:name',
+					name: 'profileModification',
+					component: ProfileModification,
+					meta: { title: 'プロフィール設定' },
 					props: true
 				},
 				{
