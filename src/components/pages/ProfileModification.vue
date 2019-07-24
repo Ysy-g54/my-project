@@ -4,7 +4,7 @@
       <BackHeader :title="'編集'"></BackHeader>
     </div>
     <div slot="main">
-	<ProfileModification></ProfileModification>
+      <ProfileModification></ProfileModification>
     </div>
   </Header>
 </template>
@@ -17,12 +17,11 @@ export default {
   data() {
     return {};
   },
-  methods: {
-  },
+  methods: {},
   props: {},
   created() {},
   components: {
-	BackHeader,
+    BackHeader,
     Header,
     ProfileModification
   }

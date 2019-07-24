@@ -2,7 +2,7 @@
   <div>
     <md-dialog-confirm
       :md-active.sync="active"
-      :md-content="content"
+      :md-title="title"
       md-confirm-text="OK"
       md-cancel-text="キャンセル"
       @md-confirm="onConfirmClick"
@@ -16,13 +16,9 @@ export default {
     active: false
   }),
   props: {
-    content: { type: String, default: "" }
+    title: { type: String, default: "" }
   },
-  watch: {
-    message() {
-      this.content = this.message;
-    }
-  },
+  watch: {},
   computed: {},
   methods: {
     onConfirmClick() {

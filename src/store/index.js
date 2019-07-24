@@ -5,7 +5,7 @@ const store = new Vuex.Store({
 	namespaced: true,
 	state: {
 		loginUser: {
-			name: '',
+			displayName: '',
 			mailAddress: '',
 			photoUrl: '',
 			uid: '',
@@ -16,7 +16,7 @@ const store = new Vuex.Store({
 	mutations: {
 		setLoginUser(state) {
 			firebase.auth().onAuthStateChanged(loginUser => {
-				state.loginUser.name = loginUser.displayName || '';
+				state.loginUser.displayName = loginUser.displayName || '';
 				state.loginUser.mailAddress = loginUser.email || '';
 				state.loginUser.photoUrl = loginUser.photoURL || '';
 				state.loginUser.uid = loginUser.uid || '';
@@ -24,7 +24,7 @@ const store = new Vuex.Store({
 			});
 		},
 		logout(state) {
-			state.loginUser.name = '';
+			state.loginUser.displayName = '';
 			state.loginUser.mailAddress = '';
 			state.loginUser.photoUrl = '';
 			state.loginUser.uid = '';

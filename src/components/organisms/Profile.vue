@@ -13,9 +13,9 @@
         <md-icon>chevron_right</md-icon>
       </md-list-item>
       <md-divider></md-divider>
-      <md-list-item @click="onItemClick('name')">
+      <md-list-item @click="onItemClick('displayName')">
         <div class="md-list-item-text">
-          <span>{{ $store.getters["getLoginUser"].name }}</span>
+          <span>{{ $store.getters["getLoginUser"].displayName }}</span>
           <span>名前</span>
         </div>
         <md-icon>chevron_right</md-icon>

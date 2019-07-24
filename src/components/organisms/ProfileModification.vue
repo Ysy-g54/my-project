@@ -1,5 +1,11 @@
 <template>
   <div>
+    <md-dialog-prompt
+      :md-active.sync="isActiveDialog"
+      v-model="editItem"
+      :md-title="getTarget"
+      @md-confirm="updateItem"
+    />
     <md-list class="md-double-line">
       <md-list-item>
         <div class="md-list-item-text">
@@ -7,7 +13,7 @@
           <span>{{ getTarget }}</span>
         </div>
         <md-button class="md-icon-button" @click="editMode">
-            <md-icon>edit</md-icon>
+          <md-icon>edit</md-icon>
         </md-button>
       </md-list-item>
     </md-list>
@@ -15,30 +21,62 @@
 </template>
 
 <script>
+import firebase from "firebase";
+import "firebase/firestore";
 export default {
   data() {
     return {
-        itemNms: [{target: 'name', value: '名前'}, {target: 'mailAddress', value: 'メールアドレス'}]
+      database: firebase.firestore(),
+      editItem: null,
+      isActiveDialog: false,
+      itemNms: [
+        { target: "displayName", value: "名前" },
+        { target: "mailAddress", value: "メールアドレス" }
+      ]
     };
   },
   methods: {
-      editMode() {
-      }
+    editMode() {
+      this.isActiveDialog = true;
+    },
+    updateItem() {
+      let currentUser = firebase.auth().currentUser;
+
+      (!(this.$route.params.target === "mailAddress")
+        ? currentUser.updateProfile({
+            displayName:
+              this.$route.params.target === "displayName"
+                ? this.editItem
+                : this.$store.getters["getLoginUser"].displayName,
+            photoURL:
+              this.$route.params.target === "photoURL"
+                ? this.editItem
+                : this.$store.getters["getLoginUser"].photoURL
+          })
+        : currentUser.updateEmail(this.editItem)
+      ).then(() => {
+        this.$store.dispatch("findLoginUser").then(() => {
+          this.$router.back();
+        });
+      });
+    }
   },
-  watch: {
-  },
+  watch: {},
   computed: {
-      getValue() {
-          return this.$store.getters["getLoginUser"][this.$route.params.target];
-      },
-      getTarget() {
-          return this.itemNms.filter(itemNm => this.$route.params.target === itemNm.target).map(filterItem => filterItem.value).join();
-      }
+    getValue() {
+      return this.$store.getters["getLoginUser"][this.$route.params.target];
+    },
+    getTarget() {
+      return this.itemNms
+        .filter(itemNm => this.$route.params.target === itemNm.target)
+        .map(filterItem => filterItem.value)
+        .join();
+    }
   },
-    props: {
-  },
+  props: {},
   mounted() {},
   created() {
+    this.editItem = this.getValue;
   },
   components: {}
 };

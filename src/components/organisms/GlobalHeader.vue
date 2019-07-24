@@ -3,7 +3,7 @@
     <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-primary">
         <div class="md-toolbar-row">
-          <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
+          <Dialog ref="dialog" :title="title" @confirm-dialog="confirmDialog"></Dialog>
           <md-button class="md-icon-button" @click="onAvatarClick">
             <md-avatar>
               <img v-if="isNotEmptyLoginUserPhoto" :src="loginUserPhoto" alt="Avatar" />
@@ -30,7 +30,7 @@
             <img v-if="isNotEmptyLoginUserPhoto" :src="loginUserPhoto" alt="Avatar" />
             <md-icon v-else>account_circle</md-icon>
           </md-avatar>
-          <div class="md-body-1">{{ $store.getters["getLoginUser"].name }}</div>
+          <div class="md-body-1">{{ $store.getters["getLoginUser"].displayName }}</div>
           <div class="md-body-1">{{ $store.getters["getLoginUser"].mailAddress }}</div>
         </div>
         <md-list>
@@ -66,7 +66,7 @@ import Dialog from "@/components/molecules/Dialog";
 export default {
   data() {
     return {
-      dialogContent: "ログアウトしますか？",
+      title: "ログアウトしますか？",
       menuVisible: false,
       q: null
     };

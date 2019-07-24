@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Dialog ref="dialog" :content="dialogContent" @confirm-dialog="confirmDialog"></Dialog>
+    <Dialog ref="dialog" :title="title" @confirm-dialog="confirmDialog"></Dialog>
     <span class="md-title">ゴミ箱</span>
     <div>
       <Memo
@@ -26,7 +26,7 @@ export default {
       button: "",
       duration: 0,
       isDialogActive: false,
-      dialogContent: "完全に削除してもいいですか？"
+      title: "完全に削除してもいいですか？"
     };
   },
   methods: {
