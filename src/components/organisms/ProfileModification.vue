@@ -3,10 +3,12 @@
     <md-list class="md-double-line">
       <md-list-item>
         <div class="md-list-item-text">
-          <span>{{ $store.getters["getLoginUser"].name }}</span>
-          <span>名前</span>
+          <span>{{ getValue }}</span>
+          <span>{{ getTarget }}</span>
         </div>
-        <md-icon>edit</md-icon>
+        <md-button class="md-icon-button" @click="editMode">
+            <md-icon>edit</md-icon>
+        </md-button>
       </md-list-item>
     </md-list>
   </div>
@@ -15,12 +17,29 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+        itemNms: [{target: 'name', value: '名前'}, {target: 'mailAddress', value: 'メールアドレス'}]
+    };
   },
-  methods: {},
-  computed: {},
+  methods: {
+      editMode() {
+      }
+  },
+  watch: {
+  },
+  computed: {
+      getValue() {
+          return this.$store.getters["getLoginUser"][this.$route.params.target];
+      },
+      getTarget() {
+          return this.itemNms.filter(itemNm => this.$route.params.target === itemNm.target).map(filterItem => filterItem.value).join();
+      }
+  },
+    props: {
+  },
   mounted() {},
-  created() {},
+  created() {
+  },
   components: {}
 };
 </script>

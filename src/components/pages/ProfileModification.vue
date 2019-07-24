@@ -1,17 +1,29 @@
 <template>
-  <ProfileModification></ProfileModification>
+  <Header>
+    <div slot="header">
+      <BackHeader :title="'編集'"></BackHeader>
+    </div>
+    <div slot="main">
+	<ProfileModification></ProfileModification>
+    </div>
+  </Header>
 </template>
 
 <script>
+import BackHeader from "@/components/organisms/BackHeader";
+import Header from "@/components/pages/Header";
 import ProfileModification from "@/components/organisms/ProfileModification";
 export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+  },
   props: {},
   created() {},
   components: {
+	BackHeader,
+    Header,
     ProfileModification
   }
 };

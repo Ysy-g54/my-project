@@ -71,13 +71,6 @@ const router = new Router({
 					props: true
 				},
 				{
-					path: 'profile/modification/:name',
-					name: 'profileModification',
-					component: ProfileModification,
-					meta: { title: 'プロフィール設定' },
-					props: true
-				},
-				{
 					path: 'feedback',
 					name: 'feedback',
 					component: Feedback,
@@ -105,6 +98,13 @@ const router = new Router({
 			name: 'memoModification',
 			component: MemoModification,
 			meta: { title: 'メモを更新' }
+		},
+		{
+			path: '/profile/modification/:target?',
+			name: 'profileModification',
+			component: ProfileModification,
+			meta: { title: 'プロフィール設定' },
+			props: true
 		},
 		// catch all redirect
 		{

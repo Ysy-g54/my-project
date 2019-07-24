@@ -40,10 +40,10 @@ export default {
     return {};
   },
   methods: {
-    onItemClick(name) {
+    onItemClick(target) {
       this.$router.push({
         name: "profileModification",
-        params: { name }
+        params: { target }
       });
     }
   },
