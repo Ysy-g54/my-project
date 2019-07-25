@@ -16,7 +16,9 @@ import Setting from '@/components/pages/Setting';
 import GlobalHeader from '@/components/organisms/GlobalHeader';
 import firebase from 'firebase';
 import Mixin from '../util/mixin';
+import autofocus from 'vue-autofocus-directive';
 
+Vue.directive('autofocus', autofocus);
 Vue.use(firestorePlugin);
 Vue.mixin(Mixin);
 Vue.use(Router);

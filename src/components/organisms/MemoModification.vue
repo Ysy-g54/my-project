@@ -2,8 +2,19 @@
   <div>
     <md-field>
       <label>メモ内容</label>
-      <md-textarea v-model="memo"></md-textarea>
+      <md-textarea v-autofocus v-model="memo"></md-textarea>
     </md-field>
+    <md-button class="md-icon-button">
+      <md-icon>insert_photo</md-icon>
+    </md-button>
+    <md-button
+      class="md-icon-button"
+      :class="{ 'md-primary': favoriteFlg }"
+      @click="onFavoriteChange"
+    >
+      <md-icon v-if="favoriteFlg">star</md-icon>
+      <md-icon v-else>star_border</md-icon>
+    </md-button>
     <div class="md-layout-item">
       <md-field>
         <label for="categoryId">カテゴリ</label>
@@ -16,15 +27,6 @@
         </md-select>
       </md-field>
     </div>
-    <span class="body-2">お気に入り</span>
-    <md-button
-      class="md-icon-button"
-      :class="{ 'md-primary': favoriteFlg }"
-      @click="onFavoriteChange"
-    >
-      <md-icon v-if="favoriteFlg">star</md-icon>
-      <md-icon v-else>star_border</md-icon>
-    </md-button>
   </div>
 </template>
 
@@ -43,6 +45,7 @@ export default {
       insertDateTime: null,
       categories: categories,
       favoriteFlg: false,
+      file: null,
       doneFlg: false
     };
   },
@@ -124,4 +127,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.md-field.md-has-textarea:not(.md-autogrow):after,
+.md-field.md-has-textarea:not(.md-autogrow):before {
+  border: hidden;
+}
 </style>
