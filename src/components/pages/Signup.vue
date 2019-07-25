@@ -48,9 +48,11 @@ export default {
               displayName: this.userName
             })
             .then(() => {
-              this.$store.dispatch("findLoginUser").then(() => {
-                this.$router.push({
-                  name: "memoHistory"
+              signupUser.sendEmailVerification().then(() => {
+                this.$store.dispatch("findLoginUser").then(() => {
+                  this.$router.push({
+                    name: "memoHistory"
+                  });
                 });
               });
             });

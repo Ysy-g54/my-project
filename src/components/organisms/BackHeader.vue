@@ -8,7 +8,7 @@
           </md-button>
           <span class="md-subheading">{{ title }}</span>
         </div>
-        <div class="md-toolbar-section-end">
+        <div v-if="isShowSaveButton" class="md-toolbar-section-end">
           <md-button class="md-icon-button" @click="save">
             <md-icon>send</md-icon>
           </md-button>
@@ -32,6 +32,7 @@ export default {
     }
   },
   props: {
+    isShowSaveButton: { type: Boolean, default: true },
     title: { type: String, default: "" }
   },
   created() {},

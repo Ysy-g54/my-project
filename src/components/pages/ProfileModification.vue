@@ -1,7 +1,7 @@
 <template>
   <Header>
     <div slot="header">
-      <BackHeader :title="'編集'"></BackHeader>
+      <BackHeader :isShowSaveButton="false" :title="'編集'"></BackHeader>
     </div>
     <div slot="main">
       <ProfileModification></ProfileModification>

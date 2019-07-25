@@ -4,6 +4,7 @@
       :md-active.sync="isActiveDialog"
       v-model="editItem"
       :md-title="getTarget"
+      :md-cancel-text="'キャンセル'"
       @md-confirm="updateItem"
     />
     <md-list class="md-double-line">
