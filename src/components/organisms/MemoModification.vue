@@ -5,11 +5,12 @@
       <md-textarea v-autofocus v-model="memo"></md-textarea>
     </md-field>
     <div v-for="file in files" :key="file.id">
-      <img v-for="file in files" :key="file.id" :src="file.thumb" width="300" height="auto" />
       <md-button class="md-icon-button" @click="$refs.upload.remove(file)">
         <md-icon>highlight_off</md-icon>
       </md-button>
+      <img v-for="file in files" :key="file.id" :src="file.thumb" width="auto" height="auto" />
     </div>
+
     <md-button class="md-icon-button">
       <fileUpload
         ref="upload"
@@ -74,7 +75,18 @@ export default {
       let uploadRef = storageRef.child(this.files[0].name);
       uploadRef
         .put(this.files[0].file)
-        .then(() => {
+        .then(uploadResult => {
+          let resultRef = firebase.storage().ref();
+          resultRef
+            .child(
+              `${uploadResult.metadata.contentType +
+                "/" +
+                uploadResult.metadata.fullPath}`
+            )
+            .getDownloadURL()
+            .then(result => {
+              console.error(result);
+            });
           let userId = this.$store.getters["getLoginUser"].uid;
           (!this.isUpdateMemo
             ? this.database.collection("memo").add({
