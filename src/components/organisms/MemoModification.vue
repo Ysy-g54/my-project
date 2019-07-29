@@ -5,7 +5,7 @@
       <md-textarea v-autofocus v-model="memo"></md-textarea>
     </md-field>
     <div v-for="file in files" :key="file.id">
-      <img v-for="file in files" :key="file.id" :src="file.thumb" width="200" height="auto" />
+      <img v-for="file in files" :key="file.id" :src="file.thumb" width="300" height="auto" />
       <md-button class="md-icon-button" @click="$refs.upload.remove(file)">
         <md-icon>highlight_off</md-icon>
       </md-button>
@@ -70,38 +70,47 @@ export default {
       this.favoriteFlg = !this.favoriteFlg;
     },
     saveMemo() {
-      let userId = this.$store.getters["getLoginUser"].uid;
-      (!this.isUpdateMemo
-        ? this.database.collection("memo").add({
-            categoryId: this.categoryId,
-            memo: this.memo,
-            insertDateTime: firebase.firestore.FieldValue.serverTimestamp(),
-            userId: userId,
-            favoriteFlg: this.favoriteFlg,
-            deleteFlg: false,
-            doneFlg: false
-          })
-        : this.database
-            .collection("memo")
-            .doc(this.memoId)
-            .set({
-              categoryId: this.categoryId,
-              memo: this.memo,
-              insertDateTime: this.insertDateTime,
-              userId: userId,
-              favoriteFlg: this.favoriteFlg,
-              deleteFlg: false,
-              doneFlg: false
+      let storageRef = firebase.storage().ref();
+      let uploadRef = storageRef.child(this.files[0].name);
+      uploadRef
+        .put(this.files[0].file)
+        .then(() => {
+          let userId = this.$store.getters["getLoginUser"].uid;
+          (!this.isUpdateMemo
+            ? this.database.collection("memo").add({
+                categoryId: this.categoryId,
+                memo: this.memo,
+                insertDateTime: firebase.firestore.FieldValue.serverTimestamp(),
+                userId: userId,
+                favoriteFlg: this.favoriteFlg,
+                deleteFlg: false,
+                doneFlg: false
+              })
+            : this.database
+                .collection("memo")
+                .doc(this.memoId)
+                .set({
+                  categoryId: this.categoryId,
+                  memo: this.memo,
+                  insertDateTime: this.insertDateTime,
+                  userId: userId,
+                  favoriteFlg: this.favoriteFlg,
+                  deleteFlg: false,
+                  doneFlg: false
+                })
+          )
+            .then(docRef => {
+              this.$router.push({
+                name: "memoHistory",
+                params: { saveSuccessFlg: true }
+              });
             })
-      )
-        .then(docRef => {
-          this.$router.push({
-            name: "memoHistory",
-            params: { saveSuccessFlg: true }
-          });
+            .catch(error => {
+              console.error("Error adding document: ", error);
+            });
         })
         .catch(error => {
-          console.error("Error adding document: ", error);
+          console.error(error);
         });
     },
     /**
