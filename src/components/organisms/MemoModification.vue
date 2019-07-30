@@ -121,15 +121,18 @@ export default {
           .getDownloadURL()
           .then(result => {
             this.fileUrl = result;
+            this.database.collection("file").add({
+              file: this.files[0].file,
+              name: this.files[0].name
+            });
           });
       });
     },
-    // getFile() {
-    //   if (this.fileUrl !== null) {
-    //     let reader = new FileReader();
-    //     console.error(new Uint8Array(reader.result));
-    //   }
-    // },
+    getFile() {
+      if (this.fileUrl !== null) {
+        this.files.thumb = this.fileUrl;
+      }
+    },
     /**
      * Has changed
      * @param  Object|undefined   newFile   Read only
@@ -225,7 +228,7 @@ export default {
             this.doneFlg = data.doneFlg;
             this.isUpdateMemo = true;
             this.fileUrl = data.fileUrl;
-            // this.getFile();
+            this.getFile();
           }
         });
     }
