@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import _ from "lodash";
 import firebase from "firebase";
 import fileUpload from "vue-upload-component";
 import { categories } from "../../constants";
@@ -62,8 +63,9 @@ export default {
       insertDateTime: null,
       categories: categories,
       favoriteFlg: false,
-      files: [],
-      doneFlg: false
+      doneFlg: false,
+      fileUrl: null,
+      files: []
     };
   },
   methods: {
@@ -71,60 +73,63 @@ export default {
       this.favoriteFlg = !this.favoriteFlg;
     },
     saveMemo() {
-      let storageRef = firebase.storage().ref();
-      let uploadRef = storageRef.child(this.files[0].name);
-      uploadRef
-        .put(this.files[0].file)
-        .then(uploadResult => {
-          let resultRef = firebase.storage().ref();
-          resultRef
-            .child(
-              `${uploadResult.metadata.contentType +
-                "/" +
-                uploadResult.metadata.fullPath}`
-            )
-            .getDownloadURL()
-            .then(result => {
-              console.error(result);
-            });
-          let userId = this.$store.getters["getLoginUser"].uid;
-          (!this.isUpdateMemo
-            ? this.database.collection("memo").add({
-                categoryId: this.categoryId,
-                memo: this.memo,
-                insertDateTime: firebase.firestore.FieldValue.serverTimestamp(),
-                userId: userId,
-                favoriteFlg: this.favoriteFlg,
-                deleteFlg: false,
-                doneFlg: false
-              })
-            : this.database
-                .collection("memo")
-                .doc(this.memoId)
-                .set({
-                  categoryId: this.categoryId,
-                  memo: this.memo,
-                  insertDateTime: this.insertDateTime,
-                  userId: userId,
-                  favoriteFlg: this.favoriteFlg,
-                  deleteFlg: false,
-                  doneFlg: false
-                })
-          )
-            .then(docRef => {
-              this.$router.push({
-                name: "memoHistory",
-                params: { saveSuccessFlg: true }
-              });
+      if (!_.isEmpty(this.files)) {
+        this.uploadFile();
+      }
+      let userId = this.$store.getters["getLoginUser"].uid;
+      (!this.isUpdateMemo
+        ? this.database.collection("memo").add({
+            categoryId: this.categoryId,
+            memo: this.memo,
+            insertDateTime: firebase.firestore.FieldValue.serverTimestamp(),
+            userId: userId,
+            favoriteFlg: this.favoriteFlg,
+            deleteFlg: false,
+            doneFlg: false,
+            fileUrl: this.fileUrl
+          })
+        : this.database
+            .collection("memo")
+            .doc(this.memoId)
+            .set({
+              categoryId: this.categoryId,
+              memo: this.memo,
+              insertDateTime: this.insertDateTime,
+              userId: userId,
+              favoriteFlg: this.favoriteFlg,
+              deleteFlg: false,
+              doneFlg: false,
+              fileUrl: this.fileUrl
             })
-            .catch(error => {
-              console.error("Error adding document: ", error);
-            });
+      )
+        .then(docRef => {
+          this.$router.push({
+            name: "memoHistory",
+            params: { saveSuccessFlg: true }
+          });
         })
         .catch(error => {
-          console.error(error);
+          console.error("Error adding document: ", error);
         });
     },
+    uploadFile() {
+      let storageRef = firebase.storage().ref();
+      let uploadRef = storageRef.child(this.files[0].name);
+      uploadRef.put(this.files[0].file).then(uploadResult => {
+        storageRef
+          .child(`${uploadResult.metadata.fullPath}`)
+          .getDownloadURL()
+          .then(result => {
+            this.fileUrl = result;
+          });
+      });
+    },
+    // getFile() {
+    //   if (this.fileUrl !== null) {
+    //     let reader = new FileReader();
+    //     console.error(new Uint8Array(reader.result));
+    //   }
+    // },
     /**
      * Has changed
      * @param  Object|undefined   newFile   Read only
@@ -143,15 +148,6 @@ export default {
           ) {
             this.$refs.upload.update(newFile, { error: "size" });
           }
-        }
-        if (newFile.progress !== oldFile.progress) {
-          // progress
-        }
-        if (newFile.error && !oldFile.error) {
-          // error
-        }
-        if (newFile.success && !oldFile.success) {
-          // success
         }
       }
       if (!newFile && oldFile) {
@@ -228,6 +224,8 @@ export default {
             this.favoriteFlg = data.favoriteFlg;
             this.doneFlg = data.doneFlg;
             this.isUpdateMemo = true;
+            this.fileUrl = data.fileUrl;
+            // this.getFile();
           }
         });
     }

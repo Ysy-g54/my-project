@@ -2,6 +2,7 @@
   <md-card>
     <md-card-content>
       <div v-if="isTextHeightFive" class="text-pre-wrap">{{ memo.memo }}</div>
+      <img v-if="memo.fileUrl !== null" :src="memo.fileUrl" width="auto" height="auto" />
       <div>カテゴリ：{{ formatCategory(memo.categoryId) }}</div>
       <div>
         <span class="md-subhead">作成日：{{ formatDate(memo.insertDateTime) }}</span>
