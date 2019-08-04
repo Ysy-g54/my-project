@@ -1,7 +1,7 @@
 <template>
   <md-card>
     <md-card-content>
-      <div v-if="isTextHeightFive" class="text-pre-wrap">{{ memo.memo }}</div>
+      <div class="text-pre-wrap">{{ memo.memo }}</div>
       <img v-if="memo.fileUrl !== null" :src="memo.fileUrl" width="auto" height="auto" />
       <div>カテゴリ：{{ formatCategory(memo.categoryId) }}</div>
       <div>
@@ -9,11 +9,6 @@
       </div>
     </md-card-content>
     <md-card-actions>
-      <md-card-expand-trigger v-if="!isTextHeightFive">
-        <md-button class="md-icon-button">
-          <md-icon>keyboard_arrow_down</md-icon>
-        </md-button>
-      </md-card-expand-trigger>
       <md-button
         v-if="!isDiscard && memo.categoryId === '1'"
         class="md-icon-button"
@@ -45,9 +40,6 @@
         </md-menu-content>
       </md-menu>
     </md-card-actions>
-    <md-card-expand-content>
-      <md-card-content>{{ memo.memo }}</md-card-content>
-    </md-card-expand-content>
   </md-card>
 </template>
 
@@ -92,11 +84,7 @@ export default {
       this.$emit("on-favorite", this.memo);
     }
   },
-  computed: {
-    isTextHeightFive() {
-      return this.memo.memo.split("\n").length <= 5;
-    }
-  },
+  computed: {},
   props: {
     isDiscard: { type: Boolean, default: false },
     memo: { type: Object, default: {} }

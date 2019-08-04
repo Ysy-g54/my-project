@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ProfileModification ref="dialog" :title="title" :content="content" />
     <md-list class="md-double-line">
       <md-subheader>プロフィール</md-subheader>
       <md-list-item>
@@ -13,20 +14,30 @@
         <md-icon>chevron_right</md-icon>
       </md-list-item>
       <md-divider></md-divider>
-      <md-list-item @click="onItemClick('displayName')">
+      <md-list-item>
         <div class="md-list-item-text">
           <span>{{ $store.getters["getLoginUser"].displayName }}</span>
           <span>名前</span>
         </div>
-        <md-icon>chevron_right</md-icon>
+        <md-button
+          class="md-icon-button"
+          @click="onEditItemClick('名前', $store.getters['getLoginUser'].displayName)"
+        >
+          <md-icon>edit</md-icon>
+        </md-button>
       </md-list-item>
       <md-divider></md-divider>
-      <md-list-item @click="onItemClick('mailAddress')">
+      <md-list-item>
         <div class="md-list-item-text">
           <span>{{ $store.getters["getLoginUser"].mailAddress }}</span>
           <span>メールアドレス</span>
         </div>
-        <md-icon>chevron_right</md-icon>
+        <md-button
+          class="md-icon-button"
+          @click="onEditItemClick('メールアドレス', $store.getters['getLoginUser'].mailAddress)"
+        >
+          <md-icon>edit</md-icon>
+        </md-button>
       </md-list-item>
       <md-divider></md-divider>
     </md-list>
@@ -35,16 +46,19 @@
 
 <script>
 import _ from "lodash";
+import ProfileModification from "@/components/organisms/ProfileModification";
 export default {
   data() {
-    return {};
+    return {
+      content: "",
+      title: ""
+    };
   },
   methods: {
-    onItemClick(target) {
-      this.$router.push({
-        name: "profileModification",
-        params: { target }
-      });
+    onEditItemClick(title, content) {
+      this.content = content;
+      this.title = title;
+      this.$refs.dialog.openDialog();
     }
   },
   computed: {
@@ -57,7 +71,7 @@ export default {
   },
   mounted() {},
   created() {},
-  components: {}
+  components: { ProfileModification }
 };
 </script>
 
