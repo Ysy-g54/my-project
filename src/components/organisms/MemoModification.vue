@@ -10,6 +10,12 @@
       </md-button>
       <img v-for="file in files" :key="file.id" :src="file.thumb" width="auto" height="auto" />
     </div>
+    <div v-if="fileUrl !== null">
+      <md-button class="md-icon-button" @click="removeFile()">
+        <md-icon>highlight_off</md-icon>
+      </md-button>
+      <img :src="fileUrl" width="auto" height="auto" />
+    </div>
 
     <md-button class="md-icon-button">
       <fileUpload
@@ -65,6 +71,7 @@ export default {
       favoriteFlg: false,
       doneFlg: false,
       fileUrl: null,
+      fileReference: null,
       files: []
     };
   },
@@ -72,12 +79,10 @@ export default {
     onFavoriteChange() {
       this.favoriteFlg = !this.favoriteFlg;
     },
-    saveMemo() {
-      if (!_.isEmpty(this.files)) {
-        this.uploadFile();
-      }
+    async saveMemo() {
+      await this.uploadFile();
       let userId = this.$store.getters["getLoginUser"].uid;
-      (!this.isUpdateMemo
+      await (!this.isUpdateMemo
         ? this.database.collection("memo").add({
             categoryId: this.categoryId,
             memo: this.memo,
@@ -86,7 +91,8 @@ export default {
             favoriteFlg: this.favoriteFlg,
             deleteFlg: false,
             doneFlg: false,
-            fileUrl: this.fileUrl
+            fileUrl: this.fileUrl,
+            fileReference: this.fileReference
           })
         : this.database
             .collection("memo")
@@ -99,39 +105,31 @@ export default {
               favoriteFlg: this.favoriteFlg,
               deleteFlg: false,
               doneFlg: false,
-              fileUrl: this.fileUrl
-            })
-      )
-        .then(docRef => {
-          this.$router.push({
-            name: "memoHistory",
-            params: { saveSuccessFlg: true }
-          });
-        })
-        .catch(error => {
-          console.error("Error adding document: ", error);
-        });
-    },
-    uploadFile() {
-      let storageRef = firebase.storage().ref();
-      let uploadRef = storageRef.child(this.files[0].name);
-      uploadRef.put(this.files[0].file).then(uploadResult => {
-        storageRef
-          .child(`${uploadResult.metadata.fullPath}`)
-          .getDownloadURL()
-          .then(result => {
-            this.fileUrl = result;
-            this.database.collection("file").add({
-              file: this.files[0].file,
-              name: this.files[0].name
-            });
-          });
+              fileUrl: this.fileUrl,
+              fileReference: this.fileReference
+            }));
+      this.$router.push({
+        name: "memoHistory",
+        params: { saveSuccessFlg: true }
       });
     },
-    getFile() {
-      if (this.fileUrl !== null) {
-        this.files.thumb = this.fileUrl;
+    async uploadFile() {
+      if (!_.isEmpty(this.files)) {
+        let storageRef = firebase.storage().ref();
+        let uploadRef = storageRef.child(
+          this.files[0].id + "-" + this.files[0].name
+        );
+        let uploadResult = await uploadRef.put(this.files[0].file);
+        let result = await storageRef
+          .child(`${uploadResult.metadata.fullPath}`)
+          .getDownloadURL();
+        this.fileUrl = result;
+        this.fileReference = this.files[0].id + "-" + this.files[0].name;
       }
+    },
+    removeFile() {
+      this.fileUrl = null;
+      this.fileReference = null;
     },
     /**
      * Has changed
@@ -228,7 +226,7 @@ export default {
             this.doneFlg = data.doneFlg;
             this.isUpdateMemo = true;
             this.fileUrl = data.fileUrl;
-            this.getFile();
+            this.fileReference = data.fileReference;
           }
         });
     }
