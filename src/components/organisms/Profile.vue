@@ -11,7 +11,9 @@
           <img v-if="isNotEmptyLoginUserPhoto" :src="loginUserPhoto" alt="Avatar" />
           <md-icon v-else>account_circle</md-icon>
         </md-avatar>
-        <md-icon>chevron_right</md-icon>
+        <md-button class="md-icon-button" @click="goPhotoModification">
+          <md-icon>chevron_right</md-icon>
+        </md-button>
       </md-list-item>
       <md-divider></md-divider>
       <md-list-item>
@@ -47,7 +49,6 @@
 <script>
 import _ from "lodash";
 import ProfileModification from "@/components/organisms/ProfileModification";
-import VueCropper from "vue-cropper";
 export default {
   data() {
     return {
@@ -60,6 +61,11 @@ export default {
       this.content = content;
       this.title = title;
       this.$refs.dialog.openDialog();
+    },
+    goPhotoModification() {
+      this.$router.push({
+        name: "photoModification"
+      });
     }
   },
   computed: {
@@ -73,8 +79,7 @@ export default {
   mounted() {},
   created() {},
   components: {
-    ProfileModification,
-    VueCropper
+    ProfileModification
   }
 };
 </script>

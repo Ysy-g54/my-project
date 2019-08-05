@@ -11,6 +11,7 @@ import MemoHistory from '@/components/pages/MemoHistory';
 import MemoSearchResult from '@/components/pages/MemoSearchResult';
 import MemoTrash from '@/components/pages/MemoTrash';
 import MemoModification from '@/components/pages/MemoModification';
+import PhotoModification from '@/components/pages/PhotoModification';
 import Setting from '@/components/pages/Setting';
 import GlobalHeader from '@/components/organisms/GlobalHeader';
 import firebase from 'firebase';
@@ -99,6 +100,12 @@ const router = new Router({
 			name: 'memoModification',
 			component: MemoModification,
 			meta: { title: 'メモを更新' }
+		},
+		{
+			path: '/photo/modification',
+			name: 'photoModification',
+			component: PhotoModification,
+			meta: { title: '写真を編集' }
 		},
 		// catch all redirect
 		{

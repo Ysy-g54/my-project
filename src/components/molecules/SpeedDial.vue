@@ -14,7 +14,6 @@ export default {
   props: {},
   computed: {},
   methods: {
-    // FIXME 共通化
     goMemoModification() {
       this.$router.push({
         name: "memoModification"
