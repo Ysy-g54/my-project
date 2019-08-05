@@ -47,6 +47,7 @@
 <script>
 import _ from "lodash";
 import ProfileModification from "@/components/organisms/ProfileModification";
+import VueCropper from "vue-cropper";
 export default {
   data() {
     return {
@@ -71,7 +72,10 @@ export default {
   },
   mounted() {},
   created() {},
-  components: { ProfileModification }
+  components: {
+    ProfileModification,
+    VueCropper
+  }
 };
 </script>
 

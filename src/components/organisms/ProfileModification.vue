@@ -3,7 +3,7 @@
     <md-dialog-prompt
       :md-active.sync="isActiveDialog"
       v-model="editContent"
-      :md-title="title"
+      :md-title="title + '編集'"
       :md-cancel-text="'キャンセル'"
       @md-confirm="updateItem"
     />
