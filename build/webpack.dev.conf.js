@@ -36,10 +36,6 @@ module.exports = merge(baseWebpackConfig, {
 			serviceWorkerLoader: `<script>${fs.readFileSync(path.join(__dirname,
 				'./service-worker-dev.js'), 'utf-8')}</script>`
 		}),
-		new FriendlyErrorsPlugin(),
-		{
-			src: '~/plugins/vue-cropper.js',
-			ssr: false
-		},
+		new FriendlyErrorsPlugin()
 	]
 })

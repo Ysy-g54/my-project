@@ -109,11 +109,7 @@ const webpackConfig = merge(baseWebpackConfig, {
 			staticFileGlobs: ['dist/**/*.{js,html,css}'],
 			minify: true,
 			stripPrefix: 'dist/'
-		}),
-		{
-			src: '~/plugins/vue-cropper.js',
-			ssr: false
-		},
+		})
 	]
 })
 
