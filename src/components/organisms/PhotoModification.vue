@@ -26,42 +26,31 @@
 
     <button @click="cropImage" v-if="imgSrc != ''" style="margin-right: 40px;">Crop</button>
     <button @click="rotate" v-if="imgSrc != ''">Rotate</button>
-    <!-- <md-button class="md-icon-button">
-      <fileUpload
-        ref="upload"
-        v-model="files"
-        post-action="/post.method"
-        put-action="/put.method"
-        @input-file="inputFile"
-        @input-filter="inputFilter"
-      >
-        <md-icon>insert_photo</md-icon>
-      </fileUpload>
-    </md-button>
-    <div v-for="file in files" :key="file.id">
-      <md-button class="md-icon-button" @click="$refs.upload.remove(file)">
-        <md-icon>highlight_off</md-icon>
-      </md-button>
-      <VueCropper ref="cropper" :src="file.blob" :background="true"></VueCropper>
-    </div>-->
+    <Snackbar ref="snackbar" :message="'更新しました'" />
   </div>
 </template>
 
 <script>
-import fileUpload from "vue-upload-component";
+import _ from "lodash";
+import firebase from "firebase";
+import "firebase/firestore";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
+import Snackbar from "@/components/atoms/Snackbar";
 export default {
   data() {
     return {
-      //   files: []
+      database: firebase.firestore(),
+      files: [],
       imgSrc: "",
-      cropImg: ""
+      cropImg: "",
+      resultUrl: null
     };
   },
   methods: {
     setImage(e) {
       const file = e.target.files[0];
+      this.files[0] = file;
 
       if (!file.type.includes("image/")) {
         alert("Please select an image file");
@@ -89,76 +78,48 @@ export default {
     rotate() {
       // guess what this does :)
       this.$refs.cropper.rotate(90);
+    },
+    async uploadFile() {
+      let storageRef = firebase.storage().ref();
+      let uploadRef = storageRef.child(this.files[0].name);
+      let uploadResult = await uploadRef.put(this.files[0]);
+      this.resultUrl = await storageRef
+        .child(`${uploadResult.metadata.fullPath}`)
+        .getDownloadURL();
+    },
+    async updateItem() {
+      let currentUser = firebase.auth().currentUser;
+      await this.formatPhoto();
+      await this.uploadFile();
+
+      currentUser
+        .updateProfile({
+          displayName: this.$store.getters["getLoginUser"].displayName,
+          photoURL: !_.isEmpty(this.files)
+            ? this.resultUrl
+            : this.$store.getters["getLoginUser"].photoURL
+        })
+        .then(() => {
+          this.$store.dispatch("findLoginUser").then(() => {
+            this.$refs.snackbar.openSnackbar();
+          });
+        });
+    },
+    async formatPhoto() {
+      await this.$refs.cropper.getCroppedCanvas().toBlob(blob => {
+        this.files[0] = new File([blob], this.files[0].name, {
+          type: this.files[0].type
+        });
+      });
     }
-    // /**
-    //  * Has changed
-    //  * @param  Object|undefined   newFile   Read only
-    //  * @param  Object|undefined   oldFile   Read only
-    //  */
-    // inputFile(newFile, oldFile) {
-    //   if (newFile && oldFile) {
-    //     // update
-    //     if (newFile.active && !oldFile.active) {
-    //       // beforeSend
-    //       // min size
-    //       if (
-    //         newFile.size >= 0 &&
-    //         this.minSize > 0 &&
-    //         newFile.size < this.minSize
-    //       ) {
-    //         this.$refs.upload.update(newFile, { error: "size" });
-    //       }
-    //     }
-    //   }
-    //   if (!newFile && oldFile) {
-    //     // remove
-    //     if (oldFile.success && oldFile.response.id) {
-    //     }
-    //   }
-    //   // Automatically activate upload
-    //   if (
-    //     Boolean(newFile) !== Boolean(oldFile) ||
-    //     oldFile.error !== newFile.error
-    //   ) {
-    //     if (this.uploadAuto && !this.$refs.upload.active) {
-    //       this.$refs.upload.active = true;
-    //     }
-    //   }
-    // },
-    // /**
-    //  * Pretreatment
-    //  * @param  Object|undefined   newFile   Read and write
-    //  * @param  Object|undefined   oldFile   Read only
-    //  * @param  Function           prevent   Prevent changing
-    //  */
-    // inputFilter(newFile, oldFile, prevent) {
-    //   if (newFile && !oldFile) {
-    //     // Before adding a file
-    //     // Filter system files or hide files
-    //     if (/(\/|^)(Thumbs\.db|desktop\.ini|\..+)$/.test(newFile.name)) {
-    //       return prevent();
-    //     }
-    //     // Filter php html js file
-    //     if (/\.(php5?|html?|jsx?)$/i.test(newFile.name)) {
-    //       return prevent();
-    //     }
-    //   }
-    //   if (newFile && (!oldFile || newFile.file !== oldFile.file)) {
-    //     // Create a blob field
-    //     newFile.blob = "";
-    //     let URL = window.URL || window.webkitURL;
-    //     if (URL && URL.createObjectURL) {
-    //       newFile.blob = URL.createObjectURL(newFile.file);
-    //     }
-    //     // Thumbnails
-    //     newFile.thumb = "";
-    //     if (newFile.blob && newFile.type.substr(0, 6) === "image/") {
-    //       newFile.thumb = newFile.blob;
-    //     }
-    //   }
-    // }
   },
-  watch: {},
+  watch: {
+    isSavable() {
+      if (!_.isEmpty(this.files)) {
+        this.updateItem();
+      }
+    }
+  },
   computed: {},
   props: {
     isSavable: { type: Boolean, default: false }
@@ -166,7 +127,7 @@ export default {
   mounted() {},
   created() {},
   components: {
-    fileUpload,
+    Snackbar,
     VueCropper
   }
 };

@@ -76,6 +76,7 @@ export default {
       this.menuVisible = true;
     },
     onLogoutClick() {
+      this.menuVisible = false;
       this.$refs.dialog.openDialog();
     },
     confirmDialog() {

@@ -11,18 +11,22 @@ export default {
   },
   methods: {
     createChart() {
-      setTimeout(() => {
-        this.renderChart(this.chartData, DEFAULT_OPTIONS);
-      }, 500);
+      this.renderChart(this.chartData, DEFAULT_OPTIONS);
     }
   },
-  props: { chartData: { type: Object, default: null } },
+  watch: {
+    isRenderChart() {
+      this.createChart();
+    }
+  },
+  props: {
+    chartData: { type: Object, default: null },
+    isRenderChart: { type: Boolean, default: false }
+  },
   computed: {},
   extends: Pie,
   mixins: [mixins.reactiveProp],
-  mounted() {
-    this.createChart();
-  },
+  mounted() {},
   destroyed() {}
 };
 </script>

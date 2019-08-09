@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="md-title">カテゴリごとの集計</span>
-    <PieChart :chartData="memoCategories"></PieChart>
+    <PieChart :chartData="memoCategories" :isRenderChart="isRenderChart"></PieChart>
     <!-- <BarChart :chartData="memoCategories"></BarChart> -->
   </div>
 </template>
@@ -17,7 +17,8 @@ export default {
   data() {
     return {
       memoCategories: {},
-      database: firebase.firestore()
+      database: firebase.firestore(),
+      isRenderChart: false
     };
   },
   methods: {
@@ -75,6 +76,7 @@ export default {
             }
           });
         });
+        this.isRenderChart = true;
       });
   },
   components: {
