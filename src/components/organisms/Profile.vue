@@ -17,7 +17,7 @@
           <md-icon v-else>account_circle</md-icon>
         </md-avatar>
         <md-button class="md-icon-button" @click="goPhotoModification">
-          <md-icon>chevron_right</md-icon>
+          <md-icon>edit</md-icon>
         </md-button>
       </md-list-item>
       <md-divider></md-divider>
@@ -39,12 +39,12 @@
           <span>{{ $store.getters["getLoginUser"].mailAddress }}</span>
           <span>メールアドレス</span>
         </div>
-        <md-button
+        <!-- <md-button
           class="md-icon-button"
           @click="onEditItemClick('メールアドレス', $store.getters['getLoginUser'].mailAddress)"
         >
           <md-icon>edit</md-icon>
-        </md-button>
+        </md-button>-->
       </md-list-item>
       <md-divider></md-divider>
     </md-list>

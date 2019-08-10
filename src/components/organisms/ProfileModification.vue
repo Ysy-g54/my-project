@@ -39,7 +39,7 @@ export default {
                 ? this.editContent
                 : this.$store.getters["getLoginUser"].photoURL
           })
-        : currentUser.updateEmail(this.editItem)
+        : currentUser.updateEmail(this.editContent)
       ).then(() => {
         this.$store.dispatch("findLoginUser").then(() => {
           this.$emit("update-success");

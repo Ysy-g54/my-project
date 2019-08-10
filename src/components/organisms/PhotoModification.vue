@@ -29,10 +29,10 @@
       :background="true"
       :rotatable="true"
       :src="imgSrc"
-      alt="Source Image"
+      alt="選択した写真が表示されます。"
       :img-style="{ width: '400px', height: '300px' }"
     ></VueCropper>
-    <img :src="cropImg" alt="Cropped Image" />
+    <img :src="cropImg" alt="トリミングした写真が表示されます。" />
     <br />
 
     <button @click="cropImage" v-if="imgSrc != ''" style="margin-right: 40px;">Crop</button>

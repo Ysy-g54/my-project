@@ -6,7 +6,7 @@
           <Dialog ref="dialog" :title="title" @confirm-dialog="confirmDialog"></Dialog>
           <md-button class="md-icon-button" @click="onAvatarClick">
             <md-avatar>
-              <img v-if="isNotEmptyLoginUserPhoto" :src="loginUserPhoto" alt="Avatar" />
+              <img v-if="isNotEmptyLoginUserPhoto" :data-src="loginUserPhoto" class="lazyload" />
               <md-icon v-else>account_circle</md-icon>
             </md-avatar>
           </md-button>

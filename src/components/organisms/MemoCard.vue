@@ -1,8 +1,14 @@
 <template>
-  <md-card>
+  <md-card class="md-elevation-1">
     <md-card-content>
       <div class="text-pre-wrap">{{ memo.memo }}</div>
-      <img v-if="memo.fileUrl !== null" :src="memo.fileUrl" width="auto" height="auto" />
+      <img
+        v-if="memo.fileUrl !== null"
+        class="lazyload"
+        :data-src="memo.fileUrl"
+        width="auto"
+        height="auto"
+      />
       <div>カテゴリ：{{ formatCategory(memo.categoryId) }}</div>
       <div>
         <span class="md-subhead">作成日：{{ formatDate(memo.insertDateTime) }}</span>

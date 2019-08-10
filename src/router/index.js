@@ -17,6 +17,7 @@ import GlobalHeader from '@/components/organisms/GlobalHeader';
 import firebase from 'firebase';
 import Mixin from '../util/mixin';
 import autofocus from 'vue-autofocus-directive';
+import 'lazysizes';
 
 Vue.directive('autofocus', autofocus);
 Vue.use(firestorePlugin);
