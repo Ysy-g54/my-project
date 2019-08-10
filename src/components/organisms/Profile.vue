@@ -1,6 +1,11 @@
 <template>
   <div>
-    <ProfileModification ref="dialog" :title="title" :content="content" />
+    <ProfileModification
+      ref="dialog"
+      :title="title"
+      :content="content"
+      @update-success="updateSuccess"
+    />
     <md-list class="md-double-line">
       <md-subheader>プロフィール</md-subheader>
       <md-list-item>
@@ -43,11 +48,13 @@
       </md-list-item>
       <md-divider></md-divider>
     </md-list>
+    <Snackbar ref="snackbar" :message="'更新しました'" />
   </div>
 </template>
 
 <script>
 import _ from "lodash";
+import Snackbar from "@/components/atoms/Snackbar";
 import ProfileModification from "@/components/organisms/ProfileModification";
 export default {
   data() {
@@ -66,6 +73,9 @@ export default {
       this.$router.push({
         name: "photoModification"
       });
+    },
+    updateSuccess() {
+      this.$refs.snackbar.openSnackbar();
     }
   },
   computed: {
@@ -76,10 +86,15 @@ export default {
       return this.$store.getters["getLoginUser"].photoUrl;
     }
   },
-  mounted() {},
+  mounted() {
+    if (this.$route.params.updateSuccessFlg !== undefined) {
+      this.updateSuccess();
+    }
+  },
   created() {},
   components: {
-    ProfileModification
+    ProfileModification,
+    Snackbar
   }
 };
 </script>

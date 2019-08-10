@@ -1,5 +1,16 @@
 <template>
   <div>
+    <Dialog ref="dialog" :title="'更新しますか?'" @confirm-dialog="updateItem"></Dialog>
+    <div>
+      <md-avatar class="md-avatar-icon md-large">
+        <img
+          v-if="isNotEmptyLoginUserPhoto"
+          :src="$store.getters['getLoginUser'].photoUrl"
+          alt="Avatar"
+        />
+        <md-icon v-else>account_circle</md-icon>
+      </md-avatar>
+    </div>
     <input
       type="file"
       name="image"
@@ -25,7 +36,12 @@
     <br />
 
     <button @click="cropImage" v-if="imgSrc != ''" style="margin-right: 40px;">Crop</button>
-    <button @click="rotate" v-if="imgSrc != ''">Rotate</button>
+    <md-button @click="rotateRight" v-if="imgSrc != ''">
+      <md-icon>rotate_right</md-icon>
+    </md-button>
+    <md-button @click="rotateLeft" v-if="imgSrc != ''">
+      <md-icon>rotate_left</md-icon>
+    </md-button>
     <Snackbar ref="snackbar" :message="'更新しました'" />
   </div>
 </template>
@@ -37,6 +53,7 @@ import "firebase/firestore";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 import Snackbar from "@/components/atoms/Snackbar";
+import Dialog from "@/components/molecules/Dialog";
 export default {
   data() {
     return {
@@ -74,10 +91,19 @@ export default {
     cropImage() {
       // get image data for post processing, e.g. upload or setting image src
       this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
+      this.$refs.cropper.getCroppedCanvas().toBlob(blob => {
+        this.files[0] = new File([blob], this.files[0].name, {
+          type: this.files[0].type
+        });
+      });
     },
-    rotate() {
+    rotateRight() {
       // guess what this does :)
       this.$refs.cropper.rotate(90);
+    },
+    rotateLeft() {
+      // guess what this does :)
+      this.$refs.cropper.rotate(-90);
     },
     async uploadFile() {
       let storageRef = firebase.storage().ref();
@@ -89,7 +115,6 @@ export default {
     },
     async updateItem() {
       let currentUser = firebase.auth().currentUser;
-      await this.formatPhoto();
       await this.uploadFile();
 
       currentUser
@@ -101,7 +126,10 @@ export default {
         })
         .then(() => {
           this.$store.dispatch("findLoginUser").then(() => {
-            this.$refs.snackbar.openSnackbar();
+            this.$router.push({
+              name: "setting",
+              params: { updateSuccessFlg: true }
+            });
           });
         });
     },
@@ -111,16 +139,24 @@ export default {
           type: this.files[0].type
         });
       });
+    },
+    openDialog() {
+      this.$refs.dialog.openDialog();
     }
   },
   watch: {
-    isSavable() {
+    async isSavable() {
       if (!_.isEmpty(this.files)) {
-        this.updateItem();
+        this.formatPhoto();
+        this.openDialog();
       }
     }
   },
-  computed: {},
+  computed: {
+    isNotEmptyLoginUserPhoto() {
+      return !_.isEmpty(this.$store.getters["getLoginUser"].photoUrl);
+    }
+  },
   props: {
     isSavable: { type: Boolean, default: false }
   },
@@ -128,7 +164,8 @@ export default {
   created() {},
   components: {
     Snackbar,
-    VueCropper
+    VueCropper,
+    Dialog
   }
 };
 </script>

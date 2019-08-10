@@ -7,14 +7,12 @@
       :md-cancel-text="'キャンセル'"
       @md-confirm="updateItem"
     />
-    <Snackbar ref="snackbar" :message="'更新しました'" />
   </div>
 </template>
 
 <script>
 import firebase from "firebase";
 import "firebase/firestore";
-import Snackbar from "@/components/atoms/Snackbar";
 export default {
   data() {
     return {
@@ -44,7 +42,7 @@ export default {
         : currentUser.updateEmail(this.editItem)
       ).then(() => {
         this.$store.dispatch("findLoginUser").then(() => {
-          this.$refs.snackbar.openSnackbar();
+          this.$emit("update-success");
         });
       });
     }
@@ -61,9 +59,7 @@ export default {
   },
   mounted() {},
   created() {},
-  components: {
-    Snackbar
-  }
+  components: {}
 };
 </script>
 
