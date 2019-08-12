@@ -91,11 +91,6 @@ export default {
     cropImage() {
       // get image data for post processing, e.g. upload or setting image src
       this.cropImg = this.$refs.cropper.getCroppedCanvas().toDataURL();
-      this.$refs.cropper.getCroppedCanvas().toBlob(blob => {
-        this.files[0] = new File([blob], this.files[0].name, {
-          type: this.files[0].type
-        });
-      });
     },
     rotateRight() {
       // guess what this does :)

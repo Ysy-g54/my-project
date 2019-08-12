@@ -35,6 +35,7 @@ export default {
       this.database
         .collection("memo")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
+        .where("deleteFlg", "==", false)
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(document => {
@@ -135,13 +136,13 @@ export default {
     }
   },
   watch: {
-    "$route.params.q": {
+    "$route.query.q": {
       async handler(q) {
-        if (this.$route.params.q !== "") {
-          await this.filterMemo(this.$route.params.q);
+        if (this.$route.query.q !== "") {
+          await this.filterMemo(this.$route.query.q);
         } else {
           this.$router.push({
-            name: "memoHistory"
+            name: "memoList"
           });
         }
       },

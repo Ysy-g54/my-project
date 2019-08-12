@@ -7,7 +7,7 @@ import Feedback from '@/components/pages/Feedback';
 import Login from '@/components/pages/Login';
 import Signup from '@/components/pages/Signup';
 import Statistics from '@/components/pages/Statistics';
-import MemoHistory from '@/components/pages/MemoHistory';
+import MemoList from '@/components/pages/MemoList';
 import MemoSearchResult from '@/components/pages/MemoSearchResult';
 import MemoTrash from '@/components/pages/MemoTrash';
 import MemoModification from '@/components/pages/MemoModification';
@@ -53,9 +53,9 @@ const router = new Router({
 					props: true
 				},
 				{
-					path: 'memo-history',
-					name: 'memoHistory',
-					component: MemoHistory,
+					path: 'memo-list',
+					name: 'memoList',
+					component: MemoList,
 					meta: { title: 'メモ一覧' },
 					props: true
 				},
@@ -88,7 +88,8 @@ const router = new Router({
 					props: true
 				},
 				{
-					path: 'memo/search/:q?',
+					path: 'memo/search/',
+					query: { q: 'word' },
 					name: 'memoSearch',
 					component: MemoSearchResult,
 					meta: { title: 'メモ検索結果' },

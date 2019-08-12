@@ -19,7 +19,6 @@ export default {
     position: "center"
   }),
   methods: {
-    // FIXME v-model使う
     openSnackbar() {
       this.isOpen = true;
     }
