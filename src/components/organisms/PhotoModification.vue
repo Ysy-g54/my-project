@@ -35,13 +35,23 @@
     <img :src="cropImg" alt="トリミングした写真が表示されます。" />
     <br />
 
-    <button @click="cropImage" v-if="imgSrc != ''" style="margin-right: 40px;">Crop</button>
-    <md-button @click="rotateRight" v-if="imgSrc != ''">
-      <md-icon>rotate_right</md-icon>
-    </md-button>
-    <md-button @click="rotateLeft" v-if="imgSrc != ''">
-      <md-icon>rotate_left</md-icon>
-    </md-button>
+    <div v-if="imgSrc != ''">
+      <md-button @click="cropImage">
+        <md-icon>rate_review</md-icon>
+      </md-button>
+      <md-button @click="rotateRight">
+        <md-icon>rotate_right</md-icon>
+      </md-button>
+      <md-button @click="rotateLeft">
+        <md-icon>rotate_left</md-icon>
+      </md-button>
+      <md-button @click="zoomIn">
+        <md-icon>zoom_in</md-icon>
+      </md-button>
+      <md-button @click="zoomOut">
+        <md-icon>zoom_out</md-icon>
+      </md-button>
+    </div>
     <Snackbar ref="snackbar" :message="'更新しました'" />
   </div>
 </template>
@@ -99,6 +109,12 @@ export default {
     rotateLeft() {
       // guess what this does :)
       this.$refs.cropper.rotate(-90);
+    },
+    zoomIn() {
+      this.$refs.cropper.relativeZoom(0.1);
+    },
+    zoomOut() {
+      this.$refs.cropper.relativeZoom(-0.1);
     },
     async uploadFile() {
       let storageRef = firebase.storage().ref();

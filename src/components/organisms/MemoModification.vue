@@ -10,7 +10,7 @@
       </md-button>
       <img v-for="file in files" :key="file.id" :src="file.thumb" width="auto" height="auto" />
     </div>
-    <div v-if="fileUrl !== null">
+    <div v-if="memoId !== null && fileUrl !== null">
       <md-button class="md-icon-button" @click="removeFile()">
         <md-icon>highlight_off</md-icon>
       </md-button>
@@ -65,7 +65,7 @@ export default {
       memo: "",
       database: firebase.firestore(),
       isUpdateMemo: false,
-      memoId: "",
+      memoId: null,
       insertDateTime: null,
       categories: categories,
       favoriteFlg: false,

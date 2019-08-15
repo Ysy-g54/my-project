@@ -1,7 +1,7 @@
 <template>
   <md-card class="md-elevation-1">
     <md-card-content>
-      <div class="text-pre-wrap">{{ memo.memo }}</div>
+      <div class="text-word-wrap">{{ memo.memo }}</div>
       <img
         v-if="memo.fileUrl !== null"
         class="lazyload"
@@ -106,12 +106,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-card {
-  width: 240px;
+  width: 245px;
   margin: 4px;
   display: inline-block;
   vertical-align: top;
 }
-.text-pre-wrap {
-  white-space: pre-wrap;
+.text-word-wrap {
+  word-wrap: break-word;
 }
 </style>
