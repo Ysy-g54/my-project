@@ -112,7 +112,7 @@ const router = new Router({
 		// catch all redirect
 		{
 			path: '*',
-			redirect: '/login'
+			redirect: '/browse/memo-list'
 		}
 	]
 });
