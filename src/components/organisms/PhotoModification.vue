@@ -52,7 +52,7 @@
         <md-icon>zoom_out</md-icon>
       </md-button>
     </div>
-    <Snackbar ref="snackbar" :message="'更新しました'" />
+    <Snackbar ref="snackbar" :message="'写真の更新に失敗しました。ファイルが画像の形式かご確認ください。'" />
   </div>
 </template>
 
@@ -80,7 +80,6 @@ export default {
       this.files[0] = file;
 
       if (!file.type.includes("image/")) {
-        alert("Please select an image file");
         return;
       }
 
@@ -117,39 +116,53 @@ export default {
       this.$refs.cropper.relativeZoom(-0.1);
     },
     async uploadFile() {
-      let storageRef = firebase.storage().ref();
-      let uploadRef = storageRef.child(this.files[0].name);
-      let uploadResult = await uploadRef.put(this.files[0]);
-      this.resultUrl = await storageRef
-        .child(`${uploadResult.metadata.fullPath}`)
-        .getDownloadURL();
+      if (this.files[0].type.includes("image/")) {
+        let storageRef = firebase.storage().ref();
+        let uploadRef = storageRef.child(
+          this.$store.getters["getLoginUser"].uid +
+            "-icon-" +
+            this.files[0].name
+        );
+        let uploadResult = await uploadRef.put(this.files[0]);
+        this.resultUrl = await storageRef
+          .child(`${uploadResult.metadata.fullPath}`)
+          .getDownloadURL();
+        return true;
+      } else {
+        return false;
+      }
     },
     async updateItem() {
-      let currentUser = firebase.auth().currentUser;
-      await this.uploadFile();
-
-      currentUser
-        .updateProfile({
-          displayName: this.$store.getters["getLoginUser"].displayName,
-          photoURL: !_.isEmpty(this.files)
-            ? this.resultUrl
-            : this.$store.getters["getLoginUser"].photoURL
-        })
-        .then(() => {
-          this.$store.dispatch("findLoginUser").then(() => {
-            this.$router.push({
-              name: "setting",
-              params: { updateSuccessFlg: true }
+      let isUploadFile = await this.uploadFile();
+      if (isUploadFile) {
+        let currentUser = firebase.auth().currentUser;
+        currentUser
+          .updateProfile({
+            displayName: this.$store.getters["getLoginUser"].displayName,
+            photoURL: !_.isEmpty(this.files)
+              ? this.resultUrl
+              : this.$store.getters["getLoginUser"].photoURL
+          })
+          .then(() => {
+            this.$store.dispatch("findLoginUser").then(() => {
+              this.$router.push({
+                name: "profile",
+                params: { updateSuccessFlg: true }
+              });
             });
           });
-        });
+      } else {
+        this.$refs.snackbar.openSnackbar();
+      }
     },
     async formatPhoto() {
-      await this.$refs.cropper.getCroppedCanvas().toBlob(blob => {
-        this.files[0] = new File([blob], this.files[0].name, {
-          type: this.files[0].type
+      if (this.files[0].type.includes("image/")) {
+        await this.$refs.cropper.getCroppedCanvas().toBlob(blob => {
+          this.files[0] = new File([blob], this.files[0].name, {
+            type: this.files[0].type
+          });
         });
-      });
+      }
     },
     openDialog() {
       this.$refs.dialog.openDialog();

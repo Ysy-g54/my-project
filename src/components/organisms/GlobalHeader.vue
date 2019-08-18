@@ -38,9 +38,9 @@
             <md-icon>delete</md-icon>
             <span class="md-list-item-text">ゴミ箱</span>
           </md-list-item>
-          <md-list-item @click="onSettingClick">
-            <md-icon>settings</md-icon>
-            <span class="md-list-item-text">設定</span>
+          <md-list-item @click="onProfileClick">
+            <md-icon>person</md-icon>
+            <span class="md-list-item-text">プロフィール</span>
           </md-list-item>
           <md-list-item @click="onFeedbackClick">
             <md-icon>textsms</md-icon>
@@ -99,10 +99,10 @@ export default {
         name: "memoTrash"
       });
     },
-    onSettingClick() {
+    onProfileClick() {
       this.menuVisible = false;
       this.$router.push({
-        name: "setting"
+        name: "profile"
       });
     },
     onFeedbackClick() {

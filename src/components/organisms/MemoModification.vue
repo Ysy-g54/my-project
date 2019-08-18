@@ -80,6 +80,7 @@ export default {
       this.favoriteFlg = !this.favoriteFlg;
     },
     async saveMemo() {
+      await this.deleteFile();
       await this.uploadFile();
       let userId = this.$store.getters["getLoginUser"].uid;
       await (!this.isUpdateMemo
@@ -113,6 +114,14 @@ export default {
         params: { saveSuccessFlg: true }
       });
     },
+    async deleteFile() {
+      if (this.fileReference !== null && this.fileUrl === null) {
+        let storageRef = firebase.storage().ref();
+        let deleteFileRef = storageRef.child(this.fileReference);
+        await deleteFileRef.delete();
+        this.fileReference = null;
+      }
+    },
     async uploadFile() {
       if (!_.isEmpty(this.files)) {
         let storageRef = firebase.storage().ref();
@@ -129,7 +138,6 @@ export default {
     },
     removeFile() {
       this.fileUrl = null;
-      this.fileReference = null;
     },
     /**
      * Has changed

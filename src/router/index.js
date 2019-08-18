@@ -12,7 +12,7 @@ import MemoSearchResult from '@/components/pages/MemoSearchResult';
 import MemoTrash from '@/components/pages/MemoTrash';
 import MemoModification from '@/components/pages/MemoModification';
 import PhotoModification from '@/components/pages/PhotoModification';
-import Setting from '@/components/pages/Setting';
+import Profile from '@/components/pages/Profile';
 import GlobalHeader from '@/components/organisms/GlobalHeader';
 import firebase from 'firebase';
 import Mixin from '../util/mixin';
@@ -67,10 +67,10 @@ const router = new Router({
 					props: true
 				},
 				{
-					path: 'setting',
-					name: 'setting',
-					component: Setting,
-					meta: { title: '設定' },
+					path: 'profile',
+					name: 'profile',
+					component: Profile,
+					meta: { title: 'プロフィール' },
 					props: true
 				},
 				{
@@ -104,7 +104,7 @@ const router = new Router({
 			meta: { title: 'メモを更新' }
 		},
 		{
-			path: '/photo/modification',
+			path: '/profile/photo/modification',
 			name: 'photoModification',
 			component: PhotoModification,
 			meta: { title: '写真を編集' }
