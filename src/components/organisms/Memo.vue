@@ -5,6 +5,18 @@
       <span class="md-subheading">個</span>
     </div>
     <div class="body-2" v-if="!isDiscard && favoriteMemos.length !== 0">お気に入り</div>
+    <!-- <md-list v-for="memo in favoriteMemos" :key="memo.memoId" class="md-double-line">
+      <md-list-item>
+        <div class="md-list-item-text">
+          <p>{{ memo.memo }}</p>
+        </div>
+        <md-button class="md-icon-button md-list-action">
+          <md-icon>sms</md-icon>
+        </md-button>
+      </md-list-item>
+      <md-divider></md-divider>
+    </md-list>-->
+
     <MemoCard
       v-for="memo in favoriteMemos"
       :key="memo.memoId"
