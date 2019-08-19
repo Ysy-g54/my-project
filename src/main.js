@@ -27,7 +27,7 @@ new Vue({
 		Promise.resolve().then(() => {
 			store.dispatch('findLoginUser');
 			if (this.$router.history.current.name === 'login') {
-				this.$router.push({ name: 'memoList' });
+				this.$router.push({ name: 'memos' });
 			}
 		});
 	}

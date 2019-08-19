@@ -51,7 +51,7 @@ export default {
               signupUser.sendEmailVerification().then(() => {
                 this.$store.dispatch("findLoginUser").then(() => {
                   this.$router.push({
-                    name: "memoList"
+                    name: "memos"
                   });
                 });
               });

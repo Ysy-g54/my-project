@@ -60,7 +60,7 @@ export default {
         .dispatch("updateLoginUser", data)
         .then(() => {
           this.$router.push({
-            name: "memoList"
+            name: "memos"
           });
         })
         .catch(() => {
@@ -82,7 +82,7 @@ export default {
             .dispatch("findLoginUser")
             .then(() => {
               this.$router.push({
-                name: "memoList"
+                name: "memos"
               });
             })
             .catch(() => {

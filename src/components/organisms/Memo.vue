@@ -5,39 +5,34 @@
       <span class="md-subheading">個</span>
     </div>
     <div class="body-2" v-if="!isDiscard && favoriteMemos.length !== 0">お気に入り</div>
-    <!-- <md-list v-for="memo in favoriteMemos" :key="memo.memoId" class="md-double-line">
-      <md-list-item>
-        <div class="md-list-item-text">
-          <p>{{ memo.memo }}</p>
-        </div>
-        <md-button class="md-icon-button md-list-action">
-          <md-icon>sms</md-icon>
-        </md-button>
-      </md-list-item>
-      <md-divider></md-divider>
-    </md-list>-->
 
-    <MemoCard
-      v-for="memo in favoriteMemos"
-      :key="memo.memoId"
-      :isDiscard="isDiscard"
-      :memo="memo"
-      @on-edit-click="onEditClick"
-      @on-delete-click="onDeleteClick"
-      @on-favorite="onFavorite"
-      @on-done="onDone"
-    ></MemoCard>
-    <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" />
-    <MemoCard
-      v-for="memo in memos"
-      :key="memo.memoId"
-      :isDiscard="isDiscard"
-      :memo="memo"
-      @on-edit-click="onEditClick"
-      @on-delete-click="onDeleteClick"
-      @on-favorite="onFavorite"
-      @on-done="onDone"
-    ></MemoCard>
+    <div v-if="showFlg">
+      <MemoList :memos="favoriteMemos"></MemoList>
+      <MemoList :memos="memos"></MemoList>
+    </div>
+    <div v-else>
+      <MemoCard
+        v-for="memo in favoriteMemos"
+        :key="memo.memoId"
+        :isDiscard="isDiscard"
+        :memo="memo"
+        @on-edit-click="onEditClick"
+        @on-delete-click="onDeleteClick"
+        @on-favorite="onFavorite"
+        @on-done="onDone"
+      ></MemoCard>
+      <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" />
+      <MemoCard
+        v-for="memo in memos"
+        :key="memo.memoId"
+        :isDiscard="isDiscard"
+        :memo="memo"
+        @on-edit-click="onEditClick"
+        @on-delete-click="onDeleteClick"
+        @on-favorite="onFavorite"
+        @on-done="onDone"
+      ></MemoCard>
+    </div>
   </div>
   <div v-else>
     <md-empty-state md-icon="create" md-label="空っぽです。" md-description="メモを追加すると、ここに表示されます。"></md-empty-state>
@@ -47,13 +42,15 @@
 <script>
 import _ from "lodash";
 import MemoCard from "@/components/organisms/MemoCard";
+import MemoList from "@/components/organisms/MemoList";
 import firebase from "firebase";
 import "firebase/firestore";
 export default {
   data: () => ({
     favoriteMemos: [],
     memos: [],
-    database: firebase.firestore()
+    database: firebase.firestore(),
+    showFlg: true
   }),
   methods: {
     searchMemo() {
@@ -177,7 +174,8 @@ export default {
     this.searchMemo();
   },
   components: {
-    MemoCard
+    MemoCard,
+    MemoList
   }
 };
 </script>

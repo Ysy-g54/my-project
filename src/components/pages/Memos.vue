@@ -1,11 +1,11 @@
 <template>
   <div>
-    <MemoList />
+    <Memos />
   </div>
 </template>
 
 <script>
-import MemoList from "@/components/organisms/MemoList";
+import Memos from "@/components/organisms/Memos";
 export default {
   data() {
     return {};
@@ -16,7 +16,7 @@ export default {
   computed: {},
   created() {},
   components: {
-    MemoList
+    Memos
   }
 };
 </script>

@@ -142,7 +142,7 @@ export default {
           await this.filterMemo(this.$route.query.q);
         } else {
           this.$router.push({
-            name: "memoList"
+            name: "memos"
           });
         }
       },
