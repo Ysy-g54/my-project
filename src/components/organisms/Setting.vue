@@ -1,10 +1,8 @@
 <template>
   <div>
-    <md-empty-state md-icon="hourglass_empty" md-label="Coming Soon..."></md-empty-state>
-    <div v-if="false">
-      <md-radio v-model="radio" :value="0" class="md-primary">カード</md-radio>
-      <md-radio v-model="radio" :value="1" class="md-primary">リスト</md-radio>
-    </div>
+    <md-subheader>メモの表示形式</md-subheader>
+    <md-radio v-model="radio" :value="'0'" class="md-primary">カード</md-radio>
+    <md-radio v-model="radio" :value="'1'" class="md-primary">リスト</md-radio>
   </div>
 </template>
 
@@ -12,7 +10,7 @@
 export default {
   data() {
     return {
-      radio: 0
+      radio: this.$store.getters["getLoginUser"].memoDisplayForm
     };
   },
   methods: {},

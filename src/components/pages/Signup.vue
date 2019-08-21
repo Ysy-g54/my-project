@@ -26,9 +26,11 @@
 import Snackbar from "@/components/atoms/Snackbar";
 import BackHeader from "@/components/organisms/BackHeader";
 import firebase from "firebase";
+import "firebase/firestore";
 export default {
   data() {
     return {
+      database: firebase.firestore(),
       userName: "",
       mailAddress: "",
       password: "",
@@ -48,13 +50,21 @@ export default {
               displayName: this.userName
             })
             .then(() => {
-              signupUser.sendEmailVerification().then(() => {
-                this.$store.dispatch("findLoginUser").then(() => {
-                  this.$router.push({
-                    name: "memos"
+              this.database
+                .collection("userSetting")
+                .add({
+                  uid: signupUser.uid,
+                  memoDisplayForm: "0"
+                })
+                .then(() => {
+                  signupUser.sendEmailVerification().then(() => {
+                    this.$store.dispatch("findLoginUser").then(() => {
+                      this.$router.push({
+                        name: "memos"
+                      });
+                    });
                   });
                 });
-              });
             });
         })
         .catch(() => {

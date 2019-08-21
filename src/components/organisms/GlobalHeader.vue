@@ -17,7 +17,7 @@
         </div>
         <div class="md-toolbar-row">
           <md-tabs class="md-primary" :md-active-tab="'tab-' + $route.name">
-            <md-tab id="tab-memoList" md-label="メモ" :to="{name: 'memos'}"></md-tab>
+            <md-tab id="tab-memos" md-label="メモ" :to="{name: 'memos'}"></md-tab>
             <md-tab id="tab-statistics" md-label="統計" :to="{name: 'statistics'}"></md-tab>
           </md-tabs>
         </div>
@@ -139,10 +139,7 @@ export default {
     },
     "$route.name"() {
       let displayControl = "";
-      if (
-        this.$route.name === "memoList" ||
-        this.$route.name === "statistics"
-      ) {
+      if (this.$route.name === "memos" || this.$route.name === "statistics") {
         displayControl = "visible";
       } else {
         displayControl = "hidden";

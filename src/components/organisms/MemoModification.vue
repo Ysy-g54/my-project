@@ -110,7 +110,7 @@ export default {
               fileReference: this.fileReference
             }));
       this.$router.push({
-        name: "Memos",
+        name: "memos",
         params: { saveSuccessFlg: true }
       });
     },

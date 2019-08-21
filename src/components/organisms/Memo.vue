@@ -6,11 +6,7 @@
     </div>
     <div class="body-2" v-if="!isDiscard && favoriteMemos.length !== 0">お気に入り</div>
 
-    <div v-if="showFlg">
-      <MemoList :memos="favoriteMemos"></MemoList>
-      <MemoList :memos="memos"></MemoList>
-    </div>
-    <div v-else>
+    <div v-if="$store.getters['getLoginUser'].memoDisplayForm === '0'">
       <MemoCard
         v-for="memo in favoriteMemos"
         :key="memo.memoId"
@@ -32,6 +28,10 @@
         @on-favorite="onFavorite"
         @on-done="onDone"
       ></MemoCard>
+    </div>
+    <div v-else>
+      <MemoList :memos="favoriteMemos"></MemoList>
+      <MemoList :memos="memos"></MemoList>
     </div>
   </div>
   <div v-else>
