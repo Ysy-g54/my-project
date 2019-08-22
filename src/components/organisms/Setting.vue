@@ -17,7 +17,7 @@ import "firebase/firestore";
 export default {
   data() {
     return {
-      memoDisplayForm: this.$store.getters["getLoginUser"].memoDisplayForm
+      memoDisplayForm: null
     };
   },
   methods: {
