@@ -11,16 +11,29 @@
 </template>
 
 <script>
+import _ from "lodash";
 import Snackbar from "@/components/atoms/Snackbar";
 import firebase from "firebase";
 import "firebase/firestore";
 export default {
   data() {
     return {
-      memoDisplayForm: null
+      memoDisplayForm: this.$store.getters["getLoginUser"].memoDisplayForm
     };
   },
   methods: {
+    searchMemoDisplayForm() {
+      firebase
+        .firestore()
+        .collection("userSetting")
+        .where("uid", "==", this.$store.getters["getLoginUser"].uid)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(document => {
+            this.memoDisplayForm = document.data().memoDisplayForm;
+          });
+        });
+    },
     saveSetting() {
       firebase
         .firestore()
@@ -41,7 +54,11 @@ export default {
   },
   computed: {},
   mounted() {},
-  created() {},
+  created() {
+    if (_.isEmpty(this.memoDisplayForm)) {
+      this.searchMemoDisplayForm();
+    }
+  },
   components: {
     Snackbar
   }

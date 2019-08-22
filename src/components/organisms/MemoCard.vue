@@ -50,9 +50,7 @@
 </template>
 
 <script>
-import _ from "lodash";
 import { categories } from "../../constants";
-import moment from "moment";
 export default {
   data: () => ({
     memoId: "",
@@ -68,14 +66,6 @@ export default {
         }
       });
       return categoryNm;
-    },
-    // FIXME 共通化する
-    formatDate(date) {
-      if (!_.isDate(date) && _.isEmpty(date)) {
-        return "";
-      }
-      let m = moment(date.toDate());
-      return m.format("YYYY/MM/DD");
     },
     onEditClick() {
       this.$emit("on-edit-click", this.memo.memoId);

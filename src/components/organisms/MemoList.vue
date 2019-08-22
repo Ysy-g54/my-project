@@ -5,6 +5,7 @@
         <md-list-item>
           <div class="md-list-item-text">
             <p>{{ memo.memo }}</p>
+            <span>作成日：{{ formatDate(memo.insertDateTime) }}</span>
           </div>
           <md-button class="md-icon-button md-list-action">
             <md-icon>more_vert</md-icon>
