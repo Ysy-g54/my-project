@@ -1,10 +1,15 @@
 <template>
   <Header>
     <div slot="header">
-      <BackHeader :title="'書き留める'" @save-success="saveSuccess"></BackHeader>
+      <BackHeader
+        :title="'書き留める'"
+        :isShowArchiveButton="true"
+        @save-success="saveSuccess"
+        @archive-success="archiveSuccess"
+      ></BackHeader>
     </div>
     <div slot="main">
-      <MemoModification :isSavable="isSavable"></MemoModification>
+      <MemoModification :isArchive="isArchive" :isSavable="isSavable"></MemoModification>
     </div>
   </Header>
 </template>
@@ -16,12 +21,16 @@ import Header from "@/components/pages/Header";
 export default {
   data() {
     return {
+      isArchive: false,
       isSavable: false
     };
   },
   methods: {
     saveSuccess() {
       this.isSavable = true;
+    },
+    archiveSuccess() {
+      this.isArchive = !this.isArchive;
     }
   },
   created() {},

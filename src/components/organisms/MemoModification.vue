@@ -83,7 +83,7 @@ export default {
       await this.deleteFile();
       await this.uploadFile();
       let userId = this.$store.getters["getLoginUser"].uid;
-      await (!this.isUpdateMemo
+      let saveData = await (!this.isUpdateMemo
         ? this.database.collection("memo").add({
             categoryId: this.categoryId,
             memo: this.memo,
@@ -109,6 +109,12 @@ export default {
               fileUrl: this.fileUrl,
               fileReference: this.fileReference
             }));
+      if (this.memoId === null) {
+        this.isUpdateMemo = true;
+        this.memoId = saveData.id;
+      }
+    },
+    goMemos() {
       this.$router.push({
         name: "memos",
         params: { saveSuccessFlg: true }
@@ -208,12 +214,17 @@ export default {
     }
   },
   watch: {
-    isSavable() {
-      this.saveMemo();
+    async isSavable() {
+      await this.saveMemo();
+      await this.goMemos();
+    },
+    async isArchive() {
+      await this.saveMemo();
     }
   },
   computed: {},
   props: {
+    isArchive: { type: Boolean, default: false },
     isSavable: { type: Boolean, default: false }
   },
   mounted() {},

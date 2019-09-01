@@ -8,8 +8,11 @@
           </md-button>
           <span class="md-subheading">{{ title }}</span>
         </div>
-        <div v-if="isShowSaveButton" class="md-toolbar-section-end">
-          <md-button class="md-icon-button" @click="save">
+        <div class="md-toolbar-section-end">
+          <md-button v-if="isShowArchiveButton" class="md-icon-button" @click="archive">
+            <md-icon>archive</md-icon>
+          </md-button>
+          <md-button v-if="isShowSaveButton" class="md-icon-button" @click="save">
             <md-icon>send</md-icon>
           </md-button>
         </div>
@@ -29,9 +32,13 @@ export default {
     },
     save() {
       this.$emit("save-success");
+    },
+    archive() {
+      this.$emit("archive-success");
     }
   },
   props: {
+    isShowArchiveButton: { type: Boolean, default: false },
     isShowSaveButton: { type: Boolean, default: true },
     title: { type: String, default: "" }
   },

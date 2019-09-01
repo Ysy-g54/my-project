@@ -158,8 +158,8 @@ export default {
   },
   props: {},
   computed: {},
-  created() {
-    this.searchMemo();
+  async created() {
+    await this.searchMemo();
   },
   components: {
     MemoCard
