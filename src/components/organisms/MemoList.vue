@@ -1,15 +1,25 @@
 <template>
   <div>
-    <div v-for="memo in memos" :key="memo.memoId">
+    <div v-for="(memo, index) in memos" :key="memo.memoId">
       <md-list class="md-double-line">
         <md-list-item>
           <div class="md-list-item-text">
             <p>{{ memo.memo }}</p>
             <span>作成日：{{ formatDate(memo.insertDateTime) }}</span>
           </div>
-          <md-button class="md-icon-button md-list-action">
-            <md-icon>more_vert</md-icon>
-          </md-button>
+          <md-menu md-size="small">
+            <md-button class="md-icon-button" md-menu-trigger>
+              <md-icon>more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item @click="onEditClick(memos[index].memoId)">
+                <span>{{ editMessage }}</span>
+              </md-menu-item>
+              <md-menu-item @click="onDeleteClick(memos[index])">
+                <span>{{ deleteMessage }}</span>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
         </md-list-item>
         <md-divider></md-divider>
       </md-list>
@@ -19,115 +29,20 @@
 
 <script>
 export default {
-  data: () => ({}),
+  data: () => ({
+    editMessage: "",
+    deleteMessage: ""
+  }),
   methods: {
-    // searchMemo() {
-    //   this.database
-    //     .collection("memo")
-    //     .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-    //     .where("deleteFlg", "==", this.isDiscard)
-    //     .get()
-    //     .then(querySnapshot => {
-    //       let memosSnapshot = [];
-    //       let favoriteMemosSnapshot = [];
-    //       querySnapshot.forEach(document => {
-    //         if (document.data().favoriteFlg) {
-    //           let favoriteMemoSnapshot = _.set(
-    //             document.data(),
-    //             "memoId",
-    //             document.id
-    //           );
-    //           favoriteMemosSnapshot.push(favoriteMemoSnapshot);
-    //         } else {
-    //           let memoSnapshot = _.set(document.data(), "memoId", document.id);
-    //           memosSnapshot.push(memoSnapshot);
-    //         }
-    //       });
-    //       this.favoriteMemos = favoriteMemosSnapshot;
-    //       this.memos = memosSnapshot;
-    //     });
-    // },
-    // onEditClick(memoId) {
-    //   if (this.isDiscard) {
-    //     this.database
-    //       .collection("memo")
-    //       .doc(memoId)
-    //       .update({
-    //         deleteFlg: false
-    //       })
-    //       .then(() => {
-    //         this.searchMemo();
-    //         this.$emit("restore-memo");
-    //       })
-    //       .catch(error => {
-    //         console.error("Error adding document: ", error);
-    //       });
-    //   } else {
-    //     this.$router.push({
-    //       name: "memoModification",
-    //       params: { memoId }
-    //     });
-    //   }
-    // },
-    // onDeleteClick(memoId) {
-    //   this.memoId = memoId;
-    //   if (this.isDiscard) {
-    //     this.$emit("delete-confirm");
-    //   } else {
-    //     this.deleteMemo();
-    //   }
-    // },
-    // onFavorite(memo) {
-    //   this.database
-    //     .collection("memo")
-    //     .doc(memo.memoId)
-    //     .update({
-    //       favoriteFlg: !memo.favoriteFlg
-    //     })
-    //     .then(() => {
-    //       this.searchMemo();
-    //     })
-    //     .catch(error => {
-    //       console.error("Error adding document: ", error);
-    //     });
-    // },
-    // onDone(memo) {
-    //   this.database
-    //     .collection("memo")
-    //     .doc(memo.memoId)
-    //     .update({
-    //       doneFlg: !memo.doneFlg
-    //     })
-    //     .then(() => {
-    //       this.searchMemo();
-    //     })
-    //     .catch(error => {
-    //       console.error("Error adding document: ", error);
-    //     });
-    // },
-    // deleteMemo() {
-    //   (this.isDiscard
-    //     ? this.database
-    //         .collection("memo")
-    //         .doc(this.memoId)
-    //         .delete()
-    //     : this.database
-    //         .collection("memo")
-    //         .doc(this.memoId)
-    //         .update({
-    //           deleteFlg: true
-    //         })
-    //   )
-    //     .then(() => {
-    //       this.searchMemo();
-    //       this.$emit("delete-memo");
-    //     })
-    //     .catch(error => {
-    //       console.error("Error adding document: ", error);
-    //     });
-    // }
+    onEditClick(memoId) {
+      this.$emit("on-edit-click", memoId);
+    },
+    onDeleteClick(memo) {
+      this.$emit("on-delete-click", memo);
+    }
   },
   props: {
+    isDiscard: { type: Boolean, default: false },
     memos: { type: Array, required: false }
   },
   computed: {
@@ -139,7 +54,8 @@ export default {
     // }
   },
   created() {
-    // this.searchMemo();
+    this.editMessage = this.isDiscard ? "復元する" : "編集する";
+    this.deleteMessage = this.isDiscard ? "完全に削除する" : "ゴミ箱に移動する";
   },
   components: {}
 };

@@ -71,7 +71,7 @@ export default {
       this.$emit("on-edit-click", this.memo.memoId);
     },
     onDeleteClick() {
-      this.$emit("on-delete-click", this.memo.memoId);
+      this.$emit("on-delete-click", this.memo);
     },
     onDoneClick() {
       this.$emit("on-done", this.memo);

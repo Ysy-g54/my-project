@@ -4,7 +4,7 @@
       <span class="md-title">{{ memoCount }}</span>
       <span class="md-subheading">個</span>
     </div>
-    <div class="body-2" v-if="!isDiscard && favoriteMemos.length !== 0">お気に入り</div>
+    <div class="body-2" v-if="!isDiscard && favoriteMemos.length !== 0">スター付きメモ</div>
 
     <div v-if="$store.getters['getLoginUser'].memoDisplayForm === '0'">
       <MemoCard
@@ -30,8 +30,18 @@
       ></MemoCard>
     </div>
     <div v-else>
-      <MemoList :memos="favoriteMemos"></MemoList>
-      <MemoList :memos="memos"></MemoList>
+      <MemoList
+        :isDiscard="isDiscard"
+        :memos="favoriteMemos"
+        @on-edit-click="onEditClick"
+        @on-delete-click="onDeleteClick"
+      ></MemoList>
+      <MemoList
+        :isDiscard="isDiscard"
+        :memos="memos"
+        @on-edit-click="onEditClick"
+        @on-delete-click="onDeleteClick"
+      ></MemoList>
     </div>
   </div>
   <div v-else>
@@ -101,12 +111,13 @@ export default {
         });
       }
     },
-    onDeleteClick(memoId) {
-      this.memoId = memoId;
+    async onDeleteClick(memo) {
+      await this.deleteFile(memo);
+      this.memoId = memo.memoId;
       if (this.isDiscard) {
-        this.$emit("delete-confirm");
+        await this.$emit("delete-confirm");
       } else {
-        this.deleteMemo();
+        await this.deleteMemo();
       }
     },
     onFavorite(memo) {
@@ -157,6 +168,13 @@ export default {
         .catch(error => {
           console.error("Error adding document: ", error);
         });
+    },
+    async deleteFile(memo) {
+      if (this.isDiscard && memo.fileReference !== null) {
+        let storageRef = firebase.storage().ref();
+        let deleteFileRef = storageRef.child(memo.fileReference);
+        await deleteFileRef.delete();
+      }
     }
   },
   props: {
