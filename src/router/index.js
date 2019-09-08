@@ -3,6 +3,7 @@ import { firestorePlugin } from "vuefire";
 import Router from "vue-router";
 import Vuex from "vuex";
 import VueMaterial from "vue-material";
+import ActionHistory from "@/components/pages/ActionHistory";
 import Feedback from "@/components/pages/Feedback";
 import Login from "@/components/pages/Login";
 import Signup from "@/components/pages/Signup";
@@ -47,10 +48,10 @@ const router = new Router({
 			props: true,
 			children: [
 				{
-					path: "Feedback",
-					name: "Feedback",
-					component: Feedback,
-					meta: { title: "サインアップ" },
+					path: "action-history",
+					name: "actionHistory",
+					component: ActionHistory,
+					meta: { title: "行動履歴" },
 					props: true
 				},
 				{

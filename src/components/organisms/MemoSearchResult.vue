@@ -44,12 +44,12 @@ export default {
           });
         });
     },
-    filterMemo(q) {
-      let filterCategoryIds = categories
+    async filterMemo(q) {
+      let filterCategoryIds = await categories
         .filter(category => category.categoryNm.includes(q))
         .map(filterCategory => filterCategory["categoryId"]);
       this.resultMemos = [];
-      this.resultMemos = this.memos.filter(
+      this.resultMemos = await this.memos.filter(
         memo =>
           memo.memo.includes(q) ||
           filterCategoryIds.find(categoryId => categoryId === memo.categoryId)

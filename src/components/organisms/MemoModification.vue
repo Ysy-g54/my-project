@@ -49,6 +49,7 @@
         </md-select>
       </md-field>
     </div>
+    <Snackbar ref="snackbar" :message="'書き留めました。'"></Snackbar>
   </div>
 </template>
 
@@ -56,6 +57,7 @@
 import _ from "lodash";
 import firebase from "firebase";
 import fileUpload from "vue-upload-component";
+import Snackbar from "@/components/atoms/Snackbar";
 import { categories } from "../../constants";
 import "firebase/firestore";
 export default {
@@ -111,7 +113,7 @@ export default {
             }));
       if (this.memoId === null) {
         this.isUpdateMemo = true;
-        this.memoId = saveData.id;
+        await this.searchMemoByMemoId(saveData.id);
       }
     },
     goMemos() {
@@ -211,6 +213,30 @@ export default {
           newFile.thumb = newFile.blob;
         }
       }
+    },
+    searchMemoByMemoId(memoId) {
+      this.database
+        .collection("memo")
+        .doc(memoId)
+        .get()
+        .then(querySnapshot => {
+          if (querySnapshot.exists) {
+            let data = querySnapshot.data();
+            _.set(data, "id", querySnapshot.id);
+            this.setMemoData(data);
+          }
+        });
+    },
+    setMemoData(data) {
+      this.categoryId = data.categoryId;
+      this.memo = data.memo;
+      this.memoId = data.id;
+      this.insertDateTime = data.insertDateTime;
+      this.favoriteFlg = data.favoriteFlg;
+      this.doneFlg = data.doneFlg;
+      this.isUpdateMemo = true;
+      this.fileUrl = data.fileUrl;
+      this.fileReference = data.fileReference;
     }
   },
   watch: {
@@ -220,6 +246,7 @@ export default {
     },
     async isArchive() {
       await this.saveMemo();
+      this.$refs.snackbar.openSnackbar();
     }
   },
   computed: {},
@@ -228,30 +255,14 @@ export default {
     isSavable: { type: Boolean, default: false }
   },
   mounted() {},
-  created() {
+  async created() {
     if (this.$route.params.memoId !== undefined) {
-      this.database
-        .collection("memo")
-        .doc(this.$route.params.memoId)
-        .get()
-        .then(querySnapshot => {
-          if (querySnapshot.exists) {
-            let data = querySnapshot.data();
-            this.categoryId = data.categoryId;
-            this.memo = data.memo;
-            this.memoId = querySnapshot.id;
-            this.insertDateTime = data.insertDateTime;
-            this.favoriteFlg = data.favoriteFlg;
-            this.doneFlg = data.doneFlg;
-            this.isUpdateMemo = true;
-            this.fileUrl = data.fileUrl;
-            this.fileReference = data.fileReference;
-          }
-        });
+      await this.searchMemoByMemoId(this.$route.params.memoId);
     }
   },
   components: {
-    fileUpload
+    fileUpload,
+    Snackbar
   }
 };
 </script>

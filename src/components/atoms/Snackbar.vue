@@ -31,7 +31,7 @@ export default {
   },
   props: {
     message: { type: String, default: "RETRY" },
-    button: { type: String, required: false },
+    button: { type: String, default: "", required: false },
     duration: { type: Number, default: 4000, required: false }
   },
   mounted() {},

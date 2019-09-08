@@ -36,6 +36,7 @@
         @on-edit-click="onEditClick"
         @on-delete-click="onDeleteClick"
       ></MemoList>
+      <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" />
       <MemoList
         :isDiscard="isDiscard"
         :memos="memos"
