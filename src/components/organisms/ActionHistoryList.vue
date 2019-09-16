@@ -4,10 +4,8 @@
       <md-list class="md-double-line">
         <md-list-item>
           <div class="md-list-item-text">
-            <p>
-              {{ formatDate(actionHistory.actionDateTime, "YYYY/MM/DD HH:mm") + " "
-              + getDataNm(actionHistory.dataType) + "を" + getActionNm(actionHistory.actionType) + "しました。" }}
-            </p>
+            <p>{{ getDataNm(actionHistory.dataType) + "を" + getActionNm(actionHistory.actionType) + "しました。" }}</p>
+            <p>{{ formatDate(actionHistory.actionDateTime, "YYYY/MM/DD HH:mm") }}</p>
           </div>
         </md-list-item>
         <md-divider></md-divider>
@@ -20,6 +18,7 @@
 import _ from "lodash";
 import firebase from "firebase";
 import "firebase/firestore";
+// import moment from "moment";
 import { actionTypes, dataTypes } from "../../constants";
 export default {
   data() {
@@ -33,6 +32,7 @@ export default {
       await this.database
         .collection("actionHistory")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
+        .orderBy("actionDateTime", "desc")
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(document => {
