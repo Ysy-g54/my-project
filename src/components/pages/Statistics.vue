@@ -24,9 +24,10 @@ export default {
   methods: {
     formatCategory(categoryId) {
       let categoryNm = "";
-      categories.forEach(category => {
+      categories.find(category => {
         if (categoryId === category.categoryId) {
           categoryNm = category.categoryNm;
+          return true;
         }
       });
       return categoryNm;

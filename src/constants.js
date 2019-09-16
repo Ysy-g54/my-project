@@ -12,16 +12,16 @@ export const categories = [
  * アクションタイプ
  */
 export const actionTypes = [
-	{ actionType: "add", categoryNm: "追加" },
-	{ actionType: "update", categoryNm: "更新" },
-	{ actionType: "delete", categoryNm: "削除" }
+	{ actionType: "add", actionNm: "追加" },
+	{ actionType: "update", actionNm: "更新" },
+	{ actionType: "delete", actionNm: "削除" }
 ];
 
 /**
  * データタイプ
  */
 export const dataTypes = [
-	{ dataType: "memo", categoryNm: "メモ" },
-	{ dataType: "setting", categoryNm: "設定" },
-	{ dataType: "profile", categoryNm: "プロフィール" }
+	{ dataType: "memo", dataNm: "メモ" },
+	{ dataType: "setting", dataNm: "設定" },
+	{ dataType: "profile", dataNm: "プロフィール" }
 ];

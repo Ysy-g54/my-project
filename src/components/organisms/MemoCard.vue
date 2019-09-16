@@ -60,11 +60,14 @@ export default {
   methods: {
     formatCategory(categoryId) {
       let categoryNm = "";
-      categories.forEach(category => {
-        if (categoryId === category.categoryId) {
-          categoryNm = category.categoryNm;
-        }
-      });
+      categoryId === ""
+        ? (categoryNm = "")
+        : categories.find(category => {
+            if (categoryId === category.categoryId) {
+              categoryNm = category.categoryNm;
+              return true;
+            }
+          });
       return categoryNm;
     },
     onEditClick() {

@@ -118,9 +118,10 @@ export default {
     },
     async registerActionHistory(memoId, actionType) {
       await this.database.collection("actionHistory").add({
-        actionType: actionTypes[0].actionType,
+        actionType: actionType,
         dataType: dataTypes[0].dataType,
         memoId: memoId,
+        actionDateTime: firebase.firestore.FieldValue.serverTimestamp(),
         userId: this.$store.getters["getLoginUser"].uid
       });
     },

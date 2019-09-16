@@ -4,7 +4,10 @@
       <md-list class="md-double-line">
         <md-list-item>
           <div class="md-list-item-text">
-            <p>{{ "テスト" }}</p>
+            <p>
+              {{ formatDate(actionHistory.actionDateTime, "YYYY/MM/DD HH:mm") + " "
+              + getDataNm(actionHistory.dataType) + "を" + getActionNm(actionHistory.actionType) + "しました。" }}
+            </p>
           </div>
         </md-list-item>
         <md-divider></md-divider>
@@ -17,6 +20,7 @@
 import _ from "lodash";
 import firebase from "firebase";
 import "firebase/firestore";
+import { actionTypes, dataTypes } from "../../constants";
 export default {
   data() {
     return {
@@ -37,6 +41,26 @@ export default {
             this.actionHistorys.push(data);
           });
         });
+    },
+    getActionNm(actionType) {
+      let actionNm = "";
+      actionTypes.find(action => {
+        if (actionType === action.actionType) {
+          actionNm = action.actionNm;
+          return true;
+        }
+      });
+      return actionNm;
+    },
+    getDataNm(dataType) {
+      let dataNm = "";
+      dataTypes.find(data => {
+        if (dataType === data.dataType) {
+          dataNm = data.dataNm;
+          return true;
+        }
+      });
+      return dataNm;
     }
   },
   watch: {},

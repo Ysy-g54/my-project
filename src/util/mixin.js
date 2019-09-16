@@ -3,12 +3,16 @@ import moment from "moment";
 
 export default {
 	methods: {
-		formatDate(date) {
+		formatDate(date, format) {
 			if (!_.isDate(date) && _.isEmpty(date)) {
 				return "";
 			}
 			let m = moment(date.toDate());
-			return m.format("YYYY/MM/DD");
+			if (format === undefined) {
+				return m.format("YYYY/MM/DD");
+			} else {
+				return m.format(format);
+			}
 		}
 	},
 	mounted() {
