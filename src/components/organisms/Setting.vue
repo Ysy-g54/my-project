@@ -26,7 +26,7 @@ export default {
       firebase
         .firestore()
         .collection("userSetting")
-        .where("uid", "==", this.$store.getters["getLoginUser"].uid)
+        .where("userId", "==", this.$store.getters["getLoginUser"].uid)
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(document => {

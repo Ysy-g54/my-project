@@ -53,7 +53,7 @@ export default {
               this.database
                 .collection("userSetting")
                 .add({
-                  uid: signupUser.uid,
+                  userId: signupUser.uid,
                   memoDisplayForm: "0"
                 })
                 .then(() => {

@@ -2,7 +2,7 @@
   <div>
     <md-field>
       <label>メモ内容</label>
-      <md-textarea v-autofocus v-model="memo"></md-textarea>
+      <md-textarea v-autofocus v-model="memo" rows="10"></md-textarea>
     </md-field>
     <div v-for="file in files" :key="file.id">
       <md-button class="md-icon-button" @click="$refs.upload.remove(file)">
@@ -58,7 +58,7 @@ import _ from "lodash";
 import firebase from "firebase";
 import fileUpload from "vue-upload-component";
 import Snackbar from "@/components/atoms/Snackbar";
-import { categories } from "../../constants";
+import { categories, actionTypes, dataTypes } from "../../constants";
 import "firebase/firestore";
 export default {
   data() {
@@ -113,8 +113,16 @@ export default {
             }));
       if (this.memoId === null) {
         this.isUpdateMemo = true;
-        await this.searchMemoByMemoId(saveData.id);
+        this.memoId = saveData.id;
       }
+    },
+    async registerActionHistory(memoId, actionType) {
+      await this.database.collection("actionHistory").add({
+        actionType: actionTypes[0].actionType,
+        dataType: dataTypes[0].dataType,
+        memoId: memoId,
+        userId: this.$store.getters["getLoginUser"].uid
+      });
     },
     goMemos() {
       this.$router.push({
@@ -242,10 +250,13 @@ export default {
   watch: {
     async isSavable() {
       await this.saveMemo();
+      await this.registerActionHistory(this.memoId, actionTypes[0].actionType);
       await this.goMemos();
     },
     async isArchive() {
       await this.saveMemo();
+      await this.registerActionHistory(this.memoId, actionTypes[1].actionType);
+      await this.searchMemoByMemoId(this.memoId);
       this.$refs.snackbar.openSnackbar();
     }
   },
@@ -272,5 +283,9 @@ export default {
 .md-field.md-has-textarea:not(.md-autogrow):after,
 .md-field.md-has-textarea:not(.md-autogrow):before {
   border: hidden;
+}
+
+.md-field.md-has-textarea:not(.md-autogrow) .md-textarea {
+  min-height: 400px;
 }
 </style>

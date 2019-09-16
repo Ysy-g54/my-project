@@ -19,7 +19,7 @@
           <md-tabs class="md-primary" :md-active-tab="'tab-' + $route.name">
             <md-tab id="tab-memos" md-label="メモ" :to="{name: 'memos'}"></md-tab>
             <md-tab id="tab-statistics" md-label="統計" :to="{name: 'statistics'}"></md-tab>
-            <md-tab id="tab-action-history" md-label="行動履歴" :to="{name: 'actionHistory'}"></md-tab>
+            <md-tab id="tab-actionHistory" md-label="行動履歴" :to="{name: 'actionHistory'}"></md-tab>
           </md-tabs>
         </div>
       </md-app-toolbar>
@@ -140,7 +140,11 @@ export default {
     },
     "$route.name"() {
       let displayControl = "";
-      if (this.$route.name === "memos" || this.$route.name === "statistics") {
+      if (
+        this.$route.name === "memos" ||
+        this.$route.name === "statistics" ||
+        this.$route.name === "actionHistory"
+      ) {
         displayControl = "visible";
       } else {
         displayControl = "hidden";

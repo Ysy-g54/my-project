@@ -1,10 +1,11 @@
 <template>
   <div>
-    <md-empty-state md-icon="hourglass_empty" md-label="Coming Soon..."></md-empty-state>
+    <ActionHistoryList />
   </div>
 </template>
 
 <script>
+import ActionHistoryList from "@/components/organisms/ActionHistoryList";
 export default {
   data() {
     return {};
@@ -13,7 +14,9 @@ export default {
   watch: {},
   computed: {},
   created() {},
-  components: {}
+  components: {
+    ActionHistoryList
+  }
 };
 </script>
 

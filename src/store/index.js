@@ -26,7 +26,7 @@ const store = new Vuex.Store({
 				firebase
 					.firestore()
 					.collection("userSetting")
-					.where("uid", "==", state.loginUser.uid)
+					.where("userId", "==", state.loginUser.uid)
 					.get()
 					.then(querySnapshot => {
 						querySnapshot.forEach(document => {
