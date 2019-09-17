@@ -36,6 +36,7 @@ export default {
         .collection("memo")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
         .where("deleteFlg", "==", false)
+        .orderBy("insertDateTime", "desc")
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(document => {

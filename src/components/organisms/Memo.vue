@@ -69,6 +69,7 @@ export default {
         .collection("memo")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
         .where("deleteFlg", "==", this.isDiscard)
+        .orderBy("insertDateTime", "desc")
         .get()
         .then(querySnapshot => {
           let memosSnapshot = [];
