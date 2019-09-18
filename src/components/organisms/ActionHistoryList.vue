@@ -2,7 +2,7 @@
   <div>
     <div v-for="actionHistory in actionHistorys" :key="actionHistory.actionHistoryId">
       <md-list class="md-double-line">
-        <md-list-item>
+        <md-list-item @click="goMemoModificationByMemoId(actionHistory.memoId)">
           <div class="md-list-item-text">
             <p>{{ getDataNm(actionHistory.dataType) + "を" + getActionNm(actionHistory.actionType) + "しました。" }}</p>
             <p>{{ formatDate(actionHistory.actionDateTime, "YYYY/MM/DD HH:mm") }}</p>
@@ -41,6 +41,14 @@ export default {
             this.actionHistorys.push(data);
           });
         });
+    },
+    goMemoModificationByMemoId(memoId) {
+      if (memoId !== "") {
+        this.$router.push({
+          name: "memoModification",
+          params: { memoId }
+        });
+      }
     },
     getActionNm(actionType) {
       let actionNm = "";

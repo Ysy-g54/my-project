@@ -49,7 +49,7 @@
         </md-select>
       </md-field>
     </div>
-    <Snackbar ref="snackbar" :message="'書き留めました。'"></Snackbar>
+    <Snackbar ref="snackbar" :message="snackbarMessage"></Snackbar>
   </div>
 </template>
 
@@ -74,7 +74,8 @@ export default {
       doneFlg: false,
       fileUrl: null,
       fileReference: null,
-      files: []
+      files: [],
+      snackbarMessage: ""
     };
   },
   methods: {
@@ -233,6 +234,10 @@ export default {
             let data = querySnapshot.data();
             _.set(data, "id", querySnapshot.id);
             this.setMemoData(data);
+          } else {
+            this.snackbarMessage =
+              "更新するメモがないため、新規メモを表示しています。";
+            this.$refs.snackbar.openSnackbar();
           }
         });
     },
@@ -256,8 +261,10 @@ export default {
     },
     async isArchive() {
       await this.saveMemo();
+      this.files = [];
       await this.registerActionHistory(this.memoId, actionTypes[1].actionType);
       await this.searchMemoByMemoId(this.memoId);
+      this.snackbarMessage = "書き留めました。";
       this.$refs.snackbar.openSnackbar();
     }
   },

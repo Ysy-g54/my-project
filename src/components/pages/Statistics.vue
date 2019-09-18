@@ -35,11 +35,10 @@ export default {
   },
   watch: {},
   computed: {},
-  created() {
-    this.database
+  async created() {
+    await this.database
       .collection("memo")
       .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-      .where("deleteFlg", "==", false)
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(document => {
@@ -77,8 +76,8 @@ export default {
             }
           });
         });
-        this.isRenderChart = true;
       });
+    this.isRenderChart = true;
   },
   components: {
     BarChart,

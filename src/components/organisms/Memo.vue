@@ -52,6 +52,7 @@
 
 <script>
 import _ from "lodash";
+import { actionTypes, dataTypes } from "../../constants";
 import MemoCard from "@/components/organisms/MemoCard";
 import MemoList from "@/components/organisms/MemoList";
 import firebase from "firebase";
@@ -164,12 +165,24 @@ export default {
             })
       )
         .then(() => {
+          if (this.isDiscard) {
+            this.registerActionHistory();
+          }
           this.searchMemo();
           this.$emit("delete-memo");
         })
         .catch(error => {
           console.error("Error adding document: ", error);
         });
+    },
+    async registerActionHistory() {
+      await this.database.collection("actionHistory").add({
+        actionType: actionTypes[2].actionType,
+        dataType: dataTypes[0].dataType,
+        memoId: "",
+        actionDateTime: firebase.firestore.FieldValue.serverTimestamp(),
+        userId: this.$store.getters["getLoginUser"].uid
+      });
     },
     async deleteFile(memo) {
       if (this.isDiscard && memo.fileReference !== null) {
