@@ -1,7 +1,13 @@
 <template>
   <md-card class="md-elevation-1">
     <md-card-content>
-      <div class="text-word-wrap">{{ memo.memo }}</div>
+      <div v-if="rowsCount > 5 && showableOmittedText" class="text-word-wrap">{{ getOmittedMemo }}</div>
+      <div v-else class="text-word-wrap">{{ memo.memo }}</div>
+      <div
+        v-if="rowsCount > 5 && showableOmittedText"
+        class="md-subhead see-next"
+        @click="showFullText"
+      >{{ "続きを見る" }}</div>
       <img
         v-if="memo.fileUrl !== null"
         class="lazyload"
@@ -55,7 +61,8 @@ export default {
   data: () => ({
     memoId: "",
     editMessage: "",
-    deleteMessage: ""
+    deleteMessage: "",
+    showableOmittedText: false
   }),
   methods: {
     formatCategory(categoryId) {
@@ -81,9 +88,33 @@ export default {
     },
     onFavoriteClick() {
       this.$emit("on-favorite", this.memo);
+    },
+    showFullText() {
+      this.showableOmittedText = false;
     }
   },
-  computed: {},
+  computed: {
+    rowsCount() {
+      let text = this.memo.memo;
+      if (text.match(/\r\n|\n/g) !== null) {
+        return text.match(/\r\n|\n/g).length;
+      } else {
+        return 0;
+      }
+    },
+    getOmittedMemo() {
+      let omittedMemo = "";
+      let assignmentCount = 0;
+      this.memo.memo.split(/\r\n|\n/g).some(text => {
+        if (assignmentCount >= 4) {
+          return true;
+        }
+        omittedMemo += text;
+        assignmentCount++;
+      });
+      return omittedMemo;
+    }
+  },
   props: {
     isDiscard: { type: Boolean, default: false },
     memo: { type: Object, default: {} }
@@ -91,6 +122,9 @@ export default {
   created() {
     this.editMessage = this.isDiscard ? "復元する" : "編集する";
     this.deleteMessage = this.isDiscard ? "完全に削除する" : "ゴミ箱に移動する";
+    if (this.rowsCount > 5) {
+      this.showableOmittedText = true;
+    }
   },
   components: {}
 };
@@ -106,5 +140,9 @@ export default {
 }
 .text-word-wrap {
   word-wrap: break-word;
+}
+.see-next {
+  cursor: pointer;
+  cursor: hand;
 }
 </style>
