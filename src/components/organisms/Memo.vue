@@ -4,7 +4,7 @@
       <span class="md-title">{{ memoCount }}</span>
       <span class="md-subheading">個</span>
     </div>
-    <div class="body-2" v-if="!isDiscard && favoriteMemos.length !== 0">スター付きメモ</div>
+    <md-subheader v-if="!isDiscard && favoriteMemos.length !== 0">スター付きメモ</md-subheader>
 
     <div v-if="$store.getters['getLoginUser'].memoDisplayForm === '0'">
       <MemoCard
@@ -18,6 +18,7 @@
         @on-done="onDone"
       ></MemoCard>
       <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" />
+      <md-subheader>メモ</md-subheader>
       <MemoCard
         v-for="memo in memos"
         :key="memo.memoId"

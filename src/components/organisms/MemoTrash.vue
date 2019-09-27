@@ -1,7 +1,7 @@
 <template>
   <div>
     <Dialog ref="dialog" :title="title" @confirm-dialog="confirmDialog"></Dialog>
-    <span class="md-title">ゴミ箱</span>
+    <md-subheader>ゴミ箱</md-subheader>
     <div>
       <Memo
         ref="memo"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="md-title">カテゴリごとの集計</span>
+    <md-subheader>カテゴリごとの集計</md-subheader>
     <PieChart :chartData="memoCategories" :isRenderChart="isRenderChart"></PieChart>
     <!-- <BarChart :chartData="memoCategories"></BarChart> -->
   </div>
