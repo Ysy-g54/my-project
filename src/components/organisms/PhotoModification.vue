@@ -115,14 +115,31 @@ export default {
     zoomOut() {
       this.$refs.cropper.relativeZoom(-0.1);
     },
+    async deleteFile() {
+      if (this.$store.getters["getLoginUser"].photoUrl !== null) {
+        let storageRef = firebase.storage().ref();
+        let deleteFileRef = storageRef.child(
+          this.$store.getters["getLoginUser"].photoReference
+        );
+        await deleteFileRef.delete();
+      }
+    },
     async uploadFile() {
       if (this.files[0].type.includes("image/")) {
-        let storageRef = firebase.storage().ref();
-        let uploadRef = storageRef.child(
+        let photoReference =
           this.$store.getters["getLoginUser"].uid +
-            "-icon-" +
-            this.files[0].name
-        );
+          "-icon-" +
+          this.files[0].name;
+
+        await this.database
+          .collection("userSetting")
+          .doc(this.$store.getters["getLoginUser"].userSettingId)
+          .update({
+            photoReference: photoReference
+          });
+
+        let storageRef = firebase.storage().ref();
+        let uploadRef = storageRef.child(photoReference);
         let uploadResult = await uploadRef.put(this.files[0]);
         this.resultUrl = await storageRef
           .child(`${uploadResult.metadata.fullPath}`)
@@ -133,6 +150,7 @@ export default {
       }
     },
     async updateItem() {
+      await this.deleteFile();
       let isUploadFile = await this.uploadFile();
       if (isUploadFile) {
         let currentUser = firebase.auth().currentUser;
@@ -169,7 +187,7 @@ export default {
     }
   },
   watch: {
-    async isSavable() {
+    isSavable() {
       if (!_.isEmpty(this.files)) {
         this.formatPhoto();
         this.openDialog();

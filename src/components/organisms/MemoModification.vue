@@ -177,10 +177,11 @@ export default {
           }
         }
       }
-      if (!newFile && oldFile) {
-        // remove
-        if (oldFile.success && oldFile.response.id) {
-        }
+      // 登録済みの画像の×ボタンをクリックせずに画像をアップロードすると2つ画面に出てしまうため、
+      // メモが登録済みかつ既にファイルが登録済みの場合にファイルURLをnullにします。
+      // TODO 画像を2つ画面に出さないようにするための考慮は別で作って判断すべきなのでそうする。
+      if (this.memoId !== null && this.fileUrl !== null) {
+        this.fileUrl = null;
       }
       // Automatically activate upload
       if (

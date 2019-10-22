@@ -12,6 +12,7 @@ const store = new Vuex.Store({
 			uid: "",
 			emailVerified: "",
 			memoDisplayForm: "",
+			photoReference: "",
 			userSettingId: ""
 		}
 	},
@@ -31,6 +32,7 @@ const store = new Vuex.Store({
 					.then(querySnapshot => {
 						querySnapshot.forEach(document => {
 							state.loginUser.memoDisplayForm = document.data().memoDisplayForm;
+							state.loginUser.photoReference = document.data().photoReference;
 							state.loginUser.userSettingId = document.id;
 						});
 					});
@@ -43,6 +45,7 @@ const store = new Vuex.Store({
 			state.loginUser.uid = "";
 			state.loginUser.emailVerified = "";
 			state.loginUser.memoDisplayForm = "";
+			state.loginUser.photoReference = "";
 			state.loginUser.userSettingId = "";
 		}
 	},

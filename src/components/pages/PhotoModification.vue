@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     saveSuccess() {
-      this.isSavable = true;
+      this.isSavable = !this.isSavable;
     }
   },
   created() {},
