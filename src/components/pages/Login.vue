@@ -27,6 +27,9 @@
             </md-icon>googleアカウントでログイン
           </md-button>
         </div>
+        <div v-if="false" class="md-layout md-alignment-center">
+          <md-button @click="onForgotPasswordClick">パスワードを忘れた方はこちら</md-button>
+        </div>
         <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
       </md-app-content>
     </md-app>
@@ -89,6 +92,11 @@ export default {
               this.showFailureMessage();
             });
         });
+    },
+    onForgotPasswordClick() {
+      this.$router.push({
+        name: "ForgotPassword"
+      });
     },
     showFailureMessage() {
       this.message = "ログインに失敗しました。正しい情報を入力してください。";

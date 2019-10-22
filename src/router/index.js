@@ -5,6 +5,7 @@ import Vuex from "vuex";
 import VueMaterial from "vue-material";
 import ActionHistory from "@/components/pages/ActionHistory";
 import Feedback from "@/components/pages/Feedback";
+import ForgotPassword from "@/components/pages/ForgotPassword";
 import Login from "@/components/pages/Login";
 import Signup from "@/components/pages/Signup";
 import Statistics from "@/components/pages/Statistics";
@@ -35,6 +36,12 @@ const router = new Router({
 			name: "login",
 			component: Login,
 			meta: { isPublic: true, title: "ログイン" }
+		},
+		{
+			path: "/forgot-password",
+			name: "ForgotPassword",
+			component: ForgotPassword,
+			meta: { isPublic: true, title: "パスワードリセット" }
 		},
 		{
 			path: "/signup",
