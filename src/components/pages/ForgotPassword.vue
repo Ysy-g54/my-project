@@ -6,7 +6,7 @@
 
 <script>
 import ForgotPassword from "@/components/organisms/ForgotPassword";
-import SendResetPasswordMail from "@/components/organisms/SendResetPasswordMail";
+import ResetPasswordMailSent from "@/components/organisms/ResetPasswordMailSent";
 export default {
   data() {
     return {
@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     successSendMail() {
-      this.currentComponentNm = "SendResetPasswordMail";
+      this.currentComponentNm = "ResetPasswordMailSent";
     }
   },
   watch: {},
@@ -23,7 +23,7 @@ export default {
   created() {},
   components: {
     ForgotPassword,
-    SendResetPasswordMail
+    ResetPasswordMailSent
   }
 };
 </script>

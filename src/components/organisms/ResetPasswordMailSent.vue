@@ -4,6 +4,10 @@
       <BackHeader :title="'パスワードをリセット'" :isShowSaveButton="false"></BackHeader>
     </div>
     <div slot="main">
+      <md-content md-theme="selection-black">
+        <p>メールを送信しました。メールに記載されたリンクをクリックするとパスワードをリセットできます。</p>
+        <p>メールが届かない場合、迷惑メールやスパムフォルダーなどもご確認ください。</p>
+      </md-content>
       <div class="md-layout md-alignment-center">
         <md-button @click="goLoginClick">ログイン画面へ戻る</md-button>
       </div>

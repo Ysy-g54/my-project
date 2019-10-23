@@ -27,7 +27,7 @@
             </md-icon>googleアカウントでログイン
           </md-button>
         </div>
-        <div v-if="false" class="md-layout md-alignment-center">
+        <div class="md-layout md-alignment-center">
           <md-button @click="onForgotPasswordClick">パスワードを忘れた方はこちら</md-button>
         </div>
         <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
