@@ -10,11 +10,13 @@
         </div>
       </md-app-toolbar>
       <md-app-content>
-        <md-field md-clearable>
+        <md-field md-clearable :class="getValidationClass('mailAddress')">
           <md-input v-model="mailAddress" placeholder="メールアドレス"></md-input>
+          <span class="md-error" v-if="!$v.mailAddress.required">{{ "メールアドレスは必須です。" }}</span>
         </md-field>
-        <md-field>
+        <md-field :class="getValidationClass('password')">
           <md-input v-model="password" placeholder="パスワード" type="password"></md-input>
+          <span class="md-error" v-if="!$v.password.required">{{ "パスワードは必須です。" }}</span>
         </md-field>
         <div class="md-layout md-alignment-center">
           <md-button class="md-layout-item md-dense md-raised md-primary" @click="onLoginClick">ログイン</md-button>
@@ -40,6 +42,7 @@
 import _ from "lodash";
 import Snackbar from "@/components/atoms/Snackbar";
 import firebase from "firebase";
+import { required } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -49,6 +52,14 @@ export default {
       duration: 10000
     };
   },
+  validations: {
+    mailAddress: {
+      required
+    },
+    password: {
+      required
+    }
+  },
   methods: {
     onSignupClick() {
       this.$router.push({
@@ -56,6 +67,11 @@ export default {
       });
     },
     onLoginClick() {
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }
+
       let data = {};
       _.set(data, "mailAddress", this.mailAddress);
       _.set(data, "password", this.password);
@@ -69,6 +85,14 @@ export default {
         .catch(() => {
           this.showFailureMessage();
         });
+    },
+    getValidationClass(fieldName) {
+      const field = this.$v[fieldName];
+      if (field) {
+        return {
+          "md-invalid": field.$invalid && field.$dirty
+        };
+      }
     },
     onGoogleLoginClick() {
       let provider = new firebase.auth.GoogleAuthProvider();

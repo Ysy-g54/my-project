@@ -1,7 +1,7 @@
 <template>
   <Header>
     <div slot="header">
-      <BackHeader :title="'アカウントを作成'" @save-success="saveSuccess"></BackHeader>
+      <BackHeader :title="'アカウントを作成'" @save-success="validateUser"></BackHeader>
     </div>
     <div slot="main">
       <md-app>
@@ -9,11 +9,13 @@
           <md-field md-clearable>
             <md-input v-model="userName" placeholder="アカウント名"></md-input>
           </md-field>
-          <md-field md-clearable>
+          <md-field md-clearable :class="getValidationClass('mailAddress')">
             <md-input v-model="mailAddress" placeholder="メールアドレス"></md-input>
+            <span class="md-error" v-if="!$v.mailAddress.required">{{ "メールアドレスは必須です。" }}</span>
           </md-field>
-          <md-field>
+          <md-field :class="getValidationClass('password')">
             <md-input v-model="password" placeholder="パスワード" type="password"></md-input>
+            <span class="md-error" v-if="!$v.password.required">{{ "パスワードは必須です。" }}</span>
           </md-field>
         </md-app-content>
       </md-app>
@@ -27,6 +29,7 @@ import Snackbar from "@/components/atoms/Snackbar";
 import BackHeader from "@/components/organisms/BackHeader";
 import firebase from "firebase";
 import "firebase/firestore";
+import { required } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -38,7 +41,30 @@ export default {
       duration: 10000
     };
   },
+  validations: {
+    mailAddress: {
+      required
+    },
+    password: {
+      required
+    }
+  },
   methods: {
+    getValidationClass(fieldName) {
+      const field = this.$v[fieldName];
+      if (field) {
+        return {
+          "md-invalid": field.$invalid && field.$dirty
+        };
+      }
+    },
+    validateUser() {
+      this.$v.$touch();
+
+      if (!this.$v.$invalid) {
+        this.saveSuccess();
+      }
+    },
     saveSuccess() {
       firebase
         .auth()

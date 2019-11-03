@@ -11,6 +11,13 @@
         <md-divider></md-divider>
       </md-list>
     </div>
+    <div v-if="isEmptyActionHistory">
+      <md-empty-state
+        md-icon="history"
+        md-label="空っぽです。"
+        md-description="メモを追加、更新、削除すると、ここに履歴が表示されます。"
+      ></md-empty-state>
+    </div>
   </div>
 </template>
 
@@ -72,7 +79,11 @@ export default {
     }
   },
   watch: {},
-  computed: {},
+  computed: {
+    isEmptyActionHistory() {
+      return _.isEmpty(this.actionHistorys);
+    }
+  },
   created() {
     this.searchActionHistory();
   },

@@ -31,8 +31,8 @@ export default {
     };
   },
   methods: {
-    searchMemo(q) {
-      this.database
+    async searchMemo() {
+      await this.database
         .collection("memo")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
         .where("deleteFlg", "==", false)
@@ -137,17 +137,14 @@ export default {
     }
   },
   watch: {
-    "$route.query.q": {
-      async handler(q) {
-        if (this.$route.query.q !== "") {
-          await this.filterMemo(this.$route.query.q);
-        } else {
-          this.$router.push({
-            name: "memos"
-          });
-        }
-      },
-      immediate: true
+    async "$route.query.q"() {
+      if (this.$route.query.q !== "") {
+        await this.filterMemo(this.$route.query.q);
+      } else {
+        this.$router.push({
+          name: "memos"
+        });
+      }
     },
     resultMemos() {
       if (_.isEmpty(this.resultMemos)) {
@@ -161,6 +158,7 @@ export default {
   computed: {},
   async created() {
     await this.searchMemo();
+    await this.filterMemo(this.$route.query.q);
   },
   components: {
     MemoCard

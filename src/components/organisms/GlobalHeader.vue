@@ -154,7 +154,11 @@ export default {
       ).style.visibility = displayControl;
     }
   },
-  created() {},
+  created() {
+    if (this.$route.query.q !== null) {
+      this.q = this.$route.query.q;
+    }
+  },
   components: {
     Dialog
   }
