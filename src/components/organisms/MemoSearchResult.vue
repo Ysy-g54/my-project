@@ -1,14 +1,19 @@
 <template>
   <div v-if="isNotEmptyResult">
-    <MemoCard
-      v-for="memo in resultMemos"
-      :key="memo.memoId"
-      :memo="memo"
-      @on-edit-click="onEditClick"
-      @on-delete-click="onDeleteClick"
-      @on-favorite="onFavorite"
-      @on-done="onDone"
-    ></MemoCard>
+    <div v-if="$store.getters['getLoginUser'].memoDisplayForm === '0'">
+      <MemoCard
+        v-for="memo in resultMemos"
+        :key="memo.memoId"
+        :memo="memo"
+        @on-edit-click="onEditClick"
+        @on-delete-click="onDeleteClick"
+        @on-favorite="onFavorite"
+        @on-done="onDone"
+      ></MemoCard>
+    </div>
+    <div v-else>
+      <MemoList :memos="resultMemos" @on-edit-click="onEditClick" @on-delete-click="onDeleteClick"></MemoList>
+    </div>
   </div>
   <div v-else>
     <md-empty-state md-icon="search" md-label="検索結果0件です。" md-description="検索条件を変えて再度検索して下さい。"></md-empty-state>
@@ -21,6 +26,7 @@ import { categories } from "../../constants";
 import firebase from "firebase";
 import "firebase/firestore";
 import MemoCard from "@/components/organisms/MemoCard";
+import MemoList from "@/components/organisms/MemoList";
 export default {
   data() {
     return {
@@ -167,7 +173,8 @@ export default {
     }
   },
   components: {
-    MemoCard
+    MemoCard,
+    MemoList
   }
 };
 </script>
