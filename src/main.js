@@ -9,8 +9,10 @@ import firebaseConfig from '@/configs/firebase.js';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
 import '@/assets/vue-material.icons.css';
+import Vuelidate from 'vuelidate';
 
 Vue.config.productionTip = false;
+Vue.use(Vuelidate);
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
