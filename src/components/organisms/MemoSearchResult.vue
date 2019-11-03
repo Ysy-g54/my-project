@@ -158,8 +158,12 @@ export default {
   computed: {},
   async created() {
     await this.searchMemo();
-    if (this.$route.query.q !== undefined) {
+    if (this.$route.query.q !== "" && this.$route.query.q !== undefined) {
       await this.filterMemo(this.$route.query.q);
+    } else {
+      this.$router.push({
+        name: "memos"
+      });
     }
   },
   components: {

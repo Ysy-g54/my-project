@@ -155,9 +155,7 @@ export default {
     }
   },
   created() {
-    if (this.$route.query.q !== null) {
-      this.q = this.$route.query.q;
-    }
+    this.q = this.$route.query.q;
   },
   components: {
     Dialog
