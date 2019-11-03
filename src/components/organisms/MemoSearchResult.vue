@@ -158,7 +158,9 @@ export default {
   computed: {},
   async created() {
     await this.searchMemo();
-    await this.filterMemo(this.$route.query.q);
+    if (this.$route.query.q !== undefined) {
+      await this.filterMemo(this.$route.query.q);
+    }
   },
   components: {
     MemoCard
