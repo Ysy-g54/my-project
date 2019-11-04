@@ -1,5 +1,9 @@
 <template>
   <div v-if="isNotEmptyResult">
+    <div>
+      <span class="md-title">{{ resultMemos.length }}</span>
+      <span class="md-subheading">個</span>
+    </div>
     <div v-if="$store.getters['getLoginUser'].memoDisplayForm === '0'">
       <MemoCard
         v-for="memo in resultMemos"

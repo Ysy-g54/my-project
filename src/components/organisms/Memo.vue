@@ -5,7 +5,6 @@
       <span class="md-subheading">個</span>
     </div>
     <md-subheader v-if="!isDiscard && favoriteMemos.length !== 0">スター付きメモ</md-subheader>
-
     <div v-if="$store.getters['getLoginUser'].memoDisplayForm === '0'">
       <MemoCard
         v-for="memo in favoriteMemos"
@@ -17,7 +16,7 @@
         @on-favorite="onFavorite"
         @on-done="onDone"
       ></MemoCard>
-      <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" />
+      <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" class="divider" />
       <md-subheader>メモ</md-subheader>
       <MemoCard
         v-for="memo in memos"
@@ -37,7 +36,8 @@
         @on-edit-click="onEditClick"
         @on-delete-click="onDeleteClick"
       ></MemoList>
-      <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" />
+      <div class="divider" v-if="!isDiscard && favoriteMemos.length !== 0" />
+      <md-subheader>メモ</md-subheader>
       <MemoList
         :isDiscard="isDiscard"
         :memos="memos"
@@ -216,4 +216,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.divider {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 </style>
