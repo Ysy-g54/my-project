@@ -133,10 +133,12 @@ export default {
   },
   watch: {
     q() {
-      this.$router.push({
-        name: "memoSearch",
-        query: { q: this.q }
-      });
+      if (this.q !== undefined && this.q !== "") {
+        this.$router.push({
+          name: "memoSearch",
+          query: { q: this.q }
+        });
+      }
     },
     "$route.name"() {
       let displayControl = "";
