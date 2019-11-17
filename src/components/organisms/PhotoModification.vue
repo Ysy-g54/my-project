@@ -71,7 +71,8 @@ export default {
       files: [],
       imgSrc: "",
       cropImg: "",
-      resultUrl: null
+      resultUrl: null,
+      photoFileIsValid: true
     };
   },
   methods: {
@@ -80,6 +81,7 @@ export default {
       this.files[0] = file;
 
       if (!file.type.includes("image/")) {
+        this.photoFileIsValid = false;
         return;
       }
 
@@ -150,6 +152,10 @@ export default {
       }
     },
     async updateItem() {
+      if (!this.photoFileIsValid) {
+        this.$refs.snackbar.openSnackbar();
+        return;
+      }
       await this.deleteFile();
       let isUploadFile = await this.uploadFile();
       if (isUploadFile) {
