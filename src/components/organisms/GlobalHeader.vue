@@ -134,9 +134,16 @@ export default {
   watch: {
     q() {
       if (this.q !== undefined && this.q !== "") {
+        // 検索ワードがある場合は、入力したワードを設定してメモ検索結果画面に遷移します。
         this.$router.push({
           name: "memoSearch",
           query: { q: this.q }
+        });
+      } else if (this.$route.query.q !== undefined) {
+        // this.qだけで判断してしまうと、画面のリロードをすると必ずメモ一覧画面に遷移してしまうため、
+        // this.qを空白にした直後の$route.query.qがundefinedでない場合にメモ一覧画面に遷移します。
+        this.$router.push({
+          name: "memos"
         });
       }
     },
