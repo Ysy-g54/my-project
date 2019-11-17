@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @keydown.ctrl.83="saveByKeyDown()">
     <md-field>
       <label>メモ内容</label>
       <md-textarea v-autofocus v-model="memo" rows="10"></md-textarea>
@@ -79,6 +79,18 @@ export default {
     };
   },
   methods: {
+    async saveByKeyDown() {
+      await event.preventDefault();
+      await this.modifyMemo();
+    },
+    async modifyMemo() {
+      await this.saveMemo();
+      this.files = [];
+      await this.registerActionHistory(this.memoId, actionTypes[1].actionType);
+      await this.searchMemoByMemoId(this.memoId);
+      this.snackbarMessage = "書き留めました。";
+      this.$refs.snackbar.openSnackbar();
+    },
     onFavoriteChange() {
       this.favoriteFlg = !this.favoriteFlg;
     },
@@ -261,12 +273,7 @@ export default {
       await this.goMemos();
     },
     async isArchive() {
-      await this.saveMemo();
-      this.files = [];
-      await this.registerActionHistory(this.memoId, actionTypes[1].actionType);
-      await this.searchMemoByMemoId(this.memoId);
-      this.snackbarMessage = "書き留めました。";
-      this.$refs.snackbar.openSnackbar();
+      await this.modifyMemo();
     }
   },
   computed: {},
