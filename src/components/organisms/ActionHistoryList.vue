@@ -31,7 +31,8 @@ export default {
   data() {
     return {
       actionHistorys: [],
-      database: firebase.firestore()
+      database: firebase.firestore(),
+      isEmptyActionHistory: false
     };
   },
   methods: {
@@ -47,6 +48,7 @@ export default {
             _.set(data, "actionHistoryId", document.id);
             this.actionHistorys.push(data);
           });
+          this.isEmptyActionHistory = _.isEmpty(this.actionHistorys);
         });
     },
     goMemoModificationByMemoId(memoId) {
@@ -79,11 +81,7 @@ export default {
     }
   },
   watch: {},
-  computed: {
-    isEmptyActionHistory() {
-      return _.isEmpty(this.actionHistorys);
-    }
-  },
+  computed: {},
   created() {
     this.searchActionHistory();
   },

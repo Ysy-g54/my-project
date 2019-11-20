@@ -63,7 +63,8 @@ export default {
     favoriteMemos: [],
     memos: [],
     database: firebase.firestore(),
-    showFlg: true
+    showFlg: true,
+    isNotEmptyMemo: true
   }),
   methods: {
     searchMemo() {
@@ -91,6 +92,7 @@ export default {
           });
           this.favoriteMemos = favoriteMemosSnapshot;
           this.memos = memosSnapshot;
+          this.isNotEmptyMemo = !_.isEmpty(this.memos);
         });
     },
     onEditClick(memoId) {
@@ -197,9 +199,6 @@ export default {
     isDiscard: { type: Boolean, default: false }
   },
   computed: {
-    isNotEmptyMemo() {
-      return !_.isEmpty(this.memos);
-    },
     memoCount() {
       return this.memos.length + this.favoriteMemos.length;
     }

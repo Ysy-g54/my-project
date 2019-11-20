@@ -37,7 +37,7 @@ export default {
       database: firebase.firestore(),
       memos: [],
       resultMemos: [],
-      isNotEmptyResult: false
+      isNotEmptyResult: true
     };
   },
   methods: {
@@ -65,6 +65,7 @@ export default {
           memo.memo.includes(q) ||
           filterCategoryIds.find(categoryId => categoryId === memo.categoryId)
       );
+      this.isNotEmptyResult = !_.isEmpty(this.resultMemos);
     },
     onEditClick(memoId) {
       if (this.isDiscard) {
@@ -154,13 +155,6 @@ export default {
         this.$router.push({
           name: "memos"
         });
-      }
-    },
-    resultMemos() {
-      if (_.isEmpty(this.resultMemos)) {
-        this.isNotEmptyResult = false;
-      } else {
-        this.isNotEmptyResult = true;
       }
     }
   },
