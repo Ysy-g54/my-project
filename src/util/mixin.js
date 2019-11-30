@@ -15,7 +15,8 @@ export default {
 		}
 	},
 	data: () => ({
-		isEdited: false
+		isEdited: false,
+		loading: true
 	}),
 	methods: {
 		formatDate(date, format) {

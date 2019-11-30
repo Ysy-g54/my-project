@@ -36,48 +36,42 @@ export default {
   watch: {},
   computed: {},
   async created() {
-    await this.database
+    let querySnapshot = await this.database
       .collection("memo")
       .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(document => {
-          categories.find(category => {
-            _.set(
+      .get();
+    await querySnapshot.forEach(async document => {
+      await categories.find(category => {
+        _.set(this.memoCategories, "datasets[0].backgroundColor", "#A5D6A7");
+        if (document.data().categoryId === category.categoryId) {
+          _.set(
+            this.memoCategories,
+            `labels[${category.categoryId}]`,
+            this.formatCategory(category.categoryId)
+          );
+          _.set(
+            this.memoCategories,
+            `datasets[0].data[${category.categoryId}]`,
+            _.get(
               this.memoCategories,
-              "datasets[0].backgroundColor",
-              "#A5D6A7"
-            );
-            if (document.data().categoryId === category.categoryId) {
-              _.set(
-                this.memoCategories,
-                `labels[${category.categoryId}]`,
-                this.formatCategory(category.categoryId)
-              );
-              _.set(
-                this.memoCategories,
-                `datasets[0].data[${category.categoryId}]`,
-                _.get(
-                  this.memoCategories,
-                  `datasets[0].data[${category.categoryId}]`,
-                  0
-                ) + 1
-              );
-              return true;
-            }
-            if (document.data().categoryId === "") {
-              _.set(this.memoCategories, "labels[0]", "");
-              _.set(
-                this.memoCategories,
-                "datasets[0].data[0]",
-                _.get(this.memoCategories, "datasets[0].data[0]", 0) + 1
-              );
-              return true;
-            }
-          });
-        });
+              `datasets[0].data[${category.categoryId}]`,
+              0
+            ) + 1
+          );
+          return true;
+        }
+        if (document.data().categoryId === "") {
+          _.set(this.memoCategories, "labels[0]", "");
+          _.set(
+            this.memoCategories,
+            "datasets[0].data[0]",
+            _.get(this.memoCategories, "datasets[0].data[0]", 0) + 1
+          );
+          return true;
+        }
       });
-    this.isRenderChart = true;
+      this.isRenderChart = true;
+    });
   },
   components: {
     BarChart,

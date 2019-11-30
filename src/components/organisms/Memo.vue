@@ -17,7 +17,7 @@
         @on-done="onDone"
       ></MemoCard>
       <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" class="divider" />
-      <md-subheader>メモ</md-subheader>
+      <md-subheader v-if="!isDiscard">メモ</md-subheader>
       <MemoCard
         v-for="memo in memos"
         :key="memo.memoId"
@@ -126,19 +126,17 @@ export default {
         await this.deleteMemo();
       }
     },
-    onFavorite(memo) {
-      this.database
+    async onFavorite(memo) {
+      await this.database
         .collection("memo")
         .doc(memo.memoId)
         .update({
           favoriteFlg: !memo.favoriteFlg
         })
-        .then(() => {
-          this.searchMemo();
-        })
-        .catch(error => {
-          console.error("Error adding document: ", error);
+        .catch(e => {
+          console.error("Error adding document: ", e);
         });
+      await this.searchMemo();
     },
     onDone(memo) {
       this.database

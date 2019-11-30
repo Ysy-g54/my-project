@@ -66,7 +66,7 @@ export default {
         name: "signup"
       });
     },
-    onLoginClick() {
+    async onLoginClick() {
       this.$v.$touch();
       if (this.$v.$invalid) {
         return;
@@ -75,16 +75,12 @@ export default {
       let data = {};
       _.set(data, "mailAddress", this.mailAddress);
       _.set(data, "password", this.password);
-      this.$store
-        .dispatch("updateLoginUser", data)
-        .then(() => {
-          this.$router.push({
-            name: "memos"
-          });
-        })
-        .catch(() => {
-          this.showFailureMessage();
-        });
+      await this.$store.dispatch("updateLoginUser", data).catch(() => {
+        this.showFailureMessage();
+      });
+      this.$router.push({
+        name: "memos"
+      });
     },
     getValidationClass(fieldName) {
       const field = this.$v[fieldName];
@@ -94,28 +90,23 @@ export default {
         };
       }
     },
-    onGoogleLoginClick() {
+    async onGoogleLoginClick() {
       let provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
-      firebase
+      await firebase.auth().signInWithRedirect(provider);
+      let result = await firebase
         .auth()
         .getRedirectResult()
-        .then(result => {
-          if (result.credential) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            // let token = result.credential.accessToken;
-          }
-          this.$store
-            .dispatch("findLoginUser")
-            .then(() => {
-              this.$router.push({
-                name: "memos"
-              });
-            })
-            .catch(() => {
-              this.showFailureMessage();
-            });
+        .catch(() => {
+          this.showFailureMessage();
         });
+      if (result.credential) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        // let token = result.credential.accessToken;
+      }
+      await this.$store.dispatch("findLoginUser");
+      this.$router.push({
+        name: "memos"
+      });
     },
     onForgotPasswordClick() {
       this.$router.push({

@@ -10,10 +10,8 @@ export default {
     return {};
   },
   methods: {
-    createChart() {
-      setTimeout(() => {
-        this.renderChart(this.chartData, DEFAULT_OPTIONS);
-      }, 500);
+    async createChart() {
+      await this.renderChart(this.chartData, DEFAULT_OPTIONS);
     }
   },
   props: { chartData: { type: Object, default: null } },

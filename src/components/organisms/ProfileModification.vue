@@ -25,11 +25,11 @@ export default {
     openDialog() {
       this.isActiveDialog = true;
     },
-    updateItem() {
+    async updateItem() {
       let currentUser = firebase.auth().currentUser;
 
-      (!(this.title === "メールアドレス")
-        ? currentUser.updateProfile({
+      !(this.title === "メールアドレス")
+        ? await currentUser.updateProfile({
             displayName:
               this.title === "名前"
                 ? this.editContent
@@ -39,12 +39,9 @@ export default {
                 ? this.editContent
                 : this.$store.getters["getLoginUser"].photoURL
           })
-        : currentUser.updateEmail(this.editContent)
-      ).then(() => {
-        this.$store.dispatch("findLoginUser").then(() => {
-          this.$emit("update-success");
-        });
-      });
+        : await currentUser.updateEmail(this.editContent);
+      this.$store.dispatch("findLoginUser");
+      this.$emit("update-success");
     }
   },
   watch: {

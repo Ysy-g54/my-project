@@ -6,7 +6,7 @@
     <div class="md-layout md-alignment-top-right">
       <md-button class="md-dense md-raised md-primary" @click="saveSetting">保存</md-button>
     </div>
-    <Snackbar ref="snackbar" :message="'更新しました'"></Snackbar>
+    <Snackbar ref="snackbar" :message="message" :duration="duration"></Snackbar>
   </div>
 </template>
 
@@ -18,38 +18,38 @@ import "firebase/firestore";
 export default {
   data() {
     return {
+      duration: 4000,
+      message: "更新しました",
       memoDisplayForm: this.$store.getters["getLoginUser"].memoDisplayForm
     };
   },
   methods: {
-    searchMemoDisplayForm() {
-      firebase
+    async searchMemoDisplayForm() {
+      let querySnapshot = await firebase
         .firestore()
         .collection("userSetting")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(document => {
-            this.memoDisplayForm = document.data().memoDisplayForm;
-          });
-        });
+        .get();
+      await querySnapshot.forEach(document => {
+        this.memoDisplayForm = document.data().memoDisplayForm;
+      });
     },
-    saveSetting() {
-      firebase
+    async saveSetting() {
+      await firebase
         .firestore()
         .collection("userSetting")
         .doc(this.$store.getters["getLoginUser"].userSettingId)
         .update({
           memoDisplayForm: this.memoDisplayForm
         })
-        .then(() => {
-          this.$store.dispatch("findLoginUser").then(() => {
-            this.$refs.snackbar.openSnackbar();
-          });
-        })
         .catch(error => {
+          this.duration = 10000;
+          this.message =
+            "更新に失敗しました。もう一度試すか、問い合わせてください。";
           console.error("Error adding document: ", error);
         });
+      await this.$store.dispatch("findLoginUser");
+      await this.$refs.snackbar.openSnackbar();
     }
   },
   computed: {},
