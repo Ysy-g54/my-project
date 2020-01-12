@@ -37,19 +37,18 @@ export default {
   },
   methods: {
     async searchActionHistory() {
-      await this.database
+      let querySnapshot = await this.database
         .collection("actionHistory")
         .where("userId", "==", this.$store.getters["getLoginUser"].uid)
         .orderBy("actionDateTime", "desc")
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(document => {
-            let data = document.data();
-            _.set(data, "actionHistoryId", document.id);
-            this.actionHistorys.push(data);
-          });
-          this.isEmptyActionHistory = _.isEmpty(this.actionHistorys);
-        });
+        .get();
+
+      querySnapshot.forEach(document => {
+        let data = document.data();
+        _.set(data, "actionHistoryId", document.id);
+        this.actionHistorys.push(data);
+      });
+      this.isEmptyActionHistory = _.isEmpty(this.actionHistorys);
     },
     goMemoModificationByMemoId(memoId) {
       if (memoId !== "") {

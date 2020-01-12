@@ -84,19 +84,13 @@ export default {
       this.menuVisible = false;
       this.$refs.dialog.openDialog();
     },
-    confirmDialog() {
-      this.$store
-        .dispatch("logout")
-        .then(() => {
-          // Sign-out successful.
-          this.$router.push({
-            name: "login"
-          });
-        })
-        .catch(error => {
-          // An error happened.
-          console.error(error);
-        });
+    async confirmDialog() {
+      await this.$store.dispatch("logout").catch(error => {
+        console.error(error);
+      });
+      await this.$router.push({
+        name: "login"
+      });
     },
     onTrashClick() {
       this.menuVisible = false;

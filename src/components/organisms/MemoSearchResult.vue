@@ -36,6 +36,7 @@ export default {
     return {
       database: firebase.firestore(),
       memos: [],
+      modifiedMemo: null,
       resultMemos: [],
       isNotEmptyResult: true
     };
@@ -97,19 +98,18 @@ export default {
         this.deleteMemo();
       }
     },
-    onFavorite(memo) {
-      this.database
+    async onFavorite(memo) {
+      await this.database
         .collection("memo")
         .doc(memo.memoId)
         .update({
           favoriteFlg: !memo.favoriteFlg
         })
-        .then(() => {
-          this.searchMemo();
-        })
         .catch(error => {
           console.error("Error adding document: ", error);
         });
+      await this.searchMemoByMemoId(memo.memoId);
+      await this.setModifiedMemoDetail(memo.memoId);
     },
     onDone(memo) {
       this.database
@@ -145,6 +145,28 @@ export default {
         .catch(error => {
           console.error("Error adding document: ", error);
         });
+    },
+    async searchMemoByMemoId(memoId) {
+      let querySnapshot = await this.database
+        .collection("memo")
+        .doc(memoId)
+        .get();
+      if (querySnapshot.exists) {
+        let data = querySnapshot.data();
+        _.set(data, "id", querySnapshot.id);
+        this.modifiedMemo = data;
+      } else {
+        this.snackbarMessage =
+          "更新するメモがないため、新規メモを表示しています。";
+        this.$refs.snackbar.openSnackbar();
+      }
+    },
+    async setModifiedMemoDetail(memoId) {
+      //   let modifiedMemos = await this.resultMemos.filter(
+      //     memo => memo.memoId !== memoId
+      //   );
+      //   this.resultMemos = await modifiedMemos;
+      //   await this.resultMemos.push(this.modifiedMemo);
     }
   },
   watch: {
