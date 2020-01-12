@@ -90,8 +90,8 @@ export default {
         });
       }
     },
-    onDeleteClick(memoId) {
-      this.memoId = memoId;
+    onDeleteClick(memo) {
+      this.memoId = memo.memoId;
       if (this.isDiscard) {
         this.$emit("delete-confirm");
       } else {
@@ -125,8 +125,8 @@ export default {
           console.error("Error adding document: ", error);
         });
     },
-    deleteMemo() {
-      (this.isDiscard
+    async deleteMemo() {
+      await (this.isDiscard
         ? this.database
             .collection("memo")
             .doc(this.memoId)
@@ -137,14 +137,11 @@ export default {
             .update({
               deleteFlg: true
             })
-      )
-        .then(() => {
-          this.searchMemo();
-          this.$emit("delete-memo");
-        })
-        .catch(error => {
-          console.error("Error adding document: ", error);
-        });
+      ).catch(error => {
+        console.error("Error adding document: ", error);
+      });
+      await this.searchMemo();
+      await this.$emit("delete-memo");
     },
     async searchMemoByMemoId(memoId) {
       let querySnapshot = await this.database
@@ -162,11 +159,11 @@ export default {
       }
     },
     async setModifiedMemoDetail(memoId) {
-      //   let modifiedMemos = await this.resultMemos.filter(
-      //     memo => memo.memoId !== memoId
-      //   );
-      //   this.resultMemos = await modifiedMemos;
-      //   await this.resultMemos.push(this.modifiedMemo);
+      let modifiedMemos = await this.resultMemos.filter(
+        memo => memo.memoId !== memoId
+      );
+      this.resultMemos = await modifiedMemos;
+      await this.resultMemos.push(this.modifiedMemo);
     }
   },
   watch: {

@@ -55,6 +55,7 @@
 
 <script>
 import _ from "lodash";
+import memoService from "@/service/memo";
 import firebase from "firebase";
 import fileUpload from "vue-upload-component";
 import Snackbar from "@/components/atoms/Snackbar";
@@ -237,22 +238,17 @@ export default {
         }
       }
     },
-    searchMemoByMemoId(memoId) {
-      this.database
-        .collection("memo")
-        .doc(memoId)
-        .get()
-        .then(querySnapshot => {
-          if (querySnapshot.exists) {
-            let data = querySnapshot.data();
-            _.set(data, "id", querySnapshot.id);
-            this.setMemoData(data);
-          } else {
-            this.snackbarMessage =
-              "更新するメモがないため、新規メモを表示しています。";
-            this.$refs.snackbar.openSnackbar();
-          }
-        });
+    async searchMemoByMemoId(memoId) {
+      let memo = await memoService.searchMemoByMemoId(memoId);
+      if (memo.exists) {
+        let data = memo.data();
+        _.set(data, "id", data.id);
+        this.setMemoData(data);
+      } else {
+        this.snackbarMessage =
+          "更新するメモがないため、新規メモを表示しています。";
+        this.$refs.snackbar.openSnackbar();
+      }
     },
     setMemoData(data) {
       this.categoryId = data.categoryId;
