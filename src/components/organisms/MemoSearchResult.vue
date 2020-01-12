@@ -27,6 +27,7 @@
 <script>
 import _ from "lodash";
 import { categories } from "../../constants";
+import memoService from "@/service/memo-service";
 import firebase from "firebase";
 import "firebase/firestore";
 import MemoCard from "@/components/organisms/MemoCard";
@@ -43,18 +44,14 @@ export default {
   },
   methods: {
     async searchMemo() {
-      await this.database
-        .collection("memo")
-        .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-        .where("deleteFlg", "==", false)
-        .orderBy("insertDateTime", "desc")
-        .get()
-        .then(querySnapshot => {
-          querySnapshot.forEach(document => {
-            let memoSnapshot = _.set(document.data(), "memoId", document.id);
-            this.memos.push(memoSnapshot);
-          });
-        });
+      let querySnapshot = await memoService.searchMemoByDeleteFlg(
+        this.$store.getters["getLoginUser"].uid,
+        false
+      );
+      querySnapshot.forEach(document => {
+        let memoSnapshot = _.set(document.data(), "memoId", document.id);
+        this.memos.push(memoSnapshot);
+      });
     },
     async filterMemo(q) {
       let filterCategoryIds = await categories
@@ -108,8 +105,8 @@ export default {
         .catch(error => {
           console.error("Error adding document: ", error);
         });
-      await this.searchMemoByMemoId(memo.memoId);
-      await this.setModifiedMemoDetail(memo.memoId);
+      //   await this.searchMemoByMemoId(memo.memoId);
+      //   await this.setModifiedMemoDetail(memo.memoId);
     },
     onDone(memo) {
       this.database
@@ -144,10 +141,7 @@ export default {
       await this.$emit("delete-memo");
     },
     async searchMemoByMemoId(memoId) {
-      let querySnapshot = await this.database
-        .collection("memo")
-        .doc(memoId)
-        .get();
+      let querySnapshot = await memoService.searchMemoByMemoId(memoId);
       if (querySnapshot.exists) {
         let data = querySnapshot.data();
         _.set(data, "id", querySnapshot.id);

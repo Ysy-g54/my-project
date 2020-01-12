@@ -53,6 +53,7 @@
 
 <script>
 import _ from "lodash";
+import memoService from "@/service/memo-service";
 import { actionTypes, dataTypes } from "../../constants";
 import MemoCard from "@/components/organisms/MemoCard";
 import MemoList from "@/components/organisms/MemoList";
@@ -67,33 +68,29 @@ export default {
     isNotEmptyMemo: true
   }),
   methods: {
-    searchMemo() {
-      this.database
-        .collection("memo")
-        .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-        .where("deleteFlg", "==", this.isDiscard)
-        .orderBy("insertDateTime", "desc")
-        .get()
-        .then(querySnapshot => {
-          let memosSnapshot = [];
-          let favoriteMemosSnapshot = [];
-          querySnapshot.forEach(document => {
-            if (document.data().favoriteFlg) {
-              let favoriteMemoSnapshot = _.set(
-                document.data(),
-                "memoId",
-                document.id
-              );
-              favoriteMemosSnapshot.push(favoriteMemoSnapshot);
-            } else {
-              let memoSnapshot = _.set(document.data(), "memoId", document.id);
-              memosSnapshot.push(memoSnapshot);
-            }
-          });
-          this.favoriteMemos = favoriteMemosSnapshot;
-          this.memos = memosSnapshot;
-          this.isNotEmptyMemo = !_.isEmpty(this.memos);
-        });
+    async searchMemo() {
+      let querySnapshot = await memoService.searchMemoByDeleteFlg(
+        this.$store.getters["getLoginUser"].uid,
+        this.isDiscard
+      );
+      let memosSnapshot = [];
+      let favoriteMemosSnapshot = [];
+      querySnapshot.forEach(document => {
+        if (document.data().favoriteFlg) {
+          let favoriteMemoSnapshot = _.set(
+            document.data(),
+            "memoId",
+            document.id
+          );
+          favoriteMemosSnapshot.push(favoriteMemoSnapshot);
+        } else {
+          let memoSnapshot = _.set(document.data(), "memoId", document.id);
+          memosSnapshot.push(memoSnapshot);
+        }
+      });
+      this.favoriteMemos = favoriteMemosSnapshot;
+      this.memos = memosSnapshot;
+      this.isNotEmptyMemo = !_.isEmpty(this.memos);
     },
     onEditClick(memoId) {
       if (this.isDiscard) {

@@ -55,7 +55,7 @@
 
 <script>
 import _ from "lodash";
-import memoService from "@/service/memo";
+import memoService from "@/service/memo-service";
 import firebase from "firebase";
 import fileUpload from "vue-upload-component";
 import Snackbar from "@/components/atoms/Snackbar";
