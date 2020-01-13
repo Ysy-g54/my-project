@@ -23,25 +23,21 @@
 
 <script>
 import _ from "lodash";
-import firebase from "firebase";
-import "firebase/firestore";
+import actionHistoryService from "@/service/action-history-service";
 // import moment from "moment";
 import { actionTypes, dataTypes } from "../../constants";
 export default {
   data() {
     return {
       actionHistorys: [],
-      database: firebase.firestore(),
       isEmptyActionHistory: false
     };
   },
   methods: {
     async searchActionHistory() {
-      let querySnapshot = await this.database
-        .collection("actionHistory")
-        .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-        .orderBy("actionDateTime", "desc")
-        .get();
+      let querySnapshot = await actionHistoryService.searchByUserId(
+        this.$store.getters["getLoginUser"].uid
+      );
 
       querySnapshot.forEach(document => {
         let data = document.data();

@@ -58,44 +58,35 @@ export default {
         };
       }
     },
-    validateUser() {
+    async validateUser() {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        this.saveSuccess();
+        await this.saveSuccess();
       }
     },
-    saveSuccess() {
-      firebase
+    async saveSuccess() {
+      await firebase
         .auth()
         .createUserWithEmailAndPassword(this.mailAddress, this.password)
-        .then(() => {
-          let signupUser = firebase.auth().currentUser;
-          signupUser
-            .updateProfile({
-              displayName: this.userName
-            })
-            .then(() => {
-              this.database
-                .collection("userSetting")
-                .add({
-                  userId: signupUser.uid,
-                  memoDisplayForm: "0"
-                })
-                .then(() => {
-                  signupUser.sendEmailVerification().then(() => {
-                    this.$store.dispatch("findLoginUser").then(() => {
-                      this.$router.push({
-                        name: "memos"
-                      });
-                    });
-                  });
-                });
-            });
-        })
         .catch(() => {
           this.showFailureMessage();
         });
+      let signupUser = await firebase.auth().currentUser;
+      await signupUser.updateProfile({
+        displayName: this.userName
+      });
+      await this.database.collection("userSetting").add({
+        userId: signupUser.uid,
+        memoDisplayForm: "0"
+      });
+      await signupUser.sendEmailVerification().catch(() => {
+        this.showFailureMessage();
+      });
+      await this.$store.dispatch("findLoginUser");
+      this.$router.push({
+        name: "memos"
+      });
     },
     showFailureMessage() {
       this.message =

@@ -53,6 +53,7 @@
 
 <script>
 import _ from "lodash";
+import actionHistoryService from "@/service/action-history-service";
 import memoService from "@/service/memo-service";
 import { actionTypes, dataTypes } from "../../constants";
 import MemoCard from "@/components/organisms/MemoCard";
@@ -69,7 +70,7 @@ export default {
   }),
   methods: {
     async searchMemo() {
-      let querySnapshot = await memoService.searchMemoByDeleteFlg(
+      let querySnapshot = await memoService.searchByDeleteFlg(
         this.$store.getters["getLoginUser"].uid,
         this.isDiscard
       );
@@ -92,21 +93,13 @@ export default {
       this.memos = memosSnapshot;
       this.isNotEmptyMemo = !_.isEmpty(this.memos);
     },
-    onEditClick(memoId) {
+    async onEditClick(memoId) {
       if (this.isDiscard) {
-        this.database
-          .collection("memo")
-          .doc(memoId)
-          .update({
-            deleteFlg: false
-          })
-          .then(() => {
-            this.searchMemo();
-            this.$emit("restore-memo");
-          })
-          .catch(error => {
-            console.error("Error adding document: ", error);
-          });
+        await memoService.modifyDeleteFlg(memoId, false).catch(error => {
+          console.error("Error adding document: ", error);
+        });
+        await this.searchMemo();
+        await this.$emit("restore-memo");
       } else {
         this.$router.push({
           name: "memoModification",
@@ -135,52 +128,43 @@ export default {
         });
       await this.searchMemo();
     },
-    onDone(memo) {
-      this.database
+    async onDone(memo) {
+      await this.database
         .collection("memo")
         .doc(memo.memoId)
         .update({
           doneFlg: !memo.doneFlg
         })
-        .then(() => {
-          this.searchMemo();
-        })
         .catch(error => {
           console.error("Error adding document: ", error);
         });
+
+      await this.searchMemo();
     },
-    deleteMemo() {
-      (this.isDiscard
+    async deleteMemo() {
+      await (this.isDiscard
         ? this.database
             .collection("memo")
             .doc(this.memoId)
             .delete()
-        : this.database
-            .collection("memo")
-            .doc(this.memoId)
-            .update({
-              deleteFlg: true
-            })
-      )
-        .then(() => {
-          if (this.isDiscard) {
-            this.registerActionHistory();
-          }
-          this.searchMemo();
-          this.$emit("delete-memo");
-        })
-        .catch(error => {
-          console.error("Error adding document: ", error);
-        });
+        : memoService.modifyDeleteFlg(this.memoId, true)
+      ).catch(error => {
+        console.error("Error adding document: ", error);
+      });
+      if (this.isDiscard) {
+        await this.registerActionHistory();
+      }
+      await this.searchMemo();
+      await this.$emit("delete-memo");
     },
     async registerActionHistory() {
-      await this.database.collection("actionHistory").add({
-        actionType: actionTypes[2].actionType,
-        dataType: dataTypes[0].dataType,
-        memoId: "",
-        actionDateTime: firebase.firestore.FieldValue.serverTimestamp(),
-        userId: this.$store.getters["getLoginUser"].uid
-      });
+      let actionHistory = {};
+      actionHistory.actionType = actionTypes[2].actionType;
+      actionHistory.dataType = dataTypes[0].dataType;
+      actionHistory.memoId = "";
+      actionHistory.actionDateTime = firebase.firestore.FieldValue.serverTimestamp();
+      actionHistory.userId = this.$store.getters["getLoginUser"].uid;
+      await actionHistoryService(actionHistory);
     },
     async deleteFile(memo) {
       if (this.isDiscard && memo.fileReference !== null) {

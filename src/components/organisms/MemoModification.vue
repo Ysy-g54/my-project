@@ -55,6 +55,7 @@
 
 <script>
 import _ from "lodash";
+import actionHistoryService from "@/service/action-history-service";
 import memoService from "@/service/memo-service";
 import firebase from "firebase";
 import fileUpload from "vue-upload-component";
@@ -98,46 +99,37 @@ export default {
     async saveMemo() {
       await this.deleteFile();
       await this.uploadFile();
-      let userId = this.$store.getters["getLoginUser"].uid;
+      let memo = {};
+      memo.categoryId = this.categoryId;
+      memo.memo = this.memo;
+      memo.insertDateTime =
+        this.insertDateTime !== null
+          ? this.insertDateTime
+          : firebase.firestore.FieldValue.serverTimestamp();
+      memo.userId = this.$store.getters["getLoginUser"].uid;
+      memo.favoriteFlg = this.favoriteFlg;
+      memo.deleteFlg = false;
+      memo.doneFlg = false;
+      memo.fileUrl = this.fileUrl;
+      memo.fileReference = this.fileReference;
+
       let saveData = await (!this.isUpdateMemo
-        ? this.database.collection("memo").add({
-            categoryId: this.categoryId,
-            memo: this.memo,
-            insertDateTime: firebase.firestore.FieldValue.serverTimestamp(),
-            userId: userId,
-            favoriteFlg: this.favoriteFlg,
-            deleteFlg: false,
-            doneFlg: false,
-            fileUrl: this.fileUrl,
-            fileReference: this.fileReference
-          })
-        : this.database
-            .collection("memo")
-            .doc(this.memoId)
-            .set({
-              categoryId: this.categoryId,
-              memo: this.memo,
-              insertDateTime: this.insertDateTime,
-              userId: userId,
-              favoriteFlg: this.favoriteFlg,
-              deleteFlg: false,
-              doneFlg: false,
-              fileUrl: this.fileUrl,
-              fileReference: this.fileReference
-            }));
+        ? memoService.register(memo)
+        : memoService.modify(memo, this.memoId));
+
       if (this.memoId === null) {
         this.isUpdateMemo = true;
         this.memoId = saveData.id;
       }
     },
     async registerActionHistory(memoId, actionType) {
-      await this.database.collection("actionHistory").add({
-        actionType: actionType,
-        dataType: dataTypes[0].dataType,
-        memoId: memoId,
-        actionDateTime: firebase.firestore.FieldValue.serverTimestamp(),
-        userId: this.$store.getters["getLoginUser"].uid
-      });
+      let actionHistory = {};
+      actionHistory.actionType = actionType;
+      actionHistory.dataType = dataTypes[0].dataType;
+      actionHistory.memoId = memoId;
+      actionHistory.actionDateTime = firebase.firestore.FieldValue.serverTimestamp();
+      actionHistory.userId = this.$store.getters["getLoginUser"].uid;
+      await actionHistoryService.register(actionHistory);
     },
     goMemos() {
       this.$router.push({
@@ -239,10 +231,10 @@ export default {
       }
     },
     async searchMemoByMemoId(memoId) {
-      let memo = await memoService.searchMemoByMemoId(memoId);
+      let memo = await memoService.searchByMemoId(memoId);
       if (memo.exists) {
         let data = memo.data();
-        _.set(data, "id", data.id);
+        _.set(data, "id", memo.id);
         this.setMemoData(data);
       } else {
         this.snackbarMessage =

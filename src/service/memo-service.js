@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import "firebase/firestore";
 
 /**
  * 削除フラグをもとにメモ情報リストを取得します。
@@ -6,7 +7,7 @@ import firebase from "firebase";
  * @param  {Boolean} deleteFlg
  * @returns メモ情報リスト
  */
-function searchMemoByDeleteFlg(userId, deleteFlg) {
+function searchByDeleteFlg(userId, deleteFlg) {
 	return firebase.firestore().collection("memo")
 		.where("userId", "==", userId)
 		.where("deleteFlg", "==", deleteFlg).orderBy("insertDateTime", "desc").get();
@@ -17,11 +18,43 @@ function searchMemoByDeleteFlg(userId, deleteFlg) {
  * @param  {String} memoId
  * @returns メモ情報
  */
-function searchMemoByMemoId(memoId) {
+function searchByMemoId(memoId) {
 	return firebase.firestore().collection("memo").doc(memoId).get();
 }
 
+/**
+ * メモ情報を登録します。
+ * @param  {Object} memo
+ * @returns 登録したメモ情報
+ */
+function register(memo) {
+	return firebase.firestore().collection("memo").add(memo);
+}
+
+/**
+ * メモ情報を更新します。
+ * @param  {Object} memo
+ * @param  {String} memoId
+ * @returns 更新したメモ情報
+ */
+function modify(memo, memoId) {
+	return firebase.firestore().collection("memo").doc(memoId).set(memo);
+}
+
+/**
+ * メモ情報を更新します。
+ * @param  {String} memoId
+ * @param  {Boolean} deleteFlg
+ * @returns 更新したメモ情報
+ */
+function modifyDeleteFlg(memoId, deleteFlg) {
+	return firebase.firestore().collection("memo").doc(memoId).update({ deleteFlg: deleteFlg });
+}
+
 export default {
-	searchMemoByDeleteFlg,
-	searchMemoByMemoId
+	searchByDeleteFlg,
+	searchByMemoId,
+	register,
+	modify,
+	modifyDeleteFlg
 };

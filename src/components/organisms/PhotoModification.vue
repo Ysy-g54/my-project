@@ -159,22 +159,18 @@ export default {
       await this.deleteFile();
       let isUploadFile = await this.uploadFile();
       if (isUploadFile) {
-        let currentUser = firebase.auth().currentUser;
-        currentUser
-          .updateProfile({
-            displayName: this.$store.getters["getLoginUser"].displayName,
-            photoURL: !_.isEmpty(this.files)
-              ? this.resultUrl
-              : this.$store.getters["getLoginUser"].photoURL
-          })
-          .then(() => {
-            this.$store.dispatch("findLoginUser").then(() => {
-              this.$router.push({
-                name: "profile",
-                params: { updateSuccessFlg: true }
-              });
-            });
-          });
+        let currentUser = await firebase.auth().currentUser;
+        await currentUser.updateProfile({
+          displayName: this.$store.getters["getLoginUser"].displayName,
+          photoURL: !_.isEmpty(this.files)
+            ? this.resultUrl
+            : this.$store.getters["getLoginUser"].photoURL
+        });
+        await this.$store.dispatch("findLoginUser");
+        this.$router.push({
+          name: "profile",
+          params: { updateSuccessFlg: true }
+        });
       } else {
         this.$refs.snackbar.openSnackbar();
       }

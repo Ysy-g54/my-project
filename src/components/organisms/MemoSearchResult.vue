@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     async searchMemo() {
-      let querySnapshot = await memoService.searchMemoByDeleteFlg(
+      let querySnapshot = await memoService.searchByDeleteFlg(
         this.$store.getters["getLoginUser"].uid,
         false
       );
@@ -65,21 +65,13 @@ export default {
       );
       this.isNotEmptyResult = !_.isEmpty(this.resultMemos);
     },
-    onEditClick(memoId) {
+    async onEditClick(memoId) {
       if (this.isDiscard) {
-        this.database
-          .collection("memo")
-          .doc(memoId)
-          .update({
-            deleteFlg: false
-          })
-          .then(() => {
-            this.searchMemo();
-            this.$emit("restore-memo");
-          })
-          .catch(error => {
-            console.error("Error adding document: ", error);
-          });
+        await memoService.modifyDeleteFlg(memoId, false).catch(error => {
+          console.error("Error adding document: ", error);
+        });
+        await this.searchMemo();
+        await this.$emit("restore-memo");
       } else {
         this.$router.push({
           name: "memoModification",
@@ -108,19 +100,17 @@ export default {
       //   await this.searchMemoByMemoId(memo.memoId);
       //   await this.setModifiedMemoDetail(memo.memoId);
     },
-    onDone(memo) {
-      this.database
+    async onDone(memo) {
+      await this.database
         .collection("memo")
         .doc(memo.memoId)
         .update({
           doneFlg: !memo.doneFlg
         })
-        .then(() => {
-          this.searchMemo();
-        })
         .catch(error => {
           console.error("Error adding document: ", error);
         });
+      await this.searchMemo();
     },
     async deleteMemo() {
       await (this.isDiscard
@@ -128,12 +118,7 @@ export default {
             .collection("memo")
             .doc(this.memoId)
             .delete()
-        : this.database
-            .collection("memo")
-            .doc(this.memoId)
-            .update({
-              deleteFlg: true
-            })
+        : memoService.modifyDeleteFlg(this.memoId, true)
       ).catch(error => {
         console.error("Error adding document: ", error);
       });
@@ -141,7 +126,7 @@ export default {
       await this.$emit("delete-memo");
     },
     async searchMemoByMemoId(memoId) {
-      let querySnapshot = await memoService.searchMemoByMemoId(memoId);
+      let querySnapshot = await memoService.searchByMemoId(memoId);
       if (querySnapshot.exists) {
         let data = querySnapshot.data();
         _.set(data, "id", querySnapshot.id);
