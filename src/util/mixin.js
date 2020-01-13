@@ -16,7 +16,7 @@ export default {
 	},
 	data: () => ({
 		isEdited: false,
-		loading: true
+		loading: false
 	}),
 	methods: {
 		formatDate(date, format) {
@@ -32,6 +32,12 @@ export default {
 		},
 		handler(event) {
 			event.returnValue = '行った変更が保存されない可能性があります。';
+		},
+		startLoading() {
+			this.loading = true;
+		},
+		endLoading() {
+			this.loading = false;
 		}
 	},
 	watch: {

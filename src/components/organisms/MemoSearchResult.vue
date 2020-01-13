@@ -97,8 +97,8 @@ export default {
         .catch(error => {
           console.error("Error adding document: ", error);
         });
-      //   await this.searchMemoByMemoId(memo.memoId);
-      //   await this.setModifiedMemoDetail(memo.memoId);
+      await this.searchMemoByMemoId(memo.memoId);
+      await this.setModifiedMemoDetail(memo.memoId);
     },
     async onDone(memo) {
       await this.database
@@ -110,7 +110,8 @@ export default {
         .catch(error => {
           console.error("Error adding document: ", error);
         });
-      await this.searchMemo();
+      await this.searchMemoByMemoId(memo.memoId);
+      await this.setModifiedMemoDetail(memo.memoId);
     },
     async deleteMemo() {
       await (this.isDiscard
@@ -129,7 +130,7 @@ export default {
       let querySnapshot = await memoService.searchByMemoId(memoId);
       if (querySnapshot.exists) {
         let data = querySnapshot.data();
-        _.set(data, "id", querySnapshot.id);
+        _.set(data, "memoId", querySnapshot.id);
         this.modifiedMemo = data;
       } else {
         this.snackbarMessage =
@@ -138,9 +139,10 @@ export default {
       }
     },
     async setModifiedMemoDetail(memoId) {
-      let modifiedMemos = await this.resultMemos.filter(
-        memo => memo.memoId !== memoId
-      );
+      let modifiedMemos = await this.resultMemos.filter(memo => {
+        return memo.memoId !== memoId;
+      });
+      this.resultMemos = [];
       this.resultMemos = await modifiedMemos;
       await this.resultMemos.push(this.modifiedMemo);
     }

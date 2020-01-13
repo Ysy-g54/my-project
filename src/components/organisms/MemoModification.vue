@@ -234,7 +234,7 @@ export default {
       let memo = await memoService.searchByMemoId(memoId);
       if (memo.exists) {
         let data = memo.data();
-        _.set(data, "id", memo.id);
+        _.set(data, "memoId", memo.id);
         this.setMemoData(data);
       } else {
         this.snackbarMessage =
@@ -245,7 +245,7 @@ export default {
     setMemoData(data) {
       this.categoryId = data.categoryId;
       this.memo = data.memo;
-      this.memoId = data.id;
+      this.memoId = data.memoId;
       this.insertDateTime = data.insertDateTime;
       this.favoriteFlg = data.favoriteFlg;
       this.doneFlg = data.doneFlg;

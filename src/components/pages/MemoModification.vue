@@ -26,7 +26,7 @@ export default {
     };
   },
   methods: {
-    saveSuccess() {
+    async saveSuccess() {
       this.isSavable = true;
     },
     archiveSuccess() {

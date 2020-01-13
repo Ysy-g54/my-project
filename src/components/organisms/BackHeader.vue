@@ -9,6 +9,14 @@
           <span class="md-subheading">{{ title }}</span>
         </div>
         <div class="md-toolbar-section-end">
+          <div v-show="loading">
+            <md-progress-spinner
+              class="md-accent"
+              :md-diameter="30"
+              :md-stroke="3"
+              md-mode="indeterminate"
+            ></md-progress-spinner>
+          </div>
           <md-button v-if="isShowArchiveButton" class="md-icon-button" @click="archive">
             <md-icon>archive</md-icon>
           </md-button>
@@ -30,11 +38,12 @@ export default {
     back() {
       this.$router.back();
     },
-    save() {
-      this.$emit("save-success");
+    async save() {
+      await this.startLoading();
+      await this.$emit("save-success");
     },
-    archive() {
-      this.$emit("archive-success");
+    async archive() {
+      await this.$emit("archive-success");
     }
   },
   props: {
@@ -49,4 +58,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.md-app {
+  --md-theme-default-accent: #fff;
+}
 </style>
