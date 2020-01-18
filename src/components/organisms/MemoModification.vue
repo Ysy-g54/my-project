@@ -274,6 +274,18 @@ export default {
     if (this.$route.params.memoId !== undefined) {
       await this.searchMemoByMemoId(this.$route.params.memoId);
     }
+    await this.$watch(
+      // 4つのプロパティを含めた値を評価させる
+      () => [
+        this.$data.categoryId,
+        this.$data.memo,
+        this.$data.favoriteFlg,
+        this.$data.doneFlg
+      ],
+      () => {
+        this.$emit("start-edit");
+      }
+    );
   },
   components: {
     fileUpload,

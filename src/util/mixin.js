@@ -41,12 +41,11 @@ export default {
 		}
 	},
 	watch: {
-		// body: {
-		// 	handler(val, old) {
-		// 		this.isEdited = true;
-		// 	},
-		// 	deep: true
-		// }
+		isEdited() {
+			if (this.isEdited) {
+				window.addEventListener('beforeunload', this.handler);
+			}
+		}
 	},
 	mounted() {
 		let title = this.$route.meta.title;
@@ -57,13 +56,8 @@ export default {
 		}
 	},
 	created() {
-		if (this.isEdited) {
-			window.addEventListener('beforeunload', this.handler);
-		}
+		window.removeEventListener('beforeunload', this.handler);
 	},
 	destroyed() {
-		if (this.isEdited) {
-			window.removeEventListener('beforeunload', this.handler);
-		}
 	}
 };
