@@ -43,11 +43,11 @@
           <md-icon>more_vert</md-icon>
         </md-button>
         <md-menu-content>
+		　<md-menu-item @click="onEditClick">
+            <span>{{ editMessage }}</span>
+          </md-menu-item>
           <md-menu-item　@click="onShareClick">
             <span>{{ 'メモを共有する' }}</span>
-          </md-menu-item>
-		<md-menu-item @click="onEditClick">
-            <span>{{ editMessage }}</span>
           </md-menu-item>
           <md-menu-item @click="onDeleteClick">
             <span>{{ deleteMessage }}</span>

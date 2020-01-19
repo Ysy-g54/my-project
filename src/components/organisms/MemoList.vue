@@ -12,12 +12,12 @@
               <md-icon>more_vert</md-icon>
             </md-button>
             <md-menu-content>
-			  <md-menu-item　@click="onShareClick(memos[index])">
-                <span>{{ 'メモを共有する' }}</span>
-          	  </md-menu-item>
               <md-menu-item @click="onEditClick(memos[index].memoId)">
                 <span>{{ editMessage }}</span>
               </md-menu-item>
+			  <md-menu-item　@click="onShareClick(memos[index])">
+                <span>{{ 'メモを共有する' }}</span>
+          	  </md-menu-item>
               <md-menu-item @click="onDeleteClick(memos[index])">
                 <span>{{ deleteMessage }}</span>
               </md-menu-item>
