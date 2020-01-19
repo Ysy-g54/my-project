@@ -43,7 +43,10 @@
           <md-icon>more_vert</md-icon>
         </md-button>
         <md-menu-content>
-          <md-menu-item @click="onEditClick">
+          <md-menu-item　@click="onShareClick">
+            <span>{{ 'メモを共有する' }}</span>
+          </md-menu-item>
+		<md-menu-item @click="onEditClick">
             <span>{{ editMessage }}</span>
           </md-menu-item>
           <md-menu-item @click="onDeleteClick">
@@ -62,7 +65,7 @@ export default {
     memoId: "",
     editMessage: "",
     deleteMessage: "",
-    showableOmittedText: false
+	showableOmittedText: false
   }),
   methods: {
     formatCategory(categoryId) {
@@ -76,7 +79,7 @@ export default {
             }
           });
       return categoryNm;
-    },
+	},
     onEditClick() {
       this.$emit("on-edit-click", this.memo.memoId);
     },
@@ -89,6 +92,9 @@ export default {
     onFavoriteClick() {
       this.$emit("on-favorite", this.memo);
     },
+	onShareClick() {
+		this.$emit("on-share-click", this.memo);
+	},
     showFullText() {
       this.showableOmittedText = false;
     }

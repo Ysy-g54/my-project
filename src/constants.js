@@ -25,3 +25,12 @@ export const dataTypes = [
 	{ dataType: "setting", dataNm: "設定" },
 	{ dataType: "profile", dataNm: "プロフィール" }
 ];
+
+/**
+ * 共有するアプリの種類
+ */
+export const shareApps = [
+	{ appNm: "LINE", url: "http://line.me/R/msg/text/?", img: require('@/assets/share/1485482196-line_78675.svg') },
+	{ appNm: "twitter", url: "http://twitter.com/share?text=", img: require('@/assets/share/Twitter_icon-icons.com_66803.svg') },
+	{ appNm: "Gmail", url: "https://mail.google.com/mail/?view=cm&body=", img: require('@/assets/share/gmail_icon_130929.svg') }
+];

@@ -1,5 +1,6 @@
 <template>
   <div v-if="isNotEmptyMemo">
+    <ShareDialog ref="shareDialog"></ShareDialog>
     <div>
       <span class="md-title">{{ memoCount }}</span>
       <span class="md-subheading">個</span>
@@ -15,6 +16,7 @@
         @on-delete-click="onDeleteClick"
         @on-favorite="onFavorite"
         @on-done="onDone"
+        @on-share-click="onShareClick"
       ></MemoCard>
       <md-divider v-if="!isDiscard && favoriteMemos.length !== 0" class="divider" />
       <md-subheader v-if="!isDiscard">メモ</md-subheader>
@@ -58,6 +60,7 @@ import memoService from "@/service/memo-service";
 import { actionTypes, dataTypes } from "../../constants";
 import MemoCard from "@/components/organisms/MemoCard";
 import MemoList from "@/components/organisms/MemoList";
+import ShareDialog from "@/components/organisms/ShareDialog";
 import firebase from "firebase";
 import "firebase/firestore";
 export default {
@@ -141,6 +144,9 @@ export default {
 
       await this.searchMemo();
     },
+    async onShareClick(memo) {
+      this.$refs.shareDialog.openDialog(memo);
+    },
     async deleteMemo() {
       await (this.isDiscard
         ? this.database
@@ -187,7 +193,8 @@ export default {
   },
   components: {
     MemoCard,
-    MemoList
+    MemoList,
+    ShareDialog
   }
 };
 </script>
