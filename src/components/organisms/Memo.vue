@@ -29,6 +29,7 @@
         @on-delete-click="onDeleteClick"
         @on-favorite="onFavorite"
         @on-done="onDone"
+        @on-share-click="onShareClick"
       ></MemoCard>
     </div>
     <div v-else>
@@ -37,6 +38,7 @@
         :memos="favoriteMemos"
         @on-edit-click="onEditClick"
         @on-delete-click="onDeleteClick"
+        @on-share-click="onShareClick"
       ></MemoList>
       <div class="divider" v-if="!isDiscard && favoriteMemos.length !== 0" />
       <md-subheader>メモ</md-subheader>
@@ -45,6 +47,7 @@
         :memos="memos"
         @on-edit-click="onEditClick"
         @on-delete-click="onDeleteClick"
+        @on-share-click="onShareClick"
       ></MemoList>
     </div>
   </div>
