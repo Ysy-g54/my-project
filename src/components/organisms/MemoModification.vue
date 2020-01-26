@@ -86,6 +86,7 @@ export default {
       await this.modifyMemo();
     },
     async modifyMemo() {
+      await this.$emit("end-edit");
       await this.saveMemo();
       this.files = [];
       await this.registerActionHistory(this.memoId, actionTypes[1].actionType);

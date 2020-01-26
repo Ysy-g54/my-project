@@ -151,4 +151,7 @@ export default {
   cursor: pointer;
   cursor: hand;
 }
+/* .md-button.md-theme-default.md-primary .md-icon-font {
+  color:var(--md-theme-default-primary-on-background, #FFFF00);
+} */
 </style>

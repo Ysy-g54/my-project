@@ -9,7 +9,12 @@
       ></BackHeader>
     </div>
     <div slot="main">
-      <MemoModification :isArchive="isArchive" :isSavable="isSavable" @start-edit="startEdit"></MemoModification>
+      <MemoModification
+        :isArchive="isArchive"
+        :isSavable="isSavable"
+        @start-edit="startEdit"
+        @end-edit="endEdit"
+      ></MemoModification>
     </div>
   </Header>
 </template>
@@ -32,9 +37,6 @@ export default {
     },
     archiveSuccess() {
       this.isArchive = !this.isArchive;
-    },
-    startEdit() {
-      this.isEdited = true;
     }
   },
   created() {},

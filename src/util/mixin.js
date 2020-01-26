@@ -38,12 +38,20 @@ export default {
 		},
 		endLoading() {
 			this.loading = false;
+		},
+		startEdit() {
+			this.isEdited = true;
+		},
+		endEdit() {
+			this.isEdited = false;
 		}
 	},
 	watch: {
 		isEdited() {
 			if (this.isEdited) {
 				window.addEventListener('beforeunload', this.handler);
+			} else {
+				window.removeEventListener('beforeunload', this.handler);
 			}
 		}
 	},
