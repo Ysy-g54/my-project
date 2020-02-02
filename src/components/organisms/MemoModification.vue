@@ -1,5 +1,6 @@
 <template>
   <div @keydown.ctrl.83="saveByKeyDown()">
+    <CameraDialog ref="cameraDialog" @set-file="setFile"></CameraDialog>
     <md-field>
       <label>メモ内容</label>
       <md-textarea v-autofocus v-model="memo" rows="10"></md-textarea>
@@ -16,6 +17,10 @@
       </md-button>
       <img :src="fileUrl" width="auto" height="auto" />
     </div>
+
+    <md-button class="md-icon-button" @click="startUpCamera">
+      <md-icon>camera_alt</md-icon>
+    </md-button>
     <md-button class="md-icon-button">
       <fileUpload
         ref="upload"
@@ -57,6 +62,7 @@ import _ from "lodash";
 import actionHistoryService from "@/service/action-history-service";
 import memoService from "@/service/memo-service";
 import firebase from "firebase";
+import CameraDialog from "@/components/organisms/CameraDialog";
 import fileUpload from "vue-upload-component";
 import Snackbar from "@/components/atoms/Snackbar";
 import { categories, actionTypes, dataTypes } from "../../constants";
@@ -252,6 +258,14 @@ export default {
       this.isUpdateMemo = true;
       this.fileUrl = data.fileUrl;
       this.fileReference = data.fileReference;
+    },
+    startUpCamera() {
+      this.$refs.cameraDialog.openDialog();
+    },
+    setFile(file) {
+      console.error(file);
+      this.files = [];
+      this.files = file;
     }
   },
   watch: {
@@ -288,6 +302,7 @@ export default {
     );
   },
   components: {
+    CameraDialog,
     fileUpload,
     Snackbar
   }
