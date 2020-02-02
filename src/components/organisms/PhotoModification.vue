@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Dialog ref="dialog" :title="'更新しますか?'" @confirm-dialog="updateItem"></Dialog>
     <div>
       <md-avatar class="md-avatar-icon md-large">
         <img
@@ -63,7 +62,6 @@ import "firebase/firestore";
 import VueCropper from "vue-cropperjs";
 import "cropperjs/dist/cropper.css";
 import Snackbar from "@/components/atoms/Snackbar";
-import Dialog from "@/components/molecules/Dialog";
 export default {
   data() {
     return {
@@ -183,16 +181,13 @@ export default {
           });
         });
       }
-    },
-    openDialog() {
-      this.$refs.dialog.openDialog();
     }
   },
   watch: {
-    isSavable() {
+    async isSavable() {
       if (!_.isEmpty(this.files)) {
-        this.formatPhoto();
-        this.openDialog();
+        await this.formatPhoto();
+        await this.updateItem();
       }
     }
   },
@@ -208,8 +203,7 @@ export default {
   created() {},
   components: {
     Snackbar,
-    VueCropper,
-    Dialog
+    VueCropper
   }
 };
 </script>

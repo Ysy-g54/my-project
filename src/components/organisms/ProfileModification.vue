@@ -40,8 +40,8 @@ export default {
                 : this.$store.getters["getLoginUser"].photoURL
           })
         : await currentUser.updateEmail(this.editContent);
-      this.$store.dispatch("findLoginUser");
-      this.$emit("update-success");
+      await this.$store.dispatch("findLoginUser");
+      await this.$emit("update-success");
     }
   },
   watch: {

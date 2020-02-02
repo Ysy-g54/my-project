@@ -39,12 +39,22 @@
           <span>{{ $store.getters["getLoginUser"].mailAddress }}</span>
           <span>メールアドレス</span>
         </div>
-        <!-- <md-button
+        <md-button
+          v-if="false"
           class="md-icon-button"
           @click="onEditItemClick('メールアドレス', $store.getters['getLoginUser'].mailAddress)"
         >
           <md-icon>edit</md-icon>
-        </md-button>-->
+        </md-button>
+      </md-list-item>
+      <md-divider></md-divider>
+      <md-list-item>
+        <div class="md-list-item-text">
+          <span>パスワード</span>
+        </div>
+        <md-button v-if="false" class="md-icon-button" @click="onEditItemClick('パスワード', )">
+          <md-icon>edit</md-icon>
+        </md-button>
       </md-list-item>
       <md-divider></md-divider>
     </md-list>
@@ -65,8 +75,8 @@ export default {
   },
   methods: {
     onEditItemClick(title, content) {
-      this.content = content;
       this.title = title;
+      this.content = content;
       this.$refs.dialog.openDialog();
     },
     goPhotoModification() {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Dialog ref="dialog" :title="title" @confirm-dialog="confirmDialog"></Dialog>
+    <DialogConfirm ref="dialog" :title="title" @confirm-dialog="confirmDialog"></DialogConfirm>
     <md-subheader>ゴミ箱</md-subheader>
     <div>
       <Memo
@@ -17,7 +17,7 @@
 
 <script>
 import Snackbar from "@/components/atoms/Snackbar";
-import Dialog from "@/components/molecules/Dialog";
+import DialogConfirm from "@/components/molecules/DialogConfirm";
 import Memo from "@/components/organisms/Memo";
 export default {
   data() {
@@ -52,7 +52,7 @@ export default {
   created() {},
   components: {
     Snackbar,
-    Dialog,
+    DialogConfirm,
     Memo
   }
 };

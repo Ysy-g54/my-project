@@ -3,7 +3,7 @@
     <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-primary">
         <div class="md-toolbar-row">
-          <Dialog ref="dialog" :title="title" @confirm-dialog="confirmDialog"></Dialog>
+          <DialogConfirm ref="dialog" :title="title" @confirm-dialog="confirmDialog"></DialogConfirm>
           <md-button class="md-icon-button" @click="onAvatarClick">
             <md-avatar>
               <img v-if="isNotEmptyLoginUserPhoto" :data-src="loginUserPhoto" class="lazyload" />
@@ -67,7 +67,7 @@
 
 <script>
 import _ from "lodash";
-import Dialog from "@/components/molecules/Dialog";
+import DialogConfirm from "@/components/molecules/DialogConfirm";
 export default {
   data() {
     return {
@@ -161,7 +161,7 @@ export default {
     this.q = this.$route.query.q;
   },
   components: {
-    Dialog
+    DialogConfirm
   }
 };
 </script>

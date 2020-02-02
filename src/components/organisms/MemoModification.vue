@@ -16,7 +16,6 @@
       </md-button>
       <img :src="fileUrl" width="auto" height="auto" />
     </div>
-
     <md-button class="md-icon-button">
       <fileUpload
         ref="upload"

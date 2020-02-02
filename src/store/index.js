@@ -13,7 +13,8 @@ const store = new Vuex.Store({
 			emailVerified: "",
 			memoDisplayForm: "",
 			photoReference: "",
-			userSettingId: ""
+			userSettingId: "",
+			providerId: ""
 		}
 	},
 	mutations: {
@@ -24,6 +25,7 @@ const store = new Vuex.Store({
 				state.loginUser.photoUrl = loginUser.photoURL || "";
 				state.loginUser.uid = loginUser.uid || "";
 				state.loginUser.emailVerified = loginUser.emailVerified || "";
+				state.loginUser.providerId = loginUser.providerData[0].providerId || "";
 				firebase
 					.firestore()
 					.collection("userSetting")
@@ -47,6 +49,7 @@ const store = new Vuex.Store({
 			state.loginUser.memoDisplayForm = "";
 			state.loginUser.photoReference = "";
 			state.loginUser.userSettingId = "";
+			state.loginUser.providerId = "";
 		}
 	},
 	actions: {
