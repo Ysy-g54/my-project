@@ -41,7 +41,7 @@
         @on-share-click="onShareClick"
       ></MemoList>
       <div class="divider" v-if="!isDiscard && favoriteMemos.length !== 0" />
-      <md-subheader>メモ</md-subheader>
+      <md-subheader v-if="!isDiscard">メモ</md-subheader>
       <MemoList
         :isDiscard="isDiscard"
         :memos="memos"
@@ -52,7 +52,7 @@
     </div>
   </div>
   <div v-else>
-    <md-empty-state md-icon="create" md-label="空っぽです。" md-description="メモを追加すると、ここに表示されます。"></md-empty-state>
+    <md-empty-state md-icon="create" md-label="空っぽです。" md-description="追加したメモが、ここに表示されます。"></md-empty-state>
   </div>
 </template>
 
@@ -173,7 +173,7 @@ export default {
       actionHistory.memoId = "";
       actionHistory.actionDateTime = firebase.firestore.FieldValue.serverTimestamp();
       actionHistory.userId = this.$store.getters["getLoginUser"].uid;
-      await actionHistoryService(actionHistory);
+      await actionHistoryService.register(actionHistory);
     },
     async deleteFile(memo) {
       if (this.isDiscard && memo.fileReference !== null) {
