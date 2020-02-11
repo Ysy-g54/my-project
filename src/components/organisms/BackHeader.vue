@@ -42,14 +42,23 @@ export default {
       await this.startLoading();
       await this.$emit("save-success");
     },
+    async isNotLoading() {
+      await this.endLoading();
+    },
     async archive() {
       await this.$emit("archive-success");
+    }
+  },
+  watch: {
+    isLoading() {
+      this.isNotLoading();
     }
   },
   props: {
     isShowArchiveButton: { type: Boolean, default: false },
     isShowSaveButton: { type: Boolean, default: true },
-    title: { type: String, default: "" }
+    title: { type: String, default: "" },
+    isLoading: { type: Boolean, default: true }
   },
   created() {},
   components: {}

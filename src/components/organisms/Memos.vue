@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <Memo @delete-memo="deleteMemo"/>
+      <Memo @delete-memo="deleteMemo" />
     </div>
-    <SpeedDial/>
+    <SpeedDial />
     <Snackbar ref="snackbar" :message="message" :button="button" :duration="duration"></Snackbar>
   </div>
 </template>

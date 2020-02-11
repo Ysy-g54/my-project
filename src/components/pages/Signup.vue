@@ -1,7 +1,7 @@
 <template>
   <Header>
     <div slot="header">
-      <BackHeader :title="'アカウントを作成'" @save-success="validateUser"></BackHeader>
+      <BackHeader :title="'アカウントを作成'" :isLoading="isLoading" @save-success="validateUser"></BackHeader>
     </div>
     <div slot="main">
       <md-app>
@@ -38,7 +38,8 @@ export default {
       mailAddress: "",
       password: "",
       message: "",
-      duration: 10000
+      duration: 10000,
+      isLoading: true
     };
   },
   validations: {
@@ -64,12 +65,14 @@ export default {
       if (!this.$v.$invalid) {
         await this.saveSuccess();
       }
+      this.isLoading = !this.isLoading;
     },
     async saveSuccess() {
       await firebase
         .auth()
         .createUserWithEmailAndPassword(this.mailAddress, this.password)
         .catch(() => {
+          this.isLoading = !this.isLoading;
           this.showFailureMessage();
         });
       let signupUser = await firebase.auth().currentUser;

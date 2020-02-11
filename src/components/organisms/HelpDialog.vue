@@ -4,12 +4,15 @@
       <md-subheader>ヘルプ</md-subheader>
       <md-list class="md-double-line">
         <md-list-item>
-          <div class="md-list-item-text">
+          <div>
+            <md-icon>list_alt</md-icon>
             <span>「ctrl」 + 「?」でヘルプを呼び出すことができます。</span>
           </div>
         </md-list-item>
+        <md-divider></md-divider>
         <md-list-item>
-          <div class="md-list-item-text">
+          <div>
+            <md-icon>list_alt</md-icon>
             <span>メモを更新する画面にて、「ctrl」 + 「s」で編集中のメモを登録・更新することができます。</span>
           </div>
         </md-list-item>
