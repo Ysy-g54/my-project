@@ -1,8 +1,9 @@
 <template>
-  <div class="page-container">
+  <div class="page-container" @keydown.ctrl.191="onHelpClick">
     <md-app md-waterfall md-mode="fixed">
       <md-app-toolbar class="md-primary">
         <div class="md-toolbar-row">
+          <HelpDialog ref="helpDialog"></HelpDialog>
           <DialogConfirm ref="dialog" :title="title" @confirm-dialog="confirmDialog"></DialogConfirm>
           <md-button class="md-icon-button" @click="onAvatarClick">
             <md-avatar>
@@ -47,6 +48,10 @@
             <md-icon>person</md-icon>
             <span class="md-list-item-text">プロフィール</span>
           </md-list-item>
+          <md-list-item @click="onHelpClick">
+            <md-icon>help</md-icon>
+            <span class="md-list-item-text">ヘルプ</span>
+          </md-list-item>
           <md-list-item @click="onFeedbackClick">
             <md-icon>textsms</md-icon>
             <span class="md-list-item-text">フィードバック</span>
@@ -68,6 +73,7 @@
 <script>
 import _ from "lodash";
 import DialogConfirm from "@/components/molecules/DialogConfirm";
+import HelpDialog from "@/components/organisms/HelpDialog";
 export default {
   data() {
     return {
@@ -109,6 +115,11 @@ export default {
       this.$router.push({
         name: "profile"
       });
+    },
+    async onHelpClick() {
+      await event.preventDefault();
+      this.menuVisible = await false;
+      await this.$refs.helpDialog.openDialog();
     },
     onFeedbackClick() {
       this.menuVisible = false;
@@ -161,7 +172,8 @@ export default {
     this.q = this.$route.query.q;
   },
   components: {
-    DialogConfirm
+    DialogConfirm,
+    HelpDialog
   }
 };
 </script>

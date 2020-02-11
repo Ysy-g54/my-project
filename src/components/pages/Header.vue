@@ -2,7 +2,7 @@
   <div>
     <header>
       <slot name="header">
-        <GlobalHeader/>
+        <GlobalHeader />
       </slot>
     </header>
     <main>

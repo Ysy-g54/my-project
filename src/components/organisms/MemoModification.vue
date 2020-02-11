@@ -1,6 +1,6 @@
 <template>
-  <div @keydown.ctrl.83="saveByKeyDown()">
-    <CameraDialog ref="cameraDialog" @set-file="setFile"></CameraDialog>
+  <div @keydown.ctrl.83="saveByKeyDown">
+    <!-- <CameraDialog ref="cameraDialog" @set-file="setFile"></CameraDialog> -->
     <md-field>
       <label>メモ内容</label>
       <md-textarea v-autofocus v-model="memo" rows="10"></md-textarea>
@@ -18,9 +18,9 @@
       <img :src="fileUrl" width="auto" height="auto" />
     </div>
 
-    <md-button class="md-icon-button" @click="startUpCamera">
+    <!-- <md-button class="md-icon-button" @click="startUpCamera">
       <md-icon>camera_alt</md-icon>
-    </md-button>
+    </md-button>-->
     <md-button class="md-icon-button">
       <fileUpload
         ref="upload"

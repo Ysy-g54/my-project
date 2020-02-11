@@ -93,20 +93,6 @@ export default {
     async onGoogleLoginClick() {
       let provider = new firebase.auth.GoogleAuthProvider();
       await firebase.auth().signInWithRedirect(provider);
-      let result = await firebase
-        .auth()
-        .getRedirectResult()
-        .catch(() => {
-          this.showFailureMessage();
-        });
-      if (result.credential) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // let token = result.credential.accessToken;
-      }
-      await this.$store.dispatch("findLoginUser");
-      this.$router.push({
-        name: "memos"
-      });
     },
     onForgotPasswordClick() {
       this.$router.push({
@@ -120,6 +106,7 @@ export default {
   },
   watch: {},
   computed: {},
+  mounted() {},
   created() {},
   components: {
     Snackbar
