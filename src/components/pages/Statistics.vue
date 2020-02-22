@@ -13,6 +13,7 @@ import BarChart from "@/components/organisms/BarChart";
 import PieChart from "@/components/organisms/PieChart";
 import firebase from "firebase";
 import "firebase/firestore";
+import * as palette from "google-palette";
 export default {
   data() {
     return {
@@ -72,6 +73,13 @@ export default {
       });
       this.isRenderChart = true;
     });
+    _.set(
+      this.memoCategories,
+      "datasets[0].backgroundColor",
+      palette("mpn65", categories.length).map(function(hex) {
+        return "#" + hex;
+      })
+    );
   },
   components: {
     BarChart,
