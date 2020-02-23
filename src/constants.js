@@ -2,6 +2,7 @@
  * メモカテゴリ
  */
 export const categories = [
+	{ categoryId: "", categoryNm: "-----" },
 	{ categoryId: "1", categoryNm: "目標" },
 	{ categoryId: "2", categoryNm: "メモ" },
 	{ categoryId: "3", categoryNm: "ToDo" },

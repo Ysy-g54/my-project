@@ -8,6 +8,11 @@
         class="md-subhead see-next"
         @click="showFullText"
       >{{ "続きを見る" }}</div>
+	        <div
+        v-if="rowsCount > 5 && !showableOmittedText"
+        class="md-subhead see-next"
+        @click="hideFullText"
+      >{{ "メモをたたむ" }}</div>
       <img
         v-if="memo.fileUrl !== null"
         class="lazyload"
@@ -97,6 +102,9 @@ export default {
 	},
     showFullText() {
       this.showableOmittedText = false;
+    },
+	hideFullText() {
+      this.showableOmittedText = true;
     }
   },
   computed: {
