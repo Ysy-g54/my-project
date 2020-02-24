@@ -71,15 +71,15 @@ export default {
           return true;
         }
       });
-      this.isRenderChart = true;
     });
-    _.set(
+    await _.set(
       this.memoCategories,
       "datasets[0].backgroundColor",
-      palette("mpn65", categories.length).map(function(hex) {
+      palette("mpn65", categories.length).map(hex => {
         return "#" + hex;
       })
     );
+    this.isRenderChart = await true;
   },
   components: {
     BarChart,

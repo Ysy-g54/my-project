@@ -1,19 +1,6 @@
 {
-	"rules": {
-		".read": true,
-		".write": true,
-		"actionHistory": {
-			".indexOn": [
-				"userId",
-				"actionDateTime"
-			]
-		},
-		"memo": {
-			".indexOn": [
-				"userId",
-				"deleteFlg",
-				"insertDateTime"
-			]
-		}
-	}
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
 }

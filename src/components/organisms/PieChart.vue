@@ -10,17 +10,17 @@ export default {
     return {};
   },
   methods: {
-    createChart() {
-      this.renderChart(this.chartData, DEFAULT_OPTIONS);
+    async createChart() {
+      await this.renderChart(this.chartData, DEFAULT_OPTIONS);
     }
   },
   watch: {
-    isRenderChart() {
-      this.createChart();
+    async isRenderChart() {
+      await this.createChart();
     }
   },
   props: {
-    chartData: { type: Object, default: null },
+    chartData: { type: Object, default: {} },
     isRenderChart: { type: Boolean, default: false }
   },
   computed: {},
