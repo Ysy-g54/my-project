@@ -1,12 +1,13 @@
 <template>
   <div>
-    <md-field>
+    <md-empty-state md-icon="hourglass_empty" md-label="Coming Soon..."></md-empty-state>
+    <!-- <md-field>
       <label>問題点やご意見を書いてください。</label>
       <md-textarea v-autofocus v-model="text" rows="10"></md-textarea>
     </md-field>
     <div class="md-layout md-alignment-top-right">
       <md-button class="md-dense md-raised md-primary" @click="sendMail">送信する</md-button>
-    </div>
+    </div>-->
   </div>
 </template>
 
