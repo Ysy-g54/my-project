@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-dialog :md-active.sync="active">
+    <md-dialog :md-active.sync="active" :md-fullscreen="false">
       <md-list class="md-double-line">
         <md-list-item
           v-for="shareApp in shareApps"

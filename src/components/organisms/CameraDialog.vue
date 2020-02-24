@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-dialog :md-active.sync="active">
+    <md-dialog :md-active.sync="active" :md-fullscreen="false">
       <video ref="video" id="video" width="500" height="500" autoplay></video>
       <div>
         <md-button class="md-icon-button" @click="capture">

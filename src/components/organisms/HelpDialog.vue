@@ -1,22 +1,16 @@
 <template>
   <div>
-    <md-dialog :md-active.sync="active" @keydown.ctrl.191="closeDialog">
+    <md-dialog :md-active.sync="active" :md-fullscreen="false" @keydown.ctrl.191="closeDialog">
       <md-subheader>ヘルプ</md-subheader>
-      <md-list class="md-double-line">
-        <md-list-item>
-          <div>
-            <md-icon>list_alt</md-icon>
-            <span>「ctrl」 + 「?」でヘルプを呼び出すことができます。</span>
-          </div>
-        </md-list-item>
-        <md-divider></md-divider>
-        <md-list-item>
-          <div>
-            <md-icon>list_alt</md-icon>
-            <span>メモを更新する画面にて、「ctrl」 + 「s」で編集中のメモを登録・更新することができます。</span>
-          </div>
-        </md-list-item>
-      </md-list>
+      <div>
+        <md-icon>list_alt</md-icon>
+        <span>「ctrl」 + 「?」でヘルプを呼び出すことができます。</span>
+      </div>
+      <md-divider></md-divider>
+      <div>
+        <md-icon>list_alt</md-icon>
+        <span>メモを更新する画面にて、「ctrl」 + 「s」で編集中のメモを登録・更新することができます。</span>
+      </div>
     </md-dialog>
   </div>
 </template>
