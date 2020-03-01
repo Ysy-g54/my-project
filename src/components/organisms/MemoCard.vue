@@ -147,7 +147,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-card {
-  width: 233px;
+  width: 240px;
   margin: 4px;
   display: inline-block;
   vertical-align: top;

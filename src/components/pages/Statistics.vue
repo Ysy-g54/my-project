@@ -2,7 +2,17 @@
   <div>
     <md-subheader>カテゴリごとの集計</md-subheader>
     <PieChart :chartData="memoCategories" :isRenderChart="isRenderChart"></PieChart>
-    <!-- <BarChart :chartData="memoCategories"></BarChart> -->
+    <md-divider />
+    <div v-for="(memoLabel, index) in memoCategories.labels" :key="index">
+      <md-list class="md-double-line">
+        <md-list-item>
+          <md-badge :style="getMemoCategoryColor(memoCategories, index)" />
+          <p>{{ memoLabel }}</p>
+          <md-icon>keyboard_arrow_right</md-icon>
+        </md-list-item>
+        <md-divider></md-divider>
+      </md-list>
+    </div>
   </div>
 </template>
 
@@ -32,6 +42,13 @@ export default {
         }
       });
       return categoryNm;
+    },
+    getMemoCategoryColor(memoCategories, index) {
+      let color = _.get(
+        memoCategories,
+        `datasets[0].backgroundColor[${index}]`
+      );
+      return "background-color: " + color;
     }
   },
   watch: {},
@@ -43,7 +60,6 @@ export default {
       .get();
     await querySnapshot.forEach(async document => {
       await categories.find(category => {
-        _.set(this.memoCategories, "datasets[0].backgroundColor", "#A5D6A7");
         if (document.data().categoryId === category.categoryId) {
           _.set(
             this.memoCategories,

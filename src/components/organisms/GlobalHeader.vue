@@ -181,7 +181,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-app {
-  height: 620px;
+  height: 605px;
   border: 1px solid rgba(#000, 0.12);
 }
 
