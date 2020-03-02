@@ -65,6 +65,13 @@ export default {
       );
       this.isNotEmptyResult = !_.isEmpty(this.resultMemos);
     },
+    async filterMemoByCategoryId(categoryId) {
+      this.resultMemos = [];
+      this.resultMemos = await this.memos.filter(
+        memo => memo.categoryId === categoryId
+      );
+      this.isNotEmptyResult = !_.isEmpty(this.resultMemos);
+    },
     async onEditClick(memoId) {
       if (this.isDiscard) {
         await memoService.modifyDeleteFlg(memoId, false).catch(error => {
@@ -164,6 +171,8 @@ export default {
     await this.searchMemo();
     if (this.$route.query.q !== undefined && this.$route.query.q !== "") {
       await this.filterMemo(this.$route.query.q);
+    } else if (this.$route.params.categoryId !== undefined) {
+      await this.filterMemoByCategoryId(this.$route.params.categoryId);
     }
   },
   components: {

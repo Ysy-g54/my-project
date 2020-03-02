@@ -4,8 +4,8 @@
     <PieChart :chartData="memoCategories" :isRenderChart="isRenderChart"></PieChart>
     <md-divider />
     <div v-for="(memoLabel, index) in memoCategories.labels" :key="index">
-      <md-list class="md-double-line">
-        <md-list-item>
+      <md-list>
+        <md-list-item class="md-double-line" @click="goMemoSearch(memoLabel)">
           <md-badge :style="getMemoCategoryColor(memoCategories, index)" />
           <p>{{ memoLabel }}</p>
           <md-icon>keyboard_arrow_right</md-icon>
@@ -42,6 +42,21 @@ export default {
         }
       });
       return categoryNm;
+    },
+    async goMemoSearch(memoLabel) {
+      let categoryId = "";
+      await categories.find(category => {
+        if (category.categoryNm === memoLabel) {
+          categoryId = category.categoryId;
+          return true;
+        }
+      });
+      if (categoryId !== "") {
+        this.$router.push({
+          name: "memoSearch",
+          params: { categoryId }
+        });
+      }
     },
     getMemoCategoryColor(memoCategories, index) {
       let color = _.get(
