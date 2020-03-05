@@ -64,7 +64,7 @@ import "firebase/firestore";
 export default {
   data() {
     return {
-      categoryId: "",
+      categoryId: categories[0].categoryId,
       memo: "",
       database: firebase.firestore(),
       isUpdateMemo: false,
