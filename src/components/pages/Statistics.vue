@@ -21,14 +21,12 @@ import _ from "lodash";
 import { categories } from "../../constants";
 import BarChart from "@/components/organisms/BarChart";
 import PieChart from "@/components/organisms/PieChart";
-import firebase from "firebase";
-import "firebase/firestore";
+import memoService from "@/service/memo-service";
 import * as palette from "google-palette";
 export default {
   data() {
     return {
       memoCategories: {},
-      database: firebase.firestore(),
       isRenderChart: false
     };
   },
@@ -69,10 +67,10 @@ export default {
   watch: {},
   computed: {},
   async created() {
-    let querySnapshot = await this.database
-      .collection("memo")
-      .where("userId", "==", this.$store.getters["getLoginUser"].uid)
-      .get();
+    let querySnapshot = await memoService.searchByDeleteFlg(
+      this.$store.getters["getLoginUser"].uid,
+      false
+    );
     await querySnapshot.forEach(async document => {
       await categories.find(category => {
         if (document.data().categoryId === category.categoryId) {
