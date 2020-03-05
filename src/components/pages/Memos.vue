@@ -6,6 +6,8 @@
 
 <script>
 import Memos from "@/components/organisms/Memos";
+import firebase from "firebase";
+import "firebase/firestore";
 export default {
   data() {
     return {};
@@ -14,7 +16,20 @@ export default {
   watch: {},
   props: {},
   computed: {},
-  created() {},
+  async created() {
+    if (
+      this.$store.getters["getLoginUser"].providerId === "google.com" &&
+      this.$store.getters["getLoginUser"].memoDisplayForm === ""
+    ) {
+      await firebase
+        .firestore()
+        .collection("userSetting")
+        .add({
+          userId: this.$store.getters["getLoginUser"].uid,
+          memoDisplayForm: "0"
+        });
+    }
+  },
   components: {
     Memos
   }
