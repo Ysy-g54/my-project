@@ -29,6 +29,7 @@ import Snackbar from "@/components/atoms/Snackbar";
 import BackHeader from "@/components/organisms/BackHeader";
 import firebase from "firebase";
 import "firebase/firestore";
+import userSettingService from "@/service/user-setting-service";
 import { required } from "vuelidate/lib/validators";
 export default {
   data() {
@@ -79,10 +80,11 @@ export default {
       await signupUser.updateProfile({
         displayName: this.userName
       });
-      await this.database.collection("userSetting").add({
+      let userSetting = {
         userId: signupUser.uid,
         memoDisplayForm: "0"
-      });
+      };
+      await userSettingService.register(userSetting);
       await signupUser.sendEmailVerification().catch(() => {
         this.showFailureMessage();
       });

@@ -6,8 +6,7 @@
 
 <script>
 import Memos from "@/components/organisms/Memos";
-import firebase from "firebase";
-import "firebase/firestore";
+import userSettingService from "@/service/user-setting-service";
 export default {
   data() {
     return {};
@@ -21,13 +20,11 @@ export default {
       this.$store.getters["getLoginUser"].providerId === "google.com" &&
       this.$store.getters["getLoginUser"].memoDisplayForm === ""
     ) {
-      await firebase
-        .firestore()
-        .collection("userSetting")
-        .add({
-          userId: this.$store.getters["getLoginUser"].uid,
-          memoDisplayForm: "0"
-        });
+      let userSetting = {
+        userId: this.$store.getters["getLoginUser"].uid,
+        memoDisplayForm: "0"
+      };
+      await userSettingService.register(userSetting);
     }
   },
   components: {
