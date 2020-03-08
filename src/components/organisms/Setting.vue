@@ -4,7 +4,7 @@
     <md-radio v-model="memoDisplayForm" :value="'0'" class="md-primary">カード</md-radio>
     <md-radio v-model="memoDisplayForm" :value="'1'" class="md-primary">リスト</md-radio>
     <md-subheader>公開範囲</md-subheader>
-    <md-switch v-model="isPublicFlg">公開 ※ほかのユーザがメモを共有する場合の検索結果に表示されます。</md-switch>
+    <md-switch v-model="publicFlg" class="md-primary">公開 ※ほかのユーザがメモを共有する場合の検索結果に表示されます。</md-switch>
     <div class="md-layout md-alignment-top-right">
       <md-button class="md-dense md-raised md-primary" @click="saveSetting">保存</md-button>
     </div>
@@ -23,7 +23,7 @@ export default {
       duration: 4000,
       message: "更新しました",
       memoDisplayForm: this.$store.getters["getLoginUser"].memoDisplayForm,
-      isPublicFlg: false
+      publicFlg: this.$store.getters["getLoginUser"].publicFlg
     };
   },
   methods: {
@@ -35,6 +35,10 @@ export default {
         .get();
       await querySnapshot.forEach(document => {
         this.memoDisplayForm = document.data().memoDisplayForm;
+        this.publicFlg =
+          document.data().publicFlg !== undefined
+            ? document.data().publicFlg
+            : false;
       });
     },
     async saveSetting() {
@@ -43,7 +47,8 @@ export default {
         .collection("userSetting")
         .doc(this.$store.getters["getLoginUser"].userSettingId)
         .update({
-          memoDisplayForm: this.memoDisplayForm
+          memoDisplayForm: this.memoDisplayForm,
+          publicFlg: this.publicFlg
         })
         .catch(error => {
           this.duration = 10000;
