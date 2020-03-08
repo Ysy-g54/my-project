@@ -3,6 +3,8 @@
     <md-subheader>メモの表示形式</md-subheader>
     <md-radio v-model="memoDisplayForm" :value="'0'" class="md-primary">カード</md-radio>
     <md-radio v-model="memoDisplayForm" :value="'1'" class="md-primary">リスト</md-radio>
+    <md-subheader>公開範囲</md-subheader>
+    <md-switch v-model="isPublicFlg">公開 ※ほかのユーザがメモを共有する場合の検索結果に表示されます。</md-switch>
     <div class="md-layout md-alignment-top-right">
       <md-button class="md-dense md-raised md-primary" @click="saveSetting">保存</md-button>
     </div>
@@ -20,7 +22,8 @@ export default {
     return {
       duration: 4000,
       message: "更新しました",
-      memoDisplayForm: this.$store.getters["getLoginUser"].memoDisplayForm
+      memoDisplayForm: this.$store.getters["getLoginUser"].memoDisplayForm,
+      isPublicFlg: false
     };
   },
   methods: {
