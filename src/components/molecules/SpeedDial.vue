@@ -28,5 +28,6 @@ export default {
 <style scoped>
 .speed-dial {
   z-index: 2;
+  height: 100px;
 }
 </style>
