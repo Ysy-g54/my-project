@@ -96,6 +96,7 @@ export default {
   methods: {
     onAvatarClick() {
       this.menuVisible = true;
+      this.informationTooltipActive = false;
     },
     onLogoutClick() {
       this.menuVisible = false;
@@ -210,6 +211,7 @@ export default {
 }
 
 .md-tooltip {
-  height: 100px;
+  height: 200px;
+  white-space: normal;
 }
 </style>

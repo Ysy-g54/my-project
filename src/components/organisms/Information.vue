@@ -1,7 +1,9 @@
 <template>
   <div>
-    <span class="md-subheading">お知らせ</span>
-    <p>memoListのリプレイスに向けて、アーキテクチャ選定~開発中です。しばしお待ちください。</p>
+    <div>
+      <span class="md-subheading">お知らせ</span>
+    </div>
+    <span class="md-body-2">memoListのリプレイスに向けて、アーキテクチャ選定~開発中です。しばしお待ちください。</span>
   </div>
 </template>
 
