@@ -13,6 +13,9 @@
           </md-button>
           <md-button class="md-icon-button" @click="showInfomation">
             <md-icon>info</md-icon>
+            <md-tooltip :md-active.sync="informationTooltipActive">
+              <Information></Information>
+            </md-tooltip>
           </md-button>
           <md-field md-clearable>
             <md-icon>search</md-icon>
@@ -78,6 +81,7 @@
 
 <script>
 import _ from "lodash";
+import Information from "@/components/organisms/Information";
 import DialogConfirm from "@/components/molecules/DialogConfirm";
 import HelpDialog from "@/components/organisms/HelpDialog";
 export default {
@@ -85,6 +89,7 @@ export default {
     return {
       title: "ログアウトしますか？",
       menuVisible: false,
+      informationTooltipActive: false,
       q: null
     };
   },
@@ -133,7 +138,9 @@ export default {
         name: "feedback"
       });
     },
-    showInfomation() {}
+    showInfomation() {
+      this.informationTooltipActive = !this.informationTooltipActive;
+    }
   },
   computed: {
     isNotEmptyLoginUserPhoto() {
@@ -179,6 +186,7 @@ export default {
     this.q = this.$route.query.q;
   },
   components: {
+    Information,
     DialogConfirm,
     HelpDialog
   }
@@ -199,5 +207,9 @@ export default {
 
 .md-field.md-theme-default > .md-icon:after {
   display: none;
+}
+
+.md-tooltip {
+  height: 100px;
 }
 </style>

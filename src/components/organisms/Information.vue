@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-subheader>お知らせ</md-subheader>
+    <span class="md-subheading">お知らせ</span>
     <p>memoListのリプレイスに向けて、アーキテクチャ選定~開発中です。しばしお待ちください。</p>
   </div>
 </template>
