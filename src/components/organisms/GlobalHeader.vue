@@ -11,9 +11,12 @@
               <md-icon v-else>account_circle</md-icon>
             </md-avatar>
           </md-button>
+          <md-button class="md-icon-button" @click="showInfomation">
+            <md-icon>info</md-icon>
+          </md-button>
           <md-field md-clearable>
             <md-icon>search</md-icon>
-            <md-input v-model="q" placeholder="メモ内容・カテゴリで検索"></md-input>
+            <md-input v-model="q" placeholder="メモ・カテゴリで検索"></md-input>
           </md-field>
         </div>
         <div class="md-toolbar-row">
@@ -129,7 +132,8 @@ export default {
       this.$router.push({
         name: "feedback"
       });
-    }
+    },
+    showInfomation() {}
   },
   computed: {
     isNotEmptyLoginUserPhoto() {
@@ -184,7 +188,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .md-app {
-  height: 650px;
+  height: 620px;
   border: 1px solid rgba(#000, 0.12);
 }
 

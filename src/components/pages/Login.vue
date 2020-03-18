@@ -10,6 +10,7 @@
         </div>
       </md-app-toolbar>
       <md-app-content>
+        <Information></Information>
         <md-field md-clearable :class="getValidationClass('mailAddress')">
           <md-input v-model="mailAddress" placeholder="メールアドレス"></md-input>
           <span class="md-error" v-if="!$v.mailAddress.required">{{ "メールアドレスは必須です。" }}</span>
@@ -40,6 +41,7 @@
 
 <script>
 import _ from "lodash";
+import Information from "@/components/organisms/Information";
 import Snackbar from "@/components/atoms/Snackbar";
 import firebase from "firebase";
 import { required } from "vuelidate/lib/validators";
@@ -109,6 +111,7 @@ export default {
   mounted() {},
   created() {},
   components: {
+    Information,
     Snackbar
   }
 };
